@@ -1,52 +1,34 @@
-import { useState } from 'react';
+import { useState, FormEvent, KeyboardEvent } from 'react';
+import { Errors, Validations, Register } from '../types/glabal';
 
-interface ValidationRules {
-  required?: boolean;
-  minValue?: number;
-  maxValue?: number;
-  minLength?: number;
-  maxLength?: number;
-  isEmail?: boolean;
-}
+type FormData = { [key: string]: string | number | boolean };
+type FieldsValidation = { [key: string]: Validations };
+type FieldsOutput = { [key: string]: 'STRING' | 'NUMBER' | 'BOOLEAN' };
 
-interface FieldError {
-  type: string;
-  message: string;
-}
+const useForm = (initialForm: FormData = {}) => {
+  const [errors, setErrors] = useState<Errors>({});
+  const [formData, setFormData] = useState<FormData>(initialForm);
+  const [pending, setPending] = useState<boolean>(false);
+  const fields: string[] = [];
+  const fieldsValidation: FieldsValidation = {};
+  const fieldsOutput: FieldsOutput = {};
+  let onSubmit: ((data: FormData) => Promise<void>) | null = null;
 
-type Errors<T> = {
-  [K in keyof T]?: FieldError;
-};
-
-interface RegisterOptions {
-  validations?: ValidationRules;
-  output?: 'NUMBER' | 'BOOLEAN' | string;
-}
-
-const useForm = <T extends Record<string, any>>(initialForm: T) => {
-  const [errors, setErrors] = useState<Errors<T>>({});
-  const [formData, setFormData] = useState<T>(initialForm);
-  const [pending, setPending] = useState(false);
-  const fields: (keyof T)[] = [];
-  const fieldsValidation: { [K in keyof T]?: ValidationRules } = {};
-  const fieldsOutput: { [K in keyof T]?: string } = {};
-  let onSubmit: ((data: T) => Promise<void>) | null = null;
-
-  const register = (name: keyof T, options: RegisterOptions = {}) => {
-    const { validations = {}, output } = options;
+  const register: Register = (name, validations = {}, output) => {
     if (!fieldsValidation[name]) fieldsValidation[name] = validations;
     if (!fields.includes(name)) fields.push(name);
     if (!fieldsOutput[name] && output)
-      fieldsOutput[name] = output.toUpperCase();
+      fieldsOutput[name] = output as 'STRING' | 'NUMBER' | 'BOOLEAN';
+
     return {
       errors,
       value: formData[name],
-      handleChange: (value: any) =>
+      handleChange: (value: string | number | boolean) =>
         setFormData(prev => {
           if (fieldsOutput[name]) {
             switch (fieldsOutput[name]) {
               case 'NUMBER':
-                value = parseFloat(value);
+                value = typeof value === 'string' ? parseFloat(value) : value;
                 break;
               case 'BOOLEAN':
                 value = value === 'true' || value === 1;
@@ -55,7 +37,6 @@ const useForm = <T extends Record<string, any>>(initialForm: T) => {
                 break;
             }
           }
-
           return { ...prev, [name]: value };
         })
     };
@@ -63,19 +44,16 @@ const useForm = <T extends Record<string, any>>(initialForm: T) => {
 
   const reset = () => setFormData(initialForm);
 
-  const setForm = (data: T) => setFormData(data);
+  const setForm = (data: FormData) => setFormData(data);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
     let haveErrors = false;
-    const data = formData;
+    const data = { ...formData };
 
     fields.forEach(name => {
-      if (
-        fieldsValidation[name]?.required &&
-        (!data[name] || data[name].length < 1)
-      ) {
+      if (fieldsValidation[name]?.required && !data[name]) {
         haveErrors = true;
         setErrors(prev => ({
           ...prev,
@@ -84,53 +62,53 @@ const useForm = <T extends Record<string, any>>(initialForm: T) => {
       } else if (
         typeof data[name] === 'number' &&
         fieldsValidation[name]?.minValue &&
-        data[name] < fieldsValidation[name]?.minValue
+        data[name] < fieldsValidation[name].minValue
       ) {
         haveErrors = true;
         setErrors(prev => ({
           ...prev,
           [name]: {
             type: 'minValue',
-            message: `El número debe ser mayor o igual a ${fieldsValidation[name]?.minValue}.`
+            message: `El número debe ser mayor o igual a ${fieldsValidation[name].minValue}.`
           }
         }));
       } else if (
         typeof data[name] === 'number' &&
         fieldsValidation[name]?.maxValue &&
-        data[name] > fieldsValidation[name]?.maxValue
+        data[name] > fieldsValidation[name].maxValue
       ) {
         haveErrors = true;
         setErrors(prev => ({
           ...prev,
           [name]: {
             type: 'maxValue',
-            message: `El número debe ser menor o igual a ${fieldsValidation[name]?.maxValue}.`
+            message: `El número debe ser menor o igual a ${fieldsValidation[name].maxValue}.`
           }
         }));
       } else if (
         typeof data[name] === 'string' &&
         fieldsValidation[name]?.minLength &&
-        data[name]?.length < fieldsValidation[name]?.minLength
+        data[name]?.length < fieldsValidation[name].minLength
       ) {
         haveErrors = true;
         setErrors(prev => ({
           ...prev,
           [name]: {
             type: 'minLength',
-            message: `El valor debe tener al menos ${fieldsValidation[name]?.minLength} caracteres.`
+            message: `El valor debe tener al menos ${fieldsValidation[name].minLength} caracteres.`
           }
         }));
       } else if (
         typeof data[name] === 'string' &&
         fieldsValidation[name]?.maxLength &&
-        data[name]?.length > fieldsValidation[name]?.maxLength
+        data[name]?.length > fieldsValidation[name].maxLength
       ) {
         haveErrors = true;
         setErrors(prev => ({
           ...prev,
           [name]: {
             type: 'maxLength',
-            message: `El valor debe tener máximo ${fieldsValidation[name]?.maxLength} caracteres.`
+            message: `El valor debe tener máximo ${fieldsValidation[name].maxLength} caracteres.`
           }
         }));
       } else if (
@@ -172,13 +150,13 @@ const useForm = <T extends Record<string, any>>(initialForm: T) => {
     return true;
   };
 
-  const handleAssistant = async (e: React.KeyboardEvent) => {
+  const handleAssistant = async (e: KeyboardEvent<HTMLFormElement>) => {
     if (e.key === 'Enter') {
-      await handleSubmit(e as unknown as React.FormEvent);
+      await handleSubmit(e);
     }
   };
 
-  const registerSubmit = (func: (data: T) => Promise<void>) => {
+  const registerSubmit = (func: (data: FormData) => Promise<void>) => {
     onSubmit = func;
   };
 

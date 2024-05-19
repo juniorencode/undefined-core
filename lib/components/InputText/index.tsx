@@ -1,5 +1,6 @@
-import { InputContainer } from '../InputContainer';
 import { useEffect, useId, useRef, useState } from 'react';
+import { Register } from '../../types/glabal';
+import { InputContainer } from '../InputContainer';
 
 interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -8,19 +9,7 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   uppercase?: boolean;
   prefix?: string;
   postfix?: string;
-  register: (
-    name: string,
-    options?: {
-      required?: boolean;
-      minLength?: number;
-      maxLength?: number;
-      isEmail?: boolean;
-    }
-  ) => {
-    errors: Record<string, { message: string }>;
-    value: string;
-    handleChange: (value: string) => void;
-  };
+  register: Register;
   required?: boolean;
   minLength?: number;
   maxLength?: number;
@@ -94,7 +83,7 @@ export const InputText = (props: InputTextProps) => {
           id={domId}
           type="text"
           name={name}
-          value={value || ''}
+          value={value !== undefined && value !== null ? value + '' : ''}
           onChange={onChange}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}

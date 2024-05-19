@@ -1,4 +1,5 @@
 import { useId, useRef, useState } from 'react';
+import { Register } from '../../types/glabal';
 import { InputContainer } from '../InputContainer';
 
 interface InputNumberProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -7,24 +8,11 @@ interface InputNumberProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   prefix?: string;
   postfix?: string;
-  register: (
-    name: string,
-    options?: InputNumberRegisterOptions
-  ) => {
-    errors: Record<string, { message: string }>;
-    value: number | string;
-    handleChange: (value: number | string) => void;
-  };
+  register: Register;
   required?: boolean;
   minValue?: number;
   maxValue?: number;
   disabled?: boolean;
-}
-
-interface InputNumberRegisterOptions {
-  required?: boolean;
-  minValue?: number;
-  maxValue?: number;
 }
 
 export const InputNumber = (props: InputNumberProps) => {

@@ -1,17 +1,14 @@
-import { cn } from '../../utils/styles.js';
-import { InputContainer } from '../InputContainer/index.js';
 import { useId } from 'react';
+import { Register } from '../../types/glabal.js';
+import { cn } from '../../utils/styles.js';
+import { InputContainer } from '../InputContainer/';
 
 interface InputCheckProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   label?: string;
   name: string;
   labelCheck?: string;
-  register: (name: string) => {
-    errors: Record<string, { message: string }>;
-    value: boolean;
-    handleChange: (value: boolean) => void;
-  };
+  register: Register;
 }
 
 export const InputCheck = (props: InputCheckProps) => {
@@ -33,7 +30,7 @@ export const InputCheck = (props: InputCheckProps) => {
           className="w-4 h-6 text-blue-600 bg-secondary-100 border-secondary-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-secondary-800 focus:ring-2 dark:bg-secondary-700 dark:border-secondary-600"
           id={domId}
           type="checkbox"
-          checked={value || false}
+          checked={typeof value === 'boolean' ? value : false}
           onChange={onChange}
           {...params}
         />

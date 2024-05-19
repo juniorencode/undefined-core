@@ -1,4 +1,5 @@
 import { useId, useState } from 'react';
+import { Register } from '../../types/glabal';
 import { InputContainer } from '../InputContainer';
 
 interface InputPasswordProps
@@ -6,15 +7,7 @@ interface InputPasswordProps
   className?: string;
   label?: string;
   name: string;
-  register: (
-    name: string,
-    options?: { required?: boolean; minLength?: number; maxLength?: number }
-  ) => {
-    errors: Record<string, { message: string }>;
-    value: string;
-    handleChange: (value: string) => void;
-  };
-
+  register: Register;
   required?: boolean;
   minLength?: number;
   maxLength?: number;
@@ -55,7 +48,7 @@ export const InputPassword = (props: InputPasswordProps) => {
           className="block p-2.5 w-full h-12 sm:text-sm bg-secondary-50 border border-secondary-300 text-secondary-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           type={isHidden ? 'password' : 'text'}
           name={name}
-          value={value || ''}
+          value={value !== undefined && value !== null ? value + '' : ''}
           onChange={onChange}
           {...params}
         />
