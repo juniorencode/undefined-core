@@ -1,6 +1,7 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Register } from '../../types/glabal';
 import { InputContainer } from '../InputContainer';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 
 interface InputPasswordProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -11,6 +12,8 @@ interface InputPasswordProps
   required?: boolean;
   minLength?: number;
   maxLength?: number;
+  focused?: boolean;
+  disabled?: boolean;
 }
 
 export const InputPassword = (props: InputPasswordProps) => {
@@ -22,15 +25,26 @@ export const InputPassword = (props: InputPasswordProps) => {
     required,
     minLength,
     maxLength,
+    focused,
+    disabled,
     ...params
   } = props;
   const domId = useId();
+  const domRef = useRef<HTMLInputElement>(null);
   const [isHidden, setIsHidden] = useState(true);
   const { errors, value, handleChange } = register(name, {
     required,
     minLength,
     maxLength
   });
+
+  useEffect(() => {
+    if (domRef.current) {
+      focused && domRef.current.focus();
+      focused && domRef.current.value && domRef.current.select();
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     handleChange(e.target.value);
@@ -44,60 +58,27 @@ export const InputPassword = (props: InputPasswordProps) => {
     >
       <div className="relative">
         <input
+          className="p-2.5 pr-12 w-full h-12 sm:text-sm border rounded-lg focus:outline-none focus:ring-1 text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400 focus:ring-blue-600 dark:focus:ring-blue-500 focus:border-blue-600 dark:focus:border-blue-500"
+          ref={domRef}
+          role="textbox"
           id={domId}
-          className="block p-2.5 w-full h-12 sm:text-sm bg-secondary-50 border border-secondary-300 text-secondary-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           type={isHidden ? 'password' : 'text'}
           name={name}
           value={value !== undefined && value !== null ? value + '' : ''}
           onChange={onChange}
+          disabled={disabled}
           {...params}
         />
         <button
-          className="absolute top-0 end-0 p-3.5 rounded-e-lg dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-secondary-600"
+          className="absolute top-0 end-0 flex items-center justify-center w-12 h-full rounded-e-lg dark:focus:outline-none text-neutral-400"
           type="button"
           onClick={() => setIsHidden(prev => !prev)}
         >
-          <svg
-            className="flex-shrink-0 size-3.5 text-secondary-400 dark:text-secondary-500"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path
-              className={isHidden ? '' : 'hidden'}
-              d="M9.88 9.88a3 3 0 1 0 4.24 4.24"
-            />
-            <path
-              className={isHidden ? '' : 'hidden'}
-              d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"
-            />
-            <path
-              className={isHidden ? '' : 'hidden'}
-              d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"
-            />
-            <line
-              className={isHidden ? '' : 'hidden'}
-              x1="2"
-              x2="22"
-              y1="2"
-              y2="22"
-            />
-            <path
-              className={isHidden ? 'hidden' : ''}
-              d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"
-            />
-            <circle
-              className={isHidden ? 'hidden' : ''}
-              cx="12"
-              cy="12"
-              r="3"
-            />
-          </svg>
+          {isHidden ? (
+            <IoEyeOutline size={18} />
+          ) : (
+            <IoEyeOffOutline size={18} />
+          )}
         </button>
       </div>
     </InputContainer>

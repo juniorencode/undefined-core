@@ -14,9 +14,9 @@ interface InputSelectProps
   firstValue?: boolean;
   toNumber?: boolean;
   toBoolean?: boolean;
+  callback?: (value: string) => void;
   register: Register;
   required?: boolean;
-  callback?: (value: string) => void;
 }
 interface Option {
   value: string;
@@ -32,9 +32,9 @@ export const InputSelect = (props: InputSelectProps) => {
     firstValue,
     toNumber,
     toBoolean,
+    callback,
     register,
     required,
-    callback,
     ...params
   } = props;
   const output = toNumber ? 'NUMBER' : toBoolean ? 'BOOLEAN' : 'STRING';
@@ -51,7 +51,6 @@ export const InputSelect = (props: InputSelectProps) => {
     null
   );
   const domRef = useClickOutside(() => setIsOpen(false));
-  // const domRef = useRef<HTMLDivElement | null>(null);
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: isOpen ? 'bottom-start' : 'top-start'
   });
@@ -84,12 +83,13 @@ export const InputSelect = (props: InputSelectProps) => {
         <div className="relative" ref={node => setReferenceElement(node)}>
           {options.length > 0 && isOpen && (
             <div
-              className="absolute top-full my-2 w-full z-20 rounded-lg shadow-3xl dark:shadow-neutral-900 bg-white dark:bg-secondary-700"
+              className="listbox absolute top-full my-2 w-full z-20 rounded-lg shadow-3xl bg-white dark:bg-secondary-700 dark:shadow-neutral-900"
               ref={setPopperElement}
+              role="listbox"
               style={styles.popper}
               {...attributes.popper}
             >
-              <ul className="py-2 text-sm max-h-52 overflow-y-auto text-secondary-700 dark:text-secondary-200">
+              <ul className="py-2 max-h-52 text-sm overflow-y-auto text-secondary-700 dark:text-secondary-200">
                 {options?.map(item => (
                   <li key={item.value}>
                     <input
@@ -103,7 +103,7 @@ export const InputSelect = (props: InputSelectProps) => {
                       checked={item.value === value}
                     />
                     <label
-                      className="block px-4 py-2 cursor-pointer hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white"
+                      className="block px-4 py-2 cursor-pointer dark:hover:text-white hover:bg-secondary-100 dark:hover:bg-secondary-600"
                       htmlFor={item.value}
                     >
                       {item.label}
@@ -114,13 +114,14 @@ export const InputSelect = (props: InputSelectProps) => {
             </div>
           )}
           <button
-            className="flex items-center justify-between p-2.5 w-full h-12 focus:ring-1 focus:outline-none rounded-lg text-sm text-center border bg-secondary-50 border-secondary-300 text-secondary-900 focus:ring-blue-600 focus:border-blue-600 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="flex items-center justify-between p-2.5 w-full h-12 focus:ring-1 focus:outline-none rounded-lg text-sm text-center border text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 focus:ring-blue-600 dark:focus:ring-blue-500 border-secondary-300 dark:border-secondary-600 focus:border-blue-600 dark:focus:border-blue-500 dark:placeholder-secondary-400"
             type="button"
             onClick={() => setIsOpen(!isOpen)}
             {...params}
           >
-            {options?.filter(item => item.value === value)[0]?.label ||
-              '\u00a0'}
+            <div className="pr-4 w-full h-full">
+              {options?.filter(item => item.value === value)[0]?.label || ''}
+            </div>
             <IoIosArrowDown size={16} />
           </button>
         </div>

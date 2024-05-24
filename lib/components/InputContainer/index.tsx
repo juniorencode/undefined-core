@@ -1,5 +1,3 @@
-import { cn } from '../../utils/styles.js';
-
 interface InputContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
@@ -9,13 +7,13 @@ interface InputContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const InputContainer = (props: InputContainerProps) => {
-  const { className, children, label, name, error = '' } = props;
+  const { children, label, name, error = '', ...params } = props;
   return (
-    <div className={cn(className)}>
+    <div {...params}>
       {label && (
         <label
           htmlFor={name}
-          className="block mb-2 w-min text-sm font-medium text-nowrap text-secondary-900 dark:text-white"
+          className="block mb-2 w-min text-sm text-nowrap font-medium text-secondary-900 dark:text-white"
         >
           {label}
         </label>

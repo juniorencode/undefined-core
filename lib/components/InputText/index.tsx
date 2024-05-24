@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Register } from '../../types/glabal';
+import { cn } from '../../utils/styles';
 import { InputContainer } from '../InputContainer';
 
 interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -14,8 +15,8 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   minLength?: number;
   maxLength?: number;
   isEmail?: boolean;
+  focused?: boolean;
   disabled?: boolean;
-  isFocus?: boolean;
 }
 
 export const InputText = (props: InputTextProps) => {
@@ -24,20 +25,20 @@ export const InputText = (props: InputTextProps) => {
     label,
     name,
     uppercase,
-    register,
     prefix,
     postfix,
+    register,
     required,
     minLength,
     maxLength,
     isEmail,
+    focused,
     disabled,
-    isFocus,
     ...params
   } = props;
   const domId = useId();
   const domRef = useRef<HTMLInputElement>(null);
-  const [focus, setIsFocus] = useState(false);
+  const [focus, setFocus] = useState(false);
   const { errors, value, handleChange } = register(name, {
     required,
     minLength,
@@ -47,19 +48,14 @@ export const InputText = (props: InputTextProps) => {
 
   useEffect(() => {
     if (domRef.current) {
-      isFocus && domRef.current.focus();
-      isFocus && domRef.current.value && domRef.current.select();
+      focused && domRef.current.focus();
+      focused && domRef.current.value && domRef.current.select();
     }
     // eslint-disable-next-line
   }, []);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let newValue = e.target.value;
-    if (uppercase) {
-      newValue = newValue.toUpperCase();
-    }
-    handleChange(newValue);
-  };
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    handleChange(uppercase ? e.target.value.toUpperCase() : e.target.value);
 
   return (
     <InputContainer
@@ -69,28 +65,31 @@ export const InputText = (props: InputTextProps) => {
       error={errors[name]?.message}
     >
       <div
-        className={`flex gap-2 p-2.5 w-full h-12 rounded-lg border bg-secondary-50 border-secondary-300 text-secondary-900 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white ${
-          focus
-            ? 'outline-none ring-2 ring-blue-600 border-blue-600 dark:ring-blue-500 dark:border-blue-500'
-            : ''
-        } ${!disabled ? 'cursor-text' : ''}`}
+        className={cn(
+          'flex gap-2 p-2.5 w-full h-12 border rounded-lg bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
+          {
+            'outline-none ring-2 ring-blue-600 dark:ring-blue-500 border-blue-600 dark:border-blue-500':
+              focus,
+            'cursor-text': !disabled
+          }
+        )}
         onClick={() => domRef.current && domRef.current.focus()}
       >
         {prefix && <span>{prefix}</span>}
         <input
-          className="w-full text-sm bg-transparent focus:outline-none"
+          className="w-full text-sm focus:outline-none bg-transparent"
           ref={domRef}
           id={domId}
           type="text"
           name={name}
           value={value !== undefined && value !== null ? value + '' : ''}
           onChange={onChange}
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
           disabled={disabled}
           {...params}
         />
-        {postfix && <span>hola{postfix}</span>}
+        {postfix && <span>{postfix}</span>}
       </div>
     </InputContainer>
   );

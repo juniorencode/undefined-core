@@ -47,6 +47,7 @@ const useForm = (initialForm: FormData = {}) => {
   const setForm = (data: FormData) => setFormData(data);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    console.log('====>', fieldsValidation);
     e.preventDefault();
     e.stopPropagation();
     let haveErrors = false;
@@ -95,7 +96,7 @@ const useForm = (initialForm: FormData = {}) => {
           ...prev,
           [name]: {
             type: 'minLength',
-            message: `El valor debe tener al menos ${fieldsValidation[name].minLength} caracteres.`
+            message: `El valor debe tener mínimo ${fieldsValidation[name].minLength} caracteres.`
           }
         }));
       } else if (

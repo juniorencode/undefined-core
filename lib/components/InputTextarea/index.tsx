@@ -8,14 +8,12 @@ interface InputTextareaProps
   label?: string;
   name: string;
   uppercase?: boolean;
-  prefix?: string;
-  postfix?: string;
   register: Register;
   required?: boolean;
   minLength?: number;
   maxLength?: number;
+  focused?: boolean;
   disabled?: boolean;
-  isFocus?: boolean;
 }
 
 export const InputTextarea = (props: InputTextareaProps) => {
@@ -28,8 +26,8 @@ export const InputTextarea = (props: InputTextareaProps) => {
     required,
     minLength,
     maxLength,
+    focused,
     disabled,
-    isFocus,
     ...params
   } = props;
   const domId = useId();
@@ -43,19 +41,14 @@ export const InputTextarea = (props: InputTextareaProps) => {
 
   useEffect(() => {
     if (domRef.current) {
-      isFocus && domRef.current.focus();
-      isFocus && domRef.current.value && domRef.current.select();
+      focused && domRef.current.focus();
+      focused && domRef.current.value && domRef.current.select();
     }
     // eslint-disable-next-line
   }, []);
 
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    let newValue = e.target.value;
-    if (uppercase) {
-      newValue = newValue.toUpperCase();
-    }
-    handleChange(newValue);
-  };
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+    handleChange(uppercase ? e.target.value.toUpperCase() : e.target.value);
 
   return (
     <InputContainer
@@ -80,8 +73,6 @@ export const InputTextarea = (props: InputTextareaProps) => {
         disabled={disabled}
         {...params}
       ></textarea>
-      {/* {postfix && <span>hola{postfix}</span>}
-      </div> */}
     </InputContainer>
   );
 };
