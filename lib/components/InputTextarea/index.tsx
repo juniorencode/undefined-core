@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import { Register } from '../../types/glabal';
 import { InputContainer } from '../InputContainer';
 
@@ -32,7 +32,6 @@ export const InputTextarea = (props: InputTextareaProps) => {
   } = props;
   const domId = useId();
   const domRef = useRef<HTMLTextAreaElement>(null);
-  const [focus, setFocus] = useState(false);
   const { errors, value, handleChange } = register(name, {
     required,
     minLength,
@@ -58,18 +57,14 @@ export const InputTextarea = (props: InputTextareaProps) => {
       error={errors[name]?.message}
     >
       <textarea
-        className={`${className} flex gap-2 p-2.5 w-full min-h-12 rounded-lg border bg-secondary-50 border-secondary-300 text-secondary-900 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white ${
-          focus
-            ? 'outline-none ring-2 ring-blue-600 border-blue-600 dark:ring-blue-500 dark:border-blue-500'
-            : ''
-        } ${!disabled ? 'cursor-text' : ''}`}
+        className={`${className} flex gap-2 p-2.5 w-full min-h-12 rounded-lg border outline-none focus:ring-2 bg-secondary-50 border-secondary-300 text-secondary-900 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white focus:ring-blue-600 dark:focus:ring-blue-500 focus:border-blue-600 dark:focus:border-blue-500 ${
+          !disabled ? 'cursor-text' : ''
+        }`}
         ref={domRef}
         id={domId}
         name={name}
         value={value !== undefined && value !== null ? value + '' : ''}
         onChange={onChange}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
         disabled={disabled}
         {...params}
       ></textarea>

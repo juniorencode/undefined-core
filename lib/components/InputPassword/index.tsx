@@ -58,7 +58,7 @@ export const InputPassword = (props: InputPasswordProps) => {
     >
       <div className="relative">
         <input
-          className="p-2.5 pr-12 w-full h-12 sm:text-sm border rounded-lg focus:outline-none focus:ring-1 text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400 focus:ring-blue-600 dark:focus:ring-blue-500 focus:border-blue-600 dark:focus:border-blue-500"
+          className="p-2.5 pr-12 w-full h-12 sm:text-sm border rounded-lg outline-none focus:ring-2 text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400 focus:ring-blue-600 dark:focus:ring-blue-500 focus:border-blue-600 dark:focus:border-blue-500"
           ref={domRef}
           role="textbox"
           id={domId}

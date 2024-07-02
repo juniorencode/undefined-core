@@ -114,7 +114,7 @@ export const InputSelect = (props: InputSelectProps) => {
             </div>
           )}
           <button
-            className="flex items-center justify-between p-2.5 w-full h-12 focus:ring-1 focus:outline-none rounded-lg text-sm text-center border text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 focus:ring-blue-600 dark:focus:ring-blue-500 border-secondary-300 dark:border-secondary-600 focus:border-blue-600 dark:focus:border-blue-500 dark:placeholder-secondary-400"
+            className="flex items-center justify-between p-2.5 w-full h-12 focus:ring-2 focus:outline-none rounded-lg text-sm text-center border text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 focus:ring-blue-600 dark:focus:ring-blue-500 border-secondary-300 dark:border-secondary-600 focus:border-blue-600 dark:focus:border-blue-500 dark:placeholder-secondary-400"
             type="button"
             onClick={() => setIsOpen(!isOpen)}
             {...params}
