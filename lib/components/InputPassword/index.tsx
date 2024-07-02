@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { Register } from '../../types/glabal';
+import { Register } from '../../types/global';
 import { InputContainer } from '../InputContainer';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 

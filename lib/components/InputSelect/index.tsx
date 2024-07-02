@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { IoIosArrowDown } from 'react-icons/io';
-import { Register } from '../../types/glabal';
+import { Register } from '../../types/global';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 

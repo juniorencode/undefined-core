@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef } from 'react';
-import { Register } from '../../types/glabal';
+import { Register } from '../../types/global';
 import { InputContainer } from '../InputContainer';
 
 interface InputTextareaProps

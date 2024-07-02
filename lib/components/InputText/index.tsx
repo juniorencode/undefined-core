@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { Register } from '../../types/glabal';
+import { Register } from '../../types/global';
 import { cn } from '../../utils/styles';
 import { InputContainer } from '../InputContainer';
 

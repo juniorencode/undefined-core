@@ -1,5 +1,5 @@
 import { useState, FormEvent, KeyboardEvent } from 'react';
-import { Errors, Validations, Register } from '../types/glabal';
+import { Errors, Validations, Register } from '../types/global';
 
 type FormData = { [key: string]: string | number | boolean };
 type FieldsValidation = { [key: string]: Validations };

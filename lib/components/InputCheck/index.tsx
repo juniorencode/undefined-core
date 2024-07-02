@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { Register } from '../../types/glabal.js';
+import { Register } from '../../types/global.js';
 import { cn } from '../../utils/styles.js';
 import { InputContainer } from '../InputContainer/';
 
