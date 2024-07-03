@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { IoIosArrowDown } from 'react-icons/io';
 import { Register } from '../../types/global';
+import { cn } from '../../utils/styles';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 
@@ -32,8 +33,8 @@ export const InputSelect = (props: InputSelectProps) => {
     firstValue,
     toNumber,
     toBoolean,
-    callback,
     register,
+    callback,
     required,
     ...params
   } = props;
@@ -51,6 +52,7 @@ export const InputSelect = (props: InputSelectProps) => {
     null
   );
   const domRef = useClickOutside(() => setIsOpen(false));
+
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: isOpen ? 'bottom-start' : 'top-start'
   });
@@ -103,7 +105,13 @@ export const InputSelect = (props: InputSelectProps) => {
                       checked={item.value === value}
                     />
                     <label
-                      className="block px-4 py-2 text-sm cursor-pointer hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white"
+                      className={cn(
+                        'block px-4 py-2 text-sm cursor-pointer hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white',
+                        {
+                          'bg-secondary-100 dark:bg-secondary-600':
+                            item.value === value
+                        }
+                      )}
                       htmlFor={item.value}
                     >
                       {item.label}
@@ -119,7 +127,7 @@ export const InputSelect = (props: InputSelectProps) => {
             onClick={() => setIsOpen(!isOpen)}
             {...params}
           >
-            <div className="pr-4 w-full h-full">
+            <div className="flex items-center justify-start pr-4 w-full h-full">
               {options?.filter(item => item.value === value)[0]?.label || ''}
             </div>
             <IoIosArrowDown size={16} />
