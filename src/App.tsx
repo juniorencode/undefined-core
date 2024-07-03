@@ -34,7 +34,11 @@ const App = () => {
             label="Select"
             options={[
               { label: '1', value: '20' },
-              { label: '2', value: '30' }
+              { label: '2', value: '30' },
+              { label: '3', value: '40' },
+              { label: '4', value: '50' },
+              { label: '5', value: '60' },
+              { label: '6', value: '70' }
             ]}
             register={Form.register}
           />

@@ -83,13 +83,13 @@ export const InputSelect = (props: InputSelectProps) => {
         <div className="relative" ref={node => setReferenceElement(node)}>
           {options.length > 0 && isOpen && (
             <div
-              className="listbox absolute top-full my-2 w-full z-20 rounded-lg shadow-3xl bg-white dark:bg-secondary-700 dark:shadow-neutral-900"
+              className="listbox absolute top-full z-20 mt-2 w-full border rounded-lg shadow-3xl bg-white dark:bg-secondary-700 dark:border-neutral-600 dark:shadow-neutral-900"
               ref={setPopperElement}
               role="listbox"
               style={styles.popper}
               {...attributes.popper}
             >
-              <ul className="py-2 max-h-52 text-sm overflow-y-auto text-secondary-700 dark:text-secondary-200">
+              <ul className="my-2 max-h-[200px] text-sm overflow-y-auto text-secondary-700 dark:text-secondary-200">
                 {options?.map(item => (
                   <li key={item.value}>
                     <input
@@ -103,7 +103,7 @@ export const InputSelect = (props: InputSelectProps) => {
                       checked={item.value === value}
                     />
                     <label
-                      className="block px-4 py-2 cursor-pointer dark:hover:text-white hover:bg-secondary-100 dark:hover:bg-secondary-600"
+                      className="block px-4 py-2 text-sm cursor-pointer hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white"
                       htmlFor={item.value}
                     >
                       {item.label}
@@ -114,7 +114,7 @@ export const InputSelect = (props: InputSelectProps) => {
             </div>
           )}
           <button
-            className="flex items-center justify-between p-2.5 w-full h-12 focus:ring-2 focus:outline-none rounded-lg text-sm text-center border text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 focus:ring-blue-600 dark:focus:ring-blue-500 border-secondary-300 dark:border-secondary-600 focus:border-blue-600 dark:focus:border-blue-500 dark:placeholder-secondary-400"
+            className="flex items-center justify-between p-2.5 w-full h-12 focus:ring-2 focus:outline-none rounded-lg text-sm text-center border bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 focus:border-blue-600 dark:focus:border-blue-500 focus:ring-blue-600 dark:focus:ring-blue-500 dark:placeholder-secondary-400"
             type="button"
             onClick={() => setIsOpen(!isOpen)}
             {...params}
