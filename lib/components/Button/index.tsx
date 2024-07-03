@@ -40,6 +40,7 @@ export const Button = (props: ButtonProps) => {
   ) : (
     <button
       className={cn(initialStyles, selectedColor, className)}
+      role="button"
       type={type}
       {...(params as ButtonHTMLAttributes<HTMLButtonElement>)}
     >

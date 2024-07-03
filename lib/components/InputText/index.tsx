@@ -91,6 +91,7 @@ export const InputText = (props: InputTextProps) => {
             }
           )}
           ref={domRef}
+          role="textbox"
           id={domId}
           type="text"
           name={name}
@@ -98,8 +99,8 @@ export const InputText = (props: InputTextProps) => {
           onChange={onChange}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
-          disabled={disabled}
           autoComplete={autoComplete ? 'on' : 'off'}
+          disabled={disabled}
           {...params}
         />
         {postfix && <span className="mr-2.5">{postfix}</span>}

@@ -4,7 +4,7 @@ import { InputContainer } from '../InputContainer';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 
 interface InputPasswordProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'autoComplete'> {
   className?: string;
   label?: string;
   name: string;
@@ -13,6 +13,7 @@ interface InputPasswordProps
   minLength?: number;
   maxLength?: number;
   focused?: boolean;
+  autoComplete?: boolean;
   disabled?: boolean;
 }
 
@@ -26,6 +27,7 @@ export const InputPassword = (props: InputPasswordProps) => {
     minLength,
     maxLength,
     focused,
+    autoComplete,
     disabled,
     ...params
   } = props;
@@ -66,11 +68,13 @@ export const InputPassword = (props: InputPasswordProps) => {
           name={name}
           value={value !== undefined && value !== null ? value + '' : ''}
           onChange={onChange}
+          autoComplete={autoComplete ? 'on' : 'off'}
           disabled={disabled}
           {...params}
         />
         <button
           className="absolute top-0 end-0 flex items-center justify-center w-12 h-full rounded-e-lg dark:focus:outline-none text-neutral-400"
+          role="button"
           type="button"
           onClick={() => setIsHidden(prev => !prev)}
         >
