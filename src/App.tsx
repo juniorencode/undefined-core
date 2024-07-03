@@ -22,7 +22,6 @@ const App = () => {
             label="Text"
             register={Form.register}
             required
-            minLength={3}
           />
           <InputPassword
             name="password"

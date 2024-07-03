@@ -3,11 +3,13 @@ import { Register } from '../../types/global';
 import { cn } from '../../utils/styles';
 import { InputContainer } from '../InputContainer';
 
-interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputTextProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'autoComplete'> {
   className?: string;
   label?: string;
   name: string;
   uppercase?: boolean;
+  align?: string;
   prefix?: string;
   postfix?: string;
   register: Register;
@@ -16,6 +18,7 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   maxLength?: number;
   isEmail?: boolean;
   focused?: boolean;
+  autoComplete?: boolean;
   disabled?: boolean;
 }
 
@@ -25,6 +28,7 @@ export const InputText = (props: InputTextProps) => {
     label,
     name,
     uppercase,
+    align,
     prefix,
     postfix,
     register,
@@ -33,6 +37,7 @@ export const InputText = (props: InputTextProps) => {
     maxLength,
     isEmail,
     focused,
+    autoComplete,
     disabled,
     ...params
   } = props;
@@ -66,18 +71,25 @@ export const InputText = (props: InputTextProps) => {
     >
       <div
         className={cn(
-          'flex gap-2 p-2.5 w-full h-12 border rounded-lg bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
+          'flex items-center w-full border rounded-lg overflow-hidden bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
           {
-            'outline-none ring-2 ring-blue-600 dark:ring-blue-500 border-blue-600 dark:border-blue-500':
+            'ring-2 ring-blue-600 dark:ring-blue-500 border-blue-600 dark:border-blue-500':
               focus,
             'cursor-text': !disabled
           }
         )}
         onClick={() => domRef.current && domRef.current.focus()}
       >
-        {prefix && <span>{prefix}</span>}
+        {prefix && <span className="ml-2.5">{prefix}</span>}
         <input
-          className="w-full text-sm focus:outline-none bg-transparent"
+          className={cn(
+            'p-2.5 w-full h-12 text-sm outline-none bg-transparent',
+            {
+              'text-left': align === 'left',
+              'text-center': align === 'center',
+              'text-right': align === 'right'
+            }
+          )}
           ref={domRef}
           id={domId}
           type="text"
@@ -87,9 +99,10 @@ export const InputText = (props: InputTextProps) => {
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
           disabled={disabled}
+          autoComplete={autoComplete ? 'on' : 'off'}
           {...params}
         />
-        {postfix && <span>{postfix}</span>}
+        {postfix && <span className="mr-2.5">{postfix}</span>}
       </div>
     </InputContainer>
   );
