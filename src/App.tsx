@@ -16,7 +16,9 @@ const App = () => {
     <BrowserRouter>
       <Card className="m-4 p-4">
         <form onSubmit={Form.handleSubmit}>
-          <h1 className="text-4xl font-bold mb-12 text-white">Test Inputs</h1>
+          <h1 className="text-4xl font-bold mb-8 text-neutral-800 dark:text-white">
+            Test Inputs
+          </h1>
           <InputText
             name="email"
             label="Text"
@@ -43,6 +45,7 @@ const App = () => {
               { label: '8', value: '90' }
             ]}
             register={Form.register}
+            funcDelete={id => console.log('delete: ' + id)}
           />
           <InputTextarea
             name="textarea"

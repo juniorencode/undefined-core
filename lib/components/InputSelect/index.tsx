@@ -4,6 +4,7 @@ import { Register } from '../../types/global';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { SelectDropdown } from '../SelectDropdown';
+import { cn } from '../../utils/styles';
 
 interface InputSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -15,6 +16,7 @@ interface InputSelectProps
   toNumber?: boolean;
   toBoolean?: boolean;
   callback?: (value: string) => void;
+  funcDelete?: (id: string) => void;
   register: Register;
   required?: boolean;
 }
@@ -35,6 +37,7 @@ export const InputSelect = (props: InputSelectProps) => {
     toBoolean,
     register,
     callback,
+    funcDelete,
     required,
     ...params
   } = props;
@@ -82,7 +85,15 @@ export const InputSelect = (props: InputSelectProps) => {
           <div className="flex items-center justify-start pr-4 w-full h-full">
             {options?.filter(item => item.value === value)[0]?.label || ''}
           </div>
-          <IoIosArrowDown size={16} />
+          <IoIosArrowDown
+            className={cn(
+              'transition-transform duration-200 text-neutral-500 dark:text-neutral-400',
+              {
+                'rotate-180': isOpen
+              }
+            )}
+            size={16}
+          />
         </button>
 
         <SelectDropdown
@@ -92,47 +103,8 @@ export const InputSelect = (props: InputSelectProps) => {
           options={options}
           onChange={onChange}
           setIsOpen={setIsOpen}
+          funcDelete={funcDelete}
         />
-        {/* <div className="relative" ref={node => setReferenceElement(node)}>
-          {options.length > 0 && isOpen && (
-            <div
-              className="listbox absolute top-full z-20 mt-2 w-full border rounded-lg shadow-3xl bg-white dark:bg-secondary-700 dark:border-neutral-600 dark:shadow-neutral-900"
-              ref={setPopperElement}
-              role="listbox"
-              style={styles.popper}
-              {...attributes.popper}
-            >
-              <ul className="my-2 max-h-[200px] text-sm overflow-y-auto text-secondary-700 dark:text-secondary-200">
-                {options?.map(item => (
-                  <li key={item.value}>
-                    <input
-                      className="hidden"
-                      id={item.value}
-                      name={name}
-                      type="radio"
-                      value={item.value}
-                      onChange={onChange}
-                      onClick={() => setIsOpen(!isOpen)}
-                      checked={item.value === value}
-                    />
-                    <label
-                      className={cn(
-                        'block px-4 py-2 text-sm cursor-pointer hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white',
-                        {
-                          'bg-secondary-100 dark:bg-secondary-600':
-                            item.value === value
-                        }
-                      )}
-                      htmlFor={item.value}
-                    >
-                      {item.label}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div> */}
       </div>
     </InputContainer>
   );

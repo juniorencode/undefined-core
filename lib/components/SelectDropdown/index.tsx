@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { usePopper } from 'react-popper';
 import { cn } from '../../utils/styles';
+import { MdClose } from 'react-icons/md';
 
 interface SelectDropdownProps {
   name: string;
@@ -9,15 +10,25 @@ interface SelectDropdownProps {
   options: Option[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setIsOpen: (isOpen: boolean) => void;
+  funcDelete?: (id: string) => void;
 }
 
 interface Option {
+  id?: string;
   value: string;
   label: string;
 }
 
 const SelectDropdown = (props: SelectDropdownProps) => {
-  const { name, value, isOpen, options = [], onChange, setIsOpen } = props;
+  const {
+    name,
+    value,
+    isOpen,
+    options = [],
+    onChange,
+    setIsOpen,
+    funcDelete
+  } = props;
   const [referenceElement, setReferenceElement] =
     useState<HTMLDivElement | null>(null);
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
@@ -39,7 +50,7 @@ const SelectDropdown = (props: SelectDropdownProps) => {
           {...attributes.popper}
         >
           <ul className="my-2 max-h-[200px] text-sm overflow-y-auto text-secondary-700 dark:text-secondary-200">
-            {options?.map(item => (
+            {options?.map((item, index) => (
               <li key={item.value}>
                 <input
                   className="hidden"
@@ -53,7 +64,7 @@ const SelectDropdown = (props: SelectDropdownProps) => {
                 />
                 <label
                   className={cn(
-                    'block px-4 py-2 text-sm cursor-pointer hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white',
+                    'flex items-center justify-between pl-4 pr-2 text-sm cursor-pointer transition-all duration-200 group hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white',
                     {
                       'bg-secondary-100 dark:bg-secondary-600':
                         item.value === value
@@ -62,6 +73,17 @@ const SelectDropdown = (props: SelectDropdownProps) => {
                   htmlFor={item.value}
                 >
                   {item.label}
+                  {funcDelete && (
+                    <button
+                      className="p-2 opacity-0 group-hover:opacity-100 group-hover:inline transition-all duration-200 text-neutral-400 hover:text-red-500"
+                      onClick={e => {
+                        e.preventDefault();
+                        funcDelete(item.id || index.toString());
+                      }}
+                    >
+                      <MdClose size={20} />
+                    </button>
+                  )}
                 </label>
               </li>
             ))}
