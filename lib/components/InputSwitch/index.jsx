@@ -20,7 +20,7 @@ export const InputSwitch = props => {
     >
       <div className="flex items-center" ref={domRef}>
         <label
-          className="inline-flex items-center cursor-pointer"
+          className="flex items-center w-fit cursor-pointer"
           onClick={() => setFocus(true)}
         >
           <input
@@ -32,7 +32,7 @@ export const InputSwitch = props => {
           />
           <div
             className={cn(
-              'relative after:content-[""] after:absolute after:top-[2px] after:start-[2px] w-[42px] h-[24px] after:h-[18px] after:w-[18px] border after:border peer-focus:ring-2 rounded-full after:rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full outline-none peer-focus:outline-none transition-all after:transition-all bg-secondary-200 after:bg-white dark:bg-secondary-700 after:border-neutral-300 border-secondary-300 dark:border-secondary-800 peer-focus:ring-blue-500 dark:peer-focus:ring-blue-500 peer-checked:bg-blue-600 peer-checked:border-blue-600 peer-checked:after:border-white',
+              'relative after:content-[""] after:absolute after:top-[2px] after:start-[2px] w-[42px] h-[24px] after:h-[18px] after:w-[18px] border after:border peer-focus:ring-2 rounded-full after:rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full outline-none peer-focus:outline-none transition-all after:transition-all bg-secondary-200 after:bg-white dark:bg-secondary-700 after:border-neutral-300 border-secondary-300 dark:border-secondary-600 peer-focus:ring-blue-500 dark:peer-focus:ring-blue-500 peer-checked:bg-blue-600 peer-checked:border-blue-600 peer-checked:after:border-white',
               {
                 'ring-2 border-blue-500 dark:border-blue-500 peer-checked:border-blue-500 peer-checked:dark:border-blue-500 ring-blue-500 dark:ring-blue-500':
                   focus
@@ -40,7 +40,7 @@ export const InputSwitch = props => {
             )}
           ></div>
           {labelCheck && (
-            <span className="ms-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
+            <span className="ml-2 px-2 text-sm font-medium text-neutral-900 dark:text-neutral-300">
               {labelCheck}
             </span>
           )}

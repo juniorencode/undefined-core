@@ -17,9 +17,9 @@ export const InputCheck = props => {
       name={domId}
       error={errors[name]?.message}
     >
-      <div className="flex items-center">
+      <div className="flex items-center w-fit cursor-pointer">
         <input
-          className="w-6 h-6 border focus:ring-2 rounded cursor-pointer transition-all bg-secondary-200 dark:bg-secondary-700 checked:bg-blue-600 checked:dark:bg-blue-600 border-secondary-300 dark:border-secondary-800 focus:border-blue-500 focus:dark:border-blue-500 checked:border-blue-600 checked:focus:border-blue-500 checked:focus:dark:border-blue-500 focus:ring-blue-500 dark:focus:ring-blue-500"
+          className="w-6 h-6 border focus:ring-2 rounded transition-all bg-secondary-200 dark:bg-secondary-700 checked:bg-blue-600 checked:dark:bg-blue-600 border-secondary-300 dark:border-secondary-600 focus:border-blue-500 focus:dark:border-blue-500 checked:border-blue-600 checked:dark:border-blue-600 checked:focus:border-blue-500 checked:focus:dark:border-blue-500 focus:ring-blue-500 dark:focus:ring-blue-500"
           id={domId}
           type="checkbox"
           checked={typeof value === 'boolean' ? value : false}
@@ -28,7 +28,7 @@ export const InputCheck = props => {
         />
         {labelCheck && (
           <label
-            className="ml-2 text-sm font-medium text-secondary-900 dark:text-secondary-300"
+            className="ml-2 px-2 text-sm font-medium text-secondary-900 dark:text-secondary-300"
             htmlFor={name}
           >
             {labelCheck}
