@@ -48,7 +48,7 @@ export const InputText = props => {
   }, []);
 
   useEffect(() => {
-    const string = normalizeString(value?.trim() || '');
+    const string = normalizeString(value?.trim());
     if (!string) setFilteredOptions(options);
     if (!string || !options) return;
     const filtered = options.filter(option =>
@@ -58,7 +58,7 @@ export const InputText = props => {
     // eslint-disable-next-line
   }, [value]);
 
-  const normalizeString = str => {
+  const normalizeString = (str = '') => {
     return str
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
@@ -68,8 +68,10 @@ export const InputText = props => {
 
   const handleOpen = () => setIsOpen(true);
 
-  const onChange = e =>
-    handleChange(uppercase ? e.target.value.toUpperCase() : e.target.value);
+  const onChange = e => {
+    const _value = e.target.value;
+    handleChange(uppercase ? _value.toUpperCase() : _value);
+  };
 
   return (
     <InputContainer
@@ -105,7 +107,7 @@ export const InputText = props => {
             id={domId}
             type="text"
             name={name}
-            value={value !== undefined && value !== null ? value + '' : ''}
+            value={value !== undefined && value !== null ? value : ''}
             onChange={onChange}
             onClick={handleOpen}
             onFocus={() => setFocus(true)}
@@ -120,7 +122,10 @@ export const InputText = props => {
           name={name}
           value={value}
           isOpen={isOpen}
-          options={filteredOptions}
+          options={filteredOptions.map(option => ({
+            value: option.value,
+            label: option.value
+          }))}
           onChange={onChange}
           setIsOpen={setIsOpen}
           funcDelete={funcDelete}

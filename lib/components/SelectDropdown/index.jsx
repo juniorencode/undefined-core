@@ -31,7 +31,7 @@ const SelectDropdown = props => {
           style={styles.popper}
           {...attributes.popper}
         >
-          <ul className="my-2 max-h-[200px] text-sm overflow-y-auto text-secondary-700 dark:text-secondary-200">
+          <ul className="my-2 max-h-[200px] text-sm overflow-y-auto text-neutral-700 dark:text-neutral-200">
             {options?.map((item, index) => (
               <li key={item.value}>
                 <input

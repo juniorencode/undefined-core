@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useForm = initialForm => {
+const useForm = (initialForm = {}) => {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState(initialForm);
   const [pending, setPending] = useState(false);
@@ -41,7 +41,6 @@ const useForm = initialForm => {
   const setForm = data => setFormData(data);
 
   const handleSubmit = async e => {
-    console.log('====>', fieldsValidation);
     e.preventDefault();
     e.stopPropagation();
     let haveErrors = false;

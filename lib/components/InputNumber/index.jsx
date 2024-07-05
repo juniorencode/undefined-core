@@ -91,7 +91,7 @@ export const InputNumber = props => {
           id={domId}
           type="text"
           name={name}
-          value={value !== undefined && value !== null ? value + '' : ''}
+          value={value !== undefined && value !== null ? value : ''}
           onChange={onChange}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}

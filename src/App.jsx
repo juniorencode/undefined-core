@@ -11,7 +11,11 @@ import { InputPassword } from '../lib/components/InputPassword';
 import { InputSwitch } from '../lib/components/InputSwitch';
 
 const App = () => {
-  const Form = useForm({ isEnabled: true });
+  const Form = useForm();
+
+  Form.registerSubmit(form => {
+    console.log(form);
+  });
 
   return (
     <BrowserRouter>
@@ -22,17 +26,18 @@ const App = () => {
               Test Inputs
             </h1>
             <InputText
-              name="email"
+              name="text"
               label="Text"
               options={[
-                { label: 'gato', value: 'gato' },
-                { label: 'perro', value: 'perro' },
-                { label: 'sol', value: 'sol' },
-                { label: 'luna', value: 'luna' },
-                { label: 'estrella', value: 'estrella' },
-                { label: 'mar', value: 'mar' },
-                { label: 'montaña', value: 'montaña' },
-                { label: 'río', value: 'río' }
+                { value: 'gato' },
+                { value: 'perro' },
+                { value: 'sol' },
+                { value: 'luna' },
+                { value: 'estrella' },
+                { value: 'mar' },
+                { value: 'montaña' },
+                { value: 'río' },
+                { value: 'mentalista' }
               ]}
               register={Form.register}
               required
