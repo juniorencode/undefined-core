@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { cn } from '../../utils/styles';
 import { InputContainer } from '../InputContainer';
 
 export const InputPassword = props => {
@@ -51,14 +52,19 @@ export const InputPassword = props => {
           id={domId}
           type={isHidden ? 'password' : 'text'}
           name={name}
-          value={value !== undefined && value !== null ? value + '' : ''}
+          value={value !== undefined && value !== null ? value : ''}
           onChange={onChange}
           autoComplete={autoComplete ? 'on' : 'off'}
           disabled={disabled}
           {...params}
         />
         <button
-          className="absolute top-0 end-0 flex items-center justify-center w-12 h-full rounded-e-lg dark:focus:outline-none text-neutral-400"
+          className={cn(
+            'absolute top-0 end-0 flex items-center justify-center w-12 h-full rounded-e-lg dark:focus:outline-none text-neutral-400',
+            {
+              'text-primary-500 dark:text-primary-500': !isHidden
+            }
+          )}
           role="button"
           type="button"
           onClick={() => setIsHidden(prev => !prev)}

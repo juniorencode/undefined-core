@@ -69,7 +69,7 @@ export const InputSelect = props => {
             className={cn(
               'transition-transform duration-200 text-neutral-500 dark:text-neutral-400',
               {
-                'rotate-180': isOpen
+                'text-primary-500 dark:text-primary-500 rotate-180': isOpen
               }
             )}
             size={16}
