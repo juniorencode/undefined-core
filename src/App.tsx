@@ -22,6 +22,16 @@ const App = () => {
           <InputText
             name="email"
             label="Text"
+            options={[
+              { label: 'gato', value: 'gato' },
+              { label: 'perro', value: 'perro' },
+              { label: 'sol', value: 'sol' },
+              { label: 'luna', value: 'luna' },
+              { label: 'estrella', value: 'estrella' },
+              { label: 'mar', value: 'mar' },
+              { label: 'montaña', value: 'montaña' },
+              { label: 'río', value: 'río' }
+            ]}
             register={Form.register}
             required
           />

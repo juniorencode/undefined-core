@@ -9,8 +9,8 @@ import { cn } from '../../utils/styles';
 interface InputSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
-  label?: string;
   name: string;
+  label?: string;
   options: Option[];
   firstValue?: boolean;
   toNumber?: boolean;
@@ -29,8 +29,8 @@ interface Option {
 export const InputSelect = (props: InputSelectProps) => {
   const {
     className,
-    label,
     name,
+    label,
     options = [],
     firstValue,
     toNumber,
@@ -63,8 +63,8 @@ export const InputSelect = (props: InputSelectProps) => {
   useEffect(() => {
     if (!firstValue || options.length < 1) return;
     if (value === options[0].value) return;
-    setValue(options[0].value);
     handleChange(options[0].value);
+    setValue(options[0].value);
     // eslint-disable-next-line
   }, [options]);
 
@@ -95,7 +95,6 @@ export const InputSelect = (props: InputSelectProps) => {
             size={16}
           />
         </button>
-
         <SelectDropdown
           name={name}
           value={value}

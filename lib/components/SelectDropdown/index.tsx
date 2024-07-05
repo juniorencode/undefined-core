@@ -64,7 +64,7 @@ const SelectDropdown = (props: SelectDropdownProps) => {
                 />
                 <label
                   className={cn(
-                    'flex items-center justify-between pl-4 pr-2 text-sm cursor-pointer transition-all duration-200 group hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white',
+                    'flex items-center justify-between pl-4 pr-2 h-9 text-sm cursor-pointer transition-all duration-200 group hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white',
                     {
                       'bg-secondary-100 dark:bg-secondary-600':
                         item.value === value
