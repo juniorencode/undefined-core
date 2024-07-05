@@ -57,7 +57,7 @@ export const InputSelect = props => {
     >
       <div ref={domRef}>
         <button
-          className="flex items-center justify-between p-2.5 w-full h-12 focus:ring-2 focus:outline-none rounded-lg text-sm text-center border bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white dark:placeholder-secondary-400 border-secondary-300 dark:border-secondary-600 focus:border-primary-600 dark:focus:border-primary-500 focus:ring-primary-600 dark:focus:ring-primary-500"
+          className="flex items-center justify-between p-2.5 w-full h-12 focus:ring-4 focus:ring-opacity-40 checked:focus:ring-opacity-40 focus:dark:ring-opacity-40 checked:focus:dark:ring-opacity-40 outline-none rounded-lg text-sm text-center border bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white dark:placeholder-secondary-400 border-secondary-300 dark:border-secondary-600 focus:border-primary-600 dark:focus:border-primary-500 focus:ring-primary-600 dark:focus:ring-primary-500"
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           {...params}

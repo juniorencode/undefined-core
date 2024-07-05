@@ -32,9 +32,9 @@ export const InputSwitch = props => {
           />
           <div
             className={cn(
-              'relative after:content-[""] after:absolute after:top-[2px] after:start-[2px] w-[42px] h-[24px] after:h-[18px] after:w-[18px] border after:border peer-focus:ring-2 rounded-full after:rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full outline-none peer-focus:outline-none transition-all after:transition-all bg-secondary-200 after:bg-white dark:bg-secondary-700 after:border-neutral-300 border-secondary-300 dark:border-secondary-600 peer-focus:ring-primary-500 dark:peer-focus:ring-primary-500 peer-checked:bg-primary-600 peer-checked:border-primary-600 peer-checked:after:border-white',
+              'relative after:content-[""] after:absolute after:top-[2px] after:start-[2px] w-[42px] h-[24px] after:h-[18px] after:w-[18px] border after:border rounded-full after:rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full outline-none transition-all after:transition-all bg-secondary-200 after:bg-white dark:bg-secondary-700 after:border-neutral-300 border-secondary-300 dark:border-secondary-600 peer-checked:bg-primary-600 peer-checked:border-primary-600 peer-checked:after:border-white',
               {
-                'ring-2 border-primary-500 dark:border-primary-500 peer-checked:border-primary-500 peer-checked:dark:border-primary-500 ring-primary-500 dark:ring-primary-500':
+                'ring-4 ring-opacity-40 checked:ring-opacity-40 dark:ring-opacity-40 checked:dark:ring-opacity-40  border-primary-500 dark:border-primary-500 peer-checked:border-primary-500 peer-checked:dark:border-primary-500 ring-primary-500 dark:ring-primary-500':
                   focus
               }
             )}
