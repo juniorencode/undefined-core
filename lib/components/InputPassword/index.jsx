@@ -1,23 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { Register } from '../../types/global';
-import { InputContainer } from '../InputContainer';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { InputContainer } from '../InputContainer';
 
-interface InputPasswordProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'autoComplete'> {
-  className?: string;
-  label?: string;
-  name: string;
-  register: Register;
-  required?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  focused?: boolean;
-  autoComplete?: boolean;
-  disabled?: boolean;
-}
-
-export const InputPassword = (props: InputPasswordProps) => {
+export const InputPassword = props => {
   const {
     className,
     label,
@@ -31,8 +16,9 @@ export const InputPassword = (props: InputPasswordProps) => {
     disabled,
     ...params
   } = props;
+
   const domId = useId();
-  const domRef = useRef<HTMLInputElement>(null);
+  const domRef = useRef(null);
   const [isHidden, setIsHidden] = useState(true);
   const { errors, value, handleChange } = register(name, {
     required,
@@ -48,8 +34,7 @@ export const InputPassword = (props: InputPasswordProps) => {
     // eslint-disable-next-line
   }, []);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    handleChange(e.target.value);
+  const onChange = e => handleChange(e.target.value);
 
   return (
     <InputContainer

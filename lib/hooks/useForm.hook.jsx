@@ -1,29 +1,23 @@
-import { useState, FormEvent, KeyboardEvent } from 'react';
-import { Errors, Validations, Register } from '../types/global';
+import { useState } from 'react';
 
-type FormData = { [key: string]: string | number | boolean };
-type FieldsValidation = { [key: string]: Validations };
-type FieldsOutput = { [key: string]: 'STRING' | 'NUMBER' | 'BOOLEAN' };
+const useForm = initialForm => {
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState(initialForm);
+  const [pending, setPending] = useState(false);
+  const fields = [];
+  const fieldsValidation = {};
+  const fieldsOutput = {};
+  let onSubmit = null;
 
-const useForm = (initialForm: FormData = {}) => {
-  const [errors, setErrors] = useState<Errors>({});
-  const [formData, setFormData] = useState<FormData>(initialForm);
-  const [pending, setPending] = useState<boolean>(false);
-  const fields: string[] = [];
-  const fieldsValidation: FieldsValidation = {};
-  const fieldsOutput: FieldsOutput = {};
-  let onSubmit: ((data: FormData) => Promise<void>) | null = null;
-
-  const register: Register = (name, validations = {}, output) => {
+  const register = (name, validations = {}, output) => {
     if (!fieldsValidation[name]) fieldsValidation[name] = validations;
     if (!fields.includes(name)) fields.push(name);
-    if (!fieldsOutput[name] && output)
-      fieldsOutput[name] = output as 'STRING' | 'NUMBER' | 'BOOLEAN';
+    if (!fieldsOutput[name] && output) fieldsOutput[name] = output;
 
     return {
       errors,
       value: formData[name],
-      handleChange: (value: string | number | boolean) =>
+      handleChange: value =>
         setFormData(prev => {
           if (fieldsOutput[name]) {
             switch (fieldsOutput[name]) {
@@ -44,9 +38,9 @@ const useForm = (initialForm: FormData = {}) => {
 
   const reset = () => setFormData(initialForm);
 
-  const setForm = (data: FormData) => setFormData(data);
+  const setForm = data => setFormData(data);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async e => {
     console.log('====>', fieldsValidation);
     e.preventDefault();
     e.stopPropagation();
@@ -141,7 +135,7 @@ const useForm = (initialForm: FormData = {}) => {
     }
   };
 
-  const validateEmail = (email: string): boolean => {
+  const validateEmail = email => {
     const [localPart, domainPart] = email.split('@');
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -151,13 +145,13 @@ const useForm = (initialForm: FormData = {}) => {
     return true;
   };
 
-  const handleAssistant = async (e: KeyboardEvent<HTMLFormElement>) => {
+  const handleAssistant = async e => {
     if (e.key === 'Enter') {
       await handleSubmit(e);
     }
   };
 
-  const registerSubmit = (func: (data: FormData) => Promise<void>) => {
+  const registerSubmit = func => {
     onSubmit = func;
   };
 

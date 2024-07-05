@@ -1,23 +1,15 @@
 import { useId } from 'react';
-import { Register } from '../../types/global.js';
 import { cn } from '../../utils/styles.js';
-import { InputContainer } from '../InputContainer/';
+import { InputContainer } from '../InputContainer';
 
-interface InputCheckProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  className?: string;
-  label?: string;
-  name: string;
-  labelCheck?: string;
-  register: Register;
-}
-
-export const InputCheck = (props: InputCheckProps) => {
+export const InputCheck = props => {
   const { className, label, name, labelCheck, register, ...params } = props;
+
   const domId = useId();
   const { errors, value, handleChange } = register(name);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    handleChange(e.target.checked);
+  const onChange = e => handleChange(e.target.checked);
+
   return (
     <InputContainer
       className={cn(className)}
@@ -27,7 +19,7 @@ export const InputCheck = (props: InputCheckProps) => {
     >
       <div className="flex items-center">
         <input
-          className="w-4 h-4 focus:ring-2 border rounded text-blue-600 bg-secondary-100 dark:bg-secondary-700 border-secondary-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-secondary-800 dark:border-secondary-600"
+          className="w-4 h-4 focus:ring-2 border rounded bg-secondary-100 dark:bg-secondary-700 checked:dark:bg-blue-600 border-secondary-300 dark:border-secondary-600 checked:dark:border-transparent focus:ring-blue-500 dark:focus:ring-blue-500"
           id={domId}
           type="checkbox"
           checked={typeof value === 'boolean' ? value : false}

@@ -3,23 +3,7 @@ import { usePopper } from 'react-popper';
 import { cn } from '../../utils/styles';
 import { MdClose } from 'react-icons/md';
 
-interface SelectDropdownProps {
-  name: string;
-  value: string | number | boolean;
-  isOpen: boolean;
-  options: Option[];
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setIsOpen: (isOpen: boolean) => void;
-  funcDelete?: (id: string) => void;
-}
-
-interface Option {
-  id?: string;
-  value: string;
-  label: string;
-}
-
-const SelectDropdown = (props: SelectDropdownProps) => {
+const SelectDropdown = props => {
   const {
     name,
     value,
@@ -29,11 +13,9 @@ const SelectDropdown = (props: SelectDropdownProps) => {
     setIsOpen,
     funcDelete
   } = props;
-  const [referenceElement, setReferenceElement] =
-    useState<HTMLDivElement | null>(null);
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-    null
-  );
+
+  const [referenceElement, setReferenceElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: isOpen ? 'bottom-start' : 'top-start'

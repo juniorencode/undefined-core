@@ -1,23 +1,8 @@
 import { useEffect, useId, useRef } from 'react';
-import { Register } from '../../types/global';
 import { InputContainer } from '../InputContainer';
 import { cn } from '../../utils/styles';
 
-interface InputTextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  className?: string;
-  label?: string;
-  name: string;
-  uppercase?: boolean;
-  register: Register;
-  required?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  focused?: boolean;
-  disabled?: boolean;
-}
-
-export const InputTextarea = (props: InputTextareaProps) => {
+export const InputTextarea = props => {
   const {
     className,
     label,
@@ -31,8 +16,9 @@ export const InputTextarea = (props: InputTextareaProps) => {
     disabled,
     ...params
   } = props;
+
   const domId = useId();
-  const domRef = useRef<HTMLTextAreaElement>(null);
+  const domRef = useRef(null);
   const { errors, value, handleChange } = register(name, {
     required,
     minLength,
@@ -47,7 +33,7 @@ export const InputTextarea = (props: InputTextareaProps) => {
     // eslint-disable-next-line
   }, []);
 
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+  const onChange = e =>
     handleChange(uppercase ? e.target.value.toUpperCase() : e.target.value);
 
   return (

@@ -1,16 +1,7 @@
-import { ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../utils/styles';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  className?: string;
-  type?: 'button' | 'submit' | 'reset';
-  to?: string;
-  color?: 'Blue' | 'Red' | 'LightSwitch' | 'DarkSwitch';
-}
-
-export const Button = (props: ButtonProps) => {
+export const Button = props => {
   const { children, className, type = 'button', to, color, ...params } = props;
 
   const initialStyles =
@@ -33,7 +24,7 @@ export const Button = (props: ButtonProps) => {
     <Link
       className={cn(initialStyles, selectedColor, className)}
       to={to}
-      {...(params as AnchorHTMLAttributes<HTMLAnchorElement>)}
+      {...params}
     >
       {children}
     </Link>
@@ -42,7 +33,7 @@ export const Button = (props: ButtonProps) => {
       className={cn(initialStyles, selectedColor, className)}
       role="button"
       type={type}
-      {...(params as ButtonHTMLAttributes<HTMLButtonElement>)}
+      {...params}
     >
       {children}
     </button>

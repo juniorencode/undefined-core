@@ -1,26 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { Register } from '../../types/global';
 import { cn } from '../../utils/styles';
 import { InputContainer } from '../InputContainer';
 
-interface InputNumberProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'autoComplete'> {
-  className?: string;
-  label?: string;
-  name: string;
-  align?: string;
-  prefix?: string;
-  postfix?: string;
-  register: Register;
-  required?: boolean;
-  minValue?: number;
-  maxValue?: number;
-  focused?: boolean;
-  autoComplete?: boolean;
-  disabled?: boolean;
-}
-
-export const InputNumber = (props: InputNumberProps) => {
+export const InputNumber = props => {
   const {
     className,
     label,
@@ -37,8 +19,9 @@ export const InputNumber = (props: InputNumberProps) => {
     disabled,
     ...params
   } = props;
+
   const domId = useId();
-  const domRef = useRef<HTMLInputElement>(null);
+  const domRef = useRef(null);
   const [focus, setFocus] = useState(false);
   const { errors, value, handleChange } = register(name, {
     required,
@@ -54,7 +37,7 @@ export const InputNumber = (props: InputNumberProps) => {
     // eslint-disable-next-line
   }, []);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = e => {
     let newValue = e.target.value
       .replace(/[^\d.-]/g, '')
       .replace(/^(\d*\.\d*).*$/, '$1');

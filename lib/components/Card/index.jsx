@@ -1,12 +1,8 @@
 import { cn } from '../../utils/styles.js';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export const Card = (props: CardProps) => {
+export const Card = props => {
   const { children, className, ...params } = props;
+
   return (
     <div
       className={cn(

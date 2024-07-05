@@ -1,37 +1,10 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { Register } from '../../types/global';
 import { cn } from '../../utils/styles';
+import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { SelectDropdown } from '../SelectDropdown';
-import { useClickOutside } from '../../hooks/useClickOutside.hook';
 
-interface InputTextProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'autoComplete'> {
-  className?: string;
-  name: string;
-  label?: string;
-  options?: Option[];
-  uppercase?: boolean;
-  align?: string;
-  prefix?: string;
-  postfix?: string;
-  funcDelete?: (id: string) => void;
-  register: Register;
-  required?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  isEmail?: boolean;
-  focused?: boolean;
-  autoComplete?: boolean;
-  disabled?: boolean;
-}
-
-interface Option {
-  value: string;
-  label: string;
-}
-
-export const InputText = (props: InputTextProps) => {
+export const InputText = props => {
   const {
     className,
     name,
@@ -52,12 +25,13 @@ export const InputText = (props: InputTextProps) => {
     disabled,
     ...params
   } = props;
+
   const domId = useId();
-  const domRef = useRef<HTMLInputElement>(null);
+  const domRef = useRef(null);
   const domRef2 = useClickOutside(() => setIsOpen(false));
   const [isOpen, setIsOpen] = useState(false);
   const [focus, setFocus] = useState(false);
-  const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
+  const [filteredOptions, setFilteredOptions] = useState(options);
   const { errors, value, handleChange } = register(name, {
     required,
     minLength,
@@ -74,18 +48,27 @@ export const InputText = (props: InputTextProps) => {
   }, []);
 
   useEffect(() => {
-    if (!value) setFilteredOptions(options);
-    if (!value || !options) return;
+    const string = normalizeString(value?.trim() || '');
+    if (!string) setFilteredOptions(options);
+    if (!string || !options) return;
     const filtered = options.filter(option =>
-      option.label.toLowerCase().includes((value + '').toLowerCase())
+      normalizeString(option.label).includes(string)
     );
     setFilteredOptions(filtered);
     // eslint-disable-next-line
   }, [value]);
 
+  const normalizeString = str => {
+    return str
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
+      .toLowerCase();
+  };
+
   const handleOpen = () => setIsOpen(true);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const onChange = e =>
     handleChange(uppercase ? e.target.value.toUpperCase() : e.target.value);
 
   return (

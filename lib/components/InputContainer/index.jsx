@@ -1,13 +1,6 @@
-interface InputContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  className?: string;
-  label?: string;
-  name: string;
-  error?: string;
-}
-
-export const InputContainer = (props: InputContainerProps) => {
+export const InputContainer = props => {
   const { children, label, name, error = '', ...params } = props;
+
   return (
     <div {...params}>
       {label && (

@@ -1,32 +1,11 @@
 import { useEffect, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
-import { Register } from '../../types/global';
+import { cn } from '../../utils/styles';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { SelectDropdown } from '../SelectDropdown';
-import { cn } from '../../utils/styles';
 
-interface InputSelectProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  className?: string;
-  name: string;
-  label?: string;
-  options: Option[];
-  firstValue?: boolean;
-  toNumber?: boolean;
-  toBoolean?: boolean;
-  callback?: (value: string) => void;
-  funcDelete?: (id: string) => void;
-  register: Register;
-  required?: boolean;
-}
-
-interface Option {
-  value: string;
-  label: string;
-}
-
-export const InputSelect = (props: InputSelectProps) => {
+export const InputSelect = props => {
   const {
     className,
     name,
@@ -41,6 +20,7 @@ export const InputSelect = (props: InputSelectProps) => {
     required,
     ...params
   } = props;
+
   const output = toNumber ? 'NUMBER' : toBoolean ? 'BOOLEAN' : 'STRING';
   const {
     errors,
@@ -51,7 +31,7 @@ export const InputSelect = (props: InputSelectProps) => {
   const [value, setValue] = useState(initialValue);
   const domRef = useClickOutside(() => setIsOpen(false));
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = e => {
     callback && callback(e.target.value);
     handleChange(e.target.value);
   };
