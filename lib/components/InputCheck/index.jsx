@@ -3,7 +3,7 @@ import { cn } from '../../utils/styles.js';
 import { InputContainer } from '../InputContainer';
 
 export const InputCheck = props => {
-  const { className, label, name, labelCheck, register, ...params } = props;
+  const { className, name, label, labelCheck, register, ...params } = props;
 
   const domId = useId();
   const { errors, value, handleChange } = register(name);
@@ -19,7 +19,7 @@ export const InputCheck = props => {
     >
       <div className="flex items-center">
         <input
-          className="w-4 h-4 focus:ring-2 border rounded bg-secondary-100 dark:bg-secondary-700 checked:dark:bg-blue-600 border-secondary-300 dark:border-secondary-600 checked:dark:border-transparent focus:ring-blue-500 dark:focus:ring-blue-500"
+          className="w-6 h-6 border focus:ring-2 rounded cursor-pointer transition-all bg-secondary-200 dark:bg-secondary-700 checked:bg-blue-600 checked:dark:bg-blue-600 border-secondary-300 dark:border-secondary-800 focus:border-blue-500 focus:dark:border-blue-500 checked:border-blue-600 checked:focus:border-blue-500 checked:focus:dark:border-blue-500 focus:ring-blue-500 dark:focus:ring-blue-500"
           id={domId}
           type="checkbox"
           checked={typeof value === 'boolean' ? value : false}

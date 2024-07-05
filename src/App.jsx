@@ -8,6 +8,7 @@ import { InputSelect } from '../lib/components/InputSelect';
 import { InputNumber } from '../lib/components/InputNumber';
 import { InputTextarea } from '../lib/components/InputTextarea';
 import { InputPassword } from '../lib/components/InputPassword';
+import { InputSwitch } from '../lib/components/InputSwitch';
 
 const App = () => {
   const Form = useForm({ isEnabled: true });
@@ -65,6 +66,12 @@ const App = () => {
           <InputCheck
             name="checkbox"
             label="Checkbox"
+            labelCheck="Active"
+            register={Form.register}
+          />
+          <InputSwitch
+            name="switch"
+            label="Switch"
             labelCheck="Active"
             register={Form.register}
           />
