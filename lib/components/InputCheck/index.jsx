@@ -29,7 +29,7 @@ export const InputCheck = props => {
         />
         {labelCheck && (
           <label
-            className="ml-2 px-2 text-sm font-medium cursor-pointer text-secondary-900 dark:text-secondary-300"
+            className="ml-2 px-2 text-sm font-medium cursor-pointer text-neutral-900 dark:text-neutral-300"
             htmlFor={domId}
           >
             {labelCheck}
