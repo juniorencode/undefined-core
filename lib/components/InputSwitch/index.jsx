@@ -1,7 +1,7 @@
 import { useId, useState } from 'react';
+import { cn } from '../../utils/styles';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
-import { cn } from '../../utils/styles';
 
 export const InputSwitch = props => {
   const { className, name, label, labelCheck, register, ...params } = props;

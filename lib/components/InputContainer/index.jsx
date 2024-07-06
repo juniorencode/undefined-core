@@ -12,7 +12,7 @@ export const InputContainer = props => {
         </label>
       )}
       {children}
-      <span className="flex justify-end mt-1 h-2 text-xs text-red-600 dark:text-red-400">
+      <span className="flex justify-end mt-1 h-4 text-xs text-red-600 dark:text-red-400">
         {error}
       </span>
     </div>
