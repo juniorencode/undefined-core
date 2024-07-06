@@ -1,8 +1,9 @@
 import { BrowserRouter } from 'react-router-dom';
-import { Card } from '../lib/components/Card';
 import { useForm } from '../lib/hooks/useForm.hook';
+import { Card } from '../lib/components/Card';
 import { Button } from '../lib/components/Button';
 import { InputText } from '../lib/components/InputText';
+import { InputSearch } from '../lib/components/InputSearch';
 import { InputCheck } from '../lib/components/InputCheck';
 import { InputSelect } from '../lib/components/InputSelect';
 import { InputNumber } from '../lib/components/InputNumber';
@@ -42,6 +43,22 @@ const App = () => {
               register={Form.register}
               required
             />
+            <InputSearch
+              name="search"
+              label="Search"
+              options={[
+                { value: '1', label: 'gato' },
+                { value: '2', label: 'perro' },
+                { value: '3', label: 'sol' },
+                { value: '4', label: 'luna' },
+                { value: '5', label: 'estrella' },
+                { value: '6', label: 'mar' },
+                { value: '7', label: 'montaña' },
+                { value: '8', label: 'río' },
+                { value: '9', label: 'mentalista' }
+              ]}
+              register={Form.register}
+            />
             <InputPassword
               name="password"
               label="Password"
@@ -56,14 +73,15 @@ const App = () => {
               name="select"
               label="Select"
               options={[
-                { label: '1', value: '20' },
-                { label: '2', value: '30' },
-                { label: '3', value: '40' },
-                { label: '4', value: '50' },
-                { label: '5', value: '60' },
-                { label: '6', value: '70' },
-                { label: '7', value: '80' },
-                { label: '8', value: '90' }
+                { value: '1', label: 'gato' },
+                { value: '2', label: 'perro' },
+                { value: '3', label: 'sol' },
+                { value: '4', label: 'luna' },
+                { value: '5', label: 'estrella' },
+                { value: '6', label: 'mar' },
+                { value: '7', label: 'montaña' },
+                { value: '8', label: 'río' },
+                { value: '9', label: 'mentalista' }
               ]}
               register={Form.register}
               funcDelete={id => console.log('delete: ' + id)}
