@@ -5,7 +5,7 @@ export const Button = props => {
   const { children, className, type = 'button', to, color, ...params } = props;
 
   const initialStyles =
-    'flex gap-2 items-center justify-center h-10 px-5 py-2.5 text-nowrap font-medium text-sm rounded-lg focus:ring-4 focus:ring-opacity-50 checked:focus:ring-opacity-50 focus:dark:ring-opacity-50 checked:focus:dark:ring-opacity-50 outline-none';
+    'flex gap-2 items-center justify-center h-10 px-5 py-2.5 text-nowrap font-medium text-sm rounded-lg focus:ring-4 focus:ring-opacity-50 checked:focus:ring-opacity-50 focus:dark:ring-opacity-50 checked:focus:dark:ring-opacity-50 outline-none transition-all';
 
   const optionsColor = {
     default:

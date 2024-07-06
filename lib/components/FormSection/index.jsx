@@ -25,7 +25,7 @@ const FormSection = props => {
         </h1>
       )}
       <div
-        className={cn('grid grid-cols-12 gap-4 p-4', {
+        className={cn('grid grid-cols-12 gap-2 p-4', {
           'p-0 py-4 border-t border-primary-200 dark:border-primary-800': !box
         })}
       >
