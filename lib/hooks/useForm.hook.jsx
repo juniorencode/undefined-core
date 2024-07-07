@@ -1,11 +1,11 @@
 import { useState, useCallback, useRef } from 'react';
 import { getValidationError } from '../utils/validate';
-import { formatOutput } from '../utils/format';
+import { formatInput, formatOutput } from '../utils/format';
 
 export const useForm = (initialForm = {}) => {
   const [formState, setFormState] = useState({
     errors: {},
-    formData: initialForm,
+    formData: formatInput(initialForm),
     pending: false
   });
   const fieldsValidation = useRef({});
@@ -126,7 +126,7 @@ export const useForm = (initialForm = {}) => {
         formData: data
       })),
     pending: formState.pending,
-    watch: formState.formData,
+    watch: formatFormData(formState.formData),
     errors: formState.errors
   };
 };
