@@ -29,8 +29,8 @@ export const InputText = props => {
   const domId = useId();
   const domRef = useRef(null);
   const domRef2 = useClickOutside(() => setIsOpen(false));
-  const [isOpen, setIsOpen] = useState(false);
   const [focus, setFocus] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState(options);
   const { errors, value, handleChange } = register(name, {
     required,
@@ -52,9 +52,11 @@ export const InputText = props => {
     if (!string) setFilteredOptions(options);
     if (!string || !options) return;
     const filtered = options.filter(option =>
-      normalizeString(option.label).includes(string)
+      normalizeString(option.value).includes(string)
     );
-    setFilteredOptions(filtered);
+    if (filtered.length === 1 && filtered[0].value === string)
+      setFilteredOptions([]);
+    else setFilteredOptions(filtered);
     // eslint-disable-next-line
   }, [value]);
 
@@ -71,6 +73,16 @@ export const InputText = props => {
   const onChange = e => {
     const _value = e.target.value;
     handleChange(uppercase ? _value.toUpperCase() : _value);
+  };
+
+  const handleFocus = () => {
+    setFocus(true);
+    setIsOpen(true);
+  };
+
+  const handleBlur = () => {
+    setFocus(false);
+    setIsOpen(false);
   };
 
   return (
@@ -110,8 +122,8 @@ export const InputText = props => {
             value={value !== undefined && value !== null ? value : ''}
             onChange={onChange}
             onClick={handleOpen}
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             autoComplete={autoComplete ? 'on' : 'off'}
             disabled={disabled}
             {...params}

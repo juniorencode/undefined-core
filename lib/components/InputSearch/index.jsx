@@ -30,8 +30,8 @@ export const InputSearch = props => {
   const domRef = useRef(null);
   const domRef2 = useClickOutside(() => setIsOpen(false));
   const [search, setSearch] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
   const [focus, setFocus] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState(options);
   const { errors, value, handleChange } = register(name, {
     required,
@@ -74,6 +74,16 @@ export const InputSearch = props => {
     setSearch(uppercase ? _value.toUpperCase() : _value);
   };
 
+  const handleFocus = () => {
+    setFocus(true);
+    setIsOpen(true);
+  };
+
+  const handleBlur = () => {
+    setFocus(false);
+    setIsOpen(false);
+  };
+
   const onSelectChange = e => {
     handleChange(e.target.value);
   };
@@ -91,7 +101,7 @@ export const InputSearch = props => {
             'flex items-center w-full border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
             {
               'ring-4 ring-opacity-30 checked:ring-opacity-30 dark:ring-opacity-40 checked:dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
-                focus,
+                focus || isOpen,
               'cursor-text': !disabled
             }
           )}
@@ -121,8 +131,8 @@ export const InputSearch = props => {
             }
             onChange={onChange}
             onClick={handleOpen}
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             autoComplete={autoComplete ? 'on' : 'off'}
             disabled={disabled}
             {...params}
