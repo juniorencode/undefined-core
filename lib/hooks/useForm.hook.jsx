@@ -3,11 +3,9 @@ import { getValidationError } from '../utils/validate';
 import { formatInput, formatOutput } from '../utils/format';
 
 export const useForm = (initialForm = {}) => {
-  const [formState, setFormState] = useState({
-    errors: {},
-    formData: formatInput(initialForm),
-    pending: false
-  });
+  const [formData, setFormData] = useState(initialForm);
+  const [pending, setPending] = useState(false);
+  const [errors, setErrors] = useState({});
   const fieldsValidation = useRef({});
   const fieldsOutput = useRef({});
   const onSubmit = useRef(null);
@@ -20,56 +18,43 @@ export const useForm = (initialForm = {}) => {
         fieldsOutput.current[name] = output;
 
       return {
-        errors: formState.errors,
-        value: formState.formData[name],
-        handleChange: value =>
-          setFormState(prev => ({
-            ...prev,
-            formData: { ...prev.formData, [name]: value }
-          }))
+        errors: errors,
+        value: formData[name],
+        handleChange: value => setFormData(prev => ({ ...prev, [name]: value }))
       };
     },
-    [formState.errors, formState.formData]
+    [errors, formData]
   );
 
-  const reset = useCallback(
-    () =>
-      setFormState(prev => ({
-        ...prev,
-        formData: initialForm
-      })),
-    [initialForm]
-  );
+  const reset = useCallback(() => {
+    setFormData(initialForm);
+  }, [initialForm]);
 
-  const setForm = useCallback(
-    data =>
-      setFormState(prev => ({
-        ...prev,
-        formData: data
-      })),
-    []
-  );
+  const setForm = useCallback(data => {
+    setFormData(data);
+  }, []);
 
   const handleSubmit = useCallback(
     async e => {
       e.preventDefault();
       e.stopPropagation();
 
-      const formattedData = formatFormData(formState.formData);
-      const validationResult = validateFields(formattedData);
+      console.log(fieldsOutput.current);
 
+      const validationResult = validateFields(formData);
       if (validationResult.haveErrors) return;
-
       if (!onSubmit.current) return;
-      setFormState(prev => ({ ...prev, pending: true }));
+
+      const formattedData = formatFormData(validationResult.data);
+      setPending(true);
 
       try {
-        await onSubmit.current(validationResult.data);
+        await onSubmit.current(formattedData);
       } finally {
-        setFormState(prev => ({ ...prev, pending: false }));
+        setPending(false);
       }
     },
-    [formState.formData]
+    [formData]
   );
 
   const formatFormData = useCallback(data => {
@@ -100,7 +85,7 @@ export const useForm = (initialForm = {}) => {
       }
     });
 
-    setFormState(prev => ({ ...prev, errors }));
+    setErrors(errors);
     return { haveErrors, data };
   }, []);
 
@@ -120,13 +105,9 @@ export const useForm = (initialForm = {}) => {
     handleAssistant,
     reset,
     setForm,
-    setFormData: data =>
-      setFormState(prev => ({
-        ...prev,
-        formData: data
-      })),
-    pending: formState.pending,
-    watch: formatFormData(formState.formData),
-    errors: formState.errors
+    setFormData,
+    pending: pending,
+    watch: formData,
+    errors: errors
   };
 };

@@ -10,6 +10,7 @@ export const InputNumber = props => {
     align,
     prefix,
     postfix,
+    toString,
     register,
     required,
     minValue,
@@ -23,6 +24,7 @@ export const InputNumber = props => {
   const domId = useId();
   const domRef = useRef(null);
   const [focus, setFocus] = useState(false);
+  const output = typeof toString === 'boolean' ? 'STRING' : 'NUMBER';
   const { errors, value, handleChange } = register(
     name,
     {
@@ -30,7 +32,7 @@ export const InputNumber = props => {
       minValue,
       maxValue
     },
-    'NUMBER'
+    output
   );
 
   useEffect(() => {
@@ -58,8 +60,8 @@ export const InputNumber = props => {
     if (maxValue && parseFloat(newValue) > maxValue) return;
 
     if (parseFloat(newValue) && !newValue.endsWith('.'))
-      handleChange(parseFloat(newValue).toString());
-    else handleChange(newValue.toString());
+      handleChange(parseFloat(newValue));
+    else handleChange(newValue);
   };
 
   return (

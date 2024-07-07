@@ -15,16 +15,17 @@ import {
 } from '../lib/main';
 
 const App = () => {
-  const Form = useForm({
-    text: 'qwe',
-    search: '3',
-    password: 'qwe',
-    number: 123.12,
-    select: '1',
-    textarea: 'qwe',
-    checkbox: true,
-    switch: true
-  });
+  // const Form = useForm({
+  //   text: 'qwe',
+  //   search: '3',
+  //   password: 'qwe',
+  //   number: 123.12,
+  //   select: '1',
+  //   textarea: 'qwe',
+  //   checkbox: true,
+  //   switch: true
+  // });
+  const Form = useForm();
 
   Form.registerSubmit(form => {
     console.log(form);
