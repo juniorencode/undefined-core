@@ -39,8 +39,6 @@ export const useForm = (initialForm = {}) => {
       e.preventDefault();
       e.stopPropagation();
 
-      console.log(fieldsOutput.current);
-
       const validationResult = validateFields(formData);
       if (validationResult.haveErrors) return;
       if (!onSubmit.current) return;
