@@ -18,7 +18,7 @@ export const FormSection = props => {
           className={cn('text-xs font-bold tracking-widest uppercase', {
             'p-4 rounded-t-lg dark:bg-opacity-50 text-secondary-500 dark:text-secondary-300 bg-primary-100 dark:bg-primary-800':
               box,
-            'py-2 text-primary-500 dark:text-primary-600': !box
+            'py-2 text-primary-500 dark:text-primary-500': !box
           })}
         >
           {title}

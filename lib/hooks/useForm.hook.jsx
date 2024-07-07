@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { getValidationError } from '../utils/validate';
-import { formatInput, formatOutput } from '../utils/format';
+import { formatOutput } from '../utils/format';
 
 export const useForm = (initialForm = {}) => {
   const [formData, setFormData] = useState(initialForm);
