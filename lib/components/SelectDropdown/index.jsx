@@ -46,9 +46,9 @@ export const SelectDropdown = props => {
                 />
                 <label
                   className={cn(
-                    'flex items-center justify-between pl-4 pr-2 h-9 text-sm cursor-pointer transition-all duration-200 group hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:hover:text-white',
+                    'flex items-center justify-between pl-4 pr-2 h-9 text-sm cursor-pointer transition-all duration-200 group hover:bg-opacity-20 dark:hover:bg-opacity-20 hover:bg-primary-500 hover:dark:bg-primary-500 dark:hover:text-white',
                     {
-                      'bg-secondary-100 dark:bg-secondary-600':
+                      'bg-opacity-50 dark:bg-opacity-40 hover:bg-opacity-50 dark:hover:bg-opacity-40 bg-primary-500 dark:bg-primary-500':
                         item.value === value
                     }
                   )}
