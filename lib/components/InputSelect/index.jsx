@@ -54,13 +54,13 @@ export const InputSelect = props => {
   };
 
   const handleBlur = () => {
-    setFocusClick(true);
+    setFocusClick(false);
     setIsOpen(false);
   };
 
   const handleClick = () => {
     if (!focusClick) {
-      setFocusClick(false);
+      setFocusClick(true);
       return;
     }
     setIsOpen(!isOpen);
