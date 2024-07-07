@@ -23,11 +23,15 @@ export const InputNumber = props => {
   const domId = useId();
   const domRef = useRef(null);
   const [focus, setFocus] = useState(false);
-  const { errors, value, handleChange } = register(name, {
-    required,
-    minValue,
-    maxValue
-  });
+  const { errors, value, handleChange } = register(
+    name,
+    {
+      required,
+      minValue,
+      maxValue
+    },
+    'NUMBER'
+  );
 
   useEffect(() => {
     if (domRef.current) {
@@ -54,8 +58,8 @@ export const InputNumber = props => {
     if (maxValue && parseFloat(newValue) > maxValue) return;
 
     if (parseFloat(newValue) && !newValue.endsWith('.'))
-      handleChange(parseFloat(newValue));
-    else handleChange(newValue);
+      handleChange(parseFloat(newValue).toString());
+    else handleChange(newValue.toString());
   };
 
   return (

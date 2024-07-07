@@ -30,7 +30,10 @@ const App = () => {
             Test Inputs
           </h1>
           <DataForm form={Form}>
-            <form className="flex flex-col gap-2" onSubmit={Form.handleSubmit}>
+            <form
+              className="flex flex-col gap-2"
+              onKeyDown={Form.handleAssistant}
+            >
               <InputText
                 name="text"
                 label="Text"
@@ -46,7 +49,7 @@ const App = () => {
                   { value: 'mentalista' }
                 ]}
                 register={Form.register}
-                required
+                // required
               />
               <InputSearch
                 name="search"
@@ -63,7 +66,7 @@ const App = () => {
                   { value: '9', label: 'mentalista' }
                 ]}
                 register={Form.register}
-                required
+                // required
               />
               <FormSection title="Section">
                 <InputPassword
@@ -71,14 +74,14 @@ const App = () => {
                   name="password"
                   label="Password"
                   register={Form.register}
-                  required
+                  // required
                 />
                 <InputNumber
                   className="col-span-12"
                   name="number"
                   label="Number"
                   register={Form.register}
-                  required
+                  // required
                 />
               </FormSection>
               <FormSection title="Section" box>
@@ -99,14 +102,14 @@ const App = () => {
                   ]}
                   funcDelete={id => console.log('delete: ' + id)}
                   register={Form.register}
-                  required
+                  // required
                 />
                 <InputTextarea
                   className="col-span-12"
                   name="textarea"
                   label="Textarea"
                   register={Form.register}
-                  required
+                  // required
                 />
               </FormSection>
               <InputCheck
