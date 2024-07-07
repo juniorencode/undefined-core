@@ -6,9 +6,9 @@ export const InputCheck = props => {
   const { className, name, label, labelCheck, register, ...params } = props;
 
   const domId = useId();
-  const { errors, value, handleChange } = register(name);
+  const { errors, value, handleChange } = register(name, {}, 'BOOLEAN');
 
-  const onChange = e => handleChange(e.target.checked);
+  const onChange = e => handleChange(e.target.checked.toString());
 
   return (
     <InputContainer
@@ -23,7 +23,7 @@ export const InputCheck = props => {
           id={domId}
           name={name}
           type="checkbox"
-          checked={typeof value === 'boolean' ? value : false}
+          checked={value === 'true' ? true : false}
           onChange={onChange}
           {...params}
         />

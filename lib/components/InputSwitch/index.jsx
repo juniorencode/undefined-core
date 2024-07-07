@@ -9,7 +9,9 @@ export const InputSwitch = props => {
   const domId = useId();
   const [focus, setFocus] = useState(false);
   const domRef = useClickOutside(() => setFocus(false));
-  const { errors, value, handleChange } = register(name);
+  const { errors, value, handleChange } = register(name, {}, 'BOOLEAN');
+
+  const onChange = e => handleChange(e.target.checked.toString());
 
   return (
     <InputContainer
@@ -26,8 +28,8 @@ export const InputSwitch = props => {
           <input
             type="checkbox"
             className="hidden peer"
-            checked={value || false}
-            onChange={() => handleChange(!value)}
+            checked={value === 'true' ? true : false}
+            onChange={onChange}
             {...params}
           />
           <div
