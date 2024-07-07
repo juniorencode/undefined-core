@@ -3,7 +3,7 @@ import { MdClose } from 'react-icons/md';
 import { usePopper } from 'react-popper';
 import { cn } from '../../utils/styles';
 
-const SelectDropdown = props => {
+export const SelectDropdown = props => {
   const {
     name,
     value,
@@ -75,5 +75,3 @@ const SelectDropdown = props => {
     </div>
   );
 };
-
-export { SelectDropdown };

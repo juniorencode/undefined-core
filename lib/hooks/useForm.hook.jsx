@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useForm = (initialForm = {}) => {
+export const useForm = (initialForm = {}) => {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState(initialForm);
   const [pending, setPending] = useState(false);
@@ -167,5 +167,3 @@ const useForm = (initialForm = {}) => {
     errors
   };
 };
-
-export { useForm };

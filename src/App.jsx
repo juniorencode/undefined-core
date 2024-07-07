@@ -1,16 +1,18 @@
 import { BrowserRouter } from 'react-router-dom';
-import { useForm } from '../lib/hooks/useForm.hook';
-import { Card } from '../lib/components/Card';
-import { DataForm } from '../lib/components/DataForm';
-import { FormSection } from '../lib/components/FormSection';
-import { InputText } from '../lib/components/InputText';
-import { InputSearch } from '../lib/components/InputSearch';
-import { InputCheck } from '../lib/components/InputCheck';
-import { InputSelect } from '../lib/components/InputSelect';
-import { InputNumber } from '../lib/components/InputNumber';
-import { InputTextarea } from '../lib/components/InputTextarea';
-import { InputPassword } from '../lib/components/InputPassword';
-import { InputSwitch } from '../lib/components/InputSwitch';
+import {
+  useForm,
+  Card,
+  DataForm,
+  FormSection,
+  InputText,
+  InputSearch,
+  InputCheck,
+  InputSelect,
+  InputNumber,
+  InputTextarea,
+  InputPassword,
+  InputSwitch
+} from '../lib/main';
 
 const App = () => {
   const Form = useForm();

@@ -1,6 +1,6 @@
 import { cn } from '../../utils/styles';
 
-const FormSection = props => {
+export const FormSection = props => {
   const { children, className, title, box } = props;
 
   return (
@@ -34,5 +34,3 @@ const FormSection = props => {
     </div>
   );
 };
-
-export { FormSection };
