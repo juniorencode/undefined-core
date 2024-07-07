@@ -45,7 +45,7 @@ export const InputTextarea = props => {
     >
       <textarea
         className={cn(
-          'flex gap-2 p-2.5 w-full min-h-12 rounded-lg border outline-none focus:ring-4 focus:ring-opacity-40 checked:focus:ring-opacity-40 focus:dark:ring-opacity-40 checked:focus:dark:ring-opacity-40 transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 focus:border-primary-600 dark:focus:border-primary-500 focus:ring-primary-600 dark:focus:ring-primary-500 dark:placeholder-secondary-400',
+          'flex gap-2 p-2.5 w-full min-h-12 rounded-lg border outline-none focus:ring-4 focus:ring-opacity-30 checked:focus:ring-opacity-30 focus:dark:ring-opacity-40 checked:focus:dark:ring-opacity-40 transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-600 dark:focus:ring-primary-500 dark:placeholder-secondary-400',
           className
         )}
         ref={domRef}

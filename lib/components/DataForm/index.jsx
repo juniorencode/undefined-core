@@ -29,7 +29,7 @@ export const DataForm = props => {
         onSubmit={form.handleSubmit}
       >
         <Button
-          className="dark:bg-opacity-0 hover:dark:bg-opacity-0 hover:underline"
+          className="hover:underline text-black dark:text-white bg-opacity-0 dark:bg-opacity-0 hover:bg-opacity-0 hover:dark:bg-opacity-0"
           onClick={handleBack}
         >
           Cancelar

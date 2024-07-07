@@ -6,7 +6,7 @@ export const InputContainer = props => {
       {label && (
         <label
           htmlFor={name}
-          className="block mb-2 w-min text-sm text-nowrap font-medium text-secondary-900 dark:text-white"
+          className="block mb-2 w-min text-sm text-nowrap font-medium text-neutral-600 dark:text-neutral-300"
         >
           {label}
         </label>

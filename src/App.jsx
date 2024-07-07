@@ -34,7 +34,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="absolute w-[100vw] min-h-[100vh] bg-secondary-100 dark:bg-secondary-900">
-        <div className="h-[55px]"></div>
+        <div className="h-[60px]"></div>
         <Card className="m-4">
           <h1 className="text-4xl font-bold p-4 text-neutral-800 dark:text-white">
             Test Inputs
