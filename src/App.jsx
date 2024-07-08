@@ -48,15 +48,15 @@ const App = () => {
                 name="text"
                 label="Text"
                 options={[
-                  { value: 'gato' },
-                  { value: 'perro' },
-                  { value: 'sol' },
-                  { value: 'luna' },
-                  { value: 'estrella' },
-                  { value: 'mar' },
-                  { value: 'montaña' },
-                  { value: 'río' },
-                  { value: 'mentalista' }
+                  'gato',
+                  'perro',
+                  'sol',
+                  'luna',
+                  'estrella',
+                  'mar',
+                  'montaña',
+                  'río',
+                  'mentalista'
                 ]}
                 register={Form.register}
                 // required

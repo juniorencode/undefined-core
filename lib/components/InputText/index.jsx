@@ -52,10 +52,15 @@ export const InputText = props => {
     if (!string) setFilteredOptions(options);
     if (!string || !options) return;
     const filtered = options.filter(option =>
-      normalizeString(option.value).includes(string)
+      normalizeString(option).includes(string)
     );
-    if (filtered.length === 1 && filtered[0].value === string)
-      setFilteredOptions([]);
+    console.log(
+      filteredOptions.map(option => ({
+        value: option,
+        label: option
+      }))
+    );
+    if (filtered.length === 1 && filtered[0] === string) setFilteredOptions([]);
     else setFilteredOptions(filtered);
     // eslint-disable-next-line
   }, [value]);
@@ -136,8 +141,8 @@ export const InputText = props => {
           value={value}
           isOpen={isOpen}
           options={filteredOptions.map(option => ({
-            value: option.value,
-            label: option.value
+            value: option,
+            label: option
           }))}
           onChange={onChange}
           setIsOpen={setIsOpen}
