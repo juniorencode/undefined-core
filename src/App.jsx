@@ -11,7 +11,8 @@ import {
   InputNumber,
   InputTextarea,
   InputPassword,
-  InputSwitch
+  InputSwitch,
+  InputDate
 } from '../lib/main';
 
 const App = () => {
@@ -58,6 +59,12 @@ const App = () => {
                   'río',
                   'mentalista'
                 ]}
+                register={Form.register}
+                // required
+              />
+              <InputDate
+                name="date"
+                label="Date"
                 register={Form.register}
                 // required
               />
