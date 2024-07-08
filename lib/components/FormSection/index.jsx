@@ -8,7 +8,7 @@ export const FormSection = props => {
       className={cn(
         'w-full',
         {
-          'border rounded-lg border-primary-400 dark:border-primary-800': box
+          'border rounded-lg border-primary-500 dark:border-primary-800': box
         },
         className
       )}
@@ -26,7 +26,7 @@ export const FormSection = props => {
       )}
       <div
         className={cn('grid grid-cols-12 gap-2 p-4', {
-          'p-0 py-4 border-t-2 border-primary-400 dark:border-primary-800': !box
+          'p-0 py-4 border-t-2 border-primary-500 dark:border-primary-800': !box
         })}
       >
         {children}
