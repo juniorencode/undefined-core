@@ -23,7 +23,6 @@ export const InputSelect = props => {
 
   const domRef = useClickOutside(() => setIsOpen(false));
   const [isOpen, setIsOpen] = useState(false);
-  const [focusClick, setFocusClick] = useState(false);
   const output = toNumber ? 'NUMBER' : toBoolean ? 'BOOLEAN' : 'STRING';
   const {
     errors,
@@ -49,22 +48,7 @@ export const InputSelect = props => {
     handleChange(e.target.value);
   };
 
-  const handleFocus = () => {
-    setIsOpen(true);
-  };
-
-  const handleBlur = () => {
-    setFocusClick(false);
-    setIsOpen(false);
-  };
-
-  const handleClick = () => {
-    if (!focusClick) {
-      setFocusClick(true);
-      return;
-    }
-    setIsOpen(!isOpen);
-  };
+  const handleClick = () => setIsOpen(!isOpen);
 
   return (
     <InputContainer
@@ -83,8 +67,6 @@ export const InputSelect = props => {
             }
           )}
           type="button"
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           onClick={handleClick}
           {...params}
         >

@@ -74,19 +74,7 @@ export const InputSearch = props => {
     setSearch(uppercase ? _value.toUpperCase() : _value);
   };
 
-  const handleFocus = () => {
-    setFocus(true);
-    setIsOpen(true);
-  };
-
-  const handleBlur = () => {
-    setFocus(false);
-    setIsOpen(false);
-  };
-
-  const onSelectChange = e => {
-    handleChange(e.target.value);
-  };
+  const onSelectChange = e => handleChange(e.target.value);
 
   return (
     <InputContainer
@@ -131,8 +119,8 @@ export const InputSearch = props => {
             }
             onChange={onChange}
             onClick={handleOpen}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
             autoComplete={autoComplete ? 'on' : 'off'}
             disabled={disabled}
             {...params}

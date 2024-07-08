@@ -80,16 +80,6 @@ export const InputText = props => {
     handleChange(uppercase ? _value.toUpperCase() : _value);
   };
 
-  const handleFocus = () => {
-    setFocus(true);
-    setIsOpen(true);
-  };
-
-  const handleBlur = () => {
-    setFocus(false);
-    setIsOpen(false);
-  };
-
   return (
     <InputContainer
       className={className}
@@ -103,7 +93,7 @@ export const InputText = props => {
             'flex items-center w-full border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
             {
               'ring-4 ring-opacity-30 checked:ring-opacity-30 dark:ring-opacity-40 checked:dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
-                focus,
+                focus || isOpen,
               'cursor-text': !disabled
             }
           )}
@@ -127,8 +117,8 @@ export const InputText = props => {
             value={value !== undefined && value !== null ? value : ''}
             onChange={onChange}
             onClick={handleOpen}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
             autoComplete={autoComplete ? 'on' : 'off'}
             disabled={disabled}
             {...params}
