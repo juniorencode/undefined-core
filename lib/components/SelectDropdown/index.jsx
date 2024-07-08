@@ -21,19 +21,16 @@ export const SelectDropdown = props => {
     placement: isOpen ? 'bottom-start' : 'top-start'
   });
 
-  const shadowClass = attributes.popper?.['data-popper-placement'].startsWith(
-    'top'
-  )
-    ? 'shadow-box-top'
-    : 'shadow-box-bottom';
-
   return (
     <>
       {options.length > 0 && isOpen && (
         <div
           className={cn(
-            'listbox absolute top-full z-20 my-2 w-full border rounded-lg bg-white dark:bg-secondary-700 dark:border-neutral-600 dark:shadow-neutral-900',
-            shadowClass
+            'listbox absolute top-full z-20 my-2 w-full border rounded-lg shadow-box-top bg-white dark:bg-secondary-700 dark:border-neutral-600 dark:shadow-neutral-900',
+            {
+              'shadow-box-bottom':
+                !attributes.popper?.['data-popper-placement'].startsWith('top')
+            }
           )}
           ref={setPopperRef}
           role="listbox"
