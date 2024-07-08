@@ -54,12 +54,6 @@ export const InputText = props => {
     const filtered = options.filter(option =>
       normalizeString(option).includes(string)
     );
-    console.log(
-      filteredOptions.map(option => ({
-        value: option,
-        label: option
-      }))
-    );
     if (filtered.length === 1 && filtered[0] === string) setFilteredOptions([]);
     else setFilteredOptions(filtered);
     // eslint-disable-next-line
@@ -72,8 +66,6 @@ export const InputText = props => {
       .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
       .toLowerCase();
   };
-
-  const handleOpen = () => setIsOpen(true);
 
   const onChange = e => {
     const _value = e.target.value;
@@ -116,7 +108,7 @@ export const InputText = props => {
             name={name}
             value={value !== undefined && value !== null ? value : ''}
             onChange={onChange}
-            onClick={handleOpen}
+            onClick={() => setIsOpen(true)}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
             autoComplete={autoComplete ? 'on' : 'off'}

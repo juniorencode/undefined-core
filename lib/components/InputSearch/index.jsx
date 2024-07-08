@@ -67,14 +67,10 @@ export const InputSearch = props => {
       .toLowerCase();
   };
 
-  const handleOpen = () => setIsOpen(true);
-
   const onChange = e => {
     const _value = e.target.value;
     setSearch(uppercase ? _value.toUpperCase() : _value);
   };
-
-  const onSelectChange = e => handleChange(e.target.value);
 
   return (
     <InputContainer
@@ -118,7 +114,7 @@ export const InputSearch = props => {
                 : search
             }
             onChange={onChange}
-            onClick={handleOpen}
+            onClick={() => setIsOpen(true)}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
             autoComplete={autoComplete ? 'on' : 'off'}
@@ -133,7 +129,7 @@ export const InputSearch = props => {
           value={value}
           isOpen={isOpen}
           options={filteredOptions}
-          onChange={onSelectChange}
+          onChange={e => handleChange(e.target.value)}
           setIsOpen={setIsOpen}
           funcDelete={funcDelete}
         />

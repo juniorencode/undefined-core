@@ -90,6 +90,7 @@ const App = () => {
                   className="col-span-12"
                   name="number"
                   label="Number"
+                  options={[30, 50, 120, 10, 460, 1720, 2, 600]}
                   register={Form.register}
                   // required
                 />
