@@ -134,6 +134,41 @@ const App = () => {
                 labelCheck="Active"
                 register={Form.register}
               />
+
+              <InputText
+                name="text"
+                label="Text"
+                options={[
+                  { value: 'gato' },
+                  { value: 'perro' },
+                  { value: 'sol' },
+                  { value: 'luna' },
+                  { value: 'estrella' },
+                  { value: 'mar' },
+                  { value: 'montaña' },
+                  { value: 'río' },
+                  { value: 'mentalista' }
+                ]}
+                register={Form.register}
+                // required
+              />
+              <InputSearch
+                name="search"
+                label="Search"
+                options={[
+                  { value: '1', label: 'gato' },
+                  { value: '2', label: 'perro' },
+                  { value: '3', label: 'sol' },
+                  { value: '4', label: 'luna' },
+                  { value: '5', label: 'estrella' },
+                  { value: '6', label: 'mar' },
+                  { value: '7', label: 'montaña' },
+                  { value: '8', label: 'río' },
+                  { value: '9', label: 'mentalista' }
+                ]}
+                register={Form.register}
+                // required
+              />
             </form>
           </DataForm>
         </Card>

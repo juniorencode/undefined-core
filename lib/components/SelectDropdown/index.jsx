@@ -5,6 +5,7 @@ import { cn } from '../../utils/styles';
 
 export const SelectDropdown = props => {
   const {
+    domRef,
     name,
     value,
     isOpen,
@@ -14,19 +15,27 @@ export const SelectDropdown = props => {
     funcDelete
   } = props;
 
-  const [referenceElement, setReferenceElement] = useState(null);
-  const [popperElement, setPopperElement] = useState(null);
+  const [popperRef, setPopperRef] = useState(null);
 
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+  const { styles, attributes } = usePopper(domRef.current, popperRef, {
     placement: isOpen ? 'bottom-start' : 'top-start'
   });
 
+  const shadowClass = attributes.popper?.['data-popper-placement'].startsWith(
+    'top'
+  )
+    ? 'shadow-box-top'
+    : 'shadow-box-bottom';
+
   return (
-    <div className="relative" ref={node => setReferenceElement(node)}>
+    <>
       {options.length > 0 && isOpen && (
         <div
-          className="listbox absolute top-full z-20 mt-2 w-full border rounded-lg shadow-3xl bg-white dark:bg-secondary-700 dark:border-neutral-600 dark:shadow-neutral-900"
-          ref={setPopperElement}
+          className={cn(
+            'listbox absolute top-full z-20 my-2 w-full border rounded-lg bg-white dark:bg-secondary-700 dark:border-neutral-600 dark:shadow-neutral-900',
+            shadowClass
+          )}
+          ref={setPopperRef}
           role="listbox"
           style={styles.popper}
           {...attributes.popper}
@@ -72,6 +81,6 @@ export const SelectDropdown = props => {
           </ul>
         </div>
       )}
-    </div>
+    </>
   );
 };

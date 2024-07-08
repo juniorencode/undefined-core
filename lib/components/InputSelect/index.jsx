@@ -21,16 +21,16 @@ export const InputSelect = props => {
     ...params
   } = props;
 
+  const domRef = useClickOutside(() => setIsOpen(false));
+  const [isOpen, setIsOpen] = useState(false);
+  const [focusClick, setFocusClick] = useState(false);
   const output = toNumber ? 'NUMBER' : toBoolean ? 'BOOLEAN' : 'STRING';
   const {
     errors,
     value: initialValue,
     handleChange
   } = register(name, { required }, output);
-  const [focusClick, setFocusClick] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState(initialValue);
-  const domRef = useClickOutside(() => setIsOpen(false));
 
   useEffect(() => {
     setValue(initialValue);
@@ -73,7 +73,7 @@ export const InputSelect = props => {
       name={name}
       error={errors[name]?.message}
     >
-      <div ref={domRef}>
+      <div className="relative" ref={domRef}>
         <button
           className={cn(
             'flex items-center justify-between p-2.5 w-full h-12 text-sm text-center border focus:ring-4 focus:ring-opacity-30 checked:focus:ring-opacity-30 focus:dark:ring-opacity-40 checked:focus:dark:ring-opacity-40 rounded-lg outline-none transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white dark:placeholder-secondary-400 border-secondary-300 dark:border-secondary-600 focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-600 dark:focus:ring-primary-500',
@@ -102,6 +102,7 @@ export const InputSelect = props => {
           />
         </button>
         <SelectDropdown
+          domRef={domRef}
           name={name}
           value={value}
           isOpen={isOpen}

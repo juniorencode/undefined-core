@@ -39,7 +39,8 @@ export default {
         }
       },
       boxShadow: {
-        '3xl': '0 16px 60px 2px rgba(0, 0, 0, 0.2)'
+        'box-top': '0 -16px 60px 2px rgba(0, 0, 0, 0.2)',
+        'box-bottom': '0 16px 60px 2px rgba(0, 0, 0, 0.2)'
       }
     }
   },

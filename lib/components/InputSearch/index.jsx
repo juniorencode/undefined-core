@@ -27,8 +27,8 @@ export const InputSearch = props => {
   } = props;
 
   const domId = useId();
-  const domRef = useRef(null);
-  const domRef2 = useClickOutside(() => setIsOpen(false));
+  const domRef = useClickOutside(() => setIsOpen(false));
+  const inputRef = useRef(null);
   const [search, setSearch] = useState('');
   const [focus, setFocus] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -41,9 +41,9 @@ export const InputSearch = props => {
   });
 
   useEffect(() => {
-    if (domRef.current) {
-      focused && domRef.current.focus();
-      focused && domRef.current.value && domRef.current.select();
+    if (inputRef.current) {
+      focused && inputRef.current.focus();
+      focused && inputRef.current.value && inputRef.current.select();
     }
     // eslint-disable-next-line
   }, []);
@@ -95,7 +95,7 @@ export const InputSearch = props => {
       name={domId}
       error={errors[name]?.message}
     >
-      <div ref={domRef2}>
+      <div className="relative" ref={domRef}>
         <div
           className={cn(
             'flex items-center w-full border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
@@ -105,7 +105,7 @@ export const InputSearch = props => {
               'cursor-text': !disabled
             }
           )}
-          onClick={() => domRef.current && domRef.current.focus()}
+          onClick={() => inputRef.current && inputRef.current.focus()}
         >
           {prefix && <span className="ml-2.5">{prefix}</span>}
           <input
@@ -117,7 +117,7 @@ export const InputSearch = props => {
                 'text-right': align === 'right'
               }
             )}
-            ref={domRef}
+            ref={inputRef}
             role="textbox"
             id={domId}
             type="text"
@@ -140,6 +140,7 @@ export const InputSearch = props => {
           {postfix && <span className="mr-2.5">{postfix}</span>}
         </div>
         <SelectDropdown
+          domRef={domRef}
           name={name}
           value={value}
           isOpen={isOpen}
