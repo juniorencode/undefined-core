@@ -1,26 +1,28 @@
 import PropTypes from 'prop-types';
 import { FaFilePdf, FaPlus } from 'react-icons/fa6';
 import { IoIosSearch } from 'react-icons/io';
-import { Card } from '../../components/Card';
-import { Pagination } from '../../components/Pagination';
+import { Card } from '../Card';
+import { Pagination } from '../Pagination';
 import { Button } from '../Button';
 import { Table } from '../Table';
 
-const DataTable = ({
-  structure,
-  data,
-  pagination,
-  filter,
-  setPage,
-  setSearch,
-  handleCreate,
-  handleUpdate,
-  handleDelete,
-  handleExport,
-  handleFeature,
-  noSequentialNumber,
-  dndFunc
-}) => {
+export const DataTable = props => {
+  const {
+    structure,
+    data,
+    pagination,
+    filter,
+    setPage,
+    setSearch,
+    handleCreate,
+    handleUpdate,
+    handleDelete,
+    handleExport,
+    handleFeature,
+    noSequentialNumber,
+    dndFunc
+  } = props;
+
   return (
     <Card>
       <div className="flex flex-col gap-4 m-4 h-10">
@@ -90,8 +92,6 @@ DataTable.propTypes = {
   handleDelete: PropTypes.func,
   handleExport: PropTypes.func,
   handleFeature: PropTypes.func,
-  dndFunc: PropTypes.func,
-  noSequentialNumber: PropTypes.bool
+  noSequentialNumber: PropTypes.bool,
+  dndFunc: PropTypes.func
 };
-
-export { DataTable };

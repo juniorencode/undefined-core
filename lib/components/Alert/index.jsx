@@ -1,11 +1,12 @@
-import ReactDOM from 'react-dom';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
 import { IoAlertCircleOutline } from 'react-icons/io5';
-import { useState } from 'react';
 import { Button } from '../Button';
 
-const Alert = ({ isOpen, closeAlert, domRef, handleConfirm, handleCancel }) => {
+export const Alert = props => {
+  const { domRef, isOpen, closeAlert, handleConfirm, handleCancel } = props;
   const [loading, setLoading] = useState(false);
   if (!isOpen) return null;
 
@@ -25,11 +26,11 @@ const Alert = ({ isOpen, closeAlert, domRef, handleConfirm, handleCancel }) => {
   };
 
   return ReactDOM.createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-70 bg-black">
       <div className="relative p-4 w-full max-w-md max-h-full" ref={domRef}>
-        <div className="relative bg-white rounded-lg shadow dark:bg-secondary-800">
+        <div className="relative border rounded-lg shadow bg-white dark:bg-secondary-800 border-secondary-200 dark:border-secondary-700">
           <button
-            className="absolute top-3 end-2.5 text-secondary-400 bg-transparent hover:bg-secondary-200 hover:text-secondary-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-secondary-600 dark:hover:text-white"
+            className="absolute top-3 inline-flex justify-center items-center ms-auto w-8 h-8 text-sm end-2.5 focus:ring-4 focus:ring-opacity-40 rounded-lg text-secondary-400 hover:text-secondary-900 dark:hover:text-white bg-transparent hover:bg-secondary-200 dark:hover:bg-secondary-600 focus:ring-primary-500"
             onClick={closeAlert}
           >
             <IoMdClose size={20} />
@@ -52,7 +53,10 @@ const Alert = ({ isOpen, closeAlert, domRef, handleConfirm, handleCancel }) => {
               >
                 {loading ? 'Eliminando...' : 'Si, estoy seguro'}
               </Button>
-              <Button color="LightSwitch" onClick={handleCancelButton}>
+              <Button
+                className="hover:underline dark:hover:underline bg-transparent dark:bg-transparent hover:bg-transparent dark:hover:bg-transparent"
+                onClick={handleCancelButton}
+              >
                 No, cancelar
               </Button>
             </div>
@@ -65,11 +69,9 @@ const Alert = ({ isOpen, closeAlert, domRef, handleConfirm, handleCancel }) => {
 };
 
 Alert.propTypes = {
+  domRef: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
   closeAlert: PropTypes.func.isRequired,
-  domRef: PropTypes.object.isRequired,
   handleConfirm: PropTypes.func,
   handleCancel: PropTypes.func
 };
-
-export { Alert };

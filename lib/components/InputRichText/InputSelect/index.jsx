@@ -1,10 +1,13 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { usePopper } from 'react-popper';
 import { IoIosArrowDown } from 'react-icons/io';
 import { cn } from '../../../utils/styles';
 import { useClickOutside } from '../../../hooks/useClickOutside.hook';
 
-export const InputSelect = ({ className, options, handleChange }) => {
+export const InputSelect = props => {
+  const { className, options = [], handleChange } = props;
+
   const domRef = useClickOutside(() => setIsOpen(false));
   const [popperRef, setPopperRef] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -82,4 +85,19 @@ export const InputSelect = ({ className, options, handleChange }) => {
       )}
     </div>
   );
+};
+
+InputSelect.propTypes = {
+  className: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool
+      ]).isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ),
+  handleChange: PropTypes.func
 };

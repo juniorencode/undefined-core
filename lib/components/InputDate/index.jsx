@@ -1,4 +1,5 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { useEffect, useState, useCallback } from 'react';
 import { usePopper } from 'react-popper';
 import { FaCalendar } from 'react-icons/fa';
 import { cn } from '../../utils/styles';
@@ -7,15 +8,10 @@ import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { Calendar } from './Calendar';
 
-export const InputDate = ({
-  className,
-  label,
-  name,
-  today,
-  register,
-  required,
-  ...params
-}) => {
+export const InputDate = props => {
+  const { className, name, label, today, register, required, ...params } =
+    props;
+
   const domRef = useClickOutside(() => setIsOpen(false));
   const [popperRef, setPopperRef] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -30,11 +26,13 @@ export const InputDate = ({
   useEffect(() => {
     setDaySelected(formatDate(value));
     value && setSelectedDate(new Date(value));
+    // eslint-disable-next-line
   }, [value]);
 
   useEffect(() => {
     if (today) handleChange(new Date());
-  }, [today, handleChange]);
+    // eslint-disable-next-line
+  }, [today]);
 
   const formatDate = useCallback(string => {
     if (!string) return;
@@ -116,4 +114,13 @@ export const InputDate = ({
       </div>
     </InputContainer>
   );
+};
+
+InputDate.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  today: PropTypes.bool,
+  register: PropTypes.func.isRequired,
+  required: PropTypes.bool
 };

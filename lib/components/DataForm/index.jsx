@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '../../utils/styles';
 import { Button } from '../Button';
@@ -40,4 +41,12 @@ export const DataForm = props => {
       </form>
     </>
   );
+};
+
+DataForm.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  form: PropTypes.object.isRequired,
+  handleCancel: PropTypes.func,
+  modal: PropTypes.bool
 };

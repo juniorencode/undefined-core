@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useId, useState } from 'react';
 import { cn } from '../../utils/styles';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
@@ -50,4 +51,12 @@ export const InputSwitch = props => {
       </div>
     </InputContainer>
   );
+};
+
+InputSwitch.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  labelCheck: PropTypes.string.isRequired,
+  register: PropTypes.func.isRequired
 };

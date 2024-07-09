@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types';
+
 export const InputContainer = props => {
-  const { children, label, name, error = '', ...params } = props;
+  const { children, className, name, label, error = '' } = props;
 
   return (
-    <div {...params}>
+    <div className={className}>
       {label && (
         <label
           htmlFor={name}
@@ -17,4 +19,12 @@ export const InputContainer = props => {
       </span>
     </div>
   );
+};
+
+InputContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  error: PropTypes.string
 };

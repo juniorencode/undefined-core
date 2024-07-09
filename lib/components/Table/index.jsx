@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { useAlert } from '../../hooks/useAlert.hook';
-import { Alert } from '../Alert';
 import {
   DndContext,
   closestCenter,
@@ -17,20 +15,24 @@ import {
   verticalListSortingStrategy,
   arrayMove
 } from '@dnd-kit/sortable';
-import { SortableRow } from './SortableRow/SortableRow';
+import { useAlert } from '../../hooks/useAlert.hook';
+import { Alert } from '../Alert';
+import { SortableRow } from './SortableRow';
 
-const Table = ({
-  className,
-  structure = [],
-  data = [],
-  page = 1,
-  handleUpdate,
-  handleDelete,
-  handleFeature,
-  highlighted,
-  noSeqNum,
-  dndFunc
-}) => {
+export const Table = props => {
+  const {
+    className,
+    structure = [],
+    data = [],
+    page = 1,
+    noSeqNum,
+    highlighted,
+    dndFunc,
+    handleUpdate,
+    handleDelete,
+    handleFeature
+  } = props;
+
   const AlertDelete = useAlert();
   const [currentId, setCurrentId] = useState(null);
   const [items, setItems] = useState([]);
@@ -184,12 +186,10 @@ Table.propTypes = {
   structure: PropTypes.array,
   data: PropTypes.array,
   page: PropTypes.number,
+  noSeqNum: PropTypes.bool,
+  highlighted: PropTypes.string,
+  dndFunc: PropTypes.func,
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
-  handleFeature: PropTypes.func,
-  dndFunc: PropTypes.func,
-  highlighted: PropTypes.string,
-  noSeqNum: PropTypes.bool
+  handleFeature: PropTypes.func
 };
-
-export { Table };

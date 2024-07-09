@@ -1,16 +1,19 @@
+import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { cn } from '../../../utils/styles';
 import { monthNames } from '../../../utils/time';
 
-export const Calendar = ({
-  selectedDate,
-  daySelected,
-  formatDate,
-  onChange,
-  previousMonth,
-  nextMonth
-}) => {
+export const Calendar = props => {
+  const {
+    selectedDate,
+    daySelected,
+    formatDate,
+    onChange,
+    previousMonth,
+    nextMonth
+  } = props;
+
   const daysInMonth = date => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -111,4 +114,13 @@ export const Calendar = ({
       </div>
     </>
   );
+};
+
+Calendar.propTypes = {
+  selectedDate: PropTypes.string,
+  daySelected: PropTypes.string,
+  formatDate: PropTypes.func,
+  onChange: PropTypes.func,
+  previousMonth: PropTypes.func,
+  nextMonth: PropTypes.func
 };

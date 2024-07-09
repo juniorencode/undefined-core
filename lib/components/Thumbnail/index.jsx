@@ -1,9 +1,11 @@
-import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { useState, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import { FaCircleNotch } from 'react-icons/fa';
 
-const Thumbnail = ({ children, className, file, url, input }) => {
+export const Thumbnail = props => {
+  const { children, className, file, url, input } = props;
+
   const playerRef = useRef(null);
   const [thumbnail, setThumbnail] = useState(null);
 
@@ -113,10 +115,8 @@ const Thumbnail = ({ children, className, file, url, input }) => {
 
 Thumbnail.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
   file: PropTypes.object,
-  input: PropTypes.bool,
   url: PropTypes.string,
-  className: PropTypes.string
+  input: PropTypes.bool
 };
-
-export default Thumbnail;

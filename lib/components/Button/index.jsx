@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { cn } from '../../utils/styles';
 
@@ -42,4 +43,12 @@ export const Button = props => {
       {children}
     </button>
   );
+};
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  type: PropTypes.string,
+  to: PropTypes.string,
+  color: PropTypes.string
 };

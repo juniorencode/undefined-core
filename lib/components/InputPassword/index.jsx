@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { cn } from '../../utils/styles';
@@ -6,8 +7,8 @@ import { InputContainer } from '../InputContainer';
 export const InputPassword = props => {
   const {
     className,
-    label,
     name,
+    label,
     register,
     required,
     minLength,
@@ -79,4 +80,17 @@ export const InputPassword = props => {
       </div>
     </InputContainer>
   );
+};
+
+InputPassword.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  register: PropTypes.func.isRequired,
+  required: PropTypes.bool,
+  minLength: PropTypes.number,
+  maxLength: PropTypes.number,
+  focused: PropTypes.bool,
+  autoComplete: PropTypes.bool,
+  disabled: PropTypes.bool
 };

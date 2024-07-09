@@ -1,8 +1,11 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import { IoIosArrowForward } from 'react-icons/io';
 
-export const Breadcrumb = ({ options, folders }) => {
+export const Breadcrumb = props => {
+  const { options, folders } = props;
+
   return (
     <nav className="flex h-4">
       <ol className="inline-flex items-center space-x-1.5 rtl:space-x-reverse">
@@ -15,8 +18,8 @@ export const Breadcrumb = ({ options, folders }) => {
             Inicio
           </Link>
         </li>
-        {options?.map(item => (
-          <li key={item.url}>
+        {options?.map((item, index) => (
+          <li key={index + '-' + item.label}>
             <div className="flex items-center text-secondary-500 dark:text-secondary-400">
               <IoIosArrowForward size={15} />
               {item.url ? (
@@ -37,4 +40,14 @@ export const Breadcrumb = ({ options, folders }) => {
       </ol>
     </nav>
   );
+};
+
+Breadcrumb.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      url: PropTypes.string
+    })
+  ),
+  folders: PropTypes.bool
 };
