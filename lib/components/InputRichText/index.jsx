@@ -256,8 +256,8 @@ export const InputRichText = ({
       name={domId}
       error={errors[name]?.message}
     >
-      <div className="overflow-hidden">
-        <div className="flex items-center gap-2 p-2 border- rounded-t-lg bg-secondary-200 dark:bg-secondary-900 border-neutral-300 dark:border-neutral-600">
+      <div className="rounded-lg overflow-hidden">
+        <div className="flex items-center gap-2 p-2 bg-secondary-300 dark:bg-secondary-900">
           <InputSelect
             className="w-24"
             options={headings}
@@ -276,7 +276,7 @@ export const InputRichText = ({
           <Button onClick={toggleForm} icon={<IoMdLink />} />
         </div>
         <div
-          className="relative rounded-b-lg border border-t-0 overflow-hidden border-neutral-300 dark:border-neutral-600"
+          className="relative rounded-b-lg border border-t-0 overflow-hidden border-secondary-300 dark:border-secondary-600"
           ref={content}
         >
           <div

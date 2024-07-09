@@ -24,9 +24,9 @@ export const InputSelect = ({ className, options, handleChange }) => {
     <div className="relative" ref={domRef}>
       <button
         className={cn(
-          'group flex items-center justify-between p-2.5 h-8 text-sm text-center rounded-lg border-0 focus:ring-4 focus:ring-opacity-40 outline-none text-secondary-600 dark:text-secondary-400 bg-transparent focus:bg-secondary-300 dark:focus:bg-secondary-800 hover:bg-secondary-300 dark:hover:bg-secondary-800 border-secondary-300 focus:ring-primary-500',
+          'group flex items-center justify-between p-2.5 h-8 text-sm text-center rounded-lg hover:bg-opacity-40 focus:bg-opacity-40 border-0 focus:ring-4 focus:ring-opacity-40 outline-none text-secondary-600 dark:text-secondary-400 bg-transparent hover:bg-secondary-400 focus:bg-secondary-400 dark:focus:bg-secondary-800 dark:hover:bg-secondary-800 border-secondary-300 focus:ring-primary-500',
           {
-            'ring-4 ring-opacity-40 bg-secondary-300 dark:bg-secondary-800 ring-primary-500':
+            'bg-opacity-40 ring-4 ring-opacity-40 bg-secondary-400 dark:bg-secondary-800 ring-primary-500':
               isOpen
           },
           className
