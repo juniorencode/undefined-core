@@ -57,19 +57,19 @@ export const Calendar = ({
     <>
       <div className="flex justify-between mb-2">
         <button
-          className="p-2.5 text-lg focus:ring-4 focus:ring-opacity-40 dark:focus:ring-opacity-40 rounded-lg outline-none text-secondary-500 dark:text-white hover:text-secondary-900 dark:hover:text-white bg-white dark:bg-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600 focus:ring-primary-600 dark:focus:ring-primary-500"
+          className="p-2.5 text-lg focus:ring-4 focus:ring-opacity-40 dark:focus:ring-opacity-40 rounded-lg outline-none text-secondary-500 dark:text-white hover:text-secondary-900 dark:hover:text-white bg-transparent dark:bg-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600 focus:ring-primary-600 dark:focus:ring-primary-500"
           type="button"
           onClick={previousMonth}
         >
           <IoIosArrowBack />
         </button>
-        <span className="px-5 py-2.5 text-sm font-semibold rounded-lg text-secondary-900 dark:text-white bg-white dark:bg-secondary-700">
+        <span className="px-5 py-2.5 text-sm font-semibold rounded-lg text-secondary-900 dark:text-white bg-transparent dark:bg-secondary-700">
           {`${
             monthNames[selectedDate.getMonth()]
           } ${selectedDate.getFullYear()}`}
         </span>
         <button
-          className="p-2.5 text-lg focus:ring-4 focus:ring-opacity-40 dark:focus:ring-opacity-40 rounded-lg outline-none text-secondary-500 dark:text-white hover:text-secondary-900 dark:hover:text-white bg-white dark:bg-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600 focus:ring-primary-600 dark:focus:ring-primary-500"
+          className="p-2.5 text-lg focus:ring-4 focus:ring-opacity-40 dark:focus:ring-opacity-40 rounded-lg outline-none text-secondary-500 dark:text-white hover:text-secondary-900 dark:hover:text-white bg-transparent dark:bg-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600 focus:ring-primary-600 dark:focus:ring-primary-500"
           type="button"
           onClick={nextMonth}
         >

@@ -76,7 +76,7 @@ export const InputDate = ({
         {isOpen && (
           <div
             className={cn(
-              'absolute top-full left-0 z-50 inline-block my-2 p-4 h-96 border rounded-lg shadow-box-top bg-white dark:bg-secondary-700 dark:border-neutral-600 dark:shadow-neutral-900',
+              'absolute top-full left-0 z-50 inline-block my-2 p-4 h-96 border rounded-lg shadow-box-top bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 dark:shadow-neutral-900',
               {
                 'shadow-box-bottom':
                   !attributes.popper?.['data-popper-placement'].startsWith(
