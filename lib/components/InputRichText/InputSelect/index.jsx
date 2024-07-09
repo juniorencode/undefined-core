@@ -24,7 +24,7 @@ export const InputSelect = ({ className, options, handleChange }) => {
     <div className="relative" ref={domRef}>
       <button
         className={cn(
-          'group flex items-center justify-between p-2.5 h-8 text-sm text-center rounded-lg hover:bg-opacity-40 focus:bg-opacity-40 border-0 focus:ring-4 focus:ring-opacity-40 outline-none text-secondary-600 dark:text-secondary-400 bg-transparent hover:bg-secondary-400 focus:bg-secondary-400 dark:focus:bg-secondary-800 dark:hover:bg-secondary-800 border-secondary-300 focus:ring-primary-500',
+          'group flex items-center justify-between p-2.5 h-8 text-sm text-center rounded-lg hover:bg-opacity-40 focus:bg-opacity-40 border-0 focus:ring-4 focus:ring-opacity-40 outline-none transition-all text-secondary-600 dark:text-secondary-400 bg-transparent hover:bg-secondary-400 focus:bg-secondary-400 dark:focus:bg-secondary-800 dark:hover:bg-secondary-800 border-secondary-300 focus:ring-primary-500',
           {
             'bg-opacity-40 ring-4 ring-opacity-40 bg-secondary-400 dark:bg-secondary-800 ring-primary-500':
               isOpen
@@ -36,7 +36,12 @@ export const InputSelect = ({ className, options, handleChange }) => {
       >
         {options?.find(item => item.value === value)?.label}
         <IoIosArrowDown
-          className="group-hover:text-primary-600 group-focus:text-primary-600"
+          className={cn(
+            'transition-all group-hover:text-primary-600 group-focus:text-primary-600',
+            {
+              'rotate-180 text-primary-600': isOpen
+            }
+          )}
           size={16}
         />
       </button>
@@ -59,7 +64,7 @@ export const InputSelect = ({ className, options, handleChange }) => {
                 <li key={item.value}>
                   <button
                     className={cn(
-                      'block px-4 py-2 w-full text-left dark:hover:text-white hover:bg-secondary-300 dark:hover:bg-secondary-700',
+                      'block px-4 py-2 w-full text-left transition-all dark:hover:text-white hover:bg-secondary-300 dark:hover:bg-secondary-700',
                       {
                         'bg-secondary-300 dark:bg-secondary-700':
                           item.value === value
