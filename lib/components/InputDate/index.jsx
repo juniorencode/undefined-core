@@ -1,11 +1,11 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { usePopper } from 'react-popper';
 import { FaCalendar } from 'react-icons/fa';
-import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { cn } from '../../utils/styles';
 import { monthNames } from '../../utils/time';
+import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
-import { Calendar } from '../Calendar';
+import { Calendar } from './Calendar';
 
 export const InputDate = ({
   className,
