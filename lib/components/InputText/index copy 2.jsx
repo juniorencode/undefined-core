@@ -24,7 +24,7 @@ export const InputText = props => {
     focused,
     autoComplete,
     disabled,
-    multiple = !true,
+    multiple = true,
     ...params
   } = props;
 
@@ -50,12 +50,7 @@ export const InputText = props => {
   }, []);
 
   useEffect(() => {
-    if (multiple) setFilteredOptions(options);
-    else filterOptions(value);
-    // eslint-disable-next-line
-  }, [value]);
-
-  const filterOptions = value => {
+    if (multiple) return;
     const string = normalizeString(value?.trim());
     if (!string) setFilteredOptions(options);
     if (!string || !options) return;
@@ -64,7 +59,8 @@ export const InputText = props => {
     );
     if (filtered.length === 1 && filtered[0] === string) setFilteredOptions([]);
     else setFilteredOptions(filtered);
-  };
+    // eslint-disable-next-line
+  }, [value]);
 
   const normalizeString = (str = '') => {
     return str
@@ -80,54 +76,6 @@ export const InputText = props => {
   };
 
   //multiple
-  const separators = [',', ';', '|'];
-  const handleInput = e => {
-    filterOptions(e.target.value);
-    if (separators.includes(e.nativeEvent.key)) {
-      const regex = new RegExp(`[${separators.join('')}]+`, 'g');
-      const tag = e.target.value?.replace(regex, '').trim();
-
-      if (tag.length > 0) {
-        if (value) {
-          if (!value.includes(tag)) handleChange([...value, tag]);
-        } else {
-          handleChange([tag]);
-        }
-      }
-
-      e.target.value = '';
-      e.preventDefault();
-    }
-  };
-  const handlePaste = e => {
-    const clipboardData = e.clipboardData || window.clipboardData;
-    const pastedData = clipboardData.getData('Text');
-
-    const tags = pastedData
-      .split(new RegExp(`[${separators.join('')}]+`))
-      .map(tag => tag.trim())
-      .filter(tag => tag.length > 0);
-
-    if (tags.length > 0) {
-      const updatedTags = value ? [...value, ...tags] : [...tags];
-      handleChange(updatedTags);
-    }
-
-    e.preventDefault();
-  };
-
-  const handleBlur = e => {
-    const tag = e.target.value?.trim();
-
-    if (tag.length > 0) {
-      const tags = value ? [...value, tag] : [tag];
-      handleChange(tags);
-    }
-
-    e.target.value = '';
-    setFocus(false);
-  };
-
   const handleRemove = (e, elem) => {
     e.preventDefault();
     if (value?.includes(elem)) {
@@ -147,9 +95,9 @@ export const InputText = props => {
         {!multiple ? (
           <div
             className={cn(
-              'flex items-center w-full border rounded-lg overflow-hidden transition-all text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
+              'flex items-center w-full border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
               {
-                'ring-4 ring-opacity-30 dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
+                'ring-4 ring-opacity-30 checked:ring-opacity-30 dark:ring-opacity-40 checked:dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
                   focus || isOpen,
                 'cursor-text': !disabled
               }
@@ -185,9 +133,9 @@ export const InputText = props => {
         ) : (
           <div
             className={cn(
-              'flex items-center w-full border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400 p-2.5 min-h-12 sm:text-sm cursor-text',
+              'flex items-center w-full border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
               {
-                'ring-4 ring-opacity-30 dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
+                'ring-4 ring-opacity-30 checked:ring-opacity-30 dark:ring-opacity-40 checked:dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
                   focus || isOpen,
                 'cursor-text': !disabled
               }
@@ -211,31 +159,17 @@ export const InputText = props => {
                 </li>
               ))}
               <input
-                className={cn(
-                  'p-2.5 w-full h-12 text-sm outline-none bg-transparent',
-                  {
-                    'text-left': align === 'left',
-                    'text-center': align === 'center',
-                    'text-right': align === 'right'
-                  }
-                )}
-                ref={inputRef}
-                role="textbox"
+                className="outline-none bg-transparent"
                 id={domId}
+                ref={domRef}
                 type="text"
                 name={name}
-                // onChange={onChange}
-                onClick={() => setIsOpen(true)}
-                onFocus={() => setFocus(true)}
-                // onBlur={() => {
-                //   multiple ? handleBlur() : setFocus(false);
-                // }}
-                autoComplete={autoComplete ? 'on' : 'off'}
-                disabled={disabled}
-                onKeyDown={handleInput}
-                onPaste={handlePaste}
-                onBlur={handleBlur}
-                {...params}
+                spellCheck="false"
+                autoComplete="off"
+                // onKeyDown={handleInput}
+                // onPaste={handlePaste}
+                // onBlur={handleBlur}
+                {...props}
               />
             </ul>
           </div>
@@ -250,7 +184,7 @@ export const InputText = props => {
             value: option,
             label: option
           }))}
-          onChange={multiple ? handleInput : onChange}
+          onChange={onChange}
           setIsOpen={setIsOpen}
           funcDelete={funcDelete}
         />
