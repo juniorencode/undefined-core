@@ -12,7 +12,8 @@ import {
   InputTextarea,
   InputPassword,
   InputSwitch,
-  InputDate
+  InputDate,
+  InputRichText
 } from '../lib/main';
 
 const App = () => {
@@ -61,6 +62,11 @@ const App = () => {
                 ]}
                 register={Form.register}
                 // required
+              />
+              <InputRichText
+                name="richtext"
+                label="RichText"
+                register={Form.register}
               />
               <InputDate
                 name="date"
