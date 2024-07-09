@@ -60,9 +60,9 @@ export const InputSelect = props => {
       <div className="relative" ref={domRef}>
         <button
           className={cn(
-            'flex items-center justify-between p-2.5 w-full h-12 text-sm text-center border focus:ring-4 focus:ring-opacity-30 checked:focus:ring-opacity-30 focus:dark:ring-opacity-40 checked:focus:dark:ring-opacity-40 rounded-lg outline-none transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white dark:placeholder-secondary-400 border-secondary-300 dark:border-secondary-600 focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-600 dark:focus:ring-primary-500',
+            'flex items-center justify-between p-2.5 w-full h-12 text-sm text-center border focus:ring-4 focus:ring-opacity-30 focus:dark:ring-opacity-40 rounded-lg outline-none transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white dark:placeholder-secondary-400 border-secondary-300 dark:border-secondary-600 focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-600 dark:focus:ring-primary-500',
             {
-              'ring-4 ring-opacity-30 checked:ring-opacity-30 dark:ring-opacity-40 checked:dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
+              'ring-4 ring-opacity-30 dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
                 isOpen
             }
           )}

@@ -12,7 +12,9 @@ import {
   InputTextarea,
   InputPassword,
   InputSwitch,
-  DataTable
+  DataTable,
+  InputDate,
+  InputRichText
 } from '../lib/main';
 import { useFilter } from '../lib/hooks/useFilter.hook';
 import { useEffect } from 'react';
@@ -412,6 +414,17 @@ const App = () => {
                   'río',
                   'mentalista'
                 ]}
+                register={Form.register}
+                // required
+              />
+              <InputRichText
+                name="richtext"
+                label="RichText"
+                register={Form.register}
+              />
+              <InputDate
+                name="date"
+                label="Date"
                 register={Form.register}
                 // required
               />
