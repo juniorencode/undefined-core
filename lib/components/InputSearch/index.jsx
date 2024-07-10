@@ -4,6 +4,7 @@ import { cn } from '../../utils/styles';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { SelectDropdown } from '../SelectDropdown';
+import { IoMdClose } from 'react-icons/io';
 
 export const InputSearch = props => {
   const {
@@ -24,6 +25,7 @@ export const InputSearch = props => {
     focused,
     autoComplete,
     disabled,
+    multiple = !true,
     ...params
   } = props;
 
@@ -50,6 +52,7 @@ export const InputSearch = props => {
   }, []);
 
   useEffect(() => {
+    console.log(search);
     const string = normalizeString(search?.trim());
     if (!string) setFilteredOptions(options);
     if (!string || !options) return;
@@ -73,6 +76,29 @@ export const InputSearch = props => {
     setSearch(uppercase ? _value.toUpperCase() : _value);
   };
 
+  const handleInput = string => {
+    const tag = string.trim();
+    console.log(tag, value);
+    if (value) {
+      if (!value.includes(tag)) {
+        handleChange([...value, tag]);
+      }
+    } else {
+      handleChange([tag]);
+    }
+    setSearch('');
+    inputRef.current && inputRef.current.focus();
+    setIsOpen(true);
+  };
+
+  const handleRemove = (e, elem) => {
+    e.preventDefault();
+    if (value?.includes(elem)) {
+      const tags = value.filter(item => item !== elem);
+      handleChange(tags);
+    }
+  };
+
   return (
     <InputContainer
       className={className}
@@ -92,37 +118,94 @@ export const InputSearch = props => {
           )}
           onClick={() => inputRef.current && inputRef.current.focus()}
         >
-          {prefix && <span className="ml-2.5">{prefix}</span>}
-          <input
-            className={cn(
-              'p-2.5 w-full h-12 text-sm outline-none bg-transparent',
-              {
-                'text-left': align === 'left',
-                'text-center': align === 'center',
-                'text-right': align === 'right'
-              }
-            )}
-            ref={inputRef}
-            role="textbox"
-            id={domId}
-            type="text"
-            name={name}
-            value={
-              value !== undefined && value !== null
-                ? options.filter(option => option.value === value).length > 0
-                  ? options.filter(option => option.value === value)[0].label
-                  : value
-                : search
-            }
-            onChange={onChange}
-            onClick={() => setIsOpen(true)}
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
-            autoComplete={autoComplete ? 'on' : 'off'}
-            disabled={disabled}
-            {...params}
-          />
-          {postfix && <span className="mr-2.5">{postfix}</span>}
+          {!multiple ? (
+            <>
+              {prefix && <span className="ml-2.5">{prefix}</span>}
+              <input
+                className={cn(
+                  'p-2.5 w-full h-12 text-sm outline-none bg-transparent',
+                  {
+                    'text-left': align === 'left',
+                    'text-center': align === 'center',
+                    'text-right': align === 'right'
+                  }
+                )}
+                ref={inputRef}
+                role="textbox"
+                id={domId}
+                type="text"
+                name={name}
+                value={
+                  value !== undefined && value !== null
+                    ? options.filter(option => option.value === value).length >
+                      0
+                      ? options.filter(option => option.value === value)[0]
+                          .label
+                      : value
+                    : search
+                }
+                onChange={onChange}
+                onClick={() => setIsOpen(true)}
+                onFocus={() => setFocus(true)}
+                onBlur={() => setFocus(false)}
+                autoComplete={autoComplete ? 'on' : 'off'}
+                disabled={disabled}
+                {...params}
+              />
+              {postfix && <span className="mr-2.5">{postfix}</span>}
+              <button
+                className="ml-1 mr-2.5 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
+                type="button"
+                onClick={() => {
+                  handleChange('');
+                  setSearch('');
+                  setIsOpen(true);
+                }}
+              >
+                <IoMdClose />
+              </button>
+            </>
+          ) : (
+            <ul className="flex items-center flex-wrap gap-2 min-h-5">
+              {value?.map(elem => (
+                <li
+                  key={elem}
+                  className="flex items-center pl-2 pr-1.5 py-0.5 h-6 rounded border bg-secondary-200 border-secondary-300 dark:bg-secondary-500 dark:border-secondary-400"
+                >
+                  {filteredOptions.find(opt => opt.value === elem).label}
+                  <button
+                    className="ml-1 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
+                    type="button"
+                    onClick={e => handleRemove(e, elem)}
+                  >
+                    <IoMdClose />
+                  </button>
+                </li>
+              ))}
+              <input
+                className={cn(
+                  'p-2.5 w-full h-12 text-sm outline-none bg-transparent',
+                  {
+                    'text-left': align === 'left',
+                    'text-center': align === 'center',
+                    'text-right': align === 'right'
+                  }
+                )}
+                ref={inputRef}
+                role="textbox"
+                id={domId}
+                type="text"
+                name={name}
+                onClick={() => setIsOpen(true)}
+                onFocus={() => setFocus(true)}
+                autoComplete={autoComplete ? 'on' : 'off'}
+                disabled={disabled}
+                onChange={onChange}
+                onBlur={() => setFocus(false)}
+                {...params}
+              />
+            </ul>
+          )}
         </div>
         <SelectDropdown
           domRef={domRef}
@@ -130,7 +213,11 @@ export const InputSearch = props => {
           value={value}
           isOpen={isOpen}
           options={filteredOptions}
-          onChange={e => handleChange(e.target.value)}
+          onChange={e => {
+            multiple
+              ? handleInput(e.target.value)
+              : handleChange(e.target.value);
+          }}
           setIsOpen={setIsOpen}
           funcDelete={funcDelete}
         />
@@ -165,5 +252,6 @@ InputSearch.propTypes = {
   isEmail: PropTypes.bool,
   focused: PropTypes.bool,
   autoComplete: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  multiple: PropTypes.bool
 };

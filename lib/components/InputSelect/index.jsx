@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowDown, IoMdClose } from 'react-icons/io';
+import PropTypes from 'prop-types';
 import { cn } from '../../utils/styles';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
@@ -19,6 +19,7 @@ export const InputSelect = props => {
     toBoolean,
     register,
     required,
+    multiple = true,
     ...params
   } = props;
 
@@ -51,6 +52,27 @@ export const InputSelect = props => {
 
   const handleClick = () => setIsOpen(!isOpen);
 
+  const handleInput = string => {
+    const tag = string.trim();
+    console.log(tag, value);
+    if (value) {
+      if (!value.includes(tag)) {
+        handleChange([...value, tag]);
+      }
+    } else {
+      handleChange([tag]);
+    }
+    setIsOpen(true);
+  };
+
+  const handleRemove = (e, elem) => {
+    e.preventDefault();
+    if (value?.includes(elem)) {
+      const tags = value.filter(item => item !== elem);
+      handleChange(tags);
+    }
+  };
+
   return (
     <InputContainer
       className={className}
@@ -59,7 +81,7 @@ export const InputSelect = props => {
       error={errors[name]?.message}
     >
       <div className="relative" ref={domRef}>
-        <button
+        <div
           className={cn(
             'flex items-center justify-between p-2.5 w-full h-12 text-sm text-center border focus:ring-4 focus:ring-opacity-30 focus:dark:ring-opacity-40 rounded-lg outline-none transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white dark:placeholder-secondary-400 border-secondary-300 dark:border-secondary-600 focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-600 dark:focus:ring-primary-500',
             {
@@ -71,26 +93,82 @@ export const InputSelect = props => {
           onClick={handleClick}
           {...params}
         >
-          <div className="flex items-center justify-start pr-4 w-full h-full">
-            {options?.filter(item => item.value === value)[0]?.label || ''}
-          </div>
-          <IoIosArrowDown
-            className={cn(
-              'transition-transform duration-200 text-neutral-500 dark:text-neutral-400',
-              {
-                'text-primary-500 dark:text-primary-500 rotate-180': isOpen
-              }
-            )}
-            size={16}
-          />
-        </button>
+          {!multiple ? (
+            <div className="flex items-center justify-start pr-4 w-full h-full">
+              {options?.filter(item => item.value === value)[0]?.label || ''}
+            </div>
+          ) : (
+            <>
+              <ul className="flex items-center flex-wrap gap-2 min-h-5">
+                {value?.map(elem => (
+                  <li
+                    key={elem}
+                    className="flex items-center pl-2 pr-1.5 py-0.5 h-6 rounded border bg-secondary-200 border-secondary-300 dark:bg-secondary-500 dark:border-secondary-400"
+                  >
+                    {options.find(opt => opt.value === elem).label}
+                    <button
+                      className="ml-1 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
+                      type="button"
+                      onClick={e => handleRemove(e, elem)}
+                    >
+                      <IoMdClose />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          {multiple ? (
+            <IoIosArrowDown
+              className={cn(
+                'transition-transform duration-200 text-neutral-500 dark:text-neutral-400',
+                {
+                  'text-primary-500 dark:text-primary-500 rotate-180': isOpen
+                }
+              )}
+              size={16}
+            />
+          ) : value !== '' ? (
+            <button
+              className="text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
+              type="button"
+              onClick={e => {
+                e.stopPropagation();
+                handleChange('');
+                setIsOpen(true);
+              }}
+            >
+              <IoMdClose
+                className={cn(
+                  'transition-transform duration-200 text-neutral-500 dark:text-neutral-400',
+                  {
+                    'text-primary-500 dark:text-primary-500 rotate-180': isOpen
+                  }
+                )}
+                size={16}
+              />
+            </button>
+          ) : (
+            <IoIosArrowDown
+              className={cn(
+                'transition-transform duration-200 text-neutral-500 dark:text-neutral-400',
+                {
+                  'text-primary-500 dark:text-primary-500 rotate-180': isOpen
+                }
+              )}
+              size={16}
+            />
+          )}
+        </div>
         <SelectDropdown
           domRef={domRef}
           name={name}
           value={value}
           isOpen={isOpen}
           options={options}
-          onChange={onChange}
+          onChange={e => {
+            multiple ? handleInput(e.target.value) : onChange(e);
+          }}
           setIsOpen={setIsOpen}
           funcDelete={funcDelete}
         />
@@ -119,5 +197,6 @@ InputSelect.propTypes = {
   toNumber: PropTypes.bool,
   toBoolean: PropTypes.bool,
   register: PropTypes.func.isRequired,
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  multiple: PropTypes.bool
 };

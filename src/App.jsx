@@ -369,28 +369,6 @@ const App = () => {
     <BrowserRouter>
       <div className="absolute w-[100vw] min-h-[100vh] bg-secondary-100 dark:bg-secondary-900">
         <div className="h-[60px]"></div>
-        <div className="m-4">
-          <DataTable
-            structure={structure}
-            data={data}
-            filter={filter}
-            pagination={{
-              currentPage: 1,
-              limit: 50,
-              from: 1,
-              to: 8,
-              total: 8,
-              totalPages: 1
-            }}
-            setPage={setPage}
-            setSearch={setSearch}
-            handleCreate={() => console.log('cr')}
-            handleUpdate={() => console.log('ed')}
-            handleDelete={() => console.log('de')}
-            handleFeature={() => console.log('fe')}
-            dndFunc={() => console.log('dnd')}
-          />
-        </div>
 
         <Card className="m-4">
           <h1 className="text-4xl font-bold p-4 text-neutral-800 dark:text-white">
@@ -414,6 +392,42 @@ const App = () => {
               className="flex flex-col gap-2"
               onKeyDown={Form.handleAssistant}
             >
+              <InputSelect
+                className="col-span-12"
+                name="select"
+                label="Select"
+                options={[
+                  { value: '1', label: 'gato' },
+                  { value: '2', label: 'perro' },
+                  { value: '3', label: 'sol' },
+                  { value: '4', label: 'luna' },
+                  { value: '5', label: 'estrella' },
+                  { value: '6', label: 'mar' },
+                  { value: '7', label: 'montaña' },
+                  { value: '8', label: 'río' },
+                  { value: '9', label: 'mentalista' }
+                ]}
+                funcDelete={id => console.log('delete: ' + id)}
+                register={Form.register}
+                // required
+              />
+              <InputSearch
+                name="search"
+                label="Search"
+                options={[
+                  { value: '1', label: 'gato' },
+                  { value: '2', label: 'perro' },
+                  { value: '3', label: 'sol' },
+                  { value: '4', label: 'luna' },
+                  { value: '5', label: 'estrella' },
+                  { value: '6', label: 'mar' },
+                  { value: '7', label: 'montaña' },
+                  { value: '8', label: 'río' },
+                  { value: '9', label: 'mentalista' }
+                ]}
+                register={Form.register}
+                // required
+              />
               <InputText
                 name="text"
                 label="Text"
@@ -442,23 +456,6 @@ const App = () => {
                 register={Form.register}
                 // required
               />
-              <InputSearch
-                name="search"
-                label="Search"
-                options={[
-                  { value: '1', label: 'gato' },
-                  { value: '2', label: 'perro' },
-                  { value: '3', label: 'sol' },
-                  { value: '4', label: 'luna' },
-                  { value: '5', label: 'estrella' },
-                  { value: '6', label: 'mar' },
-                  { value: '7', label: 'montaña' },
-                  { value: '8', label: 'río' },
-                  { value: '9', label: 'mentalista' }
-                ]}
-                register={Form.register}
-                // required
-              />
               <FormSection title="Section">
                 <InputPassword
                   className="col-span-12"
@@ -477,25 +474,6 @@ const App = () => {
                 />
               </FormSection>
               <FormSection title="Section" box>
-                <InputSelect
-                  className="col-span-12"
-                  name="select"
-                  label="Select"
-                  options={[
-                    { value: '1', label: 'gato' },
-                    { value: '2', label: 'perro' },
-                    { value: '3', label: 'sol' },
-                    { value: '4', label: 'luna' },
-                    { value: '5', label: 'estrella' },
-                    { value: '6', label: 'mar' },
-                    { value: '7', label: 'montaña' },
-                    { value: '8', label: 'río' },
-                    { value: '9', label: 'mentalista' }
-                  ]}
-                  funcDelete={id => console.log('delete: ' + id)}
-                  register={Form.register}
-                  // required
-                />
                 <InputTextarea
                   className="col-span-12"
                   name="textarea"
@@ -519,6 +497,28 @@ const App = () => {
             </form>
           </DataForm>
         </Card>
+        <div className="m-4">
+          <DataTable
+            structure={structure}
+            data={data}
+            filter={filter}
+            pagination={{
+              currentPage: 1,
+              limit: 50,
+              from: 1,
+              to: 8,
+              total: 8,
+              totalPages: 1
+            }}
+            setPage={setPage}
+            setSearch={setSearch}
+            handleCreate={() => console.log('cr')}
+            handleUpdate={() => console.log('ed')}
+            handleDelete={() => console.log('de')}
+            handleFeature={() => console.log('fe')}
+            dndFunc={() => console.log('dnd')}
+          />
+        </div>
       </div>
     </BrowserRouter>
   );

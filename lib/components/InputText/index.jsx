@@ -24,7 +24,7 @@ export const InputText = props => {
     focused,
     autoComplete,
     disabled,
-    multiple = !true,
+    multiple = true,
     ...params
   } = props;
 
@@ -40,6 +40,7 @@ export const InputText = props => {
     maxLength,
     isEmail
   });
+  const separators = [',', ';', '|'];
 
   useEffect(() => {
     if (inputRef.current) {
@@ -77,13 +78,12 @@ export const InputText = props => {
   const onChange = e => {
     const _value = e.target.value;
     handleChange(uppercase ? _value.toUpperCase() : _value);
+    filterOptions(value);
   };
 
   //multiple
-  const separators = [',', ';', '|'];
-  const handleInput = e => {
-    filterOptions(e.target.value);
-    if (separators.includes(e.nativeEvent.key)) {
+  const handleInput = (e, isSelection) => {
+    if (separators.includes(e.nativeEvent.key) || isSelection) {
       const regex = new RegExp(`[${separators.join('')}]+`, 'g');
       const tag = e.target.value?.replace(regex, '').trim();
 
@@ -94,11 +94,13 @@ export const InputText = props => {
           handleChange([tag]);
         }
       }
-
       e.target.value = '';
       e.preventDefault();
-    }
+    } else filterOptions(e.target.value);
+    inputRef.current && inputRef.current.focus();
+    setIsOpen(true);
   };
+
   const handlePaste = e => {
     const clipboardData = e.clipboardData || window.clipboardData;
     const pastedData = clipboardData.getData('Text');
@@ -109,7 +111,10 @@ export const InputText = props => {
       .filter(tag => tag.length > 0);
 
     if (tags.length > 0) {
-      const updatedTags = value ? [...value, ...tags] : [...tags];
+      const uniqueTags = value
+        ? tags.filter(tag => !value.includes(tag))
+        : tags;
+      const updatedTags = value ? [...value, ...uniqueTags] : [...uniqueTags];
       handleChange(updatedTags);
     }
 
@@ -119,7 +124,7 @@ export const InputText = props => {
   const handleBlur = e => {
     const tag = e.target.value?.trim();
 
-    if (tag.length > 0) {
+    if (tag.length > 0 && isOpen) {
       const tags = value ? [...value, tag] : [tag];
       handleChange(tags);
     }
@@ -192,9 +197,12 @@ export const InputText = props => {
                 'cursor-text': !disabled
               }
             )}
-            onClick={() => inputRef.current && inputRef.current.focus()}
+            onClick={() => {
+              inputRef.current && inputRef.current.focus();
+              setIsOpen(true);
+            }}
           >
-            <ul className="flex flex-wrap gap-2 min-h-5">
+            <ul className="flex items-center flex-wrap gap-2 min-h-5">
               {value?.map(elem => (
                 <li
                   key={elem}
@@ -224,15 +232,11 @@ export const InputText = props => {
                 id={domId}
                 type="text"
                 name={name}
-                // onChange={onChange}
                 onClick={() => setIsOpen(true)}
                 onFocus={() => setFocus(true)}
-                // onBlur={() => {
-                //   multiple ? handleBlur() : setFocus(false);
-                // }}
                 autoComplete={autoComplete ? 'on' : 'off'}
                 disabled={disabled}
-                onKeyDown={handleInput}
+                onChange={handleInput}
                 onPaste={handlePaste}
                 onBlur={handleBlur}
                 {...params}
@@ -250,7 +254,9 @@ export const InputText = props => {
             value: option,
             label: option
           }))}
-          onChange={multiple ? handleInput : onChange}
+          onChange={e => {
+            multiple ? handleInput(e, true) : onChange(e);
+          }}
           setIsOpen={setIsOpen}
           funcDelete={funcDelete}
         />
