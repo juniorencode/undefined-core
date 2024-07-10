@@ -5,7 +5,6 @@ import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { SelectDropdown } from '../SelectDropdown';
 import { IoMdClose } from 'react-icons/io';
-import { VscLaw } from 'react-icons/vsc';
 
 export const InputSearch = props => {
   const {
@@ -253,5 +252,6 @@ InputSearch.propTypes = {
   isEmail: PropTypes.bool,
   focused: PropTypes.bool,
   autoComplete: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  multiple: PropTypes.bool
 };
