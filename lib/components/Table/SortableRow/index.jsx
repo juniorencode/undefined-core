@@ -12,21 +12,25 @@ import {
   formatTimeCasual
 } from '../../../utils/time.utilities.js';
 import { useState } from 'react';
+import { cn } from '../../../utils/styles.js';
 
-export const SortableRow = ({
-  row,
-  index,
-  page = 1,
-  handleUpdate,
-  handleDelete,
-  handleFeature,
-  highlighted,
-  noSeqNum,
-  shortFileName,
-  structure,
-  handleDeleteEvent,
-  dndFunc
-}) => {
+export const SortableRow = props => {
+  const {
+    row,
+    index,
+    page = 1,
+    handleUpdate,
+    handleDelete,
+    handleFeature,
+    highlighted,
+    noSeqNum,
+    shortFileName,
+    structure,
+    handleDeleteEvent,
+    dndFunc,
+    isScrolling
+  } = props;
+
   const [isHovering, setIsHovering] = useState([null, null]);
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: row.id });
@@ -40,7 +44,7 @@ export const SortableRow = ({
     <tr
       ref={setNodeRef}
       style={style}
-      className="border-b group bg-white dark:bg-secondary-800 dark:border-secondary-700 hover:bg-[#fafafa] dark:hover:bg-[#313131]"
+      className="border-b group bg-white dark:bg-secondary-800 dark:border-secondary-700 hover:bg-[#fafafa] dark:hover:bg-secondary-900"
     >
       {dndFunc && (
         <td
@@ -191,7 +195,7 @@ export const SortableRow = ({
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="px-4 py-2 text-nowrap  "
+                className="px-4 py-2 text-nowrap"
                 // max-w-[500px] overflow-hidden
               >
                 {getHighlightedText(row[column.attr], highlighted)}
@@ -334,7 +338,14 @@ export const SortableRow = ({
         }
       })}
       {(handleUpdate || handleDelete) && (
-        <td className="px-4 py-2 sticky top-0 right-0 bg-white dark:bg-secondary-800 group-hover:bg-[#fafafa] group-hover:dark:bg-[#313131]">
+        <td
+          className={cn(
+            'px-4 py-2 sticky top-0 right-0 bg-white dark:bg-secondary-800 group-hover:bg-[#fafafa] group-hover:dark:bg-secondary-900',
+            {
+              'border-l-4 dark:border-secondary-600': isScrolling
+            }
+          )}
+        >
           <div className="flex gap-2 items-center justify-center">
             {handleUpdate && (
               <button
@@ -379,5 +390,6 @@ SortableRow.propTypes = {
   shortFileName: PropTypes.func,
   highlighted: PropTypes.string,
   noSeqNum: PropTypes.bool,
-  dndFunc: PropTypes.func
+  dndFunc: PropTypes.func,
+  isScrolling: PropTypes.bool
 };
