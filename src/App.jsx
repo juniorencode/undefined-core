@@ -18,7 +18,6 @@ import {
   Breadcrumb
 } from '../lib/main';
 import { useFilter } from '../lib/hooks/useFilter.hook';
-import { useEffect } from 'react';
 
 const App = () => {
   // const Form = useForm({
@@ -368,8 +367,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="absolute w-[100vw] min-h-[100vh] bg-secondary-100 dark:bg-secondary-900">
-        <div className="h-[60px]"></div>
-
+        <div className="h-[50px]"></div>
         <Card className="m-4">
           <h1 className="text-4xl font-bold p-4 text-neutral-800 dark:text-white">
             Test Inputs
@@ -442,6 +440,7 @@ const App = () => {
                   'río',
                   'mentalista'
                 ]}
+                multiple
                 register={Form.register}
                 // required
               />

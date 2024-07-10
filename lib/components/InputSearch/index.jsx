@@ -52,7 +52,6 @@ export const InputSearch = props => {
   }, []);
 
   useEffect(() => {
-    console.log(search);
     const string = normalizeString(search?.trim());
     if (!string) setFilteredOptions(options);
     if (!string || !options) return;
@@ -78,7 +77,6 @@ export const InputSearch = props => {
 
   const handleInput = string => {
     const tag = string.trim();
-    console.log(tag, value);
     if (value) {
       if (!value.includes(tag)) {
         handleChange([...value, tag]);

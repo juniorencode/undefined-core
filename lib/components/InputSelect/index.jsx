@@ -54,7 +54,6 @@ export const InputSelect = props => {
 
   const handleInput = string => {
     const tag = string.trim();
-    console.log(tag, value);
     if (value) {
       if (!value.includes(tag)) {
         handleChange([...value, tag]);

@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
+import { IoMdClose } from 'react-icons/io';
 import { cn } from '../../utils/styles';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { SelectDropdown } from '../SelectDropdown';
-import { IoMdClose } from 'react-icons/io';
 
 export const InputText = props => {
   const {
@@ -15,6 +16,7 @@ export const InputText = props => {
     align,
     prefix,
     postfix,
+    multiple,
     funcDelete,
     register,
     required,
@@ -24,7 +26,6 @@ export const InputText = props => {
     focused,
     autoComplete,
     disabled,
-    multiple = true,
     ...params
   } = props;
 
@@ -51,8 +52,7 @@ export const InputText = props => {
   }, []);
 
   useEffect(() => {
-    if (multiple) setFilteredOptions(options);
-    else filterOptions(value);
+    !multiple && filterOptions(value);
     // eslint-disable-next-line
   }, [value]);
 
@@ -71,39 +71,32 @@ export const InputText = props => {
     return str
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
+      .replace(/[.,#!$%&*;:{}=\-_`~()]/g, '')
       .toLowerCase();
   };
 
   const onChange = e => {
-    const _value = e.target.value;
-    handleChange(uppercase ? _value.toUpperCase() : _value);
-    filterOptions(value);
+    handleChange(uppercase ? e.target.value.toUpperCase() : e.target.value);
   };
 
   //multiple
-  const handleInput = (e, isSelection) => {
-    if (separators.includes(e.nativeEvent.key) || isSelection) {
-      const regex = new RegExp(`[${separators.join('')}]+`, 'g');
-      const tag = e.target.value?.replace(regex, '').trim();
+  const handleInput = e => {
+    if (!separators.includes(e.nativeEvent.key)) return;
 
-      if (tag.length > 0) {
-        if (value) {
-          if (!value.includes(tag)) handleChange([...value, tag]);
-        } else {
-          handleChange([tag]);
-        }
-      }
-      e.target.value = '';
-      e.preventDefault();
-    } else filterOptions(e.target.value);
-    inputRef.current && inputRef.current.focus();
-    setIsOpen(true);
+    const regex = new RegExp(`[${separators.join('')}]+`, 'g');
+    const tag = e.target.value?.replace(regex, '').trim();
+
+    insertItem(tag);
+    e.preventDefault();
+    e.target.value = '';
   };
+
+  const handleSearch = e => filterOptions(e.target.value);
 
   const handlePaste = e => {
     const clipboardData = e.clipboardData || window.clipboardData;
     const pastedData = clipboardData.getData('Text');
+    e.preventDefault();
 
     const tags = pastedData
       .split(new RegExp(`[${separators.join('')}]+`))
@@ -117,20 +110,15 @@ export const InputText = props => {
       const updatedTags = value ? [...value, ...uniqueTags] : [...uniqueTags];
       handleChange(updatedTags);
     }
-
-    e.preventDefault();
   };
 
-  const handleBlur = e => {
-    const tag = e.target.value?.trim();
+  const insertItem = tag => {
+    if (tag.length < 1) return;
+    if (value) !value.includes(tag) && handleChange([...value, tag]);
+    else handleChange([tag]);
 
-    if (tag.length > 0 && isOpen) {
-      const tags = value ? [...value, tag] : [tag];
-      handleChange(tags);
-    }
-
-    e.target.value = '';
-    setFocus(false);
+    inputRef.current.value = '';
+    inputRef.current.focus();
   };
 
   const handleRemove = (e, elem) => {
@@ -141,6 +129,21 @@ export const InputText = props => {
     }
   };
 
+  const handleFocus = () => inputRef.current.focus();
+
+  const handleBlur = e => {
+    const tag = e.target.value?.trim();
+
+    if (tag.length > 0 && !isOpen) {
+      const tags = value ? [...value, tag] : [tag];
+      setFilteredOptions(options);
+      handleChange(tags);
+    }
+
+    e.target.value = '';
+    setFocus(false);
+  };
+
   return (
     <InputContainer
       className={className}
@@ -149,7 +152,55 @@ export const InputText = props => {
       error={errors[name]?.message}
     >
       <div className="relative" ref={domRef}>
-        {!multiple ? (
+        {multiple ? (
+          <div
+            className={cn(
+              'flex items-center p-2.5 w-full min-h-12 sm:text-sm border rounded-lg cursor-text transition-all text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
+              {
+                'ring-4 ring-opacity-30 dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
+                  focus || isOpen
+              }
+            )}
+            onClick={handleFocus}
+          >
+            <ul className="flex flex-wrap gap-2 min-h-5">
+              {value?.map(elem => (
+                <li
+                  key={elem}
+                  className="flex items-center pl-2 pr-1.5 py-0.5 h-6 rounded border bg-secondary-200 border-secondary-300 dark:bg-secondary-500 dark:border-secondary-400"
+                >
+                  {elem}
+                  <button
+                    className="ml-1 transition-all text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
+                    type="button"
+                    onClick={e => handleRemove(e, elem)}
+                  >
+                    <IoMdClose />
+                  </button>
+                </li>
+              ))}
+              <input
+                className="outline-none bg-transparent"
+                ref={inputRef}
+                id={domId}
+                name={name}
+                type="text"
+                spellCheck="false"
+                autoComplete="off"
+                onClick={() => setIsOpen(true)}
+                onKeyDown={handleInput}
+                onChange={handleSearch}
+                onPaste={handlePaste}
+                onFocus={() => {
+                  setFocus(true);
+                  setIsOpen(true);
+                }}
+                onBlur={handleBlur}
+                {...params}
+              />
+            </ul>
+          </div>
+        ) : (
           <div
             className={cn(
               'flex items-center w-full border rounded-lg overflow-hidden transition-all text-secondary-900 dark:text-white bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400',
@@ -178,7 +229,6 @@ export const InputText = props => {
               name={name}
               value={value !== undefined && value !== null ? value : ''}
               onChange={onChange}
-              onClick={() => setIsOpen(true)}
               onFocus={() => setFocus(true)}
               onBlur={() => setFocus(false)}
               autoComplete={autoComplete ? 'on' : 'off'}
@@ -187,75 +237,19 @@ export const InputText = props => {
             />
             {postfix && <span className="mr-2.5">{postfix}</span>}
           </div>
-        ) : (
-          <div
-            className={cn(
-              'flex items-center w-full border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400 p-2.5 min-h-12 sm:text-sm cursor-text',
-              {
-                'ring-4 ring-opacity-30 dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
-                  focus || isOpen,
-                'cursor-text': !disabled
-              }
-            )}
-            onClick={() => {
-              inputRef.current && inputRef.current.focus();
-              setIsOpen(true);
-            }}
-          >
-            <ul className="flex items-center flex-wrap gap-2 min-h-5">
-              {value?.map(elem => (
-                <li
-                  key={elem}
-                  className="flex items-center pl-2 pr-1.5 py-0.5 h-6 rounded border bg-secondary-200 border-secondary-300 dark:bg-secondary-500 dark:border-secondary-400"
-                >
-                  {elem}
-                  <button
-                    className="ml-1 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
-                    type="button"
-                    onClick={e => handleRemove(e, elem)}
-                  >
-                    <IoMdClose />
-                  </button>
-                </li>
-              ))}
-              <input
-                className={cn(
-                  'p-2.5 w-full h-12 text-sm outline-none bg-transparent',
-                  {
-                    'text-left': align === 'left',
-                    'text-center': align === 'center',
-                    'text-right': align === 'right'
-                  }
-                )}
-                ref={inputRef}
-                role="textbox"
-                id={domId}
-                type="text"
-                name={name}
-                onClick={() => setIsOpen(true)}
-                onFocus={() => setFocus(true)}
-                autoComplete={autoComplete ? 'on' : 'off'}
-                disabled={disabled}
-                onChange={handleInput}
-                onPaste={handlePaste}
-                onBlur={handleBlur}
-                {...params}
-              />
-            </ul>
-          </div>
         )}
-
         <SelectDropdown
           domRef={domRef}
           name={name}
-          value={value}
+          value={null}
           isOpen={isOpen}
           options={filteredOptions.map(option => ({
             value: option,
             label: option
           }))}
           onChange={e => {
-            multiple ? handleInput(e, true) : onChange(e);
+            multiple ? insertItem(e.target.value.trim()) : onChange(e);
+            options && setFilteredOptions(options);
           }}
           setIsOpen={setIsOpen}
           funcDelete={funcDelete}
@@ -263,4 +257,28 @@ export const InputText = props => {
       </div>
     </InputContainer>
   );
+};
+
+InputText.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+      .isRequired
+  ),
+  uppercase: PropTypes.bool,
+  align: PropTypes.string,
+  prefix: PropTypes.string,
+  postfix: PropTypes.string,
+  multiple: PropTypes.bool,
+  funcDelete: PropTypes.func,
+  register: PropTypes.func.isRequired,
+  required: PropTypes.bool,
+  minLength: PropTypes.number,
+  maxLength: PropTypes.number,
+  isEmail: PropTypes.bool,
+  focused: PropTypes.bool,
+  autoComplete: PropTypes.bool,
+  disabled: PropTypes.bool
 };
