@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { MdClose } from 'react-icons/md';
 import { usePopper } from 'react-popper';
@@ -80,4 +81,32 @@ export const SelectDropdown = props => {
       )}
     </>
   );
+};
+
+SelectDropdown.propTypes = {
+  domRef: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool
+  ]),
+  isOpen: PropTypes.bool,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool
+      ]).isRequired,
+      label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool
+      ]).isRequired
+    })
+  ),
+  onChange: PropTypes.func.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+  funcDelete: PropTypes.func
 };

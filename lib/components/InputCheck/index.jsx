@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useId } from 'react';
 import { cn } from '../../utils/styles.js';
 import { InputContainer } from '../InputContainer';
@@ -38,4 +39,12 @@ export const InputCheck = props => {
       </div>
     </InputContainer>
   );
+};
+
+InputCheck.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  labelCheck: PropTypes.string,
+  register: PropTypes.func.isRequired
 };

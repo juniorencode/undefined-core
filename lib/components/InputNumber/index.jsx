@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
 import { cn } from '../../utils/styles';
 import { InputContainer } from '../InputContainer';
@@ -143,4 +144,26 @@ export const InputNumber = props => {
       </div>
     </InputContainer>
   );
+};
+
+InputNumber.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+      .isRequired
+  ),
+  align: PropTypes.string,
+  prefix: PropTypes.string,
+  postfix: PropTypes.string,
+  toString: PropTypes.any,
+  funcDelete: PropTypes.func,
+  register: PropTypes.func.isRequired,
+  required: PropTypes.bool,
+  minValue: PropTypes.number,
+  maxValue: PropTypes.number,
+  focused: PropTypes.bool,
+  autoComplete: PropTypes.bool,
+  disabled: PropTypes.bool
 };

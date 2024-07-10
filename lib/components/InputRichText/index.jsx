@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useRef, useEffect, useId } from 'react';
 import {
   ImBold,
@@ -14,13 +15,9 @@ import { InputSelect } from './InputSelect';
 import { Button } from './Button';
 import './styles.css';
 
-export const InputRichText = ({
-  className,
-  name,
-  label,
-  register,
-  required
-}) => {
+export const InputRichText = props => {
+  const { className, name, label, register, required } = props;
+
   const domId = useId();
   const contentEditableRef = useRef(null);
   const selectionRef = useRef(null);
@@ -321,4 +318,12 @@ export const InputRichText = ({
       </div>
     </InputContainer>
   );
+};
+
+InputRichText.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  register: PropTypes.func,
+  required: PropTypes.bool
 };

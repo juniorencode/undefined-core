@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoIosArrowDown, IoMdClose } from 'react-icons/io';
+import PropTypes from 'prop-types';
 import { cn } from '../../utils/styles';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
@@ -12,11 +13,11 @@ export const InputSelect = props => {
     label,
     options = [],
     firstValue,
+    callback,
+    funcDelete,
     toNumber,
     toBoolean,
     register,
-    callback,
-    funcDelete,
     required,
     multiple = true,
     ...params
@@ -174,4 +175,28 @@ export const InputSelect = props => {
       </div>
     </InputContainer>
   );
+};
+
+InputSelect.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool
+      ]).isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ),
+  firstValue: PropTypes.bool,
+  callback: PropTypes.func,
+  funcDelete: PropTypes.func,
+  toNumber: PropTypes.bool,
+  toBoolean: PropTypes.bool,
+  register: PropTypes.func.isRequired,
+  required: PropTypes.bool,
+  multiple: PropTypes.bool
 };

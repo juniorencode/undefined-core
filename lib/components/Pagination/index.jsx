@@ -2,7 +2,11 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
-const Pagination = ({ totalPages, currentPage, setCurrentPage = () => {} }) => {
+export const Pagination = ({
+  totalPages,
+  currentPage,
+  setCurrentPage = () => {}
+}) => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 640);
   let pagination = [];
 
@@ -150,5 +154,3 @@ Pagination.propTypes = {
   currentPage: PropTypes.number.isRequired,
   setCurrentPage: PropTypes.func
 };
-
-export { Pagination };

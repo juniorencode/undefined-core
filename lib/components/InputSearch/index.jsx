@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
 import { cn } from '../../utils/styles';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
@@ -67,7 +68,7 @@ export const InputSearch = props => {
     return str
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
+      .replace(/[.,#!$%&*;:{}=\-_`~()]/g, '')
       .toLowerCase();
   };
 
@@ -224,4 +225,33 @@ export const InputSearch = props => {
       </div>
     </InputContainer>
   );
+};
+
+InputSearch.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool
+      ]).isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ),
+  uppercase: PropTypes.bool,
+  align: PropTypes.string,
+  prefix: PropTypes.string,
+  postfix: PropTypes.string,
+  funcDelete: PropTypes.func,
+  register: PropTypes.func.isRequired,
+  required: PropTypes.bool,
+  minLength: PropTypes.number,
+  maxLength: PropTypes.number,
+  isEmail: PropTypes.bool,
+  focused: PropTypes.bool,
+  autoComplete: PropTypes.bool,
+  disabled: PropTypes.bool
 };

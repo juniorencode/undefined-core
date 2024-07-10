@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useId, useRef } from 'react';
 import { InputContainer } from '../InputContainer';
 import { cn } from '../../utils/styles';
@@ -5,8 +6,8 @@ import { cn } from '../../utils/styles';
 export const InputTextarea = props => {
   const {
     className,
-    label,
     name,
+    label,
     uppercase,
     register,
     required,
@@ -58,4 +59,17 @@ export const InputTextarea = props => {
       ></textarea>
     </InputContainer>
   );
+};
+
+InputTextarea.propTypes = {
+  className: PropTypes.string,
+  label: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  uppercase: PropTypes.bool,
+  register: PropTypes.func.isRequired,
+  required: PropTypes.bool,
+  minLength: PropTypes.number,
+  maxLength: PropTypes.number,
+  focused: PropTypes.bool,
+  disabled: PropTypes.bool
 };

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { cn } from '../../utils/styles';
 
 export const FormSection = props => {
@@ -33,4 +34,11 @@ export const FormSection = props => {
       </div>
     </div>
   );
+};
+
+FormSection.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  title: PropTypes.string,
+  box: PropTypes.bool
 };

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { cn } from '../../utils/styles.js';
 
 export const Card = props => {
@@ -14,4 +15,9 @@ export const Card = props => {
       {children}
     </div>
   );
+};
+
+Card.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string
 };

@@ -14,7 +14,8 @@ import {
   InputSwitch,
   DataTable,
   InputDate,
-  InputRichText
+  InputRichText,
+  Breadcrumb
 } from '../lib/main';
 import { useFilter } from '../lib/hooks/useFilter.hook';
 import { useEffect } from 'react';
@@ -373,6 +374,19 @@ const App = () => {
           <h1 className="text-4xl font-bold p-4 text-neutral-800 dark:text-white">
             Test Inputs
           </h1>
+          <div className="px-4">
+            <Breadcrumb
+              options={[
+                {
+                  label: 'Item1',
+                  url: 'https://google.com/'
+                },
+                {
+                  label: 'Item2'
+                }
+              ]}
+            />
+          </div>
           <DataForm form={Form}>
             <form
               className="flex flex-col gap-2"

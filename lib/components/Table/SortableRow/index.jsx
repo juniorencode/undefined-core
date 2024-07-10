@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BiSolidEdit } from 'react-icons/bi';
 import { FaFile, FaRegStar, FaRegTrashAlt, FaStar } from 'react-icons/fa';
 import { getHighlightedText } from '../../../utils/highlightedText.utilities.jsx';
-import Thumbnail from '../../Thumbnail/index.jsx';
+import { Thumbnail } from '../../Thumbnail';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { PiDotsSixVerticalBold } from 'react-icons/pi';
@@ -13,7 +13,7 @@ import {
 } from '../../../utils/time.utilities.js';
 import { useState } from 'react';
 
-const SortableRow = ({
+export const SortableRow = ({
   row,
   index,
   page = 1,
@@ -364,6 +364,7 @@ const SortableRow = ({
     </tr>
   );
 };
+
 SortableRow.propTypes = {
   index: PropTypes.number,
   row: PropTypes.object,
@@ -380,4 +381,3 @@ SortableRow.propTypes = {
   noSeqNum: PropTypes.bool,
   dndFunc: PropTypes.func
 };
-export { SortableRow };
