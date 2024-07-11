@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { FaHome, FaTable } from 'react-icons/fa';
-import { SiPlatformdotsh } from 'react-icons/si';
+import { FaBookOpen, FaHome, FaTable } from 'react-icons/fa';
 import { cn } from '../../lib/utils/styles';
 import { Navigation } from '../../lib/main';
 
 export const BaseLayout = ({ children }) => {
-  const [isCollapse, setIsCollapse] = useState(
-    localStorage.getItem('isCollapse') === 'true' || false
-  );
+  // const [isCollapse, setIsCollapse] = useState(
+  //   localStorage.getItem('isCollapse') === 'true' || false
+  // );
+  const [isCollapse, setIsCollapse] = useState(true);
 
   useEffect(() => {
     localStorage.setItem('isCollapse', isCollapse);
@@ -18,17 +18,17 @@ export const BaseLayout = ({ children }) => {
     {
       label: 'Inicio',
       path: '/',
-      icon: <FaHome />
+      icon: <FaHome size={16} />
     },
     {
       label: 'DataTable',
       path: '/table',
-      icon: <FaTable />
+      icon: <FaTable size={16} />
     },
     {
       label: 'DataForm',
       path: '/form',
-      icon: <SiPlatformdotsh />
+      icon: <FaBookOpen size={16} />
     }
   ];
 
@@ -42,7 +42,7 @@ export const BaseLayout = ({ children }) => {
         />
         <div
           className={cn('lg:ml-64 p-4 transition-all duration-300', {
-            'lg:ml-16': isCollapse
+            'lg:ml-[53px]': isCollapse
           })}
         >
           {children}
