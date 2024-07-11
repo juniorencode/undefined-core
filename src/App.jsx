@@ -89,16 +89,6 @@ const App = () => {
       type: 'users'
     },
     {
-      label: 'Estado',
-      attr: 'status',
-      type: 'status'
-    },
-    {
-      label: 'by',
-      attr: 'by',
-      type: 'by'
-    },
-    {
       label: 'files',
       attr: 'files',
       type: 'files'
@@ -107,6 +97,11 @@ const App = () => {
       label: 'filesIcon',
       attr: 'filesIcon',
       type: 'filesIcon'
+    },
+    {
+      label: 'Estado',
+      attr: 'status',
+      type: 'status'
     },
     {
       label: 'Fecha',
@@ -146,12 +141,12 @@ const App = () => {
         'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
       users: [
         {
-          label: 'radi',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         },
         {
-          label: 'radi2',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         }
@@ -159,10 +154,6 @@ const App = () => {
       link: {
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
         label: 'Link'
-      },
-      by: {
-        url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
-        label: 'Carlos Junior Ramos Vásquez'
       },
       files: [
         {
@@ -226,12 +217,12 @@ const App = () => {
         'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
       users: [
         {
-          label: 'radi',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         },
         {
-          label: 'radi2',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         }
@@ -239,10 +230,6 @@ const App = () => {
       link: {
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
         label: 'Link'
-      },
-      by: {
-        url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
-        label: 'Carlos Junior Ramos Vásquez'
       },
       files: [
         {
@@ -306,12 +293,12 @@ const App = () => {
         'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
       users: [
         {
-          label: 'radi',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         },
         {
-          label: 'radi2',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         }
@@ -319,10 +306,6 @@ const App = () => {
       link: {
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
         label: 'Link'
-      },
-      by: {
-        url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
-        label: 'Carlos Junior Ramos Vásquez'
       },
       files: [
         {

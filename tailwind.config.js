@@ -8,6 +8,12 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      boxShadow: {
+        'box-top': '0 -16px 60px 2px rgba(0, 0, 0, 0.2)',
+        left: '-16px 0 60px 2px rgba(0, 0, 0, 0.2)',
+        rigth: '16px 0 60px 2px rgba(0, 0, 0, 0.2)',
+        'box-bottom': '0 16px 60px 2px rgba(0, 0, 0, 0.2)'
+      },
       colors: {
         primary: {
           DEFAULT: '#14b8a6',
@@ -37,12 +43,6 @@ export default {
           900: '#0f172a',
           950: '#020617'
         }
-      },
-      boxShadow: {
-        'box-top': '0 -16px 60px 2px rgba(0, 0, 0, 0.2)',
-        left: '-16px 0 60px 2px rgba(0, 0, 0, 0.2)',
-        rigth: '16px 0 60px 2px rgba(0, 0, 0, 0.2)',
-        'box-bottom': '0 16px 60px 2px rgba(0, 0, 0, 0.2)'
       }
     }
   },
