@@ -18,7 +18,6 @@ import {
   Breadcrumb
 } from '../lib/main';
 import { useFilter } from '../lib/hooks/useFilter.hook';
-import { useEffect } from 'react';
 
 const App = () => {
   // const Form = useForm({
@@ -397,7 +396,10 @@ const App = () => {
                 name="select"
                 label="Select"
                 options={[
-                  { value: '1', label: 'gato' },
+                  {
+                    value: '1',
+                    label: 'gat}}}}}}}}}}}}}}}}}}}} }}}}}}}}}}}}}}}}}}}}}o'
+                  },
                   { value: '2', label: 'perro' },
                   { value: '3', label: 'sol' },
                   { value: '4', label: 'luna' },

@@ -83,7 +83,7 @@ export const InputText = props => {
 
   //multiple
   const handleInput = (e, isSelection) => {
-    if (separators.includes(e.nativeEvent.key) || isSelection) {
+    if (separators.includes(e.nativeEvent.key)) {
       const regex = new RegExp(`[${separators.join('')}]+`, 'g');
       const tag = e.target.value?.replace(regex, '').trim();
 

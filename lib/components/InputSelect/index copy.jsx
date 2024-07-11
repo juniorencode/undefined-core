@@ -19,7 +19,7 @@ export const InputSelect = props => {
     toBoolean,
     register,
     required,
-    multiple = true,
+    multiple = !true,
     ...params
   } = props;
 
@@ -83,6 +83,7 @@ export const InputSelect = props => {
       <div className="relative" ref={domRef}>
         <div
           className={cn(
+            // 'flex items-center justify-between p-2.5 w-full h-12 text-sm text-center border focus:ring-4 focus:ring-opacity-30 focus:dark:ring-opacity-40 rounded-lg outline-none transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white dark:placeholder-secondary-400 border-secondary-300 dark:border-secondary-600 focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-600 dark:focus:ring-primary-500',
             'flex items-center w-full justify-between border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400 p-2.5 min-h-12 sm:text-sm cursor-text',
             {
               'ring-4 ring-opacity-30 dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
@@ -94,10 +95,8 @@ export const InputSelect = props => {
           {...params}
         >
           {!multiple ? (
-            <div className="flex items-center justify-start pr-4 w-full h-full overflow-hidden">
-              <span className="truncate">
-                {options?.filter(item => item.value === value)[0]?.label || ''}
-              </span>
+            <div className="flex items-center justify-start pr-4 w-full h-full">
+              {options?.filter(item => item.value === value)[0]?.label || ''}
             </div>
           ) : (
             <>
@@ -105,17 +104,13 @@ export const InputSelect = props => {
                 {value?.map(elem => (
                   <li
                     key={elem}
-                    className="flex items-center pl-2 pr-1.5 py-0.5 rounded border bg-secondary-200 border-secondary-300 dark:bg-secondary-500 dark:border-secondary-400"
+                    className="flex items-center pl-2 pr-1.5 py-0.5 h-6 rounded border bg-secondary-200 border-secondary-300 dark:bg-secondary-500 dark:border-secondary-400"
                   >
                     {options.find(opt => opt.value === elem).label}
-
                     <button
                       className="ml-1 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
                       type="button"
-                      onClick={e => {
-                        e.stopPropagation();
-                        handleRemove(e, elem);
-                      }}
+                      onClick={e => handleRemove(e, elem)}
                     >
                       <IoMdClose />
                     </button>
@@ -133,15 +128,17 @@ export const InputSelect = props => {
                     'text-primary-500 dark:text-primary-500 rotate-180': isOpen
                   }
                 )}
-                size={16}
+                size={16} // Tamaño fijo para el ícono
               />
             </div>
           ) : value && value !== '' ? (
             <button
               className="text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
               type="button"
-              onClick={() => {
+              onClick={e => {
+                e.stopPropagation();
                 handleChange('');
+                setIsOpen(true);
               }}
             >
               <IoMdClose
@@ -163,12 +160,11 @@ export const InputSelect = props => {
                     'text-primary-500 dark:text-primary-500 rotate-180': isOpen
                   }
                 )}
-                size={16}
+                size={16} // Tamaño fijo para el ícono
               />
             </div>
           )}
         </div>
-
         <SelectDropdown
           domRef={domRef}
           name={name}

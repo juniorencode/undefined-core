@@ -25,7 +25,7 @@ export const InputSearch = props => {
     focused,
     autoComplete,
     disabled,
-    multiple = true,
+    multiple = !true,
     ...params
   } = props;
 
@@ -157,7 +157,7 @@ export const InputSearch = props => {
                 className="ml-1 mr-2.5 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
                 type="button"
                 onClick={() => {
-                  handleChange(undefined);
+                  handleChange('');
                   setSearch('');
                   setIsOpen(true);
                 }}
@@ -235,7 +235,6 @@ InputSearch.propTypes = {
       value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
-        PropTypes.array,
         PropTypes.bool
       ]).isRequired,
       label: PropTypes.string.isRequired
