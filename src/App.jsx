@@ -32,9 +32,6 @@ const App = () => {
   // });
   const Form = useForm();
   const { filter, setPage, setSearch } = useFilter();
-  // useEffect(() => {
-  //   Form.setForm({ text: ['hola', 'chau'] });
-  // }, []);
 
   Form.registerSubmit(form => {
     console.log(form);
@@ -133,7 +130,6 @@ const App = () => {
         deleted: false,
         createdAt: '2024-05-14T21:00:02.226Z',
         updatedAt: '2024-06-20T22:23:15.796Z',
-        __v: 0,
         url: 'https://api.juniorencode.com/public/1715720402222-slice5.jpg',
         id: '6643d0d2940ffd4bde14ac4c'
       },
@@ -166,7 +162,7 @@ const App = () => {
       },
       by: {
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
-        label: 'Link'
+        label: 'Carlos Junior Ramos Vásquez'
       },
       files: [
         {
@@ -214,7 +210,6 @@ const App = () => {
         deleted: false,
         createdAt: '2024-05-14T21:00:24.417Z',
         updatedAt: '2024-06-30T04:21:42.609Z',
-        __v: 0,
         url: 'https://api.juniorencode.com/public/1715720424204-slice3.mp4',
         id: '6643d0e8940ffd4bde14ac66'
       },
@@ -247,7 +242,7 @@ const App = () => {
       },
       by: {
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
-        label: 'Link'
+        label: 'Carlos Junior Ramos Vásquez'
       },
       files: [
         {
@@ -295,7 +290,6 @@ const App = () => {
         deleted: false,
         createdAt: '2024-05-14T21:00:02.226Z',
         updatedAt: '2024-06-20T22:23:15.796Z',
-        __v: 0,
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
         id: '6643d0d2940ffd4bde14ac4c'
       },
@@ -328,7 +322,7 @@ const App = () => {
       },
       by: {
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
-        label: 'Link'
+        label: 'Carlos Junior Ramos Vásquez'
       },
       files: [
         {

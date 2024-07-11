@@ -310,9 +310,14 @@ export const SortableRow = props => {
           case 'by':
             return (
               <td key={row.id + '_' + column.attr} className="px-4 py-2">
-                <div className="flex items-center">
-                  <img className="w-4 h-4" src={row[column.attr].url} />
-                  {getHighlightedText(row[column.attr].label, highlighted)}
+                <div className="flex items-center gap-2">
+                  <img
+                    className="w-5 h-5 rounded-full"
+                    src={row[column.attr].url}
+                  />
+                  <span className="whitespace-nowrap">
+                    {getHighlightedText(row[column.attr].label, highlighted)}
+                  </span>
                 </div>
               </td>
             );
