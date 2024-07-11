@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import {
   DndContext,
@@ -18,6 +18,7 @@ import {
 import { useAlert } from '../../hooks/useAlert.hook';
 import { Alert } from '../Alert';
 import { SortableRow } from './SortableRow';
+import { cn } from '../../utils/styles';
 
 export const Table = props => {
   const {
@@ -36,6 +37,32 @@ export const Table = props => {
   const AlertDelete = useAlert();
   const [currentId, setCurrentId] = useState(null);
   const [items, setItems] = useState([]);
+
+  const tableContainerRef = useRef(null);
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollLeft = tableContainerRef.current.scrollLeft;
+      const maxScrollLeft =
+        tableContainerRef.current.scrollWidth -
+        tableContainerRef.current.clientWidth;
+
+      setIsScrolling(scrollLeft < maxScrollLeft);
+    };
+
+    handleScroll();
+
+    const tableContainer = tableContainerRef.current;
+    tableContainer.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      tableContainer.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
   useEffect(() => {
     if (data || data.length) {
       const sortedData = [...data].sort((a, b) => a.order - b.order);
@@ -63,10 +90,6 @@ export const Table = props => {
           order: index + 1
         }));
       });
-      // const oldChange = items.find(item => item.id === active.id && item);
-      // const newChange = items.find(item => item.id === over.id && item);
-      // console.log(oldChange.order);
-      // dndFunc(oldChange.id, { ...oldChange, order: newChange.order });
     }
   };
 
@@ -100,9 +123,10 @@ export const Table = props => {
   return (
     <div
       className={clsx(
-        'relative overflow-auto border-t border-b dark:border-secondary-500',
+        'relative border-t border-b overflow-auto dark:border-secondary-500',
         className
       )}
+      ref={tableContainerRef}
     >
       <DndContext
         sensors={sensors}
@@ -134,7 +158,14 @@ export const Table = props => {
                   </th>
                 ))}
                 {(handleUpdate || handleDelete) && (
-                  <th className="px-4 py-4 w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 z-10 border-l border-secondary-200 dark:border-secondary-600">
+                  <th
+                    className={cn(
+                      'px-4 py-4 w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 z-10 border-l border-secondary-200 dark:border-secondary-600',
+                      {
+                        'border-l-4 dark:border-secondary-600': isScrolling
+                      }
+                    )}
+                  >
                     Acciones
                   </th>
                 )}
@@ -166,6 +197,7 @@ export const Table = props => {
                   handleDeleteEvent={handleDeleteEvent}
                   structure={structure}
                   dndFunc={dndFunc}
+                  isScrolling={isScrolling}
                 />
               ))}
             </tbody>

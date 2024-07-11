@@ -52,6 +52,7 @@ export const useForm = (initialForm = {}) => {
         setPending(false);
       }
     },
+    // eslint-disable-next-line
     [formData]
   );
 

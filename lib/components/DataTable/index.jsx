@@ -32,7 +32,7 @@ export const DataTable = props => {
               <IoIosSearch />
             </div>
             <input
-              className="block p-2 pl-10 w-full text-sm outline-none border focus:border-2 rounded-lg text-secondary-900 border-secondary-300 bg-secondary-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block p-2 pl-10 w-full text-sm outline-none border focus:border focus:ring-4 focus:ring-opacity-40 dark:focus:ring-opacity-40 rounded-lg text-secondary-900 border-secondary-300 bg-secondary-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               type="text"
               placeholder="Buscar..."
               value={filter.search}

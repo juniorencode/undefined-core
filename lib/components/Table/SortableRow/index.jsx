@@ -12,21 +12,25 @@ import {
   formatTimeCasual
 } from '../../../utils/time.utilities.js';
 import { useState } from 'react';
+import { cn } from '../../../utils/styles.js';
 
-export const SortableRow = ({
-  row,
-  index,
-  page = 1,
-  handleUpdate,
-  handleDelete,
-  handleFeature,
-  highlighted,
-  noSeqNum,
-  shortFileName,
-  structure,
-  handleDeleteEvent,
-  dndFunc
-}) => {
+export const SortableRow = props => {
+  const {
+    row,
+    index,
+    page = 1,
+    handleUpdate,
+    handleDelete,
+    handleFeature,
+    highlighted,
+    noSeqNum,
+    shortFileName,
+    structure,
+    handleDeleteEvent,
+    dndFunc,
+    isScrolling
+  } = props;
+
   const [isHovering, setIsHovering] = useState([null, null]);
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: row.id });
@@ -40,7 +44,7 @@ export const SortableRow = ({
     <tr
       ref={setNodeRef}
       style={style}
-      className="border-b group bg-white dark:bg-secondary-800 dark:border-secondary-700 hover:bg-[#fafafa] dark:hover:bg-[#313131]"
+      className="border-b group hover:filter hover:brightness-125 bg-white dark:bg-secondary-800 dark:border-secondary-700 hover:bg-[#fafafa] dark:hover:bg-secondary-800"
     >
       {dndFunc && (
         <td
@@ -191,7 +195,7 @@ export const SortableRow = ({
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="px-4 py-2 text-nowrap  "
+                className="px-4 py-2 text-nowrap"
                 // max-w-[500px] overflow-hidden
               >
                 {getHighlightedText(row[column.attr], highlighted)}
@@ -208,19 +212,18 @@ export const SortableRow = ({
             );
           case 'files':
             return (
-              <td
-                key={row.id + '_' + column.attr}
-                className="px-4 py-2 text-secondary-500 dark:text-secondary-300 text-nowrap"
-              >
+              <td key={row.id + '_' + column.attr} className="px-4 py-2">
                 {row[column.attr]?.map((item, indexCol) => (
                   <Link
                     key={indexCol}
-                    className="flex items-center gap-1 py-1 hover:text-primary-500"
+                    className="flex items-center gap-1 py-1 transition-all text-secondary-500 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-500"
                     to={item.url}
                     target="_blank"
                   >
                     <FaFile />
-                    {shortFileName(item.label)}
+                    <span className="text-nowrap">
+                      {shortFileName(item.label)}
+                    </span>
                   </Link>
                 ))}
               </td>
@@ -229,12 +232,12 @@ export const SortableRow = ({
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="relative px-4 text-secondary-500 dark:text-secondary-300 text-nowrap font-medium"
+                className="relative px-4 text-nowrap text-secondary-500 dark:text-secondary-300"
               >
                 {row[column.attr]?.map((item, indexItem) => (
                   <Link
                     key={indexItem}
-                    className="h-full hover:text-primary-500 relative"
+                    className="relative h-full transition-all text-secondary-500 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-500"
                     to={item.url}
                     target="_blank"
                     onMouseEnter={() =>
@@ -246,7 +249,7 @@ export const SortableRow = ({
                     {isHovering[0] === indexItem &&
                       isHovering[1] === indexColum &&
                       isHovering[2] === index && (
-                        <span className="absolute left-0 top-full mt-1 px-3 py-1 rounded-lg bg-black text-white text-sm z-10">
+                        <span className="absolute -top-full left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 mb-1 px-3 py-1 text-sm rounded-lg text-secondary-100 bg-secondary-600">
                           {shortFileName(item.label)}
                         </span>
                       )}
@@ -263,28 +266,15 @@ export const SortableRow = ({
                 <div className="flex flex-col">
                   {row[column.attr]?.map((item, index) => (
                     <div key={index} className="flex items-center gap-2 py-1">
-                      <div className="relative w-5 h-5 bg-secondary-100 dark:bg-secondary-600 rounded-full overflow-hidden">
-                        {!row[column.attr].photo ? (
-                          <svg
-                            className="absolute w-auto h-auto text-secondary-400 -bottom-1"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                              clipRule="evenodd"
-                            ></path>
-                          </svg>
-                        ) : (
+                      {item.photo && (
+                        <div className="relative w-5 h-5 bg-secondary-100 dark:bg-secondary-600 rounded-full overflow-hidden">
                           <img
                             className="w-5 h-5 rounded-full"
-                            src={item.image}
+                            src={item.photo}
                           />
-                        )}
-                      </div>
-                      {item.label}
+                        </div>
+                      )}
+                      <span className="text-nowrap">{item.label}</span>
                     </div>
                   ))}
                 </div>
@@ -300,15 +290,6 @@ export const SortableRow = ({
                     }`}
                   ></div>
                   {row[column.attr] ? 'Activo' : 'Inactivo'}
-                </div>
-              </td>
-            );
-          case 'by':
-            return (
-              <td key={row.id + '_' + column.attr} className="px-4 py-2">
-                <div className="flex items-center">
-                  <img className="w-4 h-4" src={row[column.attr].url} />
-                  {getHighlightedText(row[column.attr].label, highlighted)}
                 </div>
               </td>
             );
@@ -334,7 +315,14 @@ export const SortableRow = ({
         }
       })}
       {(handleUpdate || handleDelete) && (
-        <td className="px-4 py-2 sticky top-0 right-0 bg-white dark:bg-secondary-800 group-hover:bg-[#fafafa] group-hover:dark:bg-[#313131]">
+        <td
+          className={cn(
+            'px-4 py-2 sticky top-0 right-0 bg-white dark:bg-secondary-800 group-hover:bg-[#fafafa] group-hover:dark:bg-secondary-800',
+            {
+              'border-l-4 dark:border-secondary-600': isScrolling
+            }
+          )}
+        >
           <div className="flex gap-2 items-center justify-center">
             {handleUpdate && (
               <button
@@ -379,5 +367,6 @@ SortableRow.propTypes = {
   shortFileName: PropTypes.func,
   highlighted: PropTypes.string,
   noSeqNum: PropTypes.bool,
-  dndFunc: PropTypes.func
+  dndFunc: PropTypes.func,
+  isScrolling: PropTypes.bool
 };

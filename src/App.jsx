@@ -32,9 +32,6 @@ const App = () => {
   // });
   const Form = useForm();
   const { filter, setPage, setSearch } = useFilter();
-  // useEffect(() => {
-  //   Form.setForm({ text: ['hola', 'chau'] });
-  // }, []);
 
   Form.registerSubmit(form => {
     console.log(form);
@@ -92,16 +89,6 @@ const App = () => {
       type: 'users'
     },
     {
-      label: 'Estado',
-      attr: 'status',
-      type: 'status'
-    },
-    {
-      label: 'by',
-      attr: 'by',
-      type: 'by'
-    },
-    {
       label: 'files',
       attr: 'files',
       type: 'files'
@@ -110,6 +97,11 @@ const App = () => {
       label: 'filesIcon',
       attr: 'filesIcon',
       type: 'filesIcon'
+    },
+    {
+      label: 'Estado',
+      attr: 'status',
+      type: 'status'
     },
     {
       label: 'Fecha',
@@ -133,7 +125,6 @@ const App = () => {
         deleted: false,
         createdAt: '2024-05-14T21:00:02.226Z',
         updatedAt: '2024-06-20T22:23:15.796Z',
-        __v: 0,
         url: 'https://api.juniorencode.com/public/1715720402222-slice5.jpg',
         id: '6643d0d2940ffd4bde14ac4c'
       },
@@ -150,21 +141,17 @@ const App = () => {
         'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
       users: [
         {
-          label: 'radi',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         },
         {
-          label: 'radi2',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         }
       ],
       link: {
-        url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
-        label: 'Link'
-      },
-      by: {
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
         label: 'Link'
       },
@@ -214,7 +201,6 @@ const App = () => {
         deleted: false,
         createdAt: '2024-05-14T21:00:24.417Z',
         updatedAt: '2024-06-30T04:21:42.609Z',
-        __v: 0,
         url: 'https://api.juniorencode.com/public/1715720424204-slice3.mp4',
         id: '6643d0e8940ffd4bde14ac66'
       },
@@ -231,21 +217,17 @@ const App = () => {
         'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
       users: [
         {
-          label: 'radi',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         },
         {
-          label: 'radi2',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         }
       ],
       link: {
-        url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
-        label: 'Link'
-      },
-      by: {
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
         label: 'Link'
       },
@@ -295,7 +277,6 @@ const App = () => {
         deleted: false,
         createdAt: '2024-05-14T21:00:02.226Z',
         updatedAt: '2024-06-20T22:23:15.796Z',
-        __v: 0,
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
         id: '6643d0d2940ffd4bde14ac4c'
       },
@@ -312,21 +293,17 @@ const App = () => {
         'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
       users: [
         {
-          label: 'radi',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         },
         {
-          label: 'radi2',
+          label: 'Fabián Alexis Consilla Martinez',
           photo:
             'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp'
         }
       ],
       link: {
-        url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
-        label: 'Link'
-      },
-      by: {
         url: 'https://api.juniorencode.com/public/1720227595407-ima3ge-500x500.webp',
         label: 'Link'
       },
@@ -367,8 +344,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="absolute w-[100vw] min-h-[100vh] bg-secondary-100 dark:bg-secondary-900">
-        <div className="h-[60px]"></div>
-
+        <div className="h-[50px]"></div>
         <Card className="m-4">
           <h1 className="text-4xl font-bold p-4 text-neutral-800 dark:text-white">
             Test Inputs
@@ -444,6 +420,7 @@ const App = () => {
                   'río',
                   'mentalista'
                 ]}
+                multiple
                 register={Form.register}
                 // required
               />

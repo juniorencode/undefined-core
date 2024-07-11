@@ -74,7 +74,7 @@ export const Pagination = ({
           <button
             className={`flex items-center justify-center px-4 w-11 h-10 leading-tight ${
               currentPage === 1
-                ? 'relative z-10 text-blue-600 border border-blue-300 bg-blue-50 dark:border-secondary-700 dark:bg-secondary-700 dark:text-white'
+                ? 'relative z-10 text-primary-600 border border-primary-300 bg-primary-50 dark:border-secondary-700 dark:bg-secondary-700 dark:text-white'
                 : 'text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white'
             }`}
             onClick={() => setCurrentPage(1)}
@@ -97,7 +97,7 @@ export const Pagination = ({
             <button
               className={`flex items-center justify-center px-4 w-11 h-10 leading-tight ${
                 currentPage === page
-                  ? 'relative z-50 text-blue-600 border border-blue-300 bg-blue-50 dark:border-secondary-700 dark:bg-secondary-700 dark:text-white'
+                  ? 'relative z-50 text-primary-600 border border-primary-300 bg-primary-50 dark:border-secondary-700 dark:bg-secondary-700 dark:text-white'
                   : 'text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white'
               }`}
               onClick={() => setCurrentPage(page)}
@@ -122,7 +122,7 @@ export const Pagination = ({
             <button
               className={`flex items-center justify-center px-4 w-11 h-10 leading-tight ${
                 currentPage === totalPages
-                  ? 'relative z-50 text-blue-600 border border-blue-300 bg-blue-50 dark:border-secondary-700 dark:bg-secondary-700 dark:text-white'
+                  ? 'relative z-50 text-primary-600 border border-primary-300 bg-primary-50 dark:border-secondary-700 dark:bg-secondary-700 dark:text-white'
                   : 'text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white'
               }`}
               onClick={() => setCurrentPage(totalPages)}

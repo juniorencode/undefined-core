@@ -11,6 +11,7 @@ export const SelectDropdown = props => {
     value,
     isOpen,
     options = [],
+    onClick,
     onChange,
     setIsOpen,
     funcDelete
@@ -48,7 +49,10 @@ export const SelectDropdown = props => {
                   type="radio"
                   value={item.value}
                   onChange={onChange}
-                  onClick={() => setIsOpen(!isOpen)}
+                  onClick={() => {
+                    setIsOpen(!isOpen);
+                    onClick && onClick();
+                  }}
                   checked={item.value === value}
                 />
                 <label
@@ -92,7 +96,7 @@ SelectDropdown.propTypes = {
     PropTypes.number,
     PropTypes.bool
   ]),
-  isOpen: PropTypes.bool,
+  isOpen: PropTypes.bool.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.oneOfType([
@@ -107,6 +111,7 @@ SelectDropdown.propTypes = {
       ]).isRequired
     })
   ),
+  onClick: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   setIsOpen: PropTypes.func.isRequired,
   funcDelete: PropTypes.func
