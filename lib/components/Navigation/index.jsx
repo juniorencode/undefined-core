@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 
 export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
   const [isHovering, setIsHovering] = useState(null);
@@ -13,7 +13,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
   return (
     <div
       className={cn(
-        'fixed top-0 left-0 z-20 w-screen lg:w-64 h-screen transition-none duration-0 lg:transition-[width] lg:duration-300 bg-opacity-50 dark:bg-opacity-90 bg-secondary-900',
+        'fixed top-0 left-0 z-20 w-screen lg:w-64 h-screen transition-none duration-0 bg-opacity-50 dark:bg-opacity-90 bg-secondary-900',
         {
           'hidden lg:flex lg:w-16': isCollapse
         }
@@ -22,7 +22,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
     >
       <aside
         className={cn(
-          'w-64 lg:w-64 h-full border-r transform transition-[width] duration-300 bg-white dark:bg-secondary-800 border-secondary-200 dark:border-secondary-700',
+          'w-64 lg:w-64 h-full border-r transform bg-white dark:bg-secondary-800 border-secondary-200 dark:border-secondary-700',
           {
             'lg:w-[53px]': isCollapse
           }

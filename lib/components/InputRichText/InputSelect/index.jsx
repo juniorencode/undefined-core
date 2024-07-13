@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { usePopper } from 'react-popper';
 import { IoIosArrowDown } from 'react-icons/io';
-import { cn } from '../../../utils/styles';
+import { cn } from '../../../utilities/styles.utilities';
 import { useClickOutside } from '../../../hooks/useClickOutside.hook';
 
 export const InputSelect = props => {
@@ -51,9 +51,9 @@ export const InputSelect = props => {
       {options.length > 0 && isOpen && (
         <div
           className={cn(
-            'absolute top-full z-20 my-2 w-full border rounded-lg shadow-box-top bg-secondary-200 dark:bg-secondary-800 border-neutral-300 dark:border-neutral-800 dark:shadow-neutral-900',
+            'absolute top-full z-20 my-2 w-full border rounded-lg shadow-top bg-secondary-200 dark:bg-secondary-800 border-neutral-300 dark:border-neutral-800',
             {
-              'shadow-box-bottom':
+              'shadow-bottom':
                 !attributes.popper?.['data-popper-placement'].startsWith('top')
             }
           )}

@@ -56,10 +56,10 @@ export const Pagination = ({
 
   return (
     <nav>
-      <ul className="flex items-center -space-x-px h-10 text-base">
+      <ul className="flex items-center -space-x-px h-10 text-sm">
         <li>
           <button
-            className="flex items-center justify-center px-4 w-11 h-10 ms-0 leading-tight rounded-s-lg border text-secondary-500 bg-white border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white disabled:bg-secondary-100 disabled:text-secondary-400 disabled:border-secondary-300 dark:disabled:border-secondary-700 dark:disabled:text-secondary-700 dark:disabled:bg-secondary-800 dark:disabled:hover:text-secondary-700 dark:disabled:hover:bg-secondary-800"
+            className="flex items-center justify-center w-10 h-9 ms-0 leading-tight rounded-s-lg border text-secondary-500 bg-white border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white disabled:bg-secondary-100 disabled:text-secondary-400 disabled:border-secondary-300 dark:disabled:border-secondary-700 dark:disabled:text-secondary-700 dark:disabled:bg-secondary-800 dark:disabled:hover:text-secondary-700 dark:disabled:hover:bg-secondary-800"
             disabled={currentPage - 1 < 1}
             onClick={() => {
               if (currentPage > 1) {
@@ -72,7 +72,7 @@ export const Pagination = ({
         </li>
         <li>
           <button
-            className={`flex items-center justify-center px-4 w-11 h-10 leading-tight ${
+            className={`flex items-center justify-center w-10 h-9 leading-tight ${
               currentPage === 1
                 ? 'relative z-10 text-primary-600 border border-primary-300 bg-primary-50 dark:border-secondary-700 dark:bg-secondary-700 dark:text-white'
                 : 'text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white'
@@ -85,7 +85,7 @@ export const Pagination = ({
         {totalPages > 7 && pagination[0] !== 2 && (
           <li>
             <button
-              className="flex items-center justify-center px-4 w-11 h-10 leading-tight text-secondary-500 bg-white border border-secondary-300 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400"
+              className="flex items-center justify-center w-10 h-9 leading-tight text-secondary-500 bg-white border border-secondary-300 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400"
               disabled
             >
               ...
@@ -95,7 +95,7 @@ export const Pagination = ({
         {pagination.map(page => (
           <li key={page}>
             <button
-              className={`flex items-center justify-center px-4 w-11 h-10 leading-tight ${
+              className={`flex items-center justify-center w-10 h-9 leading-tight ${
                 currentPage === page
                   ? 'relative z-50 text-primary-600 border border-primary-300 bg-primary-50 dark:border-secondary-700 dark:bg-secondary-700 dark:text-white'
                   : 'text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white'
@@ -110,7 +110,7 @@ export const Pagination = ({
           pagination[pagination.length - 1] !== totalPages - 1 && (
             <li>
               <button
-                className="flex items-center justify-center px-4 w-11 h-10 leading-tight text-secondary-500 bg-white border border-secondary-300 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400"
+                className="flex items-center justify-center w-10 h-9 leading-tight text-secondary-500 bg-white border border-secondary-300 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400"
                 disabled
               >
                 ...
@@ -120,7 +120,7 @@ export const Pagination = ({
         <li>
           {totalPages > 1 && (
             <button
-              className={`flex items-center justify-center px-4 w-11 h-10 leading-tight ${
+              className={`flex items-center justify-center w-10 h-9 leading-tight ${
                 currentPage === totalPages
                   ? 'relative z-50 text-primary-600 border border-primary-300 bg-primary-50 dark:border-secondary-700 dark:bg-secondary-700 dark:text-white'
                   : 'text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white'
@@ -133,7 +133,7 @@ export const Pagination = ({
         </li>
         <li>
           <button
-            className="flex items-center justify-center px-4 w-11 h-10 leading-tight rounded-e-lg border text-secondary-500 bg-white border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white disabled:bg-secondary-100 disabled:text-secondary-400 disabled:border-secondary-300 dark:disabled:border-secondary-700 dark:disabled:text-secondary-700 dark:disabled:bg-secondary-800 dark:disabled:hover:text-secondary-700 dark:disabled:hover:bg-secondary-800"
+            className="flex items-center justify-center w-10 h-9 leading-tight rounded-e-lg border text-secondary-500 bg-white border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white disabled:bg-secondary-100 disabled:text-secondary-400 disabled:border-secondary-300 dark:disabled:border-secondary-700 dark:disabled:text-secondary-700 dark:disabled:bg-secondary-800 dark:disabled:hover:text-secondary-700 dark:disabled:hover:bg-secondary-800"
             disabled={currentPage + 1 > totalPages}
             onClick={() => {
               if (currentPage < totalPages) {

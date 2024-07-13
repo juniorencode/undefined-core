@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { MdClose } from 'react-icons/md';
 import { usePopper } from 'react-popper';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 
 export const SelectDropdown = props => {
   const {
@@ -28,9 +28,9 @@ export const SelectDropdown = props => {
       {options.length > 0 && isOpen && (
         <div
           className={cn(
-            'listbox absolute top-full z-20 my-2 w-full border rounded-lg shadow-box-top bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 dark:shadow-neutral-900',
+            'listbox absolute top-full z-20 my-2 w-full border rounded-lg shadow-top bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
             {
-              'shadow-box-bottom':
+              'shadow-bottom':
                 !attributes.popper?.['data-popper-placement'].startsWith('top')
             }
           )}

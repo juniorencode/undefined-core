@@ -18,7 +18,7 @@ import {
 import { useAlert } from '../../hooks/useAlert.hook';
 import { Alert } from '../Alert';
 import { SortableRow } from './SortableRow';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 
 export const Table = props => {
   const {
@@ -51,7 +51,7 @@ export const Table = props => {
       setIsScrolling(scrollLeft < maxScrollLeft);
     };
 
-    handleScroll();
+    setTimeout(handleScroll, 1);
 
     const tableContainer = tableContainerRef.current;
     tableContainer.addEventListener('scroll', handleScroll);
@@ -138,10 +138,10 @@ export const Table = props => {
             <thead className="text-xs uppercase text-secondary-500 dark:text-secondary-400">
               <tr className="sticky top-0 left-0 z-10 bg-secondary-100 dark:bg-secondary-700">
                 {dndFunc && (
-                  <th className="px-4 py-4 w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10"></th>
+                  <th className="px-4 py-3 tracking-wider w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10"></th>
                 )}
                 {!noSeqNum && (
-                  <th className="px-4 py-4 w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10">
+                  <th className="px-4 py-3 tracking-wider w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10">
                     #
                   </th>
                 )}
@@ -150,8 +150,8 @@ export const Table = props => {
                     key={column.attr}
                     className={
                       column.attr === 'photo'
-                        ? 'px-4 py-4 w-12 font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-l border-secondary-200 dark:border-secondary-600'
-                        : 'px-4 py-4 font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-l border-secondary-200 dark:border-secondary-600'
+                        ? 'px-4 py-3 tracking-wider w-12 font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-l border-secondary-200 dark:border-secondary-600'
+                        : 'px-4 py-3 tracking-wider font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-l border-secondary-200 dark:border-secondary-600'
                     }
                   >
                     {column.label}
@@ -160,9 +160,9 @@ export const Table = props => {
                 {(handleUpdate || handleDelete) && (
                   <th
                     className={cn(
-                      'px-4 py-4 w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 z-10 border-l border-secondary-200 dark:border-secondary-600',
+                      'px-4 py-3 tracking-wider w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 z-10 border-l border-secondary-200 dark:border-secondary-600',
                       {
-                        'border-l-4 dark:border-secondary-600': isScrolling
+                        'border-special': isScrolling
                       }
                     )}
                   >

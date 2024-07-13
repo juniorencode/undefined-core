@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 import { InputContainer } from '../InputContainer';
 import { SelectDropdown } from '../SelectDropdown';
 

@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { useEffect, useState, useCallback } from 'react';
 import { usePopper } from 'react-popper';
 import { FaCalendar } from 'react-icons/fa';
-import { cn } from '../../utils/styles';
-import { monthNames } from '../../utils/time';
+import { cn } from '../../utilities/styles.utilities';
+import { nameOfMonths } from '../../utilities/time.utilities';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { Calendar } from './Calendar';
@@ -37,7 +37,7 @@ export const InputDate = props => {
   const formatDate = useCallback(string => {
     if (!string) return;
     const date = new Date(string);
-    const month = monthNames[date.getMonth()];
+    const month = nameOfMonths[date.getMonth()];
     const day = date.getDate();
     const year = date.getFullYear();
     return `${month} ${day}, ${year}`;
@@ -74,9 +74,9 @@ export const InputDate = props => {
         {isOpen && (
           <div
             className={cn(
-              'absolute top-full left-0 z-50 inline-block my-2 p-4 h-96 border rounded-lg shadow-box-top bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 dark:shadow-neutral-900',
+              'absolute top-full left-0 z-50 inline-block my-2 p-4 h-96 border rounded-lg shadow-top bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
               {
-                'shadow-box-bottom':
+                'shadow-bottom':
                   !attributes.popper?.['data-popper-placement'].startsWith(
                     'top'
                   )

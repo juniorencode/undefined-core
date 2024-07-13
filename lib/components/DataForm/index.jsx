@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 import { Button } from '../Button';
 
 export const DataForm = props => {

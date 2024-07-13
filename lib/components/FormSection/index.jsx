@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 
 export const FormSection = props => {
   const { children, className, title, box } = props;

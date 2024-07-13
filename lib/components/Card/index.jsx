@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { cn } from '../../utils/styles.js';
+import { cn } from '../../utilities/styles.utilities';
 
 export const Card = props => {
   const { children, className, ...params } = props;

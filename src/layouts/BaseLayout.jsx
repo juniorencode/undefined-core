@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { FaBookOpen, FaHome, FaTable } from 'react-icons/fa';
-import { cn } from '../../lib/utils/styles';
+import { cn } from '../../lib/utilities/styles.utilities';
 import { Navigation } from '../../lib/main';
 
 export const BaseLayout = ({ children }) => {
-  // const [isCollapse, setIsCollapse] = useState(
-  //   localStorage.getItem('isCollapse') === 'true' || false
-  // );
-  const [isCollapse, setIsCollapse] = useState(true);
+  const [isCollapse, setIsCollapse] = useState(
+    localStorage.getItem('isCollapse') === 'true' || false
+  );
 
   useEffect(() => {
     localStorage.setItem('isCollapse', isCollapse);
@@ -18,17 +17,17 @@ export const BaseLayout = ({ children }) => {
     {
       label: 'Inicio',
       path: '/',
-      icon: <FaHome size={16} />
+      icon: <FaHome size={18} />
     },
     {
       label: 'DataTable',
       path: '/table',
-      icon: <FaTable size={16} />
+      icon: <FaTable size={18} />
     },
     {
       label: 'DataForm',
       path: '/form',
-      icon: <FaBookOpen size={16} />
+      icon: <FaBookOpen size={18} />
     }
   ];
 

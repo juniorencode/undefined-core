@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 
 export const Button = props => {
   const { children, className, type = 'button', to, color, ...params } = props;

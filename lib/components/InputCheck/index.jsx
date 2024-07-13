@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useId } from 'react';
-import { cn } from '../../utils/styles.js';
+import { cn } from '../../utilities/styles.utilities';
 import { InputContainer } from '../InputContainer';
 
 export const InputCheck = props => {

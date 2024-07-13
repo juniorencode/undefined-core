@@ -11,7 +11,7 @@ export const Breadcrumb = props => {
       <ol className="inline-flex items-center space-x-1.5 rtl:space-x-reverse">
         <li className="inline-flex items-center">
           <Link
-            className="inline-flex gap-2 items-center md:ms-2 text-xs font-medium text-secondary-700 hover:text-primary-600 dark:text-secondary-400 dark:hover:text-primary-400"
+            className="inline-flex gap-2 items-center text-xs font-medium text-secondary-700 hover:text-primary-600 dark:text-secondary-400 dark:hover:text-primary-400"
             to="/"
           >
             <FaHome size={15} />
