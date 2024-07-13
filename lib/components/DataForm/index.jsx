@@ -16,7 +16,7 @@ export const DataForm = props => {
     <>
       <div
         className={cn(
-          'flex flex-col gap-2 mt-2 p-4 max-h-[calc(100vh_-_255px)] overflow-auto scroll-container',
+          'flex flex-col gap-2 mt-2 p-4 max-h-[calc(100vh_-_195px)] overflow-auto scroll-container',
           {
             'max-h-[calc(100vh_-_220px)]': modal
           },

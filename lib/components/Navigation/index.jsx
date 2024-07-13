@@ -51,6 +51,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
               </span>
             </NavLink>
           </div>
+          <hr className="my-4 border-secondary-600" />
           <ul className="flex flex-col gap-2 text-xl">
             {options.map((menuItem, index) => (
               <li key={index}>
@@ -73,7 +74,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
                   </div>
                   <span
                     className={cn(
-                      'text-base text-left rtl:text-right text-nowrap',
+                      'text-sm text-left rtl:text-right text-nowrap',
                       {
                         'lg:absolute lg:hidden': isCollapse,
                         'lg:left-full lg:block lg:ml-2 lg:px-3 lg:py-1 lg:rounded-lg lg:text-white lg:bg-black':

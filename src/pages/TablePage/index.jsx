@@ -1,9 +1,4 @@
-import {
-  useFilter,
-  BaseLayout,
-  Breadcrumb,
-  DataTable
-} from '../../../lib/main';
+import { useFilter, DataTableLayout } from '../../../lib/main';
 import Data from './data.json';
 
 export const TablePage = () => {
@@ -11,6 +6,16 @@ export const TablePage = () => {
     page: { size: 20 },
     search: 'Hello World..!!'
   });
+
+  const breadcrumb = [
+    {
+      label: 'Item1',
+      url: 'https://google.com/'
+    },
+    {
+      label: 'Item2'
+    }
+  ];
 
   const structure = [
     {
@@ -316,44 +321,32 @@ export const TablePage = () => {
   //   }
   // ];
 
+  const pagination = {
+    currentPage: 1,
+    limit: 50,
+    from: 1,
+    to: 8,
+    total: 15000,
+    totalPages: 1
+  };
+
   return (
-    <BaseLayout>
-      <div className="mb-2">
-        <Breadcrumb
-          options={[
-            {
-              label: 'Item1',
-              url: 'https://google.com/'
-            },
-            {
-              label: 'Item2'
-            }
-          ]}
-        />
-      </div>
-      <DataTable
-        title="Contabilidad"
-        structure={structure}
-        data={Data.data}
-        filter={filter}
-        pagination={{
-          currentPage: 1,
-          limit: 50,
-          from: 1,
-          to: 8,
-          total: 15000,
-          totalPages: 1
-        }}
-        setDate={setDate}
-        setPage={setPage}
-        setSearch={setSearch}
-        handleCreate={() => console.log('cr')}
-        handleUpdate={() => console.log('up')}
-        handleDelete={() => console.log('de')}
-        handleExport={() => console.log('ex')}
-        handleFeature={() => console.log('fe')}
-        dndFunc={() => console.log('dnd')}
-      />
-    </BaseLayout>
+    <DataTableLayout
+      breadcrumb={breadcrumb}
+      title="Contabilidad"
+      structure={structure}
+      data={Data.data}
+      filter={filter}
+      pagination={pagination}
+      setDate={setDate}
+      setPage={setPage}
+      setSearch={setSearch}
+      handleCreate={() => console.log('cr')}
+      handleUpdate={() => console.log('up')}
+      handleDelete={() => console.log('de')}
+      handleExport={() => console.log('ex')}
+      handleFeature={() => console.log('fe')}
+      dndFunc={() => console.log('dnd')}
+    />
   );
 };
