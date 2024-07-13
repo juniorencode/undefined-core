@@ -27,7 +27,7 @@ export const DatePickerRange = ({
   const [iniDateHover, setIniDateHover] = useState('');
   const [endDateHover, setEndDateHover] = useState('');
 
-  const [leftCalendar, setLeftCalendar] = useState(changeMonth(getDate(), 1));
+  const [leftCalendar, setLeftCalendar] = useState(changeMonth(getDate(), -1));
   const [rightCalendar, setRightCalendar] = useState(getDate());
 
   const openBox = side => {

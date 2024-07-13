@@ -1,9 +1,16 @@
-import { BaseLayout } from '../../layouts/BaseLayout';
-import { useFilter, Breadcrumb, DataTable } from '../../../lib/main';
+import {
+  useFilter,
+  BaseLayout,
+  Breadcrumb,
+  DataTable
+} from '../../../lib/main';
 import Data from './data.json';
 
 export const TablePage = () => {
-  const { filter, setPage, setSearch } = useFilter();
+  const { filter, setDate, setPage, setSearch } = useFilter({
+    page: { size: 20 },
+    search: 'Hello World..!!'
+  });
 
   const structure = [
     {
@@ -337,6 +344,7 @@ export const TablePage = () => {
           total: 15000,
           totalPages: 1
         }}
+        setDate={setDate}
         setPage={setPage}
         setSearch={setSearch}
         handleCreate={() => console.log('cr')}

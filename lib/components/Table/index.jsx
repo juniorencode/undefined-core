@@ -138,7 +138,7 @@ export const Table = props => {
             <thead className="text-xs uppercase text-secondary-500 dark:text-secondary-400">
               <tr className="sticky top-0 left-0 z-10 bg-secondary-100 dark:bg-secondary-700">
                 {dndFunc && (
-                  <th className="px-4 py-3 tracking-wider w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10"></th>
+                  <th className="px-4 py-3 tracking-wider w-1 font-medium border-r bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-secondary-200 dark:border-secondary-600"></th>
                 )}
                 {!noSeqNum && (
                   <th className="px-4 py-3 tracking-wider w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10">

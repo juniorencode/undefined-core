@@ -14,6 +14,7 @@ export const DataTable = props => {
     data,
     pagination,
     filter,
+    setDate,
     setPage,
     setSearch,
     handleCreate,
@@ -59,7 +60,11 @@ export const DataTable = props => {
                 onChange={setSearch}
               />
             </div>
-            <Filter />
+            <Filter
+              iniDate={filter.ini}
+              endDate={filter.end}
+              setDate={setDate}
+            />
           </div>
         </div>
         <Table
@@ -94,6 +99,7 @@ DataTable.propTypes = {
   data: PropTypes.array,
   pagination: PropTypes.object,
   filter: PropTypes.object,
+  setDate: PropTypes.func,
   setPage: PropTypes.func,
   setSearch: PropTypes.func,
   handleCreate: PropTypes.func,

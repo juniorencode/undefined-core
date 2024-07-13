@@ -6,7 +6,8 @@ import {
   getDate,
   nameOfMonths,
   shortNameOfWeekdays,
-  setDay
+  setDay,
+  convertDatetoEnd
 } from '../../../utilities/time.utilities';
 
 export const Calendar = ({
@@ -40,7 +41,7 @@ export const Calendar = ({
       new Date(endDate) < new Date(selectedDate)
     ) {
       setToggleCalendar('right');
-      setEndDate(selectedDate);
+      setEndDate(convertDatetoEnd(selectedDate));
     } else if (
       toggleCalendar === 'left' ||
       new Date(iniDate) > new Date(selectedDate)
@@ -49,7 +50,7 @@ export const Calendar = ({
       setIniDate(selectedDate);
     } else {
       setToggleCalendar('');
-      setEndDate(selectedDate);
+      setEndDate(convertDatetoEnd(selectedDate));
       setIniDateHover('');
       setEndDateHover('');
     }

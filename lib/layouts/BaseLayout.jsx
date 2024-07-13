@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { FaBookOpen, FaHome, FaTable } from 'react-icons/fa';
 import { cn } from '../../lib/utilities/styles.utilities';
 import { Navigation } from '../../lib/main';
+import { navigation } from '../utilities/navigation.utilities';
 
 export const BaseLayout = ({ children }) => {
   const [isCollapse, setIsCollapse] = useState(
@@ -13,29 +13,11 @@ export const BaseLayout = ({ children }) => {
     localStorage.setItem('isCollapse', isCollapse);
   }, [isCollapse]);
 
-  const options = [
-    {
-      label: 'Inicio',
-      path: '/',
-      icon: <FaHome size={18} />
-    },
-    {
-      label: 'DataTable',
-      path: '/table',
-      icon: <FaTable size={18} />
-    },
-    {
-      label: 'DataForm',
-      path: '/form',
-      icon: <FaBookOpen size={18} />
-    }
-  ];
-
   return (
     <div className="flex flex-col h-screen dark:bg-secondary-900">
       <div>
         <Navigation
-          options={options}
+          options={navigation}
           isCollapse={isCollapse}
           setIsCollapse={setIsCollapse}
         />
