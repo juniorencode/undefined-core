@@ -22,8 +22,8 @@ export const BaseLayout = ({ children }) => {
           setIsCollapse={setIsCollapse}
         />
         <div
-          className={cn('lg:ml-64 p-4 transition-all duration-300', {
-            'lg:ml-[53px]': isCollapse
+          className={cn('sm:ml-64 p-4 transition-all duration-300', {
+            'sm:ml-[53px]': isCollapse
           })}
         >
           {children}

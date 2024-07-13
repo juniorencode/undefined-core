@@ -57,7 +57,7 @@ export const DatePreset = ({ iniDate, endDate, setDate }) => {
   };
 
   return (
-    <ul className="flex items-center justify-center gap-4 w-[320px] text-nowrap last:border-l border-secondary-600">
+    <ul className="hidden lg:flex items-center justify-center gap-4 w-[320px] text-nowrap border-r border-secondary-600">
       <li>
         <button
           className={cn('text-sm text-secondary-400 hover:text-secondary-100', {

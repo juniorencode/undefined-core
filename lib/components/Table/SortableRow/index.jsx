@@ -18,7 +18,8 @@ export const SortableRow = props => {
   const {
     row,
     index,
-    page = 1,
+    size,
+    page,
     handleUpdate,
     handleDelete,
     handleFeature,
@@ -57,7 +58,7 @@ export const SortableRow = props => {
       )}
       {!noSeqNum && (
         <td className="items-center px-4 py-1.5 font-semibold whitespace-nowrap border-b text-secondary-900 dark:text-white dark:border-transparent">
-          {(page - 1) * 50 + (index + 1)}
+          {(page - 1) * size + (index + 1)}
         </td>
       )}
       {structure.map((column, indexColum) => {
@@ -380,6 +381,7 @@ SortableRow.propTypes = {
   className: PropTypes.string,
   structure: PropTypes.array,
   data: PropTypes.array,
+  size: PropTypes.number,
   page: PropTypes.number,
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,

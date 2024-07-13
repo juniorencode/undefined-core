@@ -43,6 +43,7 @@ export const DataTable = props => {
         className="h-[calc(100vh_-_15rem)]"
         structure={structure}
         data={data}
+        size={filter.page.size}
         page={filter.page.number}
         handleUpdate={handleUpdate}
         handleDelete={handleDelete}

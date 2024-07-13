@@ -40,10 +40,7 @@ export const DatePickerRange = ({
   }, [endDate]);
 
   return (
-    <div
-      ref={domDatePickerRange}
-      className="relative flex items-center last:border-l border-secondary-600"
-    >
+    <div ref={domDatePickerRange} className="relative flex items-center">
       <ul className="flex items-center gap-1 px-4 text-sm text-secondary-400">
         <li>De</li>
         <li>

@@ -13,18 +13,18 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
   return (
     <div
       className={cn(
-        'fixed top-0 left-0 z-20 w-screen lg:w-64 h-screen transition-none duration-0 bg-opacity-50 dark:bg-opacity-90 bg-secondary-900',
+        'fixed top-0 left-0 z-20 w-screen sm:w-64 h-screen transition-none duration-0 bg-opacity-50 dark:bg-opacity-90 bg-secondary-900',
         {
-          'hidden lg:flex lg:w-16': isCollapse
+          'hidden sm:flex sm:w-16': isCollapse
         }
       )}
       onClick={handleShowHiden}
     >
       <aside
         className={cn(
-          'w-64 lg:w-64 h-full border-r transform bg-white dark:bg-secondary-800 border-secondary-200 dark:border-secondary-700',
+          'w-64 sm:w-64 h-full border-r transform bg-white dark:bg-secondary-800 border-secondary-200 dark:border-secondary-700',
           {
-            'lg:w-[53px]': isCollapse
+            'sm:w-[53px]': isCollapse
           }
         )}
       >
@@ -43,7 +43,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
                 className={cn(
                   'p-2 text-xl text-nowrap font-semibold text-white',
                   {
-                    'lg:hidden': isCollapse
+                    'sm:hidden': isCollapse
                   }
                 )}
               >
@@ -76,8 +76,8 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
                     className={cn(
                       'text-sm text-left rtl:text-right text-nowrap',
                       {
-                        'lg:absolute lg:hidden': isCollapse,
-                        'lg:left-full lg:block lg:ml-2 lg:px-3 lg:py-1 lg:rounded-lg lg:text-white lg:bg-black':
+                        'sm:absolute sm:hidden': isCollapse,
+                        'sm:left-full sm:block sm:ml-2 sm:px-3 sm:py-1 sm:rounded-lg sm:text-white sm:bg-black':
                           isHovering === index && isCollapse
                       }
                     )}

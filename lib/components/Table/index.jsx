@@ -25,6 +25,7 @@ export const Table = props => {
     className,
     structure = [],
     data = [],
+    size = 50,
     page = 1,
     noSeqNum,
     highlighted,
@@ -187,7 +188,8 @@ export const Table = props => {
                   key={row.id || index}
                   row={row}
                   index={index}
-                  page={page || 1}
+                  size={size}
+                  page={page}
                   handleUpdate={handleUpdate}
                   handleDelete={handleDelete}
                   handleFeature={handleFeature}
@@ -217,6 +219,7 @@ Table.propTypes = {
   className: PropTypes.string,
   structure: PropTypes.array,
   data: PropTypes.array,
+  size: PropTypes.number,
   page: PropTypes.number,
   noSeqNum: PropTypes.bool,
   highlighted: PropTypes.string,
