@@ -245,29 +245,37 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="relative px-4 text-nowrap border-b text-secondary-500 dark:text-secondary-300 dark:border-transparent"
+                className="px-4 border-b text-secondary-500 dark:text-secondary-300 dark:border-transparent"
               >
-                {row[column.attr]?.map((item, indexItem) => (
-                  <Link
-                    key={indexItem}
-                    className="relative h-full transition-all text-secondary-500 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-500"
-                    to={item.url}
-                    target="_blank"
-                    onMouseEnter={() =>
-                      setIsHovering([indexItem, indexColum, index])
-                    }
-                    onMouseLeave={() => setIsHovering([null, null])}
-                  >
-                    <FaFile className="h-10 mr-2 inline-block" />
-                    {isHovering[0] === indexItem &&
-                      isHovering[1] === indexColum &&
-                      isHovering[2] === index && (
-                        <span className="absolute -top-full left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 mb-1 px-3 py-1 text-sm rounded-lg text-secondary-100 bg-black">
-                          {shortFileName(item.label)}
-                        </span>
-                      )}
-                  </Link>
-                ))}
+                <div className="flex items-center gap-2 h-full">
+                  {row[column.attr]?.map((item, indexItem) => (
+                    <Link
+                      key={indexItem}
+                      className="relative h-[20px] transition-all text-secondary-500 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-500"
+                      to={item.url}
+                      target="_blank"
+                      onMouseEnter={() =>
+                        setIsHovering([indexItem, indexColum, index])
+                      }
+                      onMouseLeave={() => setIsHovering([null, null])}
+                    >
+                      <FaFile size={18} />
+                      <span
+                        className={cn(
+                          'absolute -top-[26px] left-1/2 -translate-x-1/2 px-3 py-1 hidden text-xs rounded-lg text-secondary-100 bg-black',
+                          {
+                            inline:
+                              isHovering[0] === indexItem &&
+                              isHovering[1] === indexColum &&
+                              isHovering[2] === index
+                          }
+                        )}
+                      >
+                        {shortFileName(item.label)}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
               </td>
             );
           case 'users':

@@ -139,10 +139,10 @@ export const Table = props => {
             <thead className="text-xs uppercase text-secondary-500 dark:text-secondary-400">
               <tr className="sticky top-0 left-0 z-10 bg-secondary-100 dark:bg-secondary-700">
                 {dndFunc && (
-                  <th className="px-4 py-3 tracking-wider w-1 font-medium border-r bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-secondary-200 dark:border-secondary-600"></th>
+                  <th className="px-4 py-3 tracking-wider w-1 font-medium border-r bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-secondary-200 dark:border-secondary-600"></th>
                 )}
                 {!noSeqNum && (
-                  <th className="px-4 py-3 tracking-wider w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10">
+                  <th className="px-4 py-3 tracking-wider w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0">
                     #
                   </th>
                 )}
@@ -151,8 +151,8 @@ export const Table = props => {
                     key={column.attr}
                     className={
                       column.attr === 'photo'
-                        ? 'px-4 py-3 tracking-wider w-12 font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-l border-secondary-200 dark:border-secondary-600'
-                        : 'px-4 py-3 tracking-wider font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-l border-secondary-200 dark:border-secondary-600'
+                        ? 'px-4 py-3 tracking-wider w-12 font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-l border-secondary-200 dark:border-secondary-600'
+                        : 'px-4 py-3 tracking-wider font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-l border-secondary-200 dark:border-secondary-600'
                     }
                   >
                     {column.label}
@@ -161,7 +161,7 @@ export const Table = props => {
                 {(handleUpdate || handleDelete) && (
                   <th
                     className={cn(
-                      'px-4 py-3 tracking-wider w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 z-10 border-l border-secondary-200 dark:border-secondary-600',
+                      'px-4 py-3 tracking-wider w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 border-l border-secondary-200 dark:border-secondary-600',
                       {
                         'border-special': isScrolling
                       }
@@ -173,16 +173,23 @@ export const Table = props => {
               </tr>
             </thead>
             <tbody>
-              {items.length === 0 && (
-                <tr>
+              <tr>
+                {dndFunc && (
+                  <td className="border-l-[1px] h-2 bg-secondary-700 border-secondary-600"></td>
+                )}
+                {!noSeqNum && (
+                  <td className="border-l-[1px] h-2 bg-secondary-700 border-secondary-600"></td>
+                )}
+                {structure.map((_, index) => (
                   <td
-                    className="py-4 text-center"
-                    colSpan={structure.length + 2}
-                  >
-                    No hay registros disponibles
-                  </td>
-                </tr>
-              )}
+                    key={`fill-${index}`}
+                    className="border-l-[1px] h-2 bg-secondary-700 border-secondary-600"
+                  ></td>
+                ))}
+                {(handleUpdate || handleDelete) && (
+                  <td className="border-l-[1px] h-2 bg-secondary-700 border-secondary-600"></td>
+                )}
+              </tr>
               {items.map((row, index) => (
                 <SortableRow
                   key={row.id || index}
@@ -202,6 +209,16 @@ export const Table = props => {
                   isScrolling={isScrolling}
                 />
               ))}
+              {items.length === 0 && (
+                <tr>
+                  <td
+                    className="py-4 text-center"
+                    colSpan={structure.length + 2}
+                  >
+                    No hay registros disponibles
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
           <Alert
