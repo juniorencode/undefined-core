@@ -8,6 +8,7 @@ export const DataTable = props => {
   const {
     structure,
     data,
+    loading,
     pagination,
     filter,
     setDate,
@@ -43,6 +44,7 @@ export const DataTable = props => {
         className="h-[calc(100vh_-_15rem)]"
         structure={structure}
         data={data}
+        loading={loading}
         size={filter.page.size}
         page={filter.page.number}
         handleUpdate={handleUpdate}
@@ -67,6 +69,7 @@ export const DataTable = props => {
 DataTable.propTypes = {
   structure: PropTypes.array,
   data: PropTypes.array,
+  loading: PropTypes.bool,
   pagination: PropTypes.object,
   filter: PropTypes.object,
   setDate: PropTypes.func,

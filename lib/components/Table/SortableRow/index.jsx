@@ -67,7 +67,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="items-center px-4 py-1.5 font-semibold whitespace-nowrap border-b text-secondary-900 dark:text-white dark:border-transparent"
+                className="items-center px-4 py-1.5 w-1 font-semibold whitespace-nowrap border-b text-secondary-900 dark:text-white dark:border-transparent"
               >
                 {handleFeature ? (
                   <button
@@ -126,7 +126,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="items-center px-4 py-1.5 border-b text-secondary-900 whitespace-nowrap dark:text-white dark:border-transparent"
+                className="items-center px-4 py-1.5 w-1 border-b text-secondary-900 whitespace-nowrap dark:text-white dark:border-transparent"
               >
                 <div className="flex">
                   <div className="relative w-10 h-10 bg-secondary-100 dark:bg-secondary-600 rounded-full overflow-hidden">
@@ -321,7 +321,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 w-20 border-b dark:border-transparent"
+                className="px-4 py-1.5 w-1 border-b dark:border-transparent"
               >
                 <Thumbnail file={row.thumbnail} />
               </td>

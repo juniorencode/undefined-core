@@ -44,7 +44,7 @@ export const InputCheck = props => {
 InputCheck.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   labelCheck: PropTypes.string,
   register: PropTypes.func.isRequired
 };

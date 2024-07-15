@@ -12,6 +12,7 @@ export const DataTableLayout = props => {
     title,
     structure,
     data,
+    loading,
     filter,
     pagination,
     setDate,
@@ -55,6 +56,7 @@ export const DataTableLayout = props => {
         <DataTable
           structure={structure}
           data={data}
+          loading={loading}
           filter={filter}
           pagination={pagination}
           setDate={setDate}
@@ -80,6 +82,7 @@ DataTableLayout.propTypes = {
   title: PropTypes.string,
   structure: PropTypes.array,
   data: PropTypes.array,
+  loading: PropTypes.bool,
   pagination: PropTypes.object,
   filter: PropTypes.object,
   setDate: PropTypes.func,
