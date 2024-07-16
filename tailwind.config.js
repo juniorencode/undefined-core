@@ -5,7 +5,7 @@ export default {
     './lib/**/*.{js,ts,jsx,tsx}',
     './src/**/*.{js,ts,jsx,tsx}'
   ],
-  darkMode: 'class',
+  darkMode: 'media',
   theme: {
     extend: {
       boxShadow: {

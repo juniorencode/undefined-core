@@ -14,7 +14,7 @@ export const BaseLayout = ({ children }) => {
   }, [isCollapse]);
 
   return (
-    <div className="flex flex-col h-screen bg-secondary-100 dark:bg-secondary-900">
+    <div className="flex flex-col h-screen">
       <div>
         <Navigation
           options={navigation}
