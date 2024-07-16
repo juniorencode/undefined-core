@@ -77,8 +77,10 @@ const InputMedia = ({
     }
   };
 
-  const [urlThumbnail, setUrlThumbnail] = useState([]);
-  const [fileThumbnail, setFileThumbnail] = useState([]);
+  const [urlThumbnail, setUrlThumbnail] = useState(
+    urlFile.value?.map(_file => _file.url) || []
+  );
+  const [fileThumbnail, setFileThumbnail] = useState(urlFile.value || []);
 
   useEffect(() => {
     if (urlFile && urlFile.value && urlFile.value.length) {
