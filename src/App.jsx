@@ -1,7 +1,9 @@
 import { BrowserRouter } from 'react-router-dom';
 import { FaBookOpen, FaHome, FaTable } from 'react-icons/fa';
 import { AppRoutes } from './routes/app.routes';
-import { setNavigation } from '../lib/main';
+import { setNavigation, setHandleLogout } from '../lib/main';
+import { MdError } from 'react-icons/md';
+import { IoShieldSharp } from 'react-icons/io5';
 
 setNavigation([
   {
@@ -18,8 +20,20 @@ setNavigation([
     label: 'DataForm',
     path: '/form',
     icon: <FaBookOpen size={18} />
+  },
+  {
+    label: 'Login',
+    path: '/login',
+    icon: <IoShieldSharp size={18} />
+  },
+  {
+    label: 'Not Found',
+    path: '/not-found',
+    icon: <MdError size={18} />
   }
 ]);
+
+setHandleLogout(() => console.log('Logout!!'));
 
 const App = () => {
   return (

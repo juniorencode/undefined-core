@@ -1,23 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+import undefinedPlugins from './lib/plugins';
+
 export default {
   content: [
     './index.html',
     './lib/**/*.{js,ts,jsx,tsx}',
     './src/**/*.{js,ts,jsx,tsx}'
   ],
-  darkMode: 'class',
+  darkMode: 'media',
   theme: {
     extend: {
-      boxShadow: {
-        top: '0 -16px 60px 2px rgba(0, 0, 0, 0.4)',
-        left: '-16px 0 60px 2px rgba(0, 0, 0, 0.4)',
-        rigth: '16px 0 60px 2px rgba(0, 0, 0, 0.4)',
-        bottom: '0 16px 60px 2px rgba(0, 0, 0, 0.4)',
-        'dark-top': '0 -16px 60px 2px rgba(0, 0, 0, 1)',
-        'dark-left': '-16px 0 60px 2px rgba(0, 0, 0, 1)',
-        'dark-rigth': '16px 0 60px 2px rgba(0, 0, 0, 1)',
-        'dark-bottom': '0 16px 60px 2px rgba(0, 0, 0, 1)'
-      },
       colors: {
         primary: {
           DEFAULT: '#14b8a6',
@@ -50,5 +42,5 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [undefinedPlugins]
 };

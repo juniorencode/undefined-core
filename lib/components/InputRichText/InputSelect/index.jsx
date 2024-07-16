@@ -51,9 +51,9 @@ export const InputSelect = props => {
       {options.length > 0 && isOpen && (
         <div
           className={cn(
-            'absolute top-full z-20 my-2 w-full border rounded-lg shadow-top dark:shadow-dark-top bg-secondary-200 dark:bg-secondary-800 border-neutral-300 dark:border-neutral-800',
+            'absolute top-full z-20 my-2 w-full border rounded-lg shadow-top dark:shadow-black bg-secondary-200 dark:bg-secondary-800 border-neutral-300 dark:border-neutral-800',
             {
-              'shadow-bottom dark:shadow-dark-bottom':
+              'shadow-bottom':
                 !attributes.popper?.['data-popper-placement'].startsWith('top')
             }
           )}

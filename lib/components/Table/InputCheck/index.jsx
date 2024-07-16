@@ -8,14 +8,20 @@ export const InputCheck = props => {
   const domId = useId();
 
   return (
-    <div className={cn('flex items-center w-fit cursor-pointer', className)}>
+    <div
+      className={cn(
+        'flex items-center px-4 py-2 w-full cursor-pointer hover:bg-secondary-600',
+        className
+      )}
+      onClick={() => handleChange(!value)}
+    >
       <input
-        className="w-6 h-6 border focus:ring-4 focus:ring-opacity-30 checked:focus:ring-opacity-30 focus:dark:ring-opacity-40 checked:focus:dark:ring-opacity-40 rounded cursor-pointer transition-all bg-secondary-200 dark:bg-secondary-700 checked:bg-primary-600 checked:dark:bg-primary-600 border-secondary-300 dark:border-secondary-600 focus:border-primary-500 focus:dark:border-primary-500 checked:border-primary-600 checked:dark:border-primary-600 checked:focus:border-primary-500 checked:focus:dark:border-primary-500 focus:ring-primary-500 dark:focus:ring-primary-500"
+        className="w-6 h-6 border rounded cursor-pointer transition-all bg-secondary-200 dark:bg-secondary-700 checked:bg-primary-600 checked:dark:bg-primary-600 border-secondary-300 dark:border-secondary-600 checked:border-primary-600 checked:dark:border-primary-600 checked:focus:border-primary-500"
         id={domId}
         name={name}
         type="checkbox"
         checked={value}
-        onChange={handleChange}
+        disabled={true}
         {...params}
       />
       {label && (

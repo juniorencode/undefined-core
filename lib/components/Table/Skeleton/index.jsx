@@ -159,7 +159,8 @@ export const Skeleton = ({
               className={cn(
                 'sticky top-0 right-0 flex gap-2 px-4 py-5 bg-white dark:bg-secondary-800',
                 {
-                  'border-special': isScrolling
+                  'border-special border-opacity-20 dark:border-opacity-100':
+                    isScrolling
                 }
               )}
             >
