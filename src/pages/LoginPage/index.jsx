@@ -1,4 +1,4 @@
-import { LoginLayout, useForm } from '../../../lib/main';
+import { BaseLayout, LoginLayout, useForm } from '../../../lib/main';
 
 export const LoginPage = () => {
   const FormLogin = useForm({
@@ -13,5 +13,9 @@ export const LoginPage = () => {
     else localStorage.removeItem('savedEmail');
   });
 
-  return <LoginLayout form={FormLogin} />;
+  return (
+    <BaseLayout className="p-0">
+      <LoginLayout form={FormLogin} />
+    </BaseLayout>
+  );
 };

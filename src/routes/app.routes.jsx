@@ -3,7 +3,7 @@ import { HomePage } from '../pages/HomePage';
 import { TablePage } from '../pages/TablePage';
 import { FormPage } from '../pages/FormPage';
 import { LoginPage } from '../pages/LoginPage';
-import { NotFoundLayout } from '../../lib/main';
+import { NotFoundPage } from '../pages/NotFoundPage';
 
 const AppRoutes = () => {
   return (
@@ -13,7 +13,7 @@ const AppRoutes = () => {
       <Route path="/form" element={<FormPage />} />
       <Route path="/form" element={<FormPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/not-found" element={<NotFoundLayout />} />
+      <Route path="/not-found" element={<NotFoundPage />} />
     </Routes>
   );
 };

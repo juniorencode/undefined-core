@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { cn } from '../../lib/utilities/styles.utilities';
 import { Navigation } from '../../lib/main';
+import { cn } from '../../lib/utilities/styles.utilities';
 import { navigation, handleLogout } from '../utilities/navigation.utilities';
 
-export const BaseLayout = ({ children }) => {
+export const BaseLayout = ({ children, className }) => {
   const [isCollapse, setIsCollapse] = useState(
     localStorage.getItem('isCollapse') === 'true' || false
   );
@@ -23,9 +23,13 @@ export const BaseLayout = ({ children }) => {
           handleLogout={handleLogout}
         />
         <div
-          className={cn('sm:ml-64 p-4 transition-all duration-300', {
-            'sm:ml-[53px]': isCollapse
-          })}
+          className={cn(
+            'sm:ml-64 p-4 transition-all duration-300',
+            {
+              'sm:ml-[53px]': isCollapse
+            },
+            className
+          )}
         >
           {children}
         </div>
@@ -35,5 +39,6 @@ export const BaseLayout = ({ children }) => {
 };
 
 BaseLayout.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  className: PropTypes.string
 };
