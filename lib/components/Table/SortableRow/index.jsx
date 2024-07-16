@@ -337,7 +337,8 @@ export const SortableRow = props => {
           className={cn(
             'px-4 py-1.5 sticky top-0 right-0 bg-white dark:bg-secondary-800 group-hover:bg-[#fafafa] group-hover:dark:bg-secondary-800',
             {
-              'border-special dark:dark-border-special': isScrolling
+              'border-special border-opacity-20 dark:border-opacity-100':
+                isScrolling
             }
           )}
         >

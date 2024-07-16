@@ -191,7 +191,8 @@ export const Table = props => {
                     className={cn(
                       'px-4 py-3 w-1 tracking-wider font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 border-l border-secondary-200 dark:border-secondary-600',
                       {
-                        'border-special dark:dark-border-special': isScrolling
+                        'border-special border-opacity-20 dark:border-opacity-100':
+                          isScrolling
                       }
                     )}
                   >
@@ -202,7 +203,7 @@ export const Table = props => {
                       <div
                         ref={dropdownRef}
                         className={cn(
-                          'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-dark-bottom rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
+                          'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-black rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
                           {
                             block: isOpen
                           }
@@ -246,7 +247,8 @@ export const Table = props => {
                     className={cn(
                       'h-2 sticky top-0 right-0 border-l bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600',
                       {
-                        'border-special dark:dark-border-special': isScrolling
+                        'border-special border-opacity-20 dark:border-opacity-100':
+                          isScrolling
                       }
                     )}
                   ></td>
