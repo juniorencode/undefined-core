@@ -92,6 +92,7 @@ SelectDropdown.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.array,
     PropTypes.number,
     PropTypes.bool
   ]),

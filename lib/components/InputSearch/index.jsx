@@ -114,7 +114,10 @@ export const InputSearch = props => {
               'cursor-text': !disabled
             }
           )}
-          onClick={() => inputRef.current && inputRef.current.focus()}
+          onClick={() => {
+            inputRef.current && inputRef.current.focus();
+            setIsOpen(true);
+          }}
         >
           {!multiple ? (
             <>
@@ -143,7 +146,6 @@ export const InputSearch = props => {
                     : search
                 }
                 onChange={onChange}
-                onClick={() => setIsOpen(true)}
                 onFocus={() => setFocus(true)}
                 onBlur={() => setFocus(false)}
                 autoComplete={autoComplete ? 'on' : 'off'}
@@ -151,20 +153,22 @@ export const InputSearch = props => {
                 {...params}
               />
               {postfix && <span className="mr-2.5">{postfix}</span>}
-              <button
-                className="ml-1 mr-2.5 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
-                type="button"
-                onClick={() => {
-                  handleChange('');
-                  setSearch('');
-                  setIsOpen(true);
-                }}
-              >
-                <IoMdClose />
-              </button>
+              {value && value !== '' && (
+                <button
+                  className="ml-1 mr-2.5 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
+                  type="button"
+                  onClick={() => {
+                    handleChange('');
+                    setSearch('');
+                    setIsOpen(true);
+                  }}
+                >
+                  <IoMdClose />
+                </button>
+              )}
             </>
           ) : (
-            <ul className="flex items-center flex-wrap gap-2 min-h-5">
+            <ul className="flex flex-wrap gap-2 min-h-5">
               {value?.map(elem => (
                 <li
                   key={elem}
@@ -172,7 +176,7 @@ export const InputSearch = props => {
                 >
                   {filteredOptions.find(opt => opt.value === elem).label}
                   <button
-                    className="ml-1 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
+                    className="ml-1 transition-all text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
                     type="button"
                     onClick={e => handleRemove(e, elem)}
                   >
