@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import { FaCircleNotch } from 'react-icons/fa';
 
 export const Thumbnail = props => {
-  const { children, className, file, url, input } = props;
+  const { className, file, url, input } = props;
 
   const playerRef = useRef(null);
   const [thumbnail, setThumbnail] = useState(null);
@@ -40,28 +40,19 @@ export const Thumbnail = props => {
           href={file.url || url}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-fit h-full flex items-center flex-col"
+          className={`${className} flex items-center overflow-hidden flex-col `}
         >
-          <div
-            className={`${
-              !input && 'rounded'
-            } w-fit h-full flex items-center flex-col overflow-hidden bg-white`}
-          >
-            <img
-              src={file.url || url}
-              alt="Miniatura de la imagen"
-              className={`${!input && 'rounded'} h-full ${url ? 'blur' : ''}`}
-            />
-          </div>
-          {children}
+          <img
+            src={file.url || url}
+            alt="Miniatura de la imagen"
+            className={`${!input && 'rounded'} ${className} object-cover ${
+              !file.url && url ? 'blur' : ''
+            }`}
+          />
         </a>
       )}
       {format() === 'video' && (
-        <div
-          className={`${
-            !input && 'rounded'
-          } flex items-center flex-col w-full h-full`}
-        >
+        <>
           <ReactPlayer
             ref={playerRef}
             url={file.url || url}
@@ -84,14 +75,17 @@ export const Thumbnail = props => {
               href={file.url || url}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative flex flex-col h-full w-fit"
+              className={`${
+                !input && 'rounded'
+              } relative w-fit h-full flex items-center flex-col overflow-hidden`}
             >
               <img
-                src={thumbnail}
+                src={thumbnail || url}
                 alt="Miniatura del video"
-                className={`${!input && 'rounded'} h-full ${url ? 'blur' : ''}`}
+                className={`${!input && 'rounded'} ${className} object-cover ${
+                  !file.url && url ? 'blur' : ''
+                }`}
               />
-              {children}
               <div className="absolute inset-0 flex items-center justify-center">
                 <svg
                   className="h-3/4 w-auto text-white bg-black bg-opacity-30 rounded-full p-2"
@@ -107,14 +101,13 @@ export const Thumbnail = props => {
               <FaCircleNotch className="animate-spin h-full" />
             </p>
           )}
-        </div>
+        </>
       )}
     </div>
   );
 };
 
 Thumbnail.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   file: PropTypes.object,
   url: PropTypes.string,

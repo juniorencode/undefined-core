@@ -15,9 +15,12 @@ import {
   DataTable,
   InputDate,
   InputRichText,
-  Breadcrumb
+  Breadcrumb,
+  InputFile,
+  InputColor
 } from '../lib/main';
 import { useFilter } from '../lib/hooks/useFilter.hook';
+import { InputMedia } from '../lib/components/InputMedia';
 
 const App = () => {
   // const Form = useForm({
@@ -367,6 +370,32 @@ const App = () => {
               className="flex flex-col gap-2"
               onKeyDown={Form.handleAssistant}
             >
+              <InputColor
+                className="col-span-4"
+                label="Color"
+                name="color"
+                register={Form.register}
+              />
+              <InputMedia
+                label="Media"
+                name="media"
+                accept={['jpeg', 'jpg', 'png', 'webp', 'mp4']}
+                register={Form.register}
+              />
+              <InputMedia
+                label="Media"
+                name="media1"
+                accept={['jpeg', 'jpg', 'png', 'webp', 'mp4']}
+                register={Form.register}
+                multiple
+              />
+              <InputFile
+                label="File"
+                name="file"
+                register={Form.register}
+                accept={['jpeg', 'jpg', 'png', 'webp', 'mp4']}
+                multiple
+              />
               <InputSelect
                 className="col-span-12"
                 name="select"

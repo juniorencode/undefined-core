@@ -64,10 +64,8 @@ export const Table = props => {
   }, []);
 
   useEffect(() => {
-    if (data || data.length) {
-      const sortedData = [...data].sort((a, b) => a.order - b.order);
-      setItems(sortedData);
-    }
+    setItems(data);
+    //eslint-disable-next-line
   }, [data]);
 
   const sensors = useSensors(
