@@ -57,13 +57,16 @@ export const DatePreset = ({ iniDate, endDate, setDate }) => {
   };
 
   return (
-    <ul className="hidden lg:flex items-center justify-center gap-4 w-[320px] text-nowrap border-r border-secondary-600">
+    <ul className="hidden lg:flex items-center justify-center gap-4 w-[320px] text-nowrap border-r border-secondary-300 dark:border-secondary-600">
       <li>
         <button
-          className={cn('text-sm text-secondary-400 hover:text-secondary-100', {
-            'font-medium transition-all text-primary-400 hover:text-primary-400':
-              select === 1
-          })}
+          className={cn(
+            'text-sm text-secondary-400 hover:text-secondary-800 dark:hover:text-secondary-100',
+            {
+              'font-medium transition-all text-primary-500 dark:text-primary-400 hover:text-primary-500 dark:hover:text-primary-400':
+                select === 1
+            }
+          )}
           onClick={handleSetToday}
         >
           Hoy
@@ -71,10 +74,13 @@ export const DatePreset = ({ iniDate, endDate, setDate }) => {
       </li>
       <li>
         <button
-          className={cn('text-sm text-secondary-400 hover:text-secondary-100', {
-            'font-medium transition-all text-primary-400 hover:text-primary-400':
-              select === 2
-          })}
+          className={cn(
+            'text-sm text-secondary-400 hover:text-secondary-800 dark:hover:text-secondary-100',
+            {
+              'font-medium transition-all text-primary-500 dark:text-primary-400 hover:text-primary-500 dark:hover:text-primary-400':
+                select === 2
+            }
+          )}
           onClick={handleSetYesterday}
         >
           Ayer
@@ -82,10 +88,13 @@ export const DatePreset = ({ iniDate, endDate, setDate }) => {
       </li>
       <li>
         <button
-          className={cn('text-sm text-secondary-400 hover:text-secondary-100', {
-            'font-medium transition-all text-primary-400 hover:text-primary-400':
-              select === 3
-          })}
+          className={cn(
+            'text-sm text-secondary-400 hover:text-secondary-800 dark:hover:text-secondary-100',
+            {
+              'font-medium transition-all text-primary-500 dark:text-primary-400 hover:text-primary-500 dark:hover:text-primary-400':
+                select === 3
+            }
+          )}
           onClick={handleSetLast7Days}
         >
           Últimos 7 días
@@ -93,10 +102,13 @@ export const DatePreset = ({ iniDate, endDate, setDate }) => {
       </li>
       <li>
         <button
-          className={cn('text-sm text-secondary-400 hover:text-secondary-100', {
-            'font-medium transition-all text-primary-400 hover:text-primary-400':
-              select === 4
-          })}
+          className={cn(
+            'text-sm text-secondary-400 hover:text-secondary-800 dark:hover:text-secondary-100',
+            {
+              'font-medium transition-all text-primary-500 dark:text-primary-400 hover:text-primary-500 dark:hover:text-primary-400':
+                select === 4
+            }
+          )}
           onClick={handleSetLast30Days}
         >
           Últimos 30 días

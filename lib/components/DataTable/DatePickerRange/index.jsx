@@ -46,10 +46,12 @@ export const DatePickerRange = ({
         <li>
           <button
             className={cn(
-              'flex items-center justify-center gap-2 py-0.5 w-[122px] font-medium border-2 rounded-lg text-secondary-100 border-transparent hover:border-secondary-500',
+              'flex items-center justify-center gap-2 py-0.5 w-[122px] font-medium border-2 rounded-lg text-secondary-400 dark:text-secondary-100 border-transparent hover:border-secondary-200 dark:hover:border-secondary-500',
               {
-                'border-secondary-500': toggleCalendar === 'left',
-                'text-primary-400': iniDate
+                'border-secondary-200 dark:border-secondary-500':
+                  toggleCalendar === 'left',
+                'text-primary-500 dark:text-primary-400 hover:border-secondary-200 dark:hover:border-secondary-500':
+                  iniDate
               }
             )}
             onClick={() => openBox('left')}
@@ -66,10 +68,12 @@ export const DatePickerRange = ({
         <li>
           <button
             className={cn(
-              'flex items-center justify-center gap-2 py-0.5 w-[122px] font-medium border-2 rounded-lg text-secondary-100 border-transparent hover:border-secondary-500',
+              'flex items-center justify-center gap-2 py-0.5 w-[122px] font-medium border-2 rounded-lg text-secondary-400 dark:text-secondary-400 border-transparent hover:border-secondary-200 dark:hover:border-secondary-500',
               {
-                'border-secondary-500': toggleCalendar === 'right',
-                'text-primary-400': endDate
+                'border-secondary-200 dark:border-secondary-500':
+                  toggleCalendar === 'right',
+                'text-primary-500 dark:text-primary-400 hover:border-secondary-200 dark:hover:border-secondary-500':
+                  endDate
               }
             )}
             onClick={() => openBox('right')}
@@ -85,7 +89,7 @@ export const DatePickerRange = ({
       </ul>
       <div
         className={cn(
-          'absolute top-full right-0 z-20 hidden mt-2 border rounded-lg shadow-bottom border-secondary-600 bg-secondary-700',
+          'absolute top-full right-0 z-20 hidden mt-2 border rounded-lg shadow-bottom dark:shadow-dark-bottom bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
           {
             flex: isOpen
           }
@@ -108,7 +112,7 @@ export const DatePickerRange = ({
             otherDate={rightCalendar}
           />
         </div>
-        <div className="p-2 border-l border-secondary-600">
+        <div className="p-2 border-l border-secondary-300 dark:border-secondary-600">
           <Calendar
             toggleCalendar={toggleCalendar}
             setToggleCalendar={setToggleCalendar}

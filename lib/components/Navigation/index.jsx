@@ -15,7 +15,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
       className={cn(
         'fixed top-0 left-0 z-20 w-screen sm:w-64 h-screen transition-none duration-0 bg-opacity-50 dark:bg-opacity-90 bg-secondary-900',
         {
-          'hidden sm:flex sm:w-16': isCollapse
+          'hidden sm:flex sm:w-[53px]': isCollapse
         }
       )}
       onClick={handleShowHiden}
@@ -41,7 +41,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
             <NavLink to="/">
               <span
                 className={cn(
-                  'p-2 text-xl text-nowrap font-semibold text-white',
+                  'p-2 text-xl text-nowrap font-semibold text-secondary-700 dark:text-white',
                   {
                     'sm:hidden': isCollapse
                   }
@@ -51,7 +51,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
               </span>
             </NavLink>
           </div>
-          <hr className="my-4 border-secondary-600" />
+          <hr className="my-4 border-secondary-300 dark:border-secondary-600" />
           <ul className="flex flex-col gap-2 text-xl">
             {options.map((menuItem, index) => (
               <li key={index}>
@@ -60,7 +60,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
                     cn(
                       'relative flex items-center gap-1 rounded-lg transition-all text-secondary-900 dark:text-white hover:bg-secondary-100 dark:hover:bg-secondary-700',
                       {
-                        'text-primary-500 dark:text-primary-400': isActive
+                        'text-primary-600 dark:text-primary-400': isActive
                       }
                     )
                   }
@@ -69,7 +69,7 @@ export const Navigation = ({ options, isCollapse, setIsCollapse }) => {
                   onMouseEnter={() => setIsHovering(index)}
                   onMouseLeave={() => setIsHovering(null)}
                 >
-                  <div className="static p-[10px] opacity-75">
+                  <div className="static p-[10px] opacity-60 dark:opacity-75">
                     {menuItem.icon}
                   </div>
                   <span

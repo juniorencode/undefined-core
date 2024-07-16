@@ -99,7 +99,7 @@ export const Table = props => {
 
   useEffect(() => {
     handleScroll();
-  }, [data, columns]);
+  }, [data, columns, loading]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -191,7 +191,7 @@ export const Table = props => {
                     className={cn(
                       'px-4 py-3 w-1 tracking-wider font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 border-l border-secondary-200 dark:border-secondary-600',
                       {
-                        'border-special': isScrolling
+                        'border-special dark:dark-border-special': isScrolling
                       }
                     )}
                   >
@@ -202,7 +202,7 @@ export const Table = props => {
                       <div
                         ref={dropdownRef}
                         className={cn(
-                          'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
+                          'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-dark-bottom rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
                           {
                             block: isOpen
                           }
@@ -231,7 +231,7 @@ export const Table = props => {
             <tbody>
               <tr>
                 {dndFunc && (
-                  <td className="border-r h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-600"></td>
+                  <td className="border-r h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600"></td>
                 )}
                 {!noSeqNum && (
                   <td className="h-2 bg-secondary-100 dark:bg-secondary-700"></td>
@@ -241,7 +241,7 @@ export const Table = props => {
                   .map((_, index) => (
                     <td
                       key={`fill-${index}`}
-                      className="border-l h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-600"
+                      className="border-l h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600"
                     ></td>
                   ))}
                 {(handleUpdate || handleDelete) && (
@@ -249,7 +249,7 @@ export const Table = props => {
                     className={cn(
                       'h-2 sticky top-0 right-0 border-l bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600',
                       {
-                        'border-special': isScrolling
+                        'border-special dark:dark-border-special': isScrolling
                       }
                     )}
                   ></td>

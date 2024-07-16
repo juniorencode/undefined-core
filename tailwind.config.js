@@ -9,10 +9,14 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        top: '0 -16px 60px 2px rgba(0, 0, 0, 1)',
-        left: '-16px 0 60px 2px rgba(0, 0, 0, 1)',
-        rigth: '16px 0 60px 2px rgba(0, 0, 0, 1)',
-        bottom: '0 16px 60px 2px rgba(0, 0, 0, 1)'
+        top: '0 -16px 60px 2px rgba(0, 0, 0, 0.4)',
+        left: '-16px 0 60px 2px rgba(0, 0, 0, 0.4)',
+        rigth: '16px 0 60px 2px rgba(0, 0, 0, 0.4)',
+        bottom: '0 16px 60px 2px rgba(0, 0, 0, 0.4)',
+        'dark-top': '0 -16px 60px 2px rgba(0, 0, 0, 1)',
+        'dark-left': '-16px 0 60px 2px rgba(0, 0, 0, 1)',
+        'dark-rigth': '16px 0 60px 2px rgba(0, 0, 0, 1)',
+        'dark-bottom': '0 16px 60px 2px rgba(0, 0, 0, 1)'
       },
       colors: {
         primary: {

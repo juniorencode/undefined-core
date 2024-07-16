@@ -158,10 +158,11 @@ export const Calendar = ({
               _endDateHover >= _dayDate);
 
       const classNames = cn(
-        'group flex items-center justify-center w-8 h-8 text-sm cursor-pointer text-secondary-200 transition-[background]',
+        'group flex items-center justify-center w-8 h-8 text-sm cursor-pointer text-secondary-600 dark:text-secondary-200 transition-[background]',
         {
-          'bg-primary-600': isIniDate || isEndDate || isInRange,
-          'bg-opacity-40 bg-primary-700':
+          'text-white bg-primary-500 dark:bg-primary-600':
+            isIniDate || isEndDate || isInRange,
+          'bg-opacity-40 bg-primary-500 dark:bg-primary-700':
             isHoverInRangeLeft || isHoverInRangeRight,
           'rounded-l-full':
             isIniDate ||
@@ -200,7 +201,7 @@ export const Calendar = ({
       <div className="flex justify-between mb-2">
         <button
           className={cn(
-            'p-2.5 text-lg dark:focus:ring-opacity-40 rounded-lg outline-none text-secondary-500 dark:text-white hover:text-secondary-900 dark:hover:text-white bg-transparent dark:bg-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600',
+            'p-2.5 text-lg dark:focus:ring-opacity-40 rounded-lg outline-none text-secondary-400 dark:text-white hover:text-secondary-900 dark:hover:text-white bg-transparent dark:bg-secondary-700 hover:bg-secondary-200 dark:hover:bg-secondary-600',
             {
               'cursor-default opacity-20': !(
                 new Date(thisDate) < new Date(otherDate) ||
@@ -213,12 +214,12 @@ export const Calendar = ({
         >
           <IoIosArrowBack />
         </button>
-        <span className="px-5 py-2.5 text-sm font-semibold rounded-lg text-secondary-900 dark:text-white bg-transparent dark:bg-secondary-700">
+        <span className="px-5 py-2.5 text-sm font-semibold rounded-lg text-secondary-600 dark:text-white bg-transparent dark:bg-secondary-700">
           {monthName} {thisYear}
         </span>
         <button
           className={cn(
-            'p-2.5 text-lg dark:focus:ring-opacity-40 rounded-lg outline-none text-secondary-500 dark:text-white hover:text-secondary-900 dark:hover:text-white bg-transparent dark:bg-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600',
+            'p-2.5 text-lg dark:focus:ring-opacity-40 rounded-lg outline-none text-secondary-400 dark:text-white hover:text-secondary-900 dark:hover:text-white bg-transparent dark:bg-secondary-700 hover:bg-secondary-200 dark:hover:bg-secondary-600',
             {
               'cursor-default opacity-20': !(
                 new Date(thisDate) > new Date(otherDate) ||
@@ -237,7 +238,7 @@ export const Calendar = ({
           {shortNameOfWeekdays.map(name => (
             <li
               key={name}
-              className="text-center h-6 leading-6 text-sm font-medium select-none text-secondary-400 dark:text-secondary-400"
+              className="text-center h-6 leading-6 text-sm font-medium select-none text-secondary-400"
             >
               {name}
             </li>

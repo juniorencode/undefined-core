@@ -45,11 +45,11 @@ export const SortableRow = props => {
     <tr
       ref={setNodeRef}
       style={style}
-      className="group border-b hover:filter hover:brightness-125 bg-white dark:bg-secondary-800 hover:bg-[#fafafa] dark:hover:bg-secondary-800"
+      className="group hover:filter hover:brightness-100 dark:hover:brightness-125 bg-white dark:bg-secondary-800 hover:bg-[#fafafa] dark:hover:bg-secondary-800"
     >
       {dndFunc && (
         <td
-          className="px-4 py-1.5 text-center border-b cursor-pointer dark:border-transparent"
+          className="px-4 py-1.5 text-center cursor-ns-resize"
           {...listeners}
           {...attributes}
         >
@@ -57,7 +57,7 @@ export const SortableRow = props => {
         </td>
       )}
       {!noSeqNum && (
-        <td className="items-center px-4 py-1.5 font-semibold whitespace-nowrap border-b text-secondary-900 dark:text-white dark:border-transparent">
+        <td className="items-center px-4 py-1.5 font-semibold whitespace-nowrap text-secondary-900 dark:text-white">
           {(page - 1) * size + (index + 1)}
         </td>
       )}
@@ -67,7 +67,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="items-center px-4 py-1.5 w-1 font-semibold whitespace-nowrap border-b text-secondary-900 dark:text-white dark:border-transparent"
+                className="items-center px-4 py-1.5 w-1 font-semibold whitespace-nowrap text-yellow-500 dark:text-yellow-500"
               >
                 {handleFeature ? (
                   <button
@@ -76,10 +76,20 @@ export const SortableRow = props => {
                       handleFeature(row.id);
                     }}
                   >
-                    {row[column.attr] ? <FaStar /> : <FaRegStar />}
+                    {row[column.attr] ? (
+                      <FaStar size={18} />
+                    ) : (
+                      <FaRegStar size={18} />
+                    )}
                   </button>
                 ) : (
-                  <label>{row[column.attr] ? <FaStar /> : <FaRegStar />}</label>
+                  <label>
+                    {row[column.attr] ? (
+                      <FaStar size={18} />
+                    ) : (
+                      <FaRegStar size={18} />
+                    )}
+                  </label>
                 )}
               </td>
             );
@@ -87,7 +97,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="items-center px-4 py-1.5 text-secondary-900 whitespace-nowrap border-b dark:text-white dark:border-transparent"
+                className="items-center px-4 py-1.5 whitespace-nowrap dark:text-white"
               >
                 <div className="flex">
                   <div className="relative w-10 h-10 bg-secondary-100 dark:bg-secondary-600 rounded-full overflow-hidden">
@@ -109,7 +119,7 @@ export const SortableRow = props => {
                     )}
                   </div>
                   <div className="ps-3">
-                    <div className="text-base font-semibold">
+                    <div className="text-base font-semibold text-secondary-600 dark:text-white">
                       {getHighlightedText(
                         row[column.attr]?.fullname,
                         highlighted
@@ -126,7 +136,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="items-center px-4 py-1.5 w-1 border-b text-secondary-900 whitespace-nowrap dark:text-white dark:border-transparent"
+                className="items-center px-4 py-1.5 w-1 text-secondary-900 whitespace-nowrap dark:text-white"
               >
                 <div className="flex">
                   <div className="relative w-10 h-10 bg-secondary-100 dark:bg-secondary-600 rounded-full overflow-hidden">
@@ -152,10 +162,7 @@ export const SortableRow = props => {
             );
           case 'tag':
             return (
-              <td
-                key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 border-b dark:border-transparent"
-              >
+              <td key={row.id + '_' + column.attr} className="px-4 py-1.5">
                 <span
                   className={`text-sm font-normal px-2.5 py-0.5 whitespace-nowrap rounded border ${
                     row[column.attr].color === 'GREEN'
@@ -171,15 +178,12 @@ export const SortableRow = props => {
             );
           case 'tags':
             return (
-              <td
-                key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 border-b dark:border-transparent"
-              >
+              <td key={row.id + '_' + column.attr} className="px-4 py-1.5">
                 <div className="flex gap-2 flex-wrap">
                   {row[column.attr]?.map((tag, i) => (
                     <span
                       key={row.id + '_' + column.attr + '_' + i}
-                      className="bg-secondary-100 text-secondary-800 text-sm font-normal px-2.5 py-0.5 rounded dark:bg-secondary-700 dark:text-secondary-300 whitespace-nowrap"
+                      className="bg-secondary-100 text-secondary-500 text-sm font-normal px-2.5 py-0.5 rounded dark:bg-secondary-700 dark:text-secondary-300 whitespace-nowrap"
                     >
                       {getHighlightedText(tag, highlighted)}
                     </span>
@@ -189,12 +193,9 @@ export const SortableRow = props => {
             );
           case 'link':
             return (
-              <td
-                key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 border-b dark:border-transparent"
-              >
+              <td key={row.id + '_' + column.attr} className="px-4 py-1.5">
                 <Link
-                  className="text-primary-400 dark:text-primary-400 hover:underline"
+                  className="text-primary-500 dark:text-primary-400 hover:underline"
                   to={row[column.attr]?.url}
                 >
                   {getHighlightedText(row[column.attr]?.label, highlighted)}
@@ -205,8 +206,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 text-nowrap border-b dark:border-transparent"
-                // max-w-[500px] overflow-hidden
+                className="px-4 py-1.5 text-nowrap"
               >
                 {getHighlightedText(row[column.attr], highlighted)}
               </td>
@@ -215,17 +215,14 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 border-b text-secondary-500 dark:text-secondary-300 text-nowrap font-medium dark:border-transparent"
+                className="px-4 py-1.5 text-secondary-500 dark:text-secondary-300 text-nowrap font-medium"
               >
                 {getHighlightedText(row[column.attr], highlighted)}
               </td>
             );
           case 'files':
             return (
-              <td
-                key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 border-b dark:border-transparent"
-              >
+              <td key={row.id + '_' + column.attr} className="px-4 py-1.5">
                 {row[column.attr]?.map((item, indexCol) => (
                   <Link
                     key={indexCol}
@@ -245,7 +242,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="px-4 border-b text-secondary-500 dark:text-secondary-300 dark:border-transparent"
+                className="px-4 text-secondary-500 dark:text-secondary-300"
               >
                 <div className="flex items-center gap-2 h-full">
                   {row[column.attr]?.map((item, indexItem) => (
@@ -282,7 +279,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 border-b text-secondary-500 dark:text-secondary-300 text-nowrap dark:border-transparent"
+                className="px-4 py-1.5 text-secondary-500 dark:text-secondary-300 text-nowrap"
               >
                 <div className="flex flex-col">
                   {row[column.attr]?.map((item, index) => (
@@ -303,10 +300,7 @@ export const SortableRow = props => {
             );
           case 'status':
             return (
-              <td
-                key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 border-b dark:border-transparent"
-              >
+              <td key={row.id + '_' + column.attr} className="px-4 py-1.5">
                 <div className="flex items-center">
                   <div
                     className={`h-2.5 w-2.5 rounded-full me-2 ${
@@ -319,19 +313,13 @@ export const SortableRow = props => {
             );
           case 'thumbnail':
             return (
-              <td
-                key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 w-1 border-b dark:border-transparent"
-              >
+              <td key={row.id + '_' + column.attr} className="px-4 py-1.5 w-1">
                 <Thumbnail file={row.thumbnail} />
               </td>
             );
           case 'date':
             return (
-              <td
-                key={row.id + '_' + column.attr}
-                className="px-4 py-1.5 border-b dark:border-transparent"
-              >
+              <td key={row.id + '_' + column.attr} className="px-4 py-1.5">
                 <div className="flex flex-col items-end">
                   <span className="text-nowrap">
                     {formatDateCasual(row[column.attr])}
@@ -349,7 +337,7 @@ export const SortableRow = props => {
           className={cn(
             'px-4 py-1.5 sticky top-0 right-0 bg-white dark:bg-secondary-800 group-hover:bg-[#fafafa] group-hover:dark:bg-secondary-800',
             {
-              'border-special': isScrolling
+              'border-special dark:dark-border-special': isScrolling
             }
           )}
         >

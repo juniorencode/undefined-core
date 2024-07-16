@@ -8,13 +8,13 @@ export const Filter = ({ iniDate, endDate, setDate }) => {
     <div className="flex">
       {(iniDate || endDate) && (
         <button
-          className="flex items-center justify-center w-[32px] h-[38px] text-white hover:text-primary-500"
+          className="flex items-center justify-center w-[32px] h-[38px] text-secondary-400 dark:text-white hover:text-primary-500"
           onClick={() => setDate('', '')}
         >
           <GrRefresh size={18} />
         </button>
       )}
-      <div className="flex items-stretch h-[38px] border rounded-lg bg-secondary-700 border-secondary-600">
+      <div className="flex items-stretch h-[38px] border rounded-lg bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600">
         <DatePreset iniDate={iniDate} endDate={endDate} setDate={setDate} />
         <DatePickerRange
           iniDate={iniDate}

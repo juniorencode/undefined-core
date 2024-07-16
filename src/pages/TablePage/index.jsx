@@ -103,7 +103,6 @@ export const TablePage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log('x');
       setLoading(false);
     }, 1000);
   }, []);
@@ -114,7 +113,6 @@ export const TablePage = () => {
       title="Contabilidad"
       structure={structure}
       data={Data.data}
-      // data={[]}
       loading={loading}
       filter={filter}
       pagination={pagination}
