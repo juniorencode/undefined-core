@@ -208,17 +208,14 @@ export const Table = props => {
                           }
                         )}
                       >
-                        <div className="px-2 min-w-[200px] max-h-[300px] overflow-y-auto">
+                        <div className="min-w-[200px] max-h-[300px] overflow-y-auto">
                           {columns.map((row, index) => (
                             <InputCheck
                               key={`ske-row-${index}`}
-                              className="py-1"
                               name={row.attr}
                               label={row.label}
                               value={!row.hidden}
-                              handleChange={e =>
-                                handleColumns(row.attr, e.target.checked)
-                              }
+                              handleChange={val => handleColumns(row.attr, val)}
                             />
                           ))}
                         </div>
