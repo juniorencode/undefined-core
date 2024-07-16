@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { IoIosSearch } from 'react-icons/io';
 import { Pagination } from '../Pagination';
 import { Table } from '../Table';
 import { Filter } from './Filter';
+import { Search } from './Search';
 
 export const DataTable = props => {
   const {
@@ -25,18 +25,7 @@ export const DataTable = props => {
     <>
       <div className="flex flex-col gap-4 m-3 h-10">
         <div className="flex items-center justify-between gap-4">
-          <div className="relative w-full max-w-80">
-            <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none text-xl text-secondary-400">
-              <IoIosSearch />
-            </div>
-            <input
-              className="block p-2 pl-10 w-full text-sm outline-none border focus:border focus:ring-4 focus:ring-opacity-40 dark:focus:ring-opacity-40 rounded-lg text-secondary-900 border-secondary-300 bg-secondary-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              type="text"
-              placeholder="Buscar..."
-              value={filter.search}
-              onChange={setSearch}
-            />
-          </div>
+          <Search search={filter.search} setSearch={setSearch} />
           <Filter iniDate={filter.ini} endDate={filter.end} setDate={setDate} />
         </div>
       </div>

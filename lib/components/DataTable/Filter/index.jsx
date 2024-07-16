@@ -5,7 +5,7 @@ import { DatePickerRange } from '../DatePickerRange';
 
 export const Filter = ({ iniDate, endDate, setDate }) => {
   return (
-    <div className="flex">
+    <div className="hidden sm:flex">
       {(iniDate || endDate) && (
         <button
           className="flex items-center justify-center w-[32px] h-[38px] text-secondary-400 dark:text-white hover:text-primary-500"
