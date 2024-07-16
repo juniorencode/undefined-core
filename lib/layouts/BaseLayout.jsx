@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { cn } from '../../lib/utilities/styles.utilities';
 import { Navigation } from '../../lib/main';
-import { navigation } from '../utilities/navigation.utilities';
+import { navigation, handleLogout } from '../utilities/navigation.utilities';
 
 export const BaseLayout = ({ children }) => {
   const [isCollapse, setIsCollapse] = useState(
@@ -20,6 +20,7 @@ export const BaseLayout = ({ children }) => {
           options={navigation}
           isCollapse={isCollapse}
           setIsCollapse={setIsCollapse}
+          handleLogout={handleLogout}
         />
         <div
           className={cn('sm:ml-64 p-4 transition-all duration-300', {

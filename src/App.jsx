@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import { FaBookOpen, FaHome, FaTable } from 'react-icons/fa';
 import { AppRoutes } from './routes/app.routes';
-import { setNavigation } from '../lib/main';
+import { setNavigation, setHandleLogout } from '../lib/main';
 
 setNavigation([
   {
@@ -20,6 +20,8 @@ setNavigation([
     icon: <FaBookOpen size={18} />
   }
 ]);
+
+setHandleLogout(() => console.log('Logout!!'));
 
 const App = () => {
   return (
