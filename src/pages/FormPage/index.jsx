@@ -161,18 +161,19 @@ export const FormPage = () => {
           name="text"
           label="Text"
           options={[
-            'gato',
-            'perro',
-            'sol',
-            'luna',
-            'estrella',
-            'mar',
-            'montaña',
-            'río',
-            'mentalista'
+            { value: 'a1', label: 'gato' },
+            { value: 'a2', label: 'perro' },
+            { value: 'a3', label: 'sol' },
+            { value: 'a4', label: 'luna' },
+            { value: 'a5', label: 'estrella' },
+            { value: 'a6', label: 'mar' },
+            { value: 'a7', label: 'montaña' },
+            { value: 'a8', label: 'río' },
+            { value: 'a9', label: 'mentalista' }
           ]}
-          multiple
+          // multiple
           register={Form.register}
+          funcDelete={id => console.log('delete: ' + id)}
           // required
         />
         <InputRichText

@@ -40,7 +40,7 @@ export const SelectDropdown = props => {
           {...attributes.popper}
         >
           <ul className="my-2 max-h-[200px] text-sm overflow-y-auto text-neutral-700 dark:text-neutral-200">
-            {options?.map((item, index) => (
+            {options?.map(item => (
               <li key={item.value}>
                 <input
                   className="hidden"
@@ -71,7 +71,7 @@ export const SelectDropdown = props => {
                       className="p-2 opacity-0 group-hover:opacity-100 group-hover:inline transition-all duration-200 text-neutral-400 hover:text-red-500"
                       onClick={e => {
                         e.preventDefault();
-                        funcDelete(item.id || index.toString());
+                        funcDelete(item.value);
                       }}
                     >
                       <MdClose size={20} />
