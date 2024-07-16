@@ -7,8 +7,10 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  /* width: 5px; */
+  /* height: 5px; */
+  width: 4px;
+  height: 4px;
   background-color: transparent;
 }
 
@@ -17,19 +19,39 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
+  /* background-color: rgba(0, 0, 0, 0.3); */
+  background: #999;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background: #666;
 }
 
-[type='checkbox'] {
+input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type='checkbox'] {
   appearance: none;
 }
 
-[type='checkbox']:checked {
+input[type='checkbox']:checked {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 12'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M1 5.917 5.724 10.5 15 1.5'/%3E%3C/svg%3E");
   background-position: 50%;
   background-repeat: no-repeat;
