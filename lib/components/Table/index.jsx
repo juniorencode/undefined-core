@@ -68,6 +68,9 @@ export const Table = props => {
   const [currentId, setCurrentId] = useState(null);
   const [items, setItems] = useState(data);
 
+  useEffect(() => {
+    setItems(data);
+  }, [data]);
   const tableContainerRef = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false);
 

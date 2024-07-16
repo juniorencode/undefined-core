@@ -19,17 +19,33 @@ import {
 } from '../../../lib/main';
 
 export const FormPage = () => {
-  // const Form = useForm({
-  //   text: 'qwe',
-  //   search: '3',
-  //   password: 'qwe',
-  //   number: 123.12,
-  //   select: '1',
-  //   textarea: 'qwe',
-  //   checkbox: true,
-  //   switch: true
-  // });
-  const Form = useForm();
+  const Form = useForm({
+    // text: 'qwe',
+    // search: '3',
+    // password: 'qwe',
+    // number: 123.12,
+    // select: '1',
+    // textarea: 'qwe',
+    // checkbox: true,
+    // switch: true,
+    media: ['66969f8d25ecd64998abe515'],
+    _media: [
+      {
+        _id: '66969f8d25ecd64998abe515',
+        name: 'File 1-200x200.png',
+        storage: '1721147277940-File 1-200x200.png',
+        isPhoto: false,
+        size: 27799,
+        type: 'image/png',
+        deleted: false,
+        createdAt: '2024-07-16T16:27:57.954Z',
+        updatedAt: '2024-07-16T16:27:57.954Z',
+        url: 'https://backend.grupocotrina.club/public/1721147277940-File 1-200x200.png',
+        id: '66969f8d25ecd64998abe515'
+      }
+    ]
+  });
+  // const Form = useForm();
 
   const breadcrumb = [
     {
@@ -121,6 +137,7 @@ export const FormPage = () => {
           ]}
           funcDelete={id => console.log('delete: ' + id)}
           register={Form.register}
+          firstValue
           // required
         />
         <InputSearch

@@ -23,6 +23,7 @@ export const DataTableLayout = props => {
     handleDelete,
     handleExport,
     handleFeature,
+    noSeqNum,
     dndFunc
   } = props;
 
@@ -66,6 +67,7 @@ export const DataTableLayout = props => {
           handleDelete={handleDelete}
           handleFeature={handleFeature}
           dndFunc={dndFunc}
+          noSeqNum={noSeqNum}
         />
       </Card>
     </BaseLayout>
@@ -93,6 +95,6 @@ DataTableLayout.propTypes = {
   handleDelete: PropTypes.func,
   handleExport: PropTypes.func,
   handleFeature: PropTypes.func,
-  noSequentialNumber: PropTypes.bool,
+  noSeqNum: PropTypes.bool,
   dndFunc: PropTypes.func
 };

@@ -16,7 +16,7 @@ export const DataTable = props => {
     handleUpdate,
     handleDelete,
     handleFeature,
-    noSequentialNumber,
+    noSeqNum,
     dndFunc
   } = props;
 
@@ -39,7 +39,7 @@ export const DataTable = props => {
         handleDelete={handleDelete}
         handleFeature={handleFeature}
         highlighted={filter.search}
-        noSequentialNumber={noSequentialNumber}
+        noSeqNum={noSeqNum}
         dndFunc={dndFunc}
       />
       <div className="flex items-center justify-center sm:justify-between m-3 h-10 dark:text-white">
@@ -66,6 +66,6 @@ DataTable.propTypes = {
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
   handleFeature: PropTypes.func,
-  noSequentialNumber: PropTypes.bool,
+  noSeqNum: PropTypes.bool,
   dndFunc: PropTypes.func
 };

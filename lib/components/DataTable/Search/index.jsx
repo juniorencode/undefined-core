@@ -7,6 +7,7 @@ export const Search = props => {
   const { search, setSearch } = props;
   const [searchTerm, setSearchTerm] = useState(search);
 
+  //eslint-disable-next-line
   const debouncedFetchData = useCallback(
     debounce(searchTerm => {
       setSearch(searchTerm || '');
@@ -15,7 +16,9 @@ export const Search = props => {
   );
 
   useEffect(() => {
+    if (searchTerm === '' && search === '') return;
     debouncedFetchData(searchTerm);
+    //eslint-disable-next-line
   }, [searchTerm]);
 
   const handleSearchChange = e => {

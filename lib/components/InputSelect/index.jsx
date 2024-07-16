@@ -19,7 +19,7 @@ export const InputSelect = props => {
     toBoolean,
     register,
     required,
-    multiple = true,
+    multiple,
     ...params
   } = props;
 

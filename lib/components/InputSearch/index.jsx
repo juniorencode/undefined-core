@@ -25,7 +25,7 @@ export const InputSearch = props => {
     focused,
     autoComplete,
     disabled,
-    multiple = !true,
+    multiple,
     ...params
   } = props;
 
