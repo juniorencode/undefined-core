@@ -61,7 +61,7 @@ export const InputText = props => {
     if (!string) setFilteredOptions(options);
     if (!string || !options) return;
     const filtered = options.filter(option =>
-      normalizeString(option).includes(string)
+      normalizeString(option.label).includes(string)
     );
     if (filtered.length === 1 && filtered[0] === string) setFilteredOptions([]);
     else setFilteredOptions(filtered);
@@ -77,6 +77,12 @@ export const InputText = props => {
 
   const onChange = e => {
     handleChange(uppercase ? e.target.value.toUpperCase() : e.target.value);
+  };
+
+  const onChangeDropdown = e => {
+    const _value = e.target.value;
+    const _label = options.filter(item => item.value === _value)[0].label;
+    handleChange(uppercase ? _label.toUpperCase() : _label);
   };
 
   //multiple
@@ -229,6 +235,7 @@ export const InputText = props => {
               name={name}
               value={value !== undefined && value !== null ? value : ''}
               onChange={onChange}
+              onClick={() => setIsOpen(true)}
               onFocus={() => setFocus(true)}
               onBlur={() => setFocus(false)}
               autoComplete={autoComplete ? 'on' : 'off'}
@@ -243,12 +250,9 @@ export const InputText = props => {
           name={name}
           value={null}
           isOpen={isOpen}
-          options={filteredOptions.map(option => ({
-            value: option,
-            label: option
-          }))}
+          options={filteredOptions}
           onChange={e => {
-            multiple ? insertItem(e.target.value.trim()) : onChange(e);
+            multiple ? insertItem(e.target.value.trim()) : onChangeDropdown(e);
             options && setFilteredOptions(options);
           }}
           setIsOpen={setIsOpen}
@@ -264,8 +268,14 @@ InputText.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   options: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
-      .isRequired
+    PropTypes.shape({
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool
+      ]).isRequired,
+      label: PropTypes.string.isRequired
+    })
   ),
   uppercase: PropTypes.bool,
   align: PropTypes.string,
