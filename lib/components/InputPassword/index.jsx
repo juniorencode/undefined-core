@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 import { InputContainer } from '../InputContainer';
 
 export const InputPassword = props => {

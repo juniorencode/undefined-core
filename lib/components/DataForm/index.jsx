@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 import { Button } from '../Button';
 
 export const DataForm = props => {
@@ -16,7 +16,7 @@ export const DataForm = props => {
     <>
       <div
         className={cn(
-          'flex flex-col gap-2 mt-2 p-4 max-h-[calc(100vh_-_255px)] overflow-auto scroll-container',
+          'flex flex-col gap-2 mt-2 p-4 max-h-[calc(100vh_-_195px)] overflow-auto scroll-container',
           {
             'max-h-[calc(100vh_-_220px)]': modal
           },

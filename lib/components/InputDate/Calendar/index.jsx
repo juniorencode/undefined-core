@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { cn } from '../../../utils/styles';
-import { monthNames } from '../../../utils/time';
+import { cn } from '../../../utilities/styles.utilities';
+import { nameOfMonths } from '../../../utilities/time.utilities';
 
 export const Calendar = props => {
   const {
@@ -68,7 +68,7 @@ export const Calendar = props => {
         </button>
         <span className="px-5 py-2.5 text-sm font-semibold rounded-lg text-secondary-900 dark:text-white bg-transparent dark:bg-secondary-700">
           {`${
-            monthNames[selectedDate.getMonth()]
+            nameOfMonths[selectedDate.getMonth()]
           } ${selectedDate.getFullYear()}`}
         </span>
         <button

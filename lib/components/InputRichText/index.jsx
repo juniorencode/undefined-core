@@ -8,7 +8,7 @@ import {
   ImUnderline
 } from 'react-icons/im';
 import { IoIosCheckmark, IoIosClose, IoMdLink } from 'react-icons/io';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { InputSelect } from './InputSelect';

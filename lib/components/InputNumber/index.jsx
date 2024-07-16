@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
+import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
 import { SelectDropdown } from '../SelectDropdown';
 
@@ -26,7 +27,7 @@ export const InputNumber = props => {
   } = props;
 
   const domId = useId();
-  const domRef = useRef(null);
+  const domRef = useClickOutside(() => setIsOpen(false));
   const inputRef = useRef(null);
   const [focus, setFocus] = useState(false);
   const [isOpen, setIsOpen] = useState(false);

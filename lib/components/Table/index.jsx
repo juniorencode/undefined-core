@@ -18,13 +18,20 @@ import {
 import { useAlert } from '../../hooks/useAlert.hook';
 import { Alert } from '../Alert';
 import { SortableRow } from './SortableRow';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
+import { Skeleton } from './Skeleton';
+import { FaTableColumns } from 'react-icons/fa6';
+import { InputCheck } from './InputCheck';
+import { useClickOutside } from '../../hooks/useClickOutside.hook';
+import { FaRegStar } from 'react-icons/fa';
 
 export const Table = props => {
   const {
     className,
     structure = [],
     data = [],
+    loading,
+    size = 50,
     page = 1,
     noSeqNum,
     highlighted,
@@ -34,24 +41,47 @@ export const Table = props => {
     handleFeature
   } = props;
 
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useClickOutside(() => setIsOpen(false));
+  const localStorageKey = window.location.pathname;
+
+  const [columns, setColumns] = useState(() => {
+    const storedColumns =
+      JSON.parse(localStorage.getItem(localStorageKey)) ||
+      structure.map(col => ({ ...col, hidden: false }));
+    return storedColumns;
+  });
+
+  const handleColumns = (attr, value) => {
+    const updatedColumns = columns.map(item => {
+      if (item.attr === attr) {
+        return { ...item, hidden: !value };
+      }
+      return item;
+    });
+
+    setColumns(updatedColumns);
+    localStorage.setItem(localStorageKey, JSON.stringify(updatedColumns));
+  };
+
   const AlertDelete = useAlert();
   const [currentId, setCurrentId] = useState(null);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(data);
 
   const tableContainerRef = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false);
 
+  const handleScroll = () => {
+    const scrollLeft = tableContainerRef.current.scrollLeft;
+    const maxScrollLeft =
+      tableContainerRef.current.scrollWidth -
+      tableContainerRef.current.clientWidth;
+
+    setIsScrolling(scrollLeft < maxScrollLeft);
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollLeft = tableContainerRef.current.scrollLeft;
-      const maxScrollLeft =
-        tableContainerRef.current.scrollWidth -
-        tableContainerRef.current.clientWidth;
-
-      setIsScrolling(scrollLeft < maxScrollLeft);
-    };
-
-    handleScroll();
+    setTimeout(handleScroll, 1);
 
     const tableContainer = tableContainerRef.current;
     tableContainer.addEventListener('scroll', handleScroll);
@@ -64,9 +94,8 @@ export const Table = props => {
   }, []);
 
   useEffect(() => {
-    setItems(data);
-    //eslint-disable-next-line
-  }, [data]);
+    handleScroll();
+  }, [data, columns, loading]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -132,72 +161,144 @@ export const Table = props => {
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
-          <table className="w-full text-sm text-left rtl:text-right border-separate border-spacing-0 text-secondary-500 dark:text-secondary-400">
+          <table className="min-w-full text-sm text-left rtl:text-right border-separate border-spacing-0 text-secondary-500 dark:text-secondary-400">
             <thead className="text-xs uppercase text-secondary-500 dark:text-secondary-400">
               <tr className="sticky top-0 left-0 z-10 bg-secondary-100 dark:bg-secondary-700">
                 {dndFunc && (
-                  <th className="px-4 py-4 w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10"></th>
+                  <th className="px-4 py-3 w-1 tracking-wider font-medium border-r bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-secondary-200 dark:border-secondary-600"></th>
                 )}
                 {!noSeqNum && (
-                  <th className="px-4 py-4 w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10">
+                  <th className="px-4 py-3 w-1 tracking-wider font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0">
                     #
                   </th>
                 )}
-                {structure.map(column => (
-                  <th
-                    key={column.attr}
-                    className={
-                      column.attr === 'photo'
-                        ? 'px-4 py-4 w-12 font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-l border-secondary-200 dark:border-secondary-600'
-                        : 'px-4 py-4 font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 z-10 border-l border-secondary-200 dark:border-secondary-600'
-                    }
-                  >
-                    {column.label}
-                  </th>
-                ))}
+                {columns
+                  .filter(col => !col.hidden)
+                  .map(column => (
+                    <th
+                      key={column.attr}
+                      className="px-4 py-3 tracking-wider font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-l border-secondary-200 dark:border-secondary-600"
+                    >
+                      {column.attr === 'featured' ? (
+                        <FaRegStar size={18} />
+                      ) : (
+                        column.label
+                      )}
+                    </th>
+                  ))}
                 {(handleUpdate || handleDelete) && (
                   <th
                     className={cn(
-                      'px-4 py-4 w-1 font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 z-10 border-l border-secondary-200 dark:border-secondary-600',
+                      'px-4 py-3 w-1 tracking-wider font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 right-0 border-l border-secondary-200 dark:border-secondary-600',
                       {
-                        'border-l-4 dark:border-secondary-600': isScrolling
+                        'border-special dark:dark-border-special': isScrolling
                       }
                     )}
                   >
-                    Acciones
+                    <div className="relative flex items-center gap-2 justify-center">
+                      <button onClick={() => setIsOpen(!isOpen)}>
+                        <FaTableColumns size={20} />
+                      </button>
+                      <div
+                        ref={dropdownRef}
+                        className={cn(
+                          'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-dark-bottom rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
+                          {
+                            block: isOpen
+                          }
+                        )}
+                      >
+                        <div className="px-2 min-w-[200px] max-h-[300px] overflow-y-auto">
+                          {columns.map((row, index) => (
+                            <InputCheck
+                              key={`ske-row-${index}`}
+                              className="py-1"
+                              name={row.attr}
+                              label={row.label}
+                              value={!row.hidden}
+                              handleChange={e =>
+                                handleColumns(row.attr, e.target.checked)
+                              }
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </th>
                 )}
               </tr>
             </thead>
             <tbody>
+              <tr>
+                {dndFunc && (
+                  <td className="border-r h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600"></td>
+                )}
+                {!noSeqNum && (
+                  <td className="h-2 bg-secondary-100 dark:bg-secondary-700"></td>
+                )}
+                {columns
+                  .filter(col => !col.hidden)
+                  .map((_, index) => (
+                    <td
+                      key={`fill-${index}`}
+                      className="border-l h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600"
+                    ></td>
+                  ))}
+                {(handleUpdate || handleDelete) && (
+                  <td
+                    className={cn(
+                      'h-2 sticky top-0 right-0 border-l bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600',
+                      {
+                        'border-special dark:dark-border-special': isScrolling
+                      }
+                    )}
+                  ></td>
+                )}
+              </tr>
+              {loading && (
+                <Skeleton
+                  isScrolling={isScrolling}
+                  columns={columns.filter(col => !col.hidden)}
+                  noSeqNum={noSeqNum}
+                  dndFunc={dndFunc}
+                  actions={Boolean(handleUpdate || handleDelete)}
+                />
+              )}
+              {!loading &&
+                items.map((row, index) => (
+                  <SortableRow
+                    key={row.id || index}
+                    row={row}
+                    index={index}
+                    size={size}
+                    page={page}
+                    handleUpdate={handleUpdate}
+                    handleDelete={handleDelete}
+                    handleFeature={handleFeature}
+                    highlighted={highlighted}
+                    noSeqNum={noSeqNum}
+                    shortFileName={shortFileName}
+                    handleDeleteEvent={handleDeleteEvent}
+                    structure={columns.filter(col => !col.hidden)}
+                    dndFunc={dndFunc}
+                    isScrolling={isScrolling}
+                  />
+                ))}
               {items.length === 0 && (
                 <tr>
                   <td
                     className="py-4 text-center"
-                    colSpan={structure.length + 2}
+                    colSpan={
+                      columns.filter(col => !col.hidden).length +
+                      (dndFunc ? 1 : 0) +
+                      (!noSeqNum ? 1 : 0) +
+                      (handleUpdate || handleDelete ? 1 : 0)
+                    }
                   >
                     No hay registros disponibles
                   </td>
                 </tr>
               )}
-              {items.map((row, index) => (
-                <SortableRow
-                  key={row.id || index}
-                  row={row}
-                  index={index}
-                  page={page || 1}
-                  handleUpdate={handleUpdate}
-                  handleDelete={handleDelete}
-                  handleFeature={handleFeature}
-                  highlighted={highlighted}
-                  noSeqNum={noSeqNum}
-                  shortFileName={shortFileName}
-                  handleDeleteEvent={handleDeleteEvent}
-                  structure={structure}
-                  dndFunc={dndFunc}
-                  isScrolling={isScrolling}
-                />
-              ))}
             </tbody>
           </table>
           <Alert
@@ -215,6 +316,8 @@ Table.propTypes = {
   className: PropTypes.string,
   structure: PropTypes.array,
   data: PropTypes.array,
+  loading: PropTypes.bool,
+  size: PropTypes.number,
   page: PropTypes.number,
   noSeqNum: PropTypes.bool,
   highlighted: PropTypes.string,

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -34,4 +34,41 @@ body {
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: 0.9em 0.9em;
+}
+
+@layer utilities {
+  .border-special {
+    border: solid;
+    border-image-slice: 1;
+    border-width: 16px;
+    border-image-source: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 2%
+    );
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .dark-border-special {
+    border: solid;
+    border-image-slice: 1;
+    border-width: 16px;
+    border-image-source: linear-gradient(to right, transparent 0%, #000 2%);
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+}
+
+.resize-handle {
+  display: inline-block;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
 }

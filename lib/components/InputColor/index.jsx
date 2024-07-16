@@ -1,8 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-// import { useClickOutside } from '../../hooks/useClickOutside';
-// import { cn } from '../../utilities/styles.utils';
-import { cn } from '../../utils/styles';
+import { cn } from '../../utilities/styles.utilities';
 import { InputContainer } from '../InputContainer';
 
 const InputColor = ({

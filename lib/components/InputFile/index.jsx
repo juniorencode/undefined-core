@@ -1,10 +1,8 @@
 import { useEffect, useId, useState } from 'react';
 import PropTypes from 'prop-types';
 import { IoCloudUploadOutline } from 'react-icons/io5';
-// import { post as postFile, putFile, remove as removeFile } from '../../api/files';
 import { InputContainer } from '../InputContainer';
 import { File } from './File';
-import axios from 'axios';
 
 const InputFile = ({
   className,
@@ -19,30 +17,6 @@ const InputFile = ({
   required
   // ...params
 }) => {
-  //borrar axios
-  postFile = (form, setProgress) =>
-    axios
-      .post('https://api.juniorencode.com/api/storage/file', form, {
-        onUploadProgress: ({ progress, loaded, total }) => {
-          if (setProgress) {
-            total !== loaded &&
-              setProgress(prev => ({ ...prev, progress, loaded, total }));
-          }
-        }
-      })
-      .then(res => res.data)
-      .catch(err => err);
-  putFile = (id, form) =>
-    axios
-      .put('https://api.juniorencode.com/api/storage/file/' + id, form)
-      .then(res => res.data)
-      .catch(err => err);
-  removeFile = id =>
-    axios
-      .delete('https://api.juniorencode.com/api/storage/file/' + id)
-      .then(res => res.data)
-      .catch(err => err);
-
   const inputFile = register(name, { required });
   const urlFile = register('_' + name);
   const domId = useId();
