@@ -17,8 +17,8 @@ export const DataTable = props => {
     handleUpdate,
     handleDelete,
     handleFeature,
-    noSequentialNumber,
-    dndFunc
+    noSeqNum,
+    manageColumns
   } = props;
 
   return (
@@ -41,9 +41,8 @@ export const DataTable = props => {
         handleUpdate={handleUpdate}
         handleDelete={handleDelete}
         handleFeature={handleFeature}
-        highlighted={filter.search}
-        noSequentialNumber={noSequentialNumber}
-        dndFunc={dndFunc}
+        noSeqNum={noSeqNum}
+        manageColumns={manageColumns}
       />
       <div className="flex items-center justify-center sm:justify-between m-3 h-10 dark:text-white">
         <p className="hidden sm:block text-sm text-secondary-400">{`${pagination.from} al ${pagination.to} de ${pagination.total}`}</p>
@@ -70,6 +69,6 @@ DataTable.propTypes = {
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
   handleFeature: PropTypes.func,
-  noSequentialNumber: PropTypes.bool,
-  dndFunc: PropTypes.func
+  noSeqNum: PropTypes.bool,
+  manageColumns: PropTypes.bool
 };
