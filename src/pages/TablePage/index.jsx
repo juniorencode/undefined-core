@@ -120,12 +120,13 @@ export const TablePage = () => {
       setDate={setDate}
       setPage={setPage}
       setSearch={setSearch}
+      dndFunc={() => console.log('dnd')}
       handleCreate={() => console.log('cr')}
       handleUpdate={() => console.log('up')}
       handleDelete={() => console.log('de')}
       handleExport={() => console.log('ex')}
       handleFeature={() => console.log('fe')}
-      dndFunc={() => console.log('dnd')}
+      // manageColumns={false}
     />
   );
 };

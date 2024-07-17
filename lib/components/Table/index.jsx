@@ -38,7 +38,8 @@ export const Table = props => {
     dndFunc,
     handleUpdate,
     handleDelete,
-    handleFeature
+    handleFeature,
+    manageColumns
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -235,39 +236,41 @@ export const Table = props => {
                       }
                     )}
                   >
-                    <div
-                      ref={dropdownRef}
-                      className="relative flex items-center gap-2 justify-center"
-                    >
-                      <button onClick={() => setIsOpen(!isOpen)}>
-                        <FaTableColumns size={20} />
-                      </button>
+                    {manageColumns && (
                       <div
-                        className={cn(
-                          'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-black rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
-                          {
-                            block: isOpen
-                          }
-                        )}
+                        ref={dropdownRef}
+                        className="relative flex items-center gap-2 justify-center"
                       >
-                        <div className="min-w-[200px] max-h-[300px] overflow-y-auto">
-                          {columns.map(
-                            (row, index) =>
-                              row.attr !== 'line' && (
-                                <InputCheck
-                                  key={`ske-row-${index}`}
-                                  name={row.attr}
-                                  label={row.label}
-                                  value={!row.hidden}
-                                  handleChange={val =>
-                                    handleColumns(row.attr, val)
-                                  }
-                                />
-                              )
+                        <button onClick={() => setIsOpen(!isOpen)}>
+                          <FaTableColumns size={20} />
+                        </button>
+                        <div
+                          className={cn(
+                            'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-black rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
+                            {
+                              block: isOpen
+                            }
                           )}
+                        >
+                          <div className="min-w-[200px] max-h-[300px] overflow-y-auto">
+                            {columns.map(
+                              (row, index) =>
+                                row.attr !== 'line' && (
+                                  <InputCheck
+                                    key={`ske-row-${index}`}
+                                    name={row.attr}
+                                    label={row.label}
+                                    value={!row.hidden}
+                                    handleChange={val =>
+                                      handleColumns(row.attr, val)
+                                    }
+                                  />
+                                )
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </th>
                 )}
               </tr>
@@ -378,5 +381,6 @@ Table.propTypes = {
   dndFunc: PropTypes.func,
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
-  handleFeature: PropTypes.func
+  handleFeature: PropTypes.func,
+  manageColumns: PropTypes.bool
 };
