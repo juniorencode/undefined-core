@@ -8,10 +8,6 @@ export const TablePage = () => {
     page: { size: 20 },
     search: 'Hello World..!!'
   });
-  useEffect(() => {
-    console.log(filter.search);
-    // eslint-disable-next-line
-  }, [filter]);
 
   const breadcrumb = [
     {
@@ -34,6 +30,7 @@ export const TablePage = () => {
       attr: 'thumbnail',
       type: 'thumbnail'
     },
+    { attr: 'line' },
     {
       label: 'idCard',
       attr: 'idCard',
@@ -123,12 +120,13 @@ export const TablePage = () => {
       setDate={setDate}
       setPage={setPage}
       setSearch={setSearch}
+      dndFunc={() => console.log('dnd')}
       handleCreate={() => console.log('cr')}
       handleUpdate={() => console.log('up')}
       handleDelete={() => console.log('de')}
       handleExport={() => console.log('ex')}
       handleFeature={() => console.log('fe')}
-      dndFunc={() => console.log('dnd')}
+      // manageColumns={false}
     />
   );
 };

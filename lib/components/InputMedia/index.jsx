@@ -4,6 +4,7 @@ import { IoCloudUploadOutline } from 'react-icons/io5';
 import { InputContainer } from '../InputContainer';
 import { Thumbnail } from '../Thumbnail';
 import { IoIosClose } from 'react-icons/io';
+import { cn } from '../../utilities/styles.utilities';
 
 const InputMedia = ({
   className,
@@ -14,7 +15,8 @@ const InputMedia = ({
   register,
   postFile,
   removeFile,
-  required
+  required,
+  disabled
   // ...params
 }) => {
   const inputFile = register(name, { required });
@@ -125,8 +127,7 @@ const InputMedia = ({
       name={domId}
       error={inputFile.errors[name]?.message}
     >
-      {/* para subir */}
-      {(multiple || !urlThumbnail?.length) && (
+      {!disabled && (multiple || !urlThumbnail?.length) && (
         <label
           className={`flex justify-center w-full mt-2 p-5 text-center border-2 border-dashed cursor-pointer rounded-xl text-secondary-500 border-secondary-300 dark:text-secondary-400 dark:border-secondary-700 ${
             isOver ? 'bg-secondary-100 dark:bg-secondary-900' : ''
@@ -166,13 +167,12 @@ const InputMedia = ({
         </label>
       )}
       <div
-        className={`${
-          multiple
-            ? 'flex flex-wrap gap-3 mt-4'
-            : 'flex justify-center w-full  flex-wrap gap-3 mt-4'
-        } relative `}
+        className={cn('relative flex flex-wrap gap-3 mt-4', {
+          'justify-center w-full': !multiple,
+          'mt-0': disabled && (!inputFile.value || inputFile.value?.length < 1)
+        })}
       >
-        {urlThumbnail?.map((elem, index) => (
+        {urlThumbnail?.map((_, index) => (
           <div
             key={index}
             className={`${
@@ -203,7 +203,7 @@ const InputMedia = ({
                 )}
               </div>
             )}
-            {fileThumbnail[index]?.url && (
+            {!disabled && fileThumbnail[index]?.url && (
               <button
                 className="absolute top-0 right-0 text-secondary-400 hover:text-black dark:text-secondary-400 darkhover:text-white"
                 type="button"
@@ -215,6 +215,11 @@ const InputMedia = ({
           </div>
         ))}
       </div>
+      {disabled && (!inputFile.value || inputFile.value?.length < 1) && (
+        <div className="p-4 w-full text-sm text-center italic border-2 rounded-lg text-secondary-400 border-secondary-700">
+          No hay archivos disponibles
+        </div>
+      )}
     </InputContainer>
   );
 };
@@ -228,7 +233,8 @@ InputMedia.propTypes = {
   register: PropTypes.func.isRequired,
   postFile: PropTypes.func.isRequired,
   removeFile: PropTypes.func.isRequired,
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 export { InputMedia };

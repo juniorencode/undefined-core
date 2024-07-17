@@ -2,7 +2,7 @@
   "data": [
     {
       "id": "1",
-      "featured": false,
+      "featured": true,
       "thumbnail": {
         "_id": "6643d0d2940ffd4bde14ac4c",
         "name": "slice5.jpg",

@@ -13,10 +13,11 @@ export const DataTable = props => {
     setDate,
     setPage,
     setSearch,
+    dndFunc,
     handleUpdate,
     handleDelete,
     handleFeature,
-    noSeqNum,
+    noSequentialNumber,
     dndFunc
   } = props;
 
@@ -35,11 +36,13 @@ export const DataTable = props => {
         loading={loading}
         size={filter.page.size}
         page={filter.page.number}
+        dndFunc={dndFunc}
+        highlighted={filter.search}
         handleUpdate={handleUpdate}
         handleDelete={handleDelete}
         handleFeature={handleFeature}
         highlighted={filter.search}
-        noSeqNum={noSeqNum}
+        noSequentialNumber={noSequentialNumber}
         dndFunc={dndFunc}
       />
       <div className="flex items-center justify-center sm:justify-between m-3 h-10 dark:text-white">
@@ -63,9 +66,10 @@ DataTable.propTypes = {
   setDate: PropTypes.func,
   setPage: PropTypes.func,
   setSearch: PropTypes.func,
+  dndFunc: PropTypes.func,
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
   handleFeature: PropTypes.func,
-  noSeqNum: PropTypes.bool,
+  noSequentialNumber: PropTypes.bool,
   dndFunc: PropTypes.func
 };

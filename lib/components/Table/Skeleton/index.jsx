@@ -30,7 +30,12 @@ export const Skeleton = ({
             </td>
           )}
           {columns.map((column, index) => (
-            <td key={`skeleton-col-${index}`} className="px-4 py-1.5">
+            <td
+              key={`skeleton-col-${index}`}
+              className={cn('px-4 py-1.5', {
+                'border-l-4 dark:border-secondary-400': column.line
+              })}
+            >
               {column.type === 'important' && (
                 <svg
                   fill="currentColor"

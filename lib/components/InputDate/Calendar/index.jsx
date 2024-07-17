@@ -22,9 +22,10 @@ export const Calendar = props => {
 
   const renderCalendar = useMemo(() => {
     const days = [];
-    const totalDays = daysInMonth(selectedDate);
+    const _selectedDate = new Date(selectedDate);
+    const totalDays = daysInMonth(_selectedDate);
     const firstDayOfWeek =
-      selectedDate.getDay() % 7 === 0 ? 7 : selectedDate.getDay();
+      _selectedDate.getDay() % 7 === 0 ? 7 : _selectedDate.getDay();
 
     for (let i = 1; i < firstDayOfWeek; i++) {
       days.push(<span key={`empty-${i}`} className="block"></span>);
@@ -32,8 +33,8 @@ export const Calendar = props => {
 
     for (let i = 1; i <= totalDays; i++) {
       const date = new Date(
-        selectedDate.getFullYear(),
-        selectedDate.getMonth(),
+        _selectedDate.getFullYear(),
+        _selectedDate.getMonth(),
         i
       );
       days.push(
@@ -46,7 +47,7 @@ export const Calendar = props => {
                 daySelected === formatDate(date)
             }
           )}
-          onClick={() => onChange(date)}
+          onClick={() => onChange(date.toISOString())}
         >
           {i}
         </span>
@@ -67,9 +68,9 @@ export const Calendar = props => {
           <IoIosArrowBack />
         </button>
         <span className="px-5 py-2.5 text-sm font-semibold rounded-lg text-secondary-900 dark:text-white bg-transparent dark:bg-secondary-700">
-          {`${
-            nameOfMonths[selectedDate.getMonth()]
-          } ${selectedDate.getFullYear()}`}
+          {`${nameOfMonths[new Date(selectedDate).getMonth()]} ${new Date(
+            selectedDate
+          ).getFullYear()}`}
         </span>
         <button
           className="p-2.5 text-lg focus:ring-4 focus:ring-opacity-40 dark:focus:ring-opacity-40 rounded-lg outline-none text-secondary-500 dark:text-white hover:text-secondary-900 dark:hover:text-white bg-transparent dark:bg-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600 focus:ring-primary-600 dark:focus:ring-primary-500"
@@ -100,7 +101,7 @@ export const Calendar = props => {
         <button
           className="px-5 py-2 w-1/2 text-sm text-center font-medium rounded-lg border focus:ring-4 focus:ring-opacity-30 dark:focus:ring-opacity-50 select-none transition-all text-white bg-primary-700 dark:bg-primary-600 hover:bg-primary-800 dark:hover:bg-primary-700 border-primary-600 dark:border-primary-600 hover:border-primary-500 dark:hover:border-primary-700 focus:ring-primary-600 dark:focus:ring-primary-700"
           type="button"
-          onClick={() => onChange(new Date())}
+          onClick={() => onChange(new Date().toISOString())}
         >
           Hoy
         </button>

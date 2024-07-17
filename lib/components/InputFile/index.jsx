@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { IoCloudUploadOutline } from 'react-icons/io5';
 import { InputContainer } from '../InputContainer';
 import { File } from './File';
+import { cn } from '../../utilities/styles.utilities';
 
 const InputFile = ({
   className,
@@ -14,7 +15,8 @@ const InputFile = ({
   putFile,
   removeFile,
   register,
-  required
+  required,
+  disabled
   // ...params
 }) => {
   const inputFile = register(name, { required });
@@ -111,48 +113,53 @@ const InputFile = ({
       name={domId}
       error={inputFile.errors[name]?.message}
     >
-      {(multiple ||
-        (!progress && !inputFile.value) ||
-        (inputFile.value?.length === 0 && !progress && multiple)) && (
-        <label
-          className={`flex justify-center w-full mt-2 p-5 text-center border-2 border-dashed cursor-pointer rounded-xl text-secondary-500 border-secondary-300 dark:text-secondary-400 dark:border-secondary-700 ${
-            isOver ? 'bg-secondary-100 dark:bg-secondary-900' : ''
-          }`}
-          htmlFor={domId}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragEnter={handleDragEnter}
-          onDragLeave={handleDragLeave}
-        >
-          <div className="flex flex-col items-center pointer-events-none">
-            <IoCloudUploadOutline size={32} />
-            <h2 className="mt-1 font-medium tracking-wide text-secondary-700 dark:text-secondary-200">
-              {isOver
-                ? 'Suelta tus archivo aquí'
-                : 'Selecciona o arrastra tu archivos aquí'}
-            </h2>
-            <p className="mt-2 text-xs tracking-wide text-secondary-500 dark:text-secondary-400">
-              {accept
-                ? [...accept]
-                    .slice(0, -1)
-                    .map(elem => elem.toUpperCase())
-                    .join(', ') +
-                  ' o ' +
-                  accept[accept.length - 1].toUpperCase()
-                : 'Todos los tipos de archivos son aceptados'}
-            </p>
-          </div>
-          <input
-            className="hidden"
-            id={domId}
-            type="file"
-            onChange={handleSelect}
-            multiple={multiple}
-            accept={'.' + accept.join(',.')}
-          />
-        </label>
-      )}
-      <div className="flex flex-col mt-4 gap-4">
+      {!disabled &&
+        (multiple ||
+          (!progress && !inputFile.value) ||
+          (inputFile.value?.length === 0 && !progress && multiple)) && (
+          <label
+            className={`flex justify-center w-full mt-2 p-5 text-center border-2 border-dashed cursor-pointer rounded-xl text-secondary-500 border-secondary-300 dark:text-secondary-400 dark:border-secondary-700 ${
+              isOver ? 'bg-secondary-100 dark:bg-secondary-900' : ''
+            }`}
+            htmlFor={domId}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+          >
+            <div className="flex flex-col items-center pointer-events-none">
+              <IoCloudUploadOutline size={32} />
+              <h2 className="mt-1 font-medium tracking-wide text-secondary-700 dark:text-secondary-200">
+                {isOver
+                  ? 'Suelta tus archivo aquí'
+                  : 'Selecciona o arrastra tu archivos aquí'}
+              </h2>
+              <p className="mt-2 text-xs tracking-wide text-secondary-500 dark:text-secondary-400">
+                {accept
+                  ? [...accept]
+                      .slice(0, -1)
+                      .map(elem => elem.toUpperCase())
+                      .join(', ') +
+                    ' o ' +
+                    accept[accept.length - 1].toUpperCase()
+                  : 'Todos los tipos de archivos son aceptados'}
+              </p>
+            </div>
+            <input
+              className="hidden"
+              id={domId}
+              type="file"
+              onChange={handleSelect}
+              multiple={multiple}
+              accept={'.' + accept.join(',.')}
+            />
+          </label>
+        )}
+      <div
+        className={cn('flex flex-col mt-4 gap-4', {
+          'mt-0': disabled && (!inputFile.value || inputFile.value?.length < 1)
+        })}
+      >
         {inputFile.value?.map((_, index) => (
           <File
             key={index}
@@ -166,6 +173,7 @@ const InputFile = ({
             }
             handleOpen={() => handleOpen(urlFile.value?.[index].url)}
             handleUnlink={() => handleUnlink(urlFile.value?.[index]._id)}
+            disabled={disabled}
           />
         ))}
         {progress && (
@@ -189,6 +197,11 @@ const InputFile = ({
             />
           ))}
       </div>
+      {disabled && (!inputFile.value || inputFile.value?.length < 1) && (
+        <div className="p-4 w-full text-sm text-center italic border-2 rounded-lg text-secondary-400 border-secondary-700">
+          No hay archivos disponibles
+        </div>
+      )}
     </InputContainer>
   );
 };
@@ -203,7 +216,8 @@ InputFile.propTypes = {
   postFile: PropTypes.func.isRequired,
   putFile: PropTypes.func.isRequired,
   removeFile: PropTypes.func.isRequired,
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 export { InputFile };

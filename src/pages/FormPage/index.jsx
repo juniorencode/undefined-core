@@ -27,21 +27,34 @@ export const FormPage = () => {
     // select: '1',
     // textarea: 'qwe',
     // checkbox: true,
-    // switch: true,
-    media: ['66969f8d25ecd64998abe515'],
-    _media: [
+    // switch: true
+    file: ['66856d7c3e4e4ac9c65ca7a2', '6685820e3e4e4ac9c65caf4e'],
+    _file: [
       {
-        _id: '66969f8d25ecd64998abe515',
-        name: 'File 1-200x200.png',
-        storage: '1721147277940-File 1-200x200.png',
+        _id: '66856d7c3e4e4ac9c65ca7a2',
+        name: 'WhatsApp Image 2024-07-03 at 10.19.12 AM.jpeg',
+        storage: '1720020348463-WhatsApp Image 2024-07-03 at 10.19.12 AM.jpeg',
         isPhoto: false,
-        size: 27799,
-        type: 'image/png',
+        size: 45987,
+        type: 'image/jpeg',
         deleted: false,
-        createdAt: '2024-07-16T16:27:57.954Z',
-        updatedAt: '2024-07-16T16:27:57.954Z',
-        url: 'https://backend.grupocotrina.club/public/1721147277940-File 1-200x200.png',
-        id: '66969f8d25ecd64998abe515'
+        createdAt: '2024-07-03T15:25:48.465Z',
+        updatedAt: '2024-07-03T15:25:48.465Z',
+        url: 'https://backend.grupocotrina.club/public/1720020348463-WhatsApp Image 2024-07-03 at 10.19.12 AM.jpeg',
+        id: '66856d7c3e4e4ac9c65ca7a2'
+      },
+      {
+        _id: '6685820e3e4e4ac9c65caf4e',
+        name: 'WhatsApp Image 2024-06-27 at 3.29.49 PM.jpeg',
+        storage: '1720025614883-WhatsApp Image 2024-06-27 at 3.29.49 PM.jpeg',
+        isPhoto: false,
+        size: 36816,
+        type: 'image/jpeg',
+        deleted: false,
+        createdAt: '2024-07-03T16:53:34.885Z',
+        updatedAt: '2024-07-03T16:53:34.885Z',
+        url: 'https://backend.grupocotrina.club/public/1720025614883-WhatsApp Image 2024-06-27 at 3.29.49 PM.jpeg',
+        id: '6685820e3e4e4ac9c65caf4e'
       }
     ]
   });
@@ -72,6 +85,7 @@ export const FormPage = () => {
       })
       .then(res => res.data)
       .catch(err => err);
+
   const putFile = (id, form) =>
     axios
       .put('https://api.juniorencode.com/api/storage/file/' + id, form)
@@ -109,6 +123,7 @@ export const FormPage = () => {
           postFile={postFile}
           removeFile={removeFile}
           multiple
+          disabled
         />
         <InputFile
           label="File"
@@ -119,6 +134,7 @@ export const FormPage = () => {
           putFile={putFile}
           removeFile={removeFile}
           multiple
+          disabled
         />
         <InputSelect
           className="col-span-12"

@@ -21,7 +21,8 @@ const File = ({
   handleDelete,
   handleUpdate,
   handleOpen,
-  handleUnlink
+  handleUnlink,
+  disabled
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ModalUpdate = useModal();
@@ -119,66 +120,68 @@ const File = ({
             </p>
           </div>
         </div>
-        <div className="flex items-center justify-center" ref={dropdownRef}>
-          <button
-            className="w-6 h-6 rounded-xl hover:text-black dark:hover:text-white"
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <HiOutlineDotsVertical size={22} />
-          </button>
-          {isOpen && (
-            <div className="absolute top-full right-0 z-20 my-2 w-44 rounded-lg shadow-3xl bg-white dark:bg-secondary-700">
-              <ul className="py-2 text-sm text-black dark:text-secondary-200">
-                <li>
-                  <button
-                    className="flex items-center gap-2 px-4 py-2 w-full text-left hover:bg-secondary-100 dark:hover:bg-secondary-600"
-                    onClick={() => handleModal()}
-                  >
-                    <AiFillEdit size={16} />
-                    Cambiar Nombre
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="flex items-center gap-2 px-4 py-2 w-full text-left hover:bg-secondary-100 dark:hover:bg-secondary-600"
-                    onClick={() => {
-                      handleOpen();
-                      setIsOpen(!isOpen);
-                    }}
-                  >
-                    <MdDownload size={16} />
-                    Descargar
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="flex items-center gap-2 px-4 py-2 w-full text-left hover:bg-secondary-100 dark:hover:bg-secondary-600"
-                    onClick={() => {
-                      handleUnlink();
-                      setIsOpen(!isOpen);
-                    }}
-                  >
-                    <MdLinkOff size={16} />
-                    Desvincular
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="flex items-center gap-2 px-4 py-2 w-full text-left text-red-600 dark:text-red-400 hover:bg-secondary-100 dark:hover:bg-secondary-600"
-                    onClick={() => {
-                      handleDelete();
-                      setIsOpen(!isOpen);
-                    }}
-                  >
-                    <IoMdTrash size={16} />
-                    Borrar
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
+        {!disabled && (
+          <div className="flex items-center justify-center" ref={dropdownRef}>
+            <button
+              className="w-6 h-6 rounded-xl hover:text-black dark:hover:text-white"
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <HiOutlineDotsVertical size={22} />
+            </button>
+            {isOpen && (
+              <div className="absolute top-full right-0 z-20 my-2 w-44 rounded-lg shadow-3xl bg-white dark:bg-secondary-700">
+                <ul className="py-2 text-sm text-black dark:text-secondary-200">
+                  <li>
+                    <button
+                      className="flex items-center gap-2 px-4 py-2 w-full text-left hover:bg-secondary-100 dark:hover:bg-secondary-600"
+                      onClick={() => handleModal()}
+                    >
+                      <AiFillEdit size={16} />
+                      Cambiar Nombre
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="flex items-center gap-2 px-4 py-2 w-full text-left hover:bg-secondary-100 dark:hover:bg-secondary-600"
+                      onClick={() => {
+                        handleOpen();
+                        setIsOpen(!isOpen);
+                      }}
+                    >
+                      <MdDownload size={16} />
+                      Descargar
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="flex items-center gap-2 px-4 py-2 w-full text-left hover:bg-secondary-100 dark:hover:bg-secondary-600"
+                      onClick={() => {
+                        handleUnlink();
+                        setIsOpen(!isOpen);
+                      }}
+                    >
+                      <MdLinkOff size={16} />
+                      Desvincular
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="flex items-center gap-2 px-4 py-2 w-full text-left text-red-600 dark:text-red-400 hover:bg-secondary-100 dark:hover:bg-secondary-600"
+                      onClick={() => {
+                        handleDelete();
+                        setIsOpen(!isOpen);
+                      }}
+                    >
+                      <IoMdTrash size={16} />
+                      Borrar
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       {!url && (
         <div className="flex items-center gap-4">
@@ -220,7 +223,8 @@ File.propTypes = {
   handleDelete: PropTypes.func,
   handleUpdate: PropTypes.func,
   handleOpen: PropTypes.func,
-  handleUnlink: PropTypes.func
+  handleUnlink: PropTypes.func,
+  disabled: PropTypes.bool
 };
 
 export { File };

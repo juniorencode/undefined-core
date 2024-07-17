@@ -18,13 +18,14 @@ export const DataTableLayout = props => {
     setDate,
     setPage,
     setSearch,
+    dndFunc,
     handleCreate,
     handleUpdate,
     handleDelete,
     handleExport,
     handleFeature,
     noSeqNum,
-    dndFunc
+    manageColumns = true
   } = props;
 
   return (
@@ -63,11 +64,11 @@ export const DataTableLayout = props => {
           setDate={setDate}
           setPage={setPage}
           setSearch={setSearch}
+          dndFunc={dndFunc}
           handleUpdate={handleUpdate}
           handleDelete={handleDelete}
           handleFeature={handleFeature}
-          dndFunc={dndFunc}
-          noSeqNum={noSeqNum}
+          manageColumns={manageColumns}
         />
       </Card>
     </BaseLayout>
@@ -90,11 +91,11 @@ DataTableLayout.propTypes = {
   setDate: PropTypes.func,
   setPage: PropTypes.func,
   setSearch: PropTypes.func,
+  dndFunc: PropTypes.func,
   handleCreate: PropTypes.func,
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
   handleExport: PropTypes.func,
   handleFeature: PropTypes.func,
-  noSeqNum: PropTypes.bool,
-  dndFunc: PropTypes.func
+  manageColumns: PropTypes.bool
 };

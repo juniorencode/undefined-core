@@ -21,12 +21,12 @@ export const InputCheck = props => {
         name={name}
         type="checkbox"
         checked={value}
-        disabled={true}
+        readOnly
         {...params}
       />
       {label && (
         <label
-          className="ml-2 px-2 text-sm font-medium cursor-pointer text-neutral-900 dark:text-neutral-300"
+          className="ml-2 px-2 text-sm font-medium cursor-pointer text-neutral-900 dark:text-neutral-300 pointer-events-none"
           htmlFor={domId}
         >
           {label}
