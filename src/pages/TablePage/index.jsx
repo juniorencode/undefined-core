@@ -8,10 +8,6 @@ export const TablePage = () => {
     page: { size: 20 },
     search: 'Hello World..!!'
   });
-  useEffect(() => {
-    console.log(filter.search);
-    // eslint-disable-next-line
-  }, [filter]);
 
   const breadcrumb = [
     {
@@ -34,6 +30,7 @@ export const TablePage = () => {
       attr: 'thumbnail',
       type: 'thumbnail'
     },
+    { attr: 'line' },
     {
       label: 'idCard',
       attr: 'idCard',

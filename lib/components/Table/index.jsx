@@ -45,11 +45,42 @@ export const Table = props => {
   const dropdownRef = useClickOutside(() => setIsOpen(false));
   const localStorageKey = window.location.pathname;
 
+  const calculateLine = _columns => {
+    const _newColumns = JSON.parse(JSON.stringify(_columns)).map(col => ({
+      ...col,
+      line: false
+    }));
+
+    for (let i = 0; i < _newColumns.length; i++) {
+      if (_newColumns[i].attr === 'line') {
+        for (let j = i + 1; j < _newColumns.length; j++) {
+          if (_newColumns[j].attr !== 'line' && !_newColumns[j].hidden) {
+            _newColumns[j].line = true;
+            break;
+          }
+        }
+      }
+    }
+
+    return _newColumns;
+  };
+
+  const arraysAreEqual = (arr1, arr2) => {
+    if (arr1.length !== arr2.length) return false;
+    for (let i = 0; i < arr1.length; i++) {
+      if (JSON.stringify(arr1[i]) !== JSON.stringify(arr2[i])) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const [columns, setColumns] = useState(() => {
-    const storedColumns =
-      JSON.parse(localStorage.getItem(localStorageKey)) ||
-      structure.map(col => ({ ...col, hidden: false }));
-    return storedColumns;
+    const _storage = JSON.parse(localStorage.getItem(localStorageKey));
+    const _default = calculateLine(
+      structure.map(col => ({ ...col, hidden: false }))
+    );
+    return arraysAreEqual(_storage, _default) ? _storage : _default;
   });
 
   const handleColumns = (attr, value) => {
@@ -60,8 +91,11 @@ export const Table = props => {
       return item;
     });
 
-    setColumns(updatedColumns);
-    localStorage.setItem(localStorageKey, JSON.stringify(updatedColumns));
+    setColumns(calculateLine(updatedColumns));
+    localStorage.setItem(
+      localStorageKey,
+      JSON.stringify(calculateLine(updatedColumns))
+    );
   };
 
   const AlertDelete = useAlert();
@@ -173,11 +207,16 @@ export const Table = props => {
                   </th>
                 )}
                 {columns
-                  .filter(col => !col.hidden)
+                  .filter(col => col.attr !== 'line' && !col.hidden)
                   .map(column => (
                     <th
                       key={column.attr}
-                      className="px-4 py-3 tracking-wider font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-l border-secondary-200 dark:border-secondary-600"
+                      className={cn(
+                        'px-4 py-3 tracking-wider font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-l border-secondary-200 dark:border-secondary-600',
+                        {
+                          'border-l-4 dark:border-secondary-400': column.line
+                        }
+                      )}
                     >
                       {column.attr === 'featured' ? (
                         <FaRegStar size={18} />
@@ -196,12 +235,14 @@ export const Table = props => {
                       }
                     )}
                   >
-                    <div className="relative flex items-center gap-2 justify-center">
+                    <div
+                      ref={dropdownRef}
+                      className="relative flex items-center gap-2 justify-center"
+                    >
                       <button onClick={() => setIsOpen(!isOpen)}>
                         <FaTableColumns size={20} />
                       </button>
                       <div
-                        ref={dropdownRef}
                         className={cn(
                           'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-black rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
                           {
@@ -210,15 +251,20 @@ export const Table = props => {
                         )}
                       >
                         <div className="min-w-[200px] max-h-[300px] overflow-y-auto">
-                          {columns.map((row, index) => (
-                            <InputCheck
-                              key={`ske-row-${index}`}
-                              name={row.attr}
-                              label={row.label}
-                              value={!row.hidden}
-                              handleChange={val => handleColumns(row.attr, val)}
-                            />
-                          ))}
+                          {columns.map(
+                            (row, index) =>
+                              row.attr !== 'line' && (
+                                <InputCheck
+                                  key={`ske-row-${index}`}
+                                  name={row.attr}
+                                  label={row.label}
+                                  value={!row.hidden}
+                                  handleChange={val =>
+                                    handleColumns(row.attr, val)
+                                  }
+                                />
+                              )
+                          )}
                         </div>
                       </div>
                     </div>
@@ -235,11 +281,16 @@ export const Table = props => {
                   <td className="h-2 bg-secondary-100 dark:bg-secondary-700"></td>
                 )}
                 {columns
-                  .filter(col => !col.hidden)
-                  .map((_, index) => (
+                  .filter(col => col.attr !== 'line' && !col.hidden)
+                  .map((col, index) => (
                     <td
                       key={`fill-${index}`}
-                      className="border-l h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600"
+                      className={cn(
+                        'border-l h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600',
+                        {
+                          'border-l-4 dark:border-secondary-400': col.line
+                        }
+                      )}
                     ></td>
                   ))}
                 {(handleUpdate || handleDelete) && (
@@ -257,7 +308,9 @@ export const Table = props => {
               {loading && (
                 <Skeleton
                   isScrolling={isScrolling}
-                  columns={columns.filter(col => !col.hidden)}
+                  columns={columns.filter(
+                    col => col.attr !== 'line' && !col.hidden
+                  )}
                   noSeqNum={noSeqNum}
                   dndFunc={dndFunc}
                   actions={Boolean(handleUpdate || handleDelete)}
@@ -278,7 +331,9 @@ export const Table = props => {
                     noSeqNum={noSeqNum}
                     shortFileName={shortFileName}
                     handleDeleteEvent={handleDeleteEvent}
-                    structure={columns.filter(col => !col.hidden)}
+                    structure={columns.filter(
+                      col => col.attr !== 'line' && !col.hidden
+                    )}
                     dndFunc={dndFunc}
                     isScrolling={isScrolling}
                   />
