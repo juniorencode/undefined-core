@@ -15,7 +15,7 @@ export const InputDate = props => {
   const domRef = useClickOutside(() => setIsOpen(false));
   const [popperRef, setPopperRef] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
   const [daySelected, setDaySelected] = useState(null);
   const { errors, value, handleChange } = register(name, { required });
 
@@ -25,12 +25,12 @@ export const InputDate = props => {
 
   useEffect(() => {
     setDaySelected(formatDate(value));
-    value && setSelectedDate(new Date(value));
+    value && setSelectedDate(new Date(value).toISOString());
     // eslint-disable-next-line
   }, [value]);
 
   useEffect(() => {
-    if (today) handleChange(new Date());
+    if (today) handleChange(new Date().toISOString());
     // eslint-disable-next-line
   }, [today]);
 
@@ -45,7 +45,7 @@ export const InputDate = props => {
 
   const onChange = useCallback(
     date => {
-      handleChange(date.toISOString());
+      handleChange(date);
       setIsOpen(false);
     },
     [handleChange]
@@ -53,13 +53,13 @@ export const InputDate = props => {
 
   const previousMonth = useCallback(() => {
     const newDate = new Date(selectedDate);
-    newDate.setMonth(selectedDate.getMonth() - 1);
+    newDate.setMonth(newDate.getMonth() - 1);
     setSelectedDate(newDate);
   }, [selectedDate]);
 
   const nextMonth = useCallback(() => {
     const newDate = new Date(selectedDate);
-    newDate.setMonth(selectedDate.getMonth() + 1);
+    newDate.setMonth(newDate.getMonth() + 1);
     setSelectedDate(newDate);
   }, [selectedDate]);
 
