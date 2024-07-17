@@ -306,9 +306,9 @@ export const SortableRow = props => {
                       <FaFile size={18} />
                       <span
                         className={cn(
-                          'absolute -top-[26px] left-1/2 -translate-x-1/2 px-3 py-1 hidden text-xs rounded-lg text-secondary-100 bg-black',
+                          'absolute -top-[26px] left-1/2 -translate-x-1/2 px-3 py-1 hidden w-max text-xs rounded-lg text-secondary-100 bg-black',
                           {
-                            inline:
+                            flex:
                               isHovering[0] === indexItem &&
                               isHovering[1] === indexColum &&
                               isHovering[2] === index
