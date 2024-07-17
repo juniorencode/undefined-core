@@ -25,6 +25,7 @@ const InputMedia = ({
   const [waiting, setWaiting] = useState([]);
   const [progress, setProgress] = useState();
   const [isOver, setIsOver] = useState(false);
+
   const postData = async file => {
     const formData = new FormData();
     formData.append('name', file.name);
@@ -37,6 +38,7 @@ const InputMedia = ({
     else urlFile.handleChange([response.data]);
     setProgress(null);
   };
+
   const handleDragOver = e => e.preventDefault();
   const handleDragEnter = () => !isOver && setIsOver(true);
   const handleDragLeave = () => isOver && setIsOver(false);
@@ -91,6 +93,14 @@ const InputMedia = ({
         ...prevFileThumbnail.slice(urlFile.value.length)
       ]);
     }
+    //eslint-disable-next-line
+  }, [urlFile.value]);
+  useEffect(() => {
+    urlFile &&
+      urlFile.value &&
+      urlFile.value.length &&
+      !urlThumbnail.length &&
+      setUrlThumbnail(urlFile.value?.map(item => item.url));
     //eslint-disable-next-line
   }, [urlFile.value]);
 

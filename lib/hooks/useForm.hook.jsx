@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { getValidationError } from '../utilities/validate.utilities';
 import { formatOutput } from '../utilities/format.utilities';
 
@@ -9,6 +9,8 @@ export const useForm = (initialForm = {}) => {
   const fieldsValidation = useRef({});
   const fieldsOutput = useRef({});
   const onSubmit = useRef(null);
+
+  useEffect(() => {});
 
   const register = useCallback(
     (name, validations = {}, output) => {
@@ -26,12 +28,44 @@ export const useForm = (initialForm = {}) => {
     [errors, formData]
   );
 
+  const isInvalidValue = value => {
+    if (value === null || value === undefined || value === '') {
+      return true;
+    }
+    if (Array.isArray(value)) {
+      return value.every(isInvalidValue);
+    }
+    return false;
+  };
+
+  const deepFilter = obj => {
+    if (typeof obj !== 'object' || obj === null) {
+      return obj;
+    }
+
+    if (Array.isArray(obj)) {
+      return obj.map(deepFilter).filter(item => !isInvalidValue(item));
+    }
+
+    return (
+      Object.entries(obj)
+        //eslint-disable-next-line
+        .filter(([_, value]) => !isInvalidValue(value))
+        .reduce((acc, [key, value]) => {
+          acc[key] = deepFilter(value);
+          return acc;
+        }, {})
+    );
+  };
+
   const reset = useCallback(() => {
     setFormData(initialForm);
+    //eslint-disable-next-line
   }, [initialForm]);
 
   const setForm = useCallback(data => {
-    setFormData(data);
+    setFormData(deepFilter(data));
+    //eslint-disable-next-line
   }, []);
 
   const handleSubmit = useCallback(

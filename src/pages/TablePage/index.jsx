@@ -126,7 +126,7 @@ export const TablePage = () => {
       handleDelete={() => console.log('de')}
       handleExport={() => console.log('ex')}
       handleFeature={() => console.log('fe')}
-      // manageColumns={false}
+      manageColumns={false}
     />
   );
 };

@@ -67,6 +67,7 @@ export const Table = props => {
   };
 
   const arraysAreEqual = (arr1, arr2) => {
+    if (!arr1) return false;
     if (arr1.length !== arr2.length) return false;
     for (let i = 0; i < arr1.length; i++) {
       if (JSON.stringify(arr1[i]) !== JSON.stringify(arr2[i])) {

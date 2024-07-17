@@ -28,8 +28,8 @@ export const FormPage = () => {
     // textarea: 'qwe',
     // checkbox: true,
     // switch: true
-    file: ['66856d7c3e4e4ac9c65ca7a2', '6685820e3e4e4ac9c65caf4e'],
-    _file: [
+    media: ['66856d7c3e4e4ac9c65ca7a2', '6685820e3e4e4ac9c65caf4e'],
+    _media: [
       {
         _id: '66856d7c3e4e4ac9c65ca7a2',
         name: 'WhatsApp Image 2024-07-03 at 10.19.12 AM.jpeg',
@@ -73,6 +73,7 @@ export const FormPage = () => {
   Form.registerSubmit(form => {
     console.log(form);
   });
+
   const postFile = (form, setProgress) =>
     axios
       .post('https://api.juniorencode.com/api/storage/file', form, {
@@ -113,6 +114,7 @@ export const FormPage = () => {
           accept={['jpeg', 'jpg', 'png', 'webp', 'mp4']}
           register={Form.register}
           postFile={postFile}
+          multiple
           removeFile={removeFile}
         />
         <InputMedia
