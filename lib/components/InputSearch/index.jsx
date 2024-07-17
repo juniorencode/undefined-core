@@ -44,6 +44,11 @@ export const InputSearch = props => {
   });
 
   useEffect(() => {
+    if (options.length === 0) return;
+    setFilteredOptions(options);
+  }, [options]);
+
+  useEffect(() => {
     if (inputRef.current) {
       focused && inputRef.current.focus();
       focused && inputRef.current.value && inputRef.current.select();
