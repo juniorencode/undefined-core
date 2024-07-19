@@ -3,7 +3,7 @@ import { FaBookOpen, FaHome, FaTable } from 'react-icons/fa';
 import { AppRoutes } from './routes/app.routes';
 import { setNavigation, setHandleLogout } from '../lib/main';
 import { MdError } from 'react-icons/md';
-import { IoShieldSharp } from 'react-icons/io5';
+import { IoSettingsSharp, IoShieldSharp } from 'react-icons/io5';
 
 setNavigation([
   {
@@ -30,6 +30,11 @@ setNavigation([
     label: 'Not Found',
     path: '/not-found',
     icon: <MdError size={18} />
+  },
+  {
+    label: 'Settings',
+    path: '/settings',
+    icon: <IoSettingsSharp size={18} />
   }
 ]);
 

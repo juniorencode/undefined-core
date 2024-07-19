@@ -14,9 +14,7 @@ export const DataFormLayout = props => {
         <Breadcrumb options={breadcrumb} />
       </div>
       {title && (
-        <div className="flex items-center justify-between gap-4 mb-4">
-          <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
-        </div>
+        <h1 className="mb-4 text-3xl font-bold dark:text-white">{title}</h1>
       )}
       <Card>
         <DataForm
