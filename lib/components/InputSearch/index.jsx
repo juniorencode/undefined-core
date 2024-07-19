@@ -152,7 +152,10 @@ export const InputSearch = props => {
                 }
                 onChange={onChange}
                 onFocus={() => setFocus(true)}
-                onBlur={() => setFocus(false)}
+                onBlur={() => {
+                  setFocus(false);
+                  setIsOpen(false);
+                }}
                 autoComplete={autoComplete ? 'on' : 'off'}
                 disabled={disabled}
                 {...params}
@@ -208,7 +211,10 @@ export const InputSearch = props => {
                 autoComplete={autoComplete ? 'on' : 'off'}
                 disabled={disabled}
                 onChange={onChange}
-                onBlur={() => setFocus(false)}
+                onBlur={() => {
+                  setFocus(false);
+                  setIsOpen(false);
+                }}
                 {...params}
               />
             </ul>

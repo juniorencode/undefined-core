@@ -155,7 +155,7 @@ export const FormPage = () => {
           ]}
           funcDelete={id => console.log('delete: ' + id)}
           register={Form.register}
-          firstValue
+          // firstValue
           // required
         />
         <InputSearch

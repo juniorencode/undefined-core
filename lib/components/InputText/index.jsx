@@ -242,7 +242,10 @@ export const InputText = props => {
               onChange={onChange}
               onClick={() => setIsOpen(true)}
               onFocus={() => setFocus(true)}
-              onBlur={() => setFocus(false)}
+              onBlur={() => {
+                setFocus(false);
+                setIsOpen(false);
+              }}
               autoComplete={autoComplete ? 'on' : 'off'}
               disabled={disabled}
               {...params}

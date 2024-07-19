@@ -80,9 +80,9 @@ export const InputSelect = props => {
       error={errors[name]?.message}
     >
       <div className="relative" ref={domRef}>
-        <div
+        <button
           className={cn(
-            'flex items-center w-full justify-between border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400 p-2.5 min-h-12 sm:text-sm cursor-text',
+            'flex items-center w-full justify-between border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400 p-2.5 min-h-12 sm:text-sm cursor-pointer',
             {
               'ring-4 ring-opacity-30 dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
                 isOpen
@@ -90,6 +90,7 @@ export const InputSelect = props => {
           )}
           type="button"
           onClick={handleClick}
+          onBlur={() => setIsOpen(false)}
           {...params}
         >
           {!multiple ? (
@@ -108,9 +109,8 @@ export const InputSelect = props => {
                   >
                     {options.find(opt => opt.value === elem).label}
 
-                    <button
+                    <span
                       className="ml-1 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
-                      type="button"
                       onClick={e => {
                         e.stopPropagation();
                         handleRemove(e, elem);
@@ -118,7 +118,7 @@ export const InputSelect = props => {
                       }}
                     >
                       <IoMdClose />
-                    </button>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -137,23 +137,22 @@ export const InputSelect = props => {
               />
             </div>
           ) : value && value !== '' ? (
-            <button
+            <span
               className="text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
-              type="button"
               onClick={() => {
                 handleChange('');
               }}
             >
               <IoMdClose
                 className={cn(
-                  'transition-transform duration-200 text-neutral-500 dark:text-neutral-400',
+                  'transition-transform duration-200 select-none text-neutral-500 dark:text-neutral-400',
                   {
                     'text-primary-500 dark:text-primary-500 rotate-180': isOpen
                   }
                 )}
                 size={16}
               />
-            </button>
+            </span>
           ) : (
             <div className="flex-shrink-0">
               <IoIosArrowDown
@@ -167,8 +166,7 @@ export const InputSelect = props => {
               />
             </div>
           )}
-        </div>
-
+        </button>
         <SelectDropdown
           domRef={domRef}
           name={name}
