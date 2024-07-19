@@ -20,7 +20,7 @@ import {
 
 export const FormPage = () => {
   const Form = useForm({
-    // text: 'qwe',
+    text: '@juniorencode',
     // search: '3',
     // password: 'qwe',
     // number: 123.12,
@@ -193,6 +193,7 @@ export const FormPage = () => {
           register={Form.register}
           funcDelete={id => console.log('delete: ' + id)}
           // required
+          minLength={2}
         />
         <InputRichText
           name="richtext"
