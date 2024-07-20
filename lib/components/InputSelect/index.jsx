@@ -90,7 +90,6 @@ export const InputSelect = props => {
           )}
           type="button"
           onClick={handleClick}
-          onBlur={() => setIsOpen(false)}
           {...params}
         >
           {!multiple ? (
