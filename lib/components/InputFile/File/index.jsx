@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaFile } from 'react-icons/fa';
 import { IoMdTrash } from 'react-icons/io';
-import { MdDownload, MdLinkOff } from 'react-icons/md';
+import { MdDownload } from 'react-icons/md';
 import { AiFillEdit } from 'react-icons/ai';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { useClickOutside } from '../../../hooks/useClickOutside.hook';
@@ -21,7 +21,6 @@ const File = ({
   handleDelete,
   handleUpdate,
   handleOpen,
-  handleUnlink,
   disabled
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -151,18 +150,6 @@ const File = ({
                     >
                       <MdDownload size={16} />
                       Descargar
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="flex items-center gap-2 px-4 py-2 w-full text-left hover:bg-secondary-100 dark:hover:bg-secondary-600"
-                      onClick={() => {
-                        handleUnlink();
-                        setIsOpen(!isOpen);
-                      }}
-                    >
-                      <MdLinkOff size={16} />
-                      Desvincular
                     </button>
                   </li>
                   <li>

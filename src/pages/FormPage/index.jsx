@@ -125,7 +125,7 @@ export const FormPage = () => {
           postFile={postFile}
           removeFile={removeFile}
           multiple
-          disabled
+          // disabled
         />
         <InputFile
           label="File"
@@ -136,7 +136,7 @@ export const FormPage = () => {
           putFile={putFile}
           removeFile={removeFile}
           multiple
-          disabled
+          // disabled
         />
         <InputSelect
           className="col-span-12"

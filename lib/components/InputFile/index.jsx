@@ -13,7 +13,6 @@ const InputFile = ({
   multiple,
   postFile,
   putFile,
-  removeFile,
   register,
   required,
   disabled
@@ -87,7 +86,6 @@ const InputFile = ({
   const handleDelete = id => {
     inputFile.handleChange(inputFile.value.filter(objeto => objeto !== id));
     urlFile.handleChange(urlFile.value.filter(objeto => objeto._id !== id));
-    removeFile(id);
   };
 
   const handleUpdate = async (id, data, index) => {
@@ -95,11 +93,6 @@ const InputFile = ({
     value[index].name = data?.name;
     urlFile.handleChange(value);
     await putFile(id, data);
-  };
-
-  const handleUnlink = async id => {
-    inputFile.handleChange(inputFile.value.filter(objeto => objeto !== id));
-    urlFile.handleChange(urlFile.value.filter(objeto => objeto._id !== id));
   };
 
   const handleOpen = url => {
@@ -172,7 +165,6 @@ const InputFile = ({
               handleUpdate(urlFile.value?.[index]._id, data, index)
             }
             handleOpen={() => handleOpen(urlFile.value?.[index].url)}
-            handleUnlink={() => handleUnlink(urlFile.value?.[index]._id)}
             disabled={disabled}
           />
         ))}
@@ -215,7 +207,6 @@ InputFile.propTypes = {
   register: PropTypes.func.isRequired,
   postFile: PropTypes.func.isRequired,
   putFile: PropTypes.func.isRequired,
-  removeFile: PropTypes.func.isRequired,
   required: PropTypes.bool,
   disabled: PropTypes.bool
 };

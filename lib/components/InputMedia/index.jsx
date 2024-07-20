@@ -14,7 +14,6 @@ const InputMedia = ({
   multiple,
   register,
   postFile,
-  removeFile,
   required,
   disabled
   // ...params
@@ -33,7 +32,10 @@ const InputMedia = ({
     const response = await postFile(formData, setProgress);
     if (inputFile.value)
       inputFile.handleChange([...inputFile.value, response.data._id]);
-    else inputFile.handleChange([response.data._id]);
+    else
+      inputFile.handleChange(
+        !multiple ? response.data._id : [response.data._id]
+      );
     if (urlFile.value) urlFile.handleChange([...urlFile.value, response.data]);
     else urlFile.handleChange([response.data]);
     setProgress(null);
@@ -125,7 +127,6 @@ const InputMedia = ({
   const handleRemove = index => {
     inputFile.handleChange(inputFile?.value?.filter((_, i) => i !== index));
     urlFile.handleChange(urlFile?.value?.filter((_, i) => i !== index));
-    removeFile(urlFile.value[index]?._id);
     setFileThumbnail(prev => prev.filter((_, i) => i !== index));
     setUrlThumbnail(prev => prev.filter((_, i) => i !== index));
   };
@@ -242,7 +243,6 @@ InputMedia.propTypes = {
   multiple: PropTypes.bool,
   register: PropTypes.func.isRequired,
   postFile: PropTypes.func.isRequired,
-  removeFile: PropTypes.func.isRequired,
   required: PropTypes.bool,
   disabled: PropTypes.bool
 };
