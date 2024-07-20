@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { cn } from '../../utilities/styles.utilities';
 
 export const Pagination = ({
   totalPages,
@@ -72,11 +73,13 @@ export const Pagination = ({
         </li>
         <li>
           <button
-            className={`flex items-center justify-center w-10 h-9 leading-tight ${
-              currentPage === 1
-                ? 'relative z-10 border text-white bg-primary-600 dark:bg-primary-800 border-primary-700 dark:border-primary-500'
-                : 'text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white'
-            }`}
+            className={cn(
+              'flex items-center justify-center w-10 h-9 leading-tight text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white',
+              {
+                'relative z-10 border text-white dark:text-white bg-primary-600 hover:bg-primary-600 dark:bg-primary-800 dark:hover:bg-primary-800 border-primary-700 dark:border-primary-500':
+                  currentPage === 1
+              }
+            )}
             onClick={() => setCurrentPage(1)}
           >
             1
@@ -95,11 +98,13 @@ export const Pagination = ({
         {pagination.map(page => (
           <li key={page}>
             <button
-              className={`flex items-center justify-center w-10 h-9 leading-tight ${
-                currentPage === page
-                  ? 'relative z-10 border text-white bg-primary-600 dark:bg-primary-800 border-primary-700 dark:border-primary-500'
-                  : 'text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white'
-              }`}
+              className={cn(
+                'flex items-center justify-center w-10 h-9 leading-tight text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white',
+                {
+                  'relative z-10 border text-white dark:text-white bg-primary-600 hover:bg-primary-600 dark:bg-primary-800 dark:hover:bg-primary-800 border-primary-700 dark:border-primary-500':
+                    currentPage === page
+                }
+              )}
               onClick={() => setCurrentPage(page)}
             >
               {page}
@@ -120,11 +125,13 @@ export const Pagination = ({
         <li>
           {totalPages > 1 && (
             <button
-              className={`flex items-center justify-center w-10 h-9 leading-tight ${
-                currentPage === totalPages
-                  ? 'relative z-10 border text-white bg-primary-600 dark:bg-primary-800 border-primary-700 dark:border-primary-500'
-                  : 'text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white'
-              }`}
+              className={cn(
+                'flex items-center justify-center w-10 h-9 leading-tight text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white',
+                {
+                  'relative z-10 border text-white dark:text-white bg-primary-600 hover:bg-primary-600 dark:bg-primary-800 dark:hover:bg-primary-800 border-primary-700 dark:border-primary-500':
+                    currentPage === totalPages
+                }
+              )}
               onClick={() => setCurrentPage(totalPages)}
             >
               {totalPages}
