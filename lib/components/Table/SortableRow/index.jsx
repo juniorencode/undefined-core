@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable } from '@dnd-kit/sortable';
 import { PiDotsSixVerticalBold } from 'react-icons/pi';
 import { FaFile, FaRegStar, FaRegTrashAlt, FaStar } from 'react-icons/fa';
 import { BiSolidEdit } from 'react-icons/bi';
+import { Link } from '../../../utilities/navigation.utilities';
 import { getHighlightedText } from '../../../utilities/highlightedText.utilities';
 import {
   formatDateCasual,

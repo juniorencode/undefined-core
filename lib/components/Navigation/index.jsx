@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { RxHamburgerMenu } from 'react-icons/rx';
 import { IoIosLogOut } from 'react-icons/io';
+import { RxHamburgerMenu } from 'react-icons/rx';
 import { cn } from '../../utilities/styles.utilities';
+import { NavLink } from '../../utilities/navigation.utilities';
 
 export const Navigation = ({
   options,
@@ -11,7 +11,6 @@ export const Navigation = ({
   setIsCollapse,
   handleLogout
 }) => {
-  // const location = useLocation();
   const [isHovering, setIsHovering] = useState(null);
 
   const handleShowHiden = e =>
@@ -75,10 +74,10 @@ export const Navigation = ({
                     to={menuItem.path}
                     onMouseEnter={() => setIsHovering(index)}
                     onMouseLeave={() => setIsHovering(null)}
-                    // onClick={() => {
-                    //   menuItem.path === location.pathname &&
-                    //     setIsCollapse(true);
-                    // }}
+                    onClick={() => {
+                      menuItem.path === window.location.pathname &&
+                        setIsCollapse(true);
+                    }}
                   >
                     <div className="static p-[10px] opacity-60 dark:opacity-75">
                       {menuItem.icon}
@@ -131,7 +130,13 @@ export const Navigation = ({
 };
 
 Navigation.propTypes = {
-  options: PropTypes.array,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      icon: PropTypes.node.isRequired
+    })
+  ),
   isCollapse: PropTypes.bool,
   setIsCollapse: PropTypes.func,
   handleLogout: PropTypes.func

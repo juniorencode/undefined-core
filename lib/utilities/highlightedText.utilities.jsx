@@ -1,4 +1,5 @@
 export const getHighlightedText = (text, highlightedText) => {
+  if (!text) return;
   if (!highlightedText) {
     return [<span key="full-text">{text}</span>];
   }
