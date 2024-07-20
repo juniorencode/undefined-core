@@ -21,10 +21,10 @@ import {
 export const FormPage = () => {
   const Form = useForm({
     text: '@juniorencode',
-    // search: '3',
+    search: '3',
     // password: 'qwe',
     // number: 123.12,
-    // select: '1',
+    select: '1',
     // textarea: 'qwe',
     // checkbox: true,
     // switch: true
@@ -157,6 +157,7 @@ export const FormPage = () => {
           register={Form.register}
           // firstValue
           // required
+          disabled
         />
         <InputSearch
           name="search"
@@ -174,6 +175,7 @@ export const FormPage = () => {
           ]}
           register={Form.register}
           // required
+          disabled
         />
         <InputText
           name="text"
@@ -194,6 +196,7 @@ export const FormPage = () => {
           funcDelete={id => console.log('delete: ' + id)}
           // required
           minLength={2}
+          disabled
         />
         <InputRichText
           name="richtext"

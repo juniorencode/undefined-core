@@ -7,31 +7,31 @@ import {
   convertDatetoEnd
 } from '../../../utilities/time.utilities';
 
-export const DatePreset = ({ iniDate, endDate, setDate }) => {
+export const DatePreset = ({ startDate, endDate, setDate }) => {
   const [select, setSelect] = useState(0);
 
   useEffect(() => {
-    if (iniDate === getDate() && endDate === convertDatetoEnd(getDate())) {
+    if (startDate === getDate() && endDate === convertDatetoEnd(getDate())) {
       setSelect(1);
     } else if (
-      iniDate === changeDay(getDate(), -1) &&
+      startDate === changeDay(getDate(), -1) &&
       endDate === convertDatetoEnd(changeDay(getDate(), -1))
     ) {
       setSelect(2);
     } else if (
-      iniDate === changeDay(getDate(), -7) &&
+      startDate === changeDay(getDate(), -7) &&
       endDate === convertDatetoEnd(getDate())
     ) {
       setSelect(3);
     } else if (
-      iniDate === changeDay(getDate(), -30) &&
+      startDate === changeDay(getDate(), -30) &&
       endDate === convertDatetoEnd(getDate())
     ) {
       setSelect(4);
     } else {
       setSelect(0);
     }
-  }, [iniDate, endDate]);
+  }, [startDate, endDate]);
 
   const handleSetToday = () => {
     setSelect(1);
@@ -119,7 +119,7 @@ export const DatePreset = ({ iniDate, endDate, setDate }) => {
 };
 
 DatePreset.propTypes = {
-  iniDate: PropTypes.string,
+  startDate: PropTypes.string,
   endDate: PropTypes.string,
   setDate: PropTypes.func
 };

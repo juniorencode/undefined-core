@@ -249,7 +249,7 @@ export const Table = props => {
                         </button>
                         <div
                           className={cn(
-                            'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-black rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
+                            'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-neutral-900 rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
                             {
                               block: isOpen
                             }

@@ -3,10 +3,10 @@ import { GrRefresh } from 'react-icons/gr';
 import { DatePreset } from '../DatePreset';
 import { DatePickerRange } from '../DatePickerRange';
 
-export const Filter = ({ iniDate, endDate, setDate }) => {
+export const Filter = ({ startDate, endDate, setDate }) => {
   return (
     <div className="hidden sm:flex">
-      {(iniDate || endDate) && (
+      {(startDate || endDate) && (
         <button
           className="flex items-center justify-center w-[32px] h-[38px] text-secondary-400 dark:text-white hover:text-primary-500"
           onClick={() => setDate('', '')}
@@ -15,12 +15,12 @@ export const Filter = ({ iniDate, endDate, setDate }) => {
         </button>
       )}
       <div className="flex items-stretch h-[38px] border rounded-lg bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600">
-        <DatePreset iniDate={iniDate} endDate={endDate} setDate={setDate} />
+        <DatePreset startDate={startDate} endDate={endDate} setDate={setDate} />
         <DatePickerRange
-          iniDate={iniDate}
-          setIniDate={ini => setDate(ini, endDate)}
+          startDate={startDate}
+          setStartDate={start => setDate(start, endDate)}
           endDate={endDate}
-          setEndDate={end => setDate(iniDate, end)}
+          setEndDate={end => setDate(startDate, end)}
         />
       </div>
     </div>
@@ -28,7 +28,7 @@ export const Filter = ({ iniDate, endDate, setDate }) => {
 };
 
 Filter.propTypes = {
-  iniDate: PropTypes.string,
+  startDate: PropTypes.string,
   endDate: PropTypes.string,
   setDate: PropTypes.func
 };

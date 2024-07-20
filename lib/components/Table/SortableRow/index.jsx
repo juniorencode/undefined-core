@@ -220,7 +220,7 @@ export const SortableRow = props => {
             return (
               <td
                 key={row.id + '_' + column.attr}
-                className={cn('px-4 py-1.5', {
+                className={cn('px-4 py-1.5  text-nowrap', {
                   'border-l-4 dark:border-secondary-400': column.line
                 })}
               >

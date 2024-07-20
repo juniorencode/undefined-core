@@ -3,7 +3,9 @@ export const getHighlightedText = (text, highlightedText) => {
     return [<span key="full-text">{text}</span>];
   }
 
-  const parts = text?.split(new RegExp(`(${highlightedText})`, 'gi'));
+  const parts = text
+    ? text.toString().split(new RegExp(`(${highlightedText})`, 'gi'))
+    : [];
   return parts?.map((part, index) =>
     part.toLowerCase() === highlightedText.toLowerCase() ? (
       <span key={index} style={{ backgroundColor: '#2652c0' }}>

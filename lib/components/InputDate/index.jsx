@@ -74,7 +74,7 @@ export const InputDate = props => {
         {isOpen && (
           <div
             className={cn(
-              'absolute top-full left-0 z-50 inline-block my-2 p-4 h-96 border rounded-lg shadow-top dark:shadow-black bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
+              'absolute top-full left-0 z-50 inline-block my-2 p-4 h-96 border rounded-lg shadow-top dark:shadow-neutral-900 bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
               {
                 'shadow-bottom':
                   !attributes.popper?.['data-popper-placement'].startsWith(

@@ -28,7 +28,7 @@ export const SelectDropdown = props => {
       {options.length > 0 && isOpen && (
         <div
           className={cn(
-            'listbox absolute top-full z-20 my-2 w-full border rounded-lg shadow-top dark:shadow-black bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
+            'listbox absolute top-full z-20 my-2 w-full border rounded-lg shadow-top dark:shadow-neutral-900 bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
             {
               'shadow-bottom':
                 !attributes.popper?.['data-popper-placement'].startsWith('top')

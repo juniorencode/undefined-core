@@ -24,8 +24,8 @@ export const InputSearch = props => {
     isEmail,
     focused,
     autoComplete,
-    disabled,
     multiple,
+    disabled,
     ...params
   } = props;
 
@@ -160,7 +160,7 @@ export const InputSearch = props => {
                 {...params}
               />
               {postfix && <span className="mr-2.5">{postfix}</span>}
-              {value && value !== '' && (
+              {!disabled && value && (
                 <button
                   className="ml-1 mr-2.5 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
                   type="button"

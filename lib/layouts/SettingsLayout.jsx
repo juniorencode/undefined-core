@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 import { cn } from '../utilities/styles.utilities';
 import { primaryColors, secondaryColors } from '../utilities/color.utilities';
+import { BaseLayout } from '../layouts/BaseLayout';
 import { Card } from '../components/Card';
 import { ThemePreview } from '../components/ThemePreview';
-import { BaseLayout, Breadcrumb } from '../main';
+import { Breadcrumb } from '../components/Breadcrumb';
 
 export const SettingsLayout = ({ breadcrumb }) => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'system');

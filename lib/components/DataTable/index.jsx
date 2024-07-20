@@ -26,7 +26,11 @@ export const DataTable = props => {
       <div className="flex flex-col gap-4 m-3 h-10">
         <div className="flex items-center justify-between gap-4">
           <Search search={filter.search} setSearch={setSearch} />
-          <Filter iniDate={filter.ini} endDate={filter.end} setDate={setDate} />
+          <Filter
+            startDate={filter.start}
+            endDate={filter.end}
+            setDate={setDate}
+          />
         </div>
       </div>
       <Table

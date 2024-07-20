@@ -20,6 +20,7 @@ export const InputSelect = props => {
     register,
     required,
     multiple,
+    disabled,
     ...params
   } = props;
 
@@ -85,11 +86,12 @@ export const InputSelect = props => {
             'flex items-center w-full justify-between border rounded-lg overflow-hidden transition-all bg-secondary-50 dark:bg-secondary-700 text-secondary-900 dark:text-white border-secondary-300 dark:border-secondary-600 dark:placeholder-secondary-400 p-2.5 min-h-12 sm:text-sm cursor-pointer',
             {
               'ring-4 ring-opacity-30 dark:ring-opacity-40 border-primary-500 dark:border-primary-500 ring-primary-600 dark:ring-primary-500':
-                isOpen
+                isOpen,
+              'cursor-default': disabled
             }
           )}
           type="button"
-          onClick={handleClick}
+          onClick={!disabled && handleClick}
           {...params}
         >
           {!multiple ? (
@@ -135,23 +137,26 @@ export const InputSelect = props => {
                 size={16}
               />
             </div>
-          ) : value && value !== '' ? (
-            <span
-              className="text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
-              onClick={() => {
-                handleChange('');
-              }}
-            >
-              <IoMdClose
-                className={cn(
-                  'transition-transform duration-200 select-none text-neutral-500 dark:text-neutral-400',
-                  {
-                    'text-primary-500 dark:text-primary-500 rotate-180': isOpen
-                  }
-                )}
-                size={16}
-              />
-            </span>
+          ) : value ? (
+            !disabled && (
+              <span
+                className="text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-200"
+                onClick={() => {
+                  handleChange('');
+                }}
+              >
+                <IoMdClose
+                  className={cn(
+                    'transition-transform duration-200 select-none text-neutral-500 dark:text-neutral-400',
+                    {
+                      'text-primary-500 dark:text-primary-500 rotate-180':
+                        isOpen
+                    }
+                  )}
+                  size={16}
+                />
+              </span>
+            )
           ) : (
             <div className="flex-shrink-0">
               <IoIosArrowDown
@@ -170,7 +175,7 @@ export const InputSelect = props => {
           domRef={domRef}
           name={name}
           value={value}
-          isOpen={isOpen}
+          isOpen={!disabled ? isOpen : false}
           options={options}
           onChange={e => {
             multiple ? handleInput(e.target.value) : onChange(e);
@@ -204,5 +209,6 @@ InputSelect.propTypes = {
   toBoolean: PropTypes.bool,
   register: PropTypes.func.isRequired,
   required: PropTypes.bool,
-  multiple: PropTypes.bool
+  multiple: PropTypes.bool,
+  disabled: PropTypes.bool
 };

@@ -13,13 +13,13 @@ import {
 export const Calendar = ({
   toggleCalendar,
   setToggleCalendar,
-  iniDate,
+  startDate,
   endDate,
-  setIniDate,
+  setStartDate,
   setEndDate,
-  iniDateHover,
+  startDateHover,
   endDateHover,
-  setIniDateHover,
+  setStartDateHover,
   setEndDateHover,
   thisDate,
   setThisDate,
@@ -44,14 +44,14 @@ export const Calendar = ({
       setEndDate(convertDatetoEnd(selectedDate));
     } else if (
       toggleCalendar === 'left' ||
-      new Date(iniDate) > new Date(selectedDate)
+      new Date(startDate) > new Date(selectedDate)
     ) {
       setToggleCalendar('right');
-      setIniDate(selectedDate);
+      setStartDate(selectedDate);
     } else {
       setToggleCalendar('');
       setEndDate(convertDatetoEnd(selectedDate));
-      setIniDateHover('');
+      setStartDateHover('');
       setEndDateHover('');
     }
   };
@@ -78,9 +78,9 @@ export const Calendar = ({
 
   const handleHoverDate = day => {
     const hoverDate = setDay(thisDate, day);
-    if (iniDate) {
+    if (startDate) {
       if (toggleCalendar === 'left') {
-        setIniDateHover(hoverDate);
+        setStartDateHover(hoverDate);
       } else if (toggleCalendar === 'right') {
         setEndDateHover(hoverDate);
       }
@@ -88,7 +88,7 @@ export const Calendar = ({
   };
 
   const handleLeaveDate = () => {
-    setIniDateHover('');
+    setStartDateHover('');
     setEndDateHover('');
   };
 
@@ -101,71 +101,71 @@ export const Calendar = ({
     const dateCells = days.map((day, i) => {
       const dayString = setDay(thisDate, day);
       const _dayDate = new Date(dayString);
-      const _iniDate = new Date(iniDate);
+      const _startDate = new Date(startDate);
       const _endDate = new Date(endDate);
-      const _iniDateHover = new Date(iniDateHover);
+      const _startDateHover = new Date(startDateHover);
       const _endDateHover = new Date(endDateHover);
       const _dayFormat = getDate(dayString);
 
-      const isIniDate = iniDate && getDate(iniDate) === _dayFormat;
+      const isStartDate = startDate && getDate(startDate) === _dayFormat;
       const isEndDate = endDate && getDate(endDate) === _dayFormat;
       const isInRange =
-        iniDate && endDate && _iniDate <= _dayDate && _endDate >= _dayDate;
+        startDate && endDate && _startDate <= _dayDate && _endDate >= _dayDate;
 
       const isLeftDateHover =
-        (iniDateHover &&
-          getDate(iniDateHover) === _dayFormat &&
-          _iniDateHover <= _endDate) ||
+        (startDateHover &&
+          getDate(startDateHover) === _dayFormat &&
+          _startDateHover <= _endDate) ||
         (endDateHover &&
           getDate(endDateHover) === _dayFormat &&
-          _endDateHover <= _iniDate);
+          _endDateHover <= _startDate);
       const isRightDateHover =
-        (iniDateHover &&
-          getDate(iniDateHover) === _dayFormat &&
-          _iniDateHover >= _endDate) ||
+        (startDateHover &&
+          getDate(startDateHover) === _dayFormat &&
+          _startDateHover >= _endDate) ||
         (endDateHover &&
           getDate(endDateHover) === _dayFormat &&
-          _endDateHover >= _iniDate);
+          _endDateHover >= _startDate);
 
       const isHoverInRangeLeft =
-        iniDate &&
-        iniDateHover &&
+        startDate &&
+        startDateHover &&
         toggleCalendar === 'left' &&
-        _iniDate <= _dayDate &&
-        _iniDateHover > _dayDate &&
-        _iniDate <= _iniDateHover &&
-        _endDate >= _iniDateHover;
+        _startDate <= _dayDate &&
+        _startDateHover > _dayDate &&
+        _startDate <= _startDateHover &&
+        _endDate >= _startDateHover;
       const isHoverInRangeRight =
         endDate &&
         endDateHover &&
         toggleCalendar === 'right' &&
         _endDate >= _dayDate &&
         _endDateHover < _dayDate &&
-        _iniDate <= _endDateHover &&
+        _startDate <= _endDateHover &&
         _endDate >= _endDateHover;
 
       const isBorderDashed =
-        iniDate && endDate
-          ? ((_iniDateHover <= _dayDate || _endDateHover <= _dayDate) &&
-              _iniDate > _dayDate) ||
-            ((_iniDateHover >= _dayDate || _endDateHover >= _dayDate) &&
+        startDate && endDate
+          ? ((_startDateHover <= _dayDate || _endDateHover <= _dayDate) &&
+              _startDate > _dayDate) ||
+            ((_startDateHover >= _dayDate || _endDateHover >= _dayDate) &&
               _endDate < _dayDate)
           : (toggleCalendar === 'left' &&
-              _iniDateHover <= _dayDate &&
+              _startDateHover <= _dayDate &&
               _endDate >= _dayDate) ||
             (toggleCalendar === 'right' &&
-              _iniDate <= _dayDate &&
+              _startDate <= _dayDate &&
               _endDateHover >= _dayDate);
 
       const classNames = cn(
         'group flex items-center justify-center w-8 h-8 text-sm cursor-pointer text-secondary-600 dark:text-secondary-200 transition-[background]',
         {
           'text-white bg-primary-500 dark:bg-primary-600':
-            isIniDate || isEndDate || isInRange,
+            isStartDate || isEndDate || isInRange,
           'bg-opacity-40 bg-primary-500 dark:bg-primary-700':
             isHoverInRangeLeft || isHoverInRangeRight,
           'rounded-l-full':
-            isIniDate ||
+            isStartDate ||
             isLeftDateHover ||
             i === 0 ||
             (i + startsOn - 1) % 7 === 0,
@@ -255,13 +255,13 @@ export const Calendar = ({
 Calendar.propTypes = {
   toggleCalendar: PropTypes.string.isRequired,
   setToggleCalendar: PropTypes.func.isRequired,
-  iniDate: PropTypes.string,
+  startDate: PropTypes.string,
   endDate: PropTypes.string,
-  setIniDate: PropTypes.func.isRequired,
+  setStartDate: PropTypes.func.isRequired,
   setEndDate: PropTypes.func.isRequired,
-  iniDateHover: PropTypes.string,
+  startDateHover: PropTypes.string,
   endDateHover: PropTypes.string,
-  setIniDateHover: PropTypes.func.isRequired,
+  setStartDateHover: PropTypes.func.isRequired,
   setEndDateHover: PropTypes.func.isRequired,
   thisDate: PropTypes.string,
   setThisDate: PropTypes.func.isRequired,

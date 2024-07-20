@@ -11,8 +11,8 @@ import { useClickOutside } from '../../../hooks/useClickOutside.hook';
 import { Calendar } from '../Calendar';
 
 export const DatePickerRange = ({
-  iniDate,
-  setIniDate,
+  startDate,
+  setStartDate,
   endDate,
   setEndDate
 }) => {
@@ -24,7 +24,7 @@ export const DatePickerRange = ({
     setToggleCalendar('');
   });
 
-  const [iniDateHover, setIniDateHover] = useState('');
+  const [startDateHover, setStartDateHover] = useState('');
   const [endDateHover, setEndDateHover] = useState('');
 
   const [leftCalendar, setLeftCalendar] = useState(changeMonth(getDate(), -1));
@@ -32,7 +32,7 @@ export const DatePickerRange = ({
 
   const openBox = side => {
     !isOpen && setIsOpen(true);
-    setToggleCalendar(!iniDate ? 'left' : side);
+    setToggleCalendar(!startDate ? 'left' : side);
   };
 
   useEffect(() => {
@@ -51,15 +51,15 @@ export const DatePickerRange = ({
                 'border-secondary-200 dark:border-secondary-500':
                   toggleCalendar === 'left',
                 'text-primary-500 dark:text-primary-400 hover:border-secondary-200 dark:hover:border-secondary-500':
-                  iniDate
+                  startDate
               }
             )}
             onClick={() => openBox('left')}
           >
             <IoCalendarClearOutline />
             <span>
-              {iniDate
-                ? formatDateCasualShort(new Date(iniDate))
+              {startDate
+                ? formatDateCasualShort(new Date(startDate))
                 : 'Fecha inicio'}
             </span>
           </button>
@@ -89,7 +89,7 @@ export const DatePickerRange = ({
       </ul>
       <div
         className={cn(
-          'absolute top-full right-0 z-20 hidden mt-2 border rounded-lg shadow-bottom dark:shadow-black bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
+          'absolute top-full right-0 z-20 hidden mt-2 border rounded-lg shadow-bottom dark:shadow-neutral-900 bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
           {
             flex: isOpen
           }
@@ -99,13 +99,13 @@ export const DatePickerRange = ({
           <Calendar
             toggleCalendar={toggleCalendar}
             setToggleCalendar={setToggleCalendar}
-            iniDate={iniDate}
+            startDate={startDate}
             endDate={endDate}
-            setIniDate={setIniDate}
+            setStartDate={setStartDate}
             setEndDate={setEndDate}
-            iniDateHover={iniDateHover}
+            startDateHover={startDateHover}
             endDateHover={endDateHover}
-            setIniDateHover={setIniDateHover}
+            setStartDateHover={setStartDateHover}
             setEndDateHover={setEndDateHover}
             thisDate={leftCalendar}
             setThisDate={setLeftCalendar}
@@ -116,13 +116,13 @@ export const DatePickerRange = ({
           <Calendar
             toggleCalendar={toggleCalendar}
             setToggleCalendar={setToggleCalendar}
-            iniDate={iniDate}
+            startDate={startDate}
             endDate={endDate}
-            setIniDate={setIniDate}
+            setStartDate={setStartDate}
             setEndDate={setEndDate}
-            iniDateHover={iniDateHover}
+            startDateHover={startDateHover}
             endDateHover={endDateHover}
-            setIniDateHover={setIniDateHover}
+            setStartDateHover={setStartDateHover}
             setEndDateHover={setEndDateHover}
             thisDate={rightCalendar}
             setThisDate={setRightCalendar}
@@ -135,8 +135,8 @@ export const DatePickerRange = ({
 };
 
 DatePickerRange.propTypes = {
-  iniDate: PropTypes.string,
-  setIniDate: PropTypes.func,
+  startDate: PropTypes.string,
+  setStartDate: PropTypes.func,
   endDate: PropTypes.string,
   setEndDate: PropTypes.func
 };
