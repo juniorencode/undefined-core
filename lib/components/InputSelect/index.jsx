@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { IoIosArrowDown, IoMdClose } from 'react-icons/io';
-import PropTypes from 'prop-types';
 import { cn } from '../../utilities/styles.utilities';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';

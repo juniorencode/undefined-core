@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { Breadcrumb } from '../components/Breadcrumb';
 import { BaseLayout } from './BaseLayout';
 import { Card } from '../components/Card';
-import { DataForm } from '../main';
+import { DataForm } from '../components/DataForm';
+import { Breadcrumb } from '../components/Breadcrumb';
 
 export const DataFormLayout = props => {
   const { children, className, breadcrumb, title, form, handleCancel, modal } =

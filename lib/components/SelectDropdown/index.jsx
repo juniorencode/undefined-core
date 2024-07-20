@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { MdClose } from 'react-icons/md';
 import { usePopper } from 'react-popper';
+import { MdClose } from 'react-icons/md';
 import { cn } from '../../utilities/styles.utilities';
 
 export const SelectDropdown = props => {

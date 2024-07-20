@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BiSolidEdit } from 'react-icons/bi';
-import { FaFile, FaRegStar, FaRegTrashAlt, FaStar } from 'react-icons/fa';
-import { getHighlightedText } from '../../../utilities/highlightedText.utilities';
-import { Thumbnail } from '../../Thumbnail';
-import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useSortable } from '@dnd-kit/sortable';
 import { PiDotsSixVerticalBold } from 'react-icons/pi';
+import { FaFile, FaRegStar, FaRegTrashAlt, FaStar } from 'react-icons/fa';
+import { BiSolidEdit } from 'react-icons/bi';
+import { getHighlightedText } from '../../../utilities/highlightedText.utilities';
 import {
   formatDateCasual,
   formatTimeCasual
 } from '../../../utilities/time.utilities';
-import { useState } from 'react';
 import { cn } from '../../../utilities/styles.utilities';
+import { Thumbnail } from '../../Thumbnail';
 
 export const SortableRow = props => {
   const {

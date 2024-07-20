@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { FaFile } from 'react-icons/fa';
 import { IoMdTrash } from 'react-icons/io';
 import { MdDownload, MdLinkOff } from 'react-icons/md';
@@ -29,15 +29,6 @@ const File = ({
   const FormUpdate = useForm();
   const dropdownRef = useClickOutside(() => setIsOpen(false));
 
-  // const calculateSecond = () => {
-  //   const currentTime = new Date().getTime();
-  //   const elapsedTime = (currentTime - timeStamp) / 1000;
-  //   const speed = loaded / elapsedTime;
-  //   const remainingBytes = total - loaded;
-  //   const remainingTimeSeconds = remainingBytes / speed;
-  //   return Math.round(remainingTimeSeconds);
-  // };
-
   const formatSize = bytes => {
     if (bytes < 1024) {
       return bytes + ' B';
@@ -50,31 +41,6 @@ const File = ({
     }
   };
 
-  // const formatRelativeTime = seconds => {
-  //   if (seconds < 1) return '0 segundos restantes';
-
-  //   const timeUnits = [
-  //     { singular: 'año', plural: 'años', divisor: 60 * 60 * 24 * 365 },
-  //     { singular: 'mes', plural: 'meses', divisor: 60 * 60 * 24 * 30.417 },
-  //     { singular: 'semana', plural: 'semanas', divisor: 60 * 60 * 24 * 7 },
-  //     { singular: 'día', plural: 'días', divisor: 60 * 60 * 24 },
-  //     { singular: 'hora', plural: 'horas', divisor: 60 * 60 },
-  //     { singular: 'minuto', plural: 'minutos', divisor: 60 },
-  //     { singular: 'segundo', plural: 'segundos', divisor: 1 }
-  //   ];
-
-  //   for (const unit of timeUnits) {
-  //     const value = seconds / unit.divisor;
-  //     if (value >= 1) {
-  //       const roundedValue = Math.round(value);
-  //       return `${roundedValue} ${
-  //         roundedValue === 1
-  //           ? `${unit.singular} restante`
-  //           : `${unit.plural} restantes`
-  //       }`;
-  //     }
-  //   }
-  // };
   const handleModal = () => {
     ModalUpdate.openModal();
     setIsOpen(!isOpen);

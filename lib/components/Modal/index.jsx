@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
 
 const Modal = ({ children, isOpen, closeModal, domRef, title }) => {

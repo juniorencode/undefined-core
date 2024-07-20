@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useId, useRef } from 'react';
-import { InputContainer } from '../InputContainer';
 import { cn } from '../../utilities/styles.utilities';
+import { InputContainer } from '../InputContainer';
 
 export const InputTextarea = props => {
   const {

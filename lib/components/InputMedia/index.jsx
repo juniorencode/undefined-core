@@ -1,9 +1,9 @@
-import { useEffect, useId, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useEffect, useId, useState } from 'react';
 import { IoCloudUploadOutline } from 'react-icons/io5';
-import { InputContainer } from '../InputContainer';
-import { Thumbnail } from '../Thumbnail';
 import { IoIosClose } from 'react-icons/io';
+import { Thumbnail } from '../Thumbnail';
+import { InputContainer } from '../InputContainer';
 import { cn } from '../../utilities/styles.utilities';
 
 const InputMedia = ({
