@@ -5,9 +5,9 @@ import { cn } from '../utilities/styles.utilities';
 import { primaryColors, secondaryColors } from '../utilities/color.utilities';
 import { Card } from '../components/Card';
 import { ThemePreview } from '../components/ThemePreview';
-import { Breadcrumb } from '../main';
+import { BaseLayout, Breadcrumb } from '../main';
 
-export const SettingsLayout = () => {
+export const SettingsLayout = ({ breadcrumb }) => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'system');
   const [accent, setAccent] = useState(
     localStorage.getItem('accent') || 'blue'
@@ -58,19 +58,15 @@ export const SettingsLayout = () => {
     setBase(color);
   };
 
-  const breadcrumb = [
-    {
-      label: 'Configuraciones'
-    }
-  ];
-
   return (
-    <div className="flex flex-col gap-4">
-      <Breadcrumb options={breadcrumb} />
+    <BaseLayout>
+      <div className="mb-2">
+        <Breadcrumb options={breadcrumb} />
+      </div>
       <h1 className="mb-4 text-3xl font-bold dark:text-white">
         Configuraciones
       </h1>
-      <Card className="flex flex-col gap-12 px-4 py-6">
+      <Card className="flex flex-col gap-8 px-4 py-6">
         <div>
           <h2 className="mb-2 w-min text-sm text-nowrap font-medium text-neutral-600 dark:text-neutral-300">
             Tema
@@ -193,10 +189,15 @@ export const SettingsLayout = () => {
           </div>
         </div>
       </Card>
-    </div>
+    </BaseLayout>
   );
 };
 
 SettingsLayout.propTypes = {
-  mode: PropTypes.string
+  breadcrumb: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      url: PropTypes.string
+    })
+  )
 };
