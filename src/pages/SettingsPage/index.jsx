@@ -1,9 +1,11 @@
-import { BaseLayout, SettingsLayout } from '../../../lib/main';
+import { SettingsLayout } from '../../../lib/main';
 
 export const SettingsPage = () => {
-  return (
-    <BaseLayout>
-      <SettingsLayout />
-    </BaseLayout>
-  );
+  const breadcrumb = [
+    {
+      label: 'Configuraciones'
+    }
+  ];
+
+  return <SettingsLayout breadcrumb={breadcrumb} />;
 };
