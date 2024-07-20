@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { Navigation } from '../../lib/main';
-import { cn } from '../../lib/utilities/styles.utilities';
+import { Navigation } from '../components/Navigation';
+import { cn } from '../utilities/styles.utilities';
 import { navigation, handleLogout } from '../utilities/navigation.utilities';
 
 export const BaseLayout = ({ children, className }) => {

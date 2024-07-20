@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { IoCalendarClearOutline } from 'react-icons/io5';
 import { cn } from '../../../utilities/styles.utilities';
-import { useClickOutside } from '../../../hooks/useClickOutside.hook';
-import { Calendar } from '../Calendar';
 import {
   getDate,
   changeMonth,
   formatDateCasualShort
 } from '../../../utilities/time.utilities';
+import { useClickOutside } from '../../../hooks/useClickOutside.hook';
+import { Calendar } from '../Calendar';
 
 export const DatePickerRange = ({
   iniDate,

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState, useRef } from 'react';
-import ReactPlayer from 'react-player';
 import { FaCircleNotch } from 'react-icons/fa';
+import ReactPlayer from 'react-player';
 
 export const Thumbnail = props => {
   const { className, file, url, input } = props;

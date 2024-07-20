@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
-import clsx from 'clsx';
 import {
   DndContext,
   closestCenter,
@@ -15,15 +14,15 @@ import {
   verticalListSortingStrategy,
   arrayMove
 } from '@dnd-kit/sortable';
+import { FaRegStar } from 'react-icons/fa';
+import { FaTableColumns } from 'react-icons/fa6';
+import { cn } from '../../utilities/styles.utilities';
+import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { useAlert } from '../../hooks/useAlert.hook';
 import { Alert } from '../Alert';
-import { SortableRow } from './SortableRow';
-import { cn } from '../../utilities/styles.utilities';
 import { Skeleton } from './Skeleton';
-import { FaTableColumns } from 'react-icons/fa6';
 import { InputCheck } from './InputCheck';
-import { useClickOutside } from '../../hooks/useClickOutside.hook';
-import { FaRegStar } from 'react-icons/fa';
+import { SortableRow } from './SortableRow';
 
 export const Table = props => {
   const {
@@ -188,7 +187,7 @@ export const Table = props => {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'relative border-t border-b overflow-auto dark:border-secondary-500',
         className
       )}

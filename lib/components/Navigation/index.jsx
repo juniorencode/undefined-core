@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { cn } from '../../utilities/styles.utilities';
 import { IoIosLogOut } from 'react-icons/io';
+import { cn } from '../../utilities/styles.utilities';
 
 export const Navigation = ({
   options,
