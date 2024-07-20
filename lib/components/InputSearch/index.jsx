@@ -154,7 +154,6 @@ export const InputSearch = props => {
                 onFocus={() => setFocus(true)}
                 onBlur={() => {
                   setFocus(false);
-                  setIsOpen(false);
                 }}
                 autoComplete={autoComplete ? 'on' : 'off'}
                 disabled={disabled}
