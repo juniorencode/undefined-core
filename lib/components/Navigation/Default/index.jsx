@@ -13,7 +13,7 @@ export const Default = ({
   return (
     <aside
       className={cn(
-        'fixed hidden sm:block w-64 h-full border-r transform bg-white dark:bg-secondary-800 border-secondary-200 dark:border-secondary-700',
+        'fixed hidden z-10 sm:block w-64 h-full border-r transform bg-white dark:bg-secondary-800 border-secondary-200 dark:border-secondary-700',
         {
           'w-[53px]': isCollapse
         }
