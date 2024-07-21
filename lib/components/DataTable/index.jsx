@@ -3,7 +3,7 @@ import { Pagination } from '../Pagination';
 import { Table } from '../Table';
 import { Filter } from './Filter';
 import { Search } from './Search';
-import { useEffect } from 'react';
+
 export const DataTable = props => {
   const {
     structure,

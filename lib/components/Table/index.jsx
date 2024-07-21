@@ -66,13 +66,21 @@ export const Table = props => {
   };
 
   const arraysAreEqual = (arr1, arr2) => {
-    if (!arr1) return false;
+    console.log(arr1, arr2);
+    if (!arr1 || !arr2) return false;
     if (arr1.length !== arr2.length) return false;
+
+    const cleanObject = obj => ({ ...obj, hidden: null, line: null });
+
     for (let i = 0; i < arr1.length; i++) {
-      if (JSON.stringify(arr1[i]) !== JSON.stringify(arr2[i])) {
+      if (
+        JSON.stringify(cleanObject(arr1[i])) !==
+        JSON.stringify(cleanObject(arr2[i]))
+      ) {
         return false;
       }
     }
+
     return true;
   };
 
