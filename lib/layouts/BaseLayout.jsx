@@ -15,24 +15,22 @@ export const BaseLayout = ({ children, className }) => {
 
   return (
     <div className="flex flex-col min-h-screen bg-secondary-100 dark:bg-secondary-900">
-      <div>
-        <Navigation
-          options={navigation}
-          isCollapse={isCollapse}
-          setIsCollapse={setIsCollapse}
-          handleLogout={handleLogout}
-        />
-        <div
-          className={cn(
-            'mt-[62px] sm:mt-0 sm:ml-64 p-4 transition-all duration-300',
-            {
-              'sm:ml-[53px]': isCollapse
-            },
-            className
-          )}
-        >
-          {children}
-        </div>
+      <Navigation
+        options={navigation}
+        isCollapse={isCollapse}
+        setIsCollapse={setIsCollapse}
+        handleLogout={handleLogout}
+      />
+      <div
+        className={cn(
+          'mt-[62px] sm:mt-0 sm:ml-64 p-4 transition-all duration-300',
+          {
+            'sm:ml-[53px]': isCollapse
+          },
+          className
+        )}
+      >
+        {children}
       </div>
     </div>
   );
