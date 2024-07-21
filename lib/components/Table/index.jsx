@@ -52,7 +52,7 @@ export const Table = props => {
     }));
 
     for (let i = 0; i < _newColumns.length; i++) {
-      if (_newColumns[i].attr === 'line') {
+      if (_newColumns[i].type === 'line') {
         for (let j = i + 1; j < _newColumns.length; j++) {
           if (_newColumns[j].attr !== 'line' && !_newColumns[j].hidden) {
             _newColumns[j].line = true;
@@ -113,6 +113,7 @@ export const Table = props => {
   useEffect(() => {
     setItems(data);
   }, [data]);
+
   const tableContainerRef = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false);
 
@@ -218,7 +219,7 @@ export const Table = props => {
                   </th>
                 )}
                 {columns
-                  .filter(col => col.attr !== 'line' && !col.hidden)
+                  .filter(col => col.type !== 'line' && !col.hidden)
                   .map(column => (
                     <th
                       key={column.attr}
@@ -294,7 +295,7 @@ export const Table = props => {
                   <td className="h-2 bg-secondary-100 dark:bg-secondary-700"></td>
                 )}
                 {columns
-                  .filter(col => col.attr !== 'line' && !col.hidden)
+                  .filter(col => col.type !== 'line' && !col.hidden)
                   .map((col, index) => (
                     <td
                       key={`fill-${index}`}
@@ -322,7 +323,7 @@ export const Table = props => {
                 <Skeleton
                   isScrolling={isScrolling}
                   columns={columns.filter(
-                    col => col.attr !== 'line' && !col.hidden
+                    col => col.type !== 'line' && !col.hidden
                   )}
                   noSeqNum={noSeqNum}
                   dndFunc={dndFunc}

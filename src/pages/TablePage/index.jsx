@@ -30,7 +30,7 @@ export const TablePage = () => {
       attr: 'thumbnail',
       type: 'thumbnail'
     },
-    { attr: 'line' },
+    { type: 'line' },
     {
       label: 'idCard',
       attr: 'idCard',
