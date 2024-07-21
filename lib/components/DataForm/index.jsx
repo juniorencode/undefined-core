@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '../../utilities/navigation.utilities';
 import { cn } from '../../utilities/styles.utilities';
 import { Button } from '../Button';
 
