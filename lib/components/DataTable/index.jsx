@@ -35,7 +35,7 @@ export const DataTable = props => {
         </div>
       </div>
       <Table
-        className="h-[calc(100vh_-_15.1rem)]"
+        className="h-[calc(100vh_-_19.1rem)] sm:h-[calc(100vh_-_15.1rem)]"
         structure={structure}
         data={data}
         loading={loading}

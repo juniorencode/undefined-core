@@ -91,7 +91,7 @@ export const InputSelect = props => {
             }
           )}
           type="button"
-          onClick={!disabled && handleClick}
+          onClick={!disabled ? handleClick : null}
           {...params}
         >
           {!multiple ? (

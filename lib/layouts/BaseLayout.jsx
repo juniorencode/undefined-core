@@ -24,7 +24,7 @@ export const BaseLayout = ({ children, className }) => {
         />
         <div
           className={cn(
-            'sm:ml-64 p-4 transition-all duration-300',
+            'mt-[62px] sm:mt-0 sm:ml-64 p-4 transition-all duration-300',
             {
               'sm:ml-[53px]': isCollapse
             },
