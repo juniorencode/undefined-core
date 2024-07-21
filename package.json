@@ -2,11 +2,11 @@
   "name": "undefined-core",
   "author": "Carlos Junior Ramos Vásquez",
   "private": false,
-  "version": "0.27.0",
+  "version": "0.27.1",
   "type": "module",
-  "main": "lib/main.js",
+  "main": "dist/main.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
