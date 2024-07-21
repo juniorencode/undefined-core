@@ -257,27 +257,29 @@ export const Table = props => {
                         </button>
                         <div
                           className={cn(
-                            'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-neutral-900 rounded-lg overflow-y-auto bg-secondary-700 border-secondary-600',
+                            'absolute top-full right-0 hidden mt-2 py-2 text-sm normal-case border shadow-bottom dark:shadow-neutral-900 rounded-lg overflow-y-auto bg-secondary-50 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
                             {
                               block: isOpen
                             }
                           )}
                         >
                           <div className="min-w-[200px] max-h-[300px] overflow-y-auto">
-                            {columns.map(
-                              (row, index) =>
-                                row.attr !== 'line' && (
-                                  <InputCheck
-                                    key={`ske-row-${index}`}
-                                    name={row.attr}
-                                    label={row.label}
-                                    value={!row.hidden}
-                                    handleChange={val =>
-                                      handleColumns(row.attr, val)
-                                    }
-                                  />
-                                )
-                            )}
+                            {columns
+                              .filter(col => col.type !== 'line')
+                              .map(
+                                (row, index) =>
+                                  row.attr !== 'line' && (
+                                    <InputCheck
+                                      key={`ske-row-${index}`}
+                                      name={row.attr}
+                                      label={row.label}
+                                      value={!row.hidden}
+                                      handleChange={val =>
+                                        handleColumns(row.attr, val)
+                                      }
+                                    />
+                                  )
+                              )}
                           </div>
                         </div>
                       </div>

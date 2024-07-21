@@ -10,7 +10,7 @@ export const InputCheck = props => {
   return (
     <div
       className={cn(
-        'flex items-center px-4 py-2 w-full cursor-pointer hover:bg-secondary-600',
+        'flex items-center px-4 py-2 w-full cursor-pointer hover:bg-secondary-200 dark:hover:bg-secondary-600',
         className
       )}
       onClick={() => handleChange(!value)}
@@ -26,7 +26,7 @@ export const InputCheck = props => {
       />
       {label && (
         <label
-          className="ml-2 px-2 text-sm font-medium cursor-pointer text-neutral-900 dark:text-neutral-300 pointer-events-none"
+          className="ml-2 px-2 text-sm font-medium cursor-pointer text-neutral-600 dark:text-neutral-300 pointer-events-none"
           htmlFor={domId}
         >
           {label}
