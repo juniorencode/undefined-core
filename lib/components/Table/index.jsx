@@ -353,19 +353,9 @@ export const Table = props => {
                   />
                 ))}
               {items.length === 0 && (
-                <tr>
-                  <td
-                    className="py-4 text-center"
-                    colSpan={
-                      columns.filter(col => !col.hidden).length +
-                      (dndFunc ? 1 : 0) +
-                      (!noSeqNum ? 1 : 0) +
-                      (handleUpdate || handleDelete ? 1 : 0)
-                    }
-                  >
-                    No hay registros disponibles
-                  </td>
-                </tr>
+                <div className="absolute top-16 left-1/2 -translate-x-1/2">
+                  No hay registros disponibles
+                </div>
               )}
             </tbody>
           </table>

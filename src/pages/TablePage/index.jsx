@@ -114,6 +114,7 @@ export const TablePage = () => {
       title="Contabilidad"
       structure={structure}
       data={Data.data}
+      // data={[]}
       loading={loading}
       filter={filter}
       pagination={pagination}

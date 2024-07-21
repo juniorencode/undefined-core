@@ -69,7 +69,7 @@ export const DataTableLayout = props => {
           handleDelete={handleDelete}
           handleFeature={handleFeature}
           manageColumns={manageColumns}
-          noSeqNum
+          noSeqNum={noSeqNum}
         />
       </Card>
     </BaseLayout>
