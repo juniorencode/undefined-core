@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useNavigate } from '../../utilities/navigation.utilities';
 import { cn } from '../../utilities/styles.utilities';
+import { useNavigate } from '../../utilities/navigation.utilities';
 import { Button } from '../Button';
 
 export const DataForm = props => {
