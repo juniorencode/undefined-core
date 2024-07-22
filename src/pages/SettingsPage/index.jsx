@@ -1,4 +1,4 @@
-import { SettingsLayout } from '../../../lib/main';
+import { SettingsLayout } from '../../../lib/layouts';
 
 export const SettingsPage = () => {
   const breadcrumb = [

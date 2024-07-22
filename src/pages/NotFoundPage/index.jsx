@@ -1,4 +1,4 @@
-import { BaseLayout, NotFoundLayout } from '../../../lib/main';
+import { BaseLayout, NotFoundLayout } from '../../../lib/layouts';
 
 export const NotFoundPage = () => {
   return (

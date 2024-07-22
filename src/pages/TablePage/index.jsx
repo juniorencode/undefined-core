@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useFilter, DataTableLayout } from '../../../lib/main';
+import { useFilter } from '../../../lib/hooks';
+import { DataTableLayout } from '../../../lib/layouts';
 import Data from './data.json';
 
 export const TablePage = () => {

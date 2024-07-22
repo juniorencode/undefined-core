@@ -1,4 +1,4 @@
-import { BaseLayout } from '../../../lib/main';
+import { BaseLayout } from '../../../lib/layouts';
 
 export const HomePage = () => {
   return (

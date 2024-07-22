@@ -1,7 +1,5 @@
 import axios from 'axios';
 import {
-  useForm,
-  DataFormLayout,
   FormSection,
   InputText,
   InputSearch,
@@ -17,6 +15,8 @@ import {
   InputMedia,
   InputFile
 } from '../../../lib/main';
+import { DataFormLayout } from '../../../lib/layouts';
+import { useForm } from '../../../lib/hooks';
 
 export const FormPage = () => {
   const Form = useForm({

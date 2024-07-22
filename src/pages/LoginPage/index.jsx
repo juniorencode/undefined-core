@@ -1,4 +1,5 @@
-import { BaseLayout, LoginLayout, useForm } from '../../../lib/main';
+import { BaseLayout, LoginLayout } from '../../../lib/layouts';
+import { useForm } from '../../../lib/hooks';
 
 export const LoginPage = () => {
   const FormLogin = useForm({
