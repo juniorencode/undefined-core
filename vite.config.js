@@ -28,7 +28,8 @@ export default defineConfig({
       ),
       output: {
         assetFileNames: 'assets/[name][extname]',
-        entryFileNames: '[name].js'
+        entryFileNames: '[name].js',
+        format: 'es'
       }
     }
   }
