@@ -4,9 +4,9 @@
   "private": false,
   "version": "0.28.0",
   "type": "module",
-  "main": "lib/main.js",
+  "main": "dist/main.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
