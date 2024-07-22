@@ -354,13 +354,13 @@ export const Table = props => {
                     isScrolling={isScrolling}
                   />
                 ))}
-              {items.length === 0 && (
-                <div className="absolute top-16 left-1/2 -translate-x-1/2">
-                  No hay registros disponibles
-                </div>
-              )}
             </tbody>
           </table>
+          {!loading && items.length === 0 && (
+            <div className="absolute top-16 left-1/2 -translate-x-1/2 text-secondary-600 dark:text-secondary-200">
+              No hay registros disponibles
+            </div>
+          )}
           <Alert
             handleConfirm={handleConfirm}
             handleCancel={handleCancel}
