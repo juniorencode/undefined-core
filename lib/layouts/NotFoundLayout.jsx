@@ -1,5 +1,5 @@
 import { IoIosArrowRoundBack } from 'react-icons/io';
-import { NavLink } from '../utilities/navigation.utilities';
+import { NavLink } from 'react-router-dom';
 
 export const NotFoundLayout = () => {
   return (

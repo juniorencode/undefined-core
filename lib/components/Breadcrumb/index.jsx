@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import { IoIosArrowForward } from 'react-icons/io';
-import { Link } from '../../utilities/navigation.utilities';
 
 export const Breadcrumb = props => {
   const { options, folders } = props;

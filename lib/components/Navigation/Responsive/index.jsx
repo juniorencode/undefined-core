@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { PiSignOutBold } from 'react-icons/pi';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { cn } from '../../../utilities/styles.utilities';
-import { NavLink } from '../../../utilities/navigation.utilities';
 
 export const Responsive = ({ options, handleLogout }) => {
   const [isCollapse, setIsCollapse] = useState(true);

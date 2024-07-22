@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { PiSignOutBold } from 'react-icons/pi';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { cn } from '../../../utilities/styles.utilities';
-import { NavLink } from '../../../utilities/navigation.utilities';
 
 export const Default = ({
   options,
