@@ -2,11 +2,11 @@
   "name": "undefined-core",
   "author": "Carlos Junior Ramos Vásquez",
   "private": false,
-  "version": "0.28.4",
+  "version": "0.28.6",
   "type": "module",
-  "main": "lib/main.js",
+  "main": "dist/main.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -15,11 +15,11 @@
     "**/*.css"
   ],
   "exports": {
-    ".": "./lib/main.js",
-    "./utilities": "./lib/utilities/index.js",
-    "./layouts": "./lib/layouts/index.js",
-    "./hooks": "./lib/hooks/index.js",
-    "./plugins": "./lib/plugins/index.js"
+    ".": "./dist/main.js",
+    "./utilities": "./dist/utilities/index.js",
+    "./layouts": "./dist/layouts/index.js",
+    "./hooks": "./dist/hooks/index.js",
+    "./plugins": "./dist/plugins/index.js"
   },
   "scripts": {
     "dev": "vite --host",
@@ -48,6 +48,7 @@
     "@welldone-software/why-did-you-render": "^8.0.3",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.2",
+    "chart.js": "^4.4.3",
     "clsx": "^2.1.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
@@ -57,6 +58,7 @@
     "jsdom": "^24.0.0",
     "postcss": "^8.4.38",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
