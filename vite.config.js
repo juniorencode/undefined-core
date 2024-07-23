@@ -5,11 +5,20 @@ import { glob } from 'glob';
 import react from '@vitejs/plugin-react';
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
+import { visualizer } from 'rollup-plugin-visualizer';
+
 // Define __dirname
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
-  plugins: [react(), libInjectCss()],
+  plugins: [
+    react(),
+    libInjectCss(),
+    visualizer({
+      filename: './dist/stats.html',
+      open: true
+    })
+  ],
   build: {
     copyPublicDir: false,
     lib: {

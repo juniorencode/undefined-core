@@ -4,7 +4,7 @@ import { Navigation } from '../components/Navigation';
 import { cn } from '../utilities/styles.utilities';
 import { navigation, handleLogout } from '../utilities/navigation.utilities';
 
-export const BaseLayout = ({ children, className }) => {
+export const DashboardLayout = ({ children, className }) => {
   const [isCollapse, setIsCollapse] = useState(
     localStorage.getItem('isCollapse') === 'true' || false
   );
@@ -14,7 +14,7 @@ export const BaseLayout = ({ children, className }) => {
   }, [isCollapse]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-secondary-100 dark:bg-secondary-900">
+    <div className="flex flex-col min-h-screen overflow-y-auto bg-secondary-100 dark:bg-secondary-900">
       <Navigation
         options={navigation}
         isCollapse={isCollapse}
@@ -23,7 +23,7 @@ export const BaseLayout = ({ children, className }) => {
       />
       <div
         className={cn(
-          'mt-[62px] sm:mt-0 sm:ml-64 p-4 h-screen overflow-y-auto transition-all duration-300',
+          'mt-[62px] sm:mt-0 sm:ml-64 transition-all duration-300',
           {
             'sm:ml-[53px]': isCollapse
           },
@@ -36,7 +36,7 @@ export const BaseLayout = ({ children, className }) => {
   );
 };
 
-BaseLayout.propTypes = {
+DashboardLayout.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string
 };
