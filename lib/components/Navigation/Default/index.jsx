@@ -5,6 +5,7 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { cn } from '../../../utilities/styles.utilities';
 
 export const Default = ({
+  systemName,
   options,
   isCollapse,
   setIsCollapse,
@@ -13,7 +14,7 @@ export const Default = ({
   return (
     <aside
       className={cn(
-        'fixed hidden z-10 sm:block w-64 h-full border-r transform bg-white dark:bg-secondary-800 border-secondary-200 dark:border-secondary-700',
+        'fixed hidden z-20 sm:block w-64 h-full border-r transform bg-white dark:bg-secondary-800 border-secondary-200 dark:border-secondary-700',
         {
           'w-[53px]': isCollapse
         }
@@ -39,7 +40,7 @@ export const Default = ({
                   }
                 )}
               >
-                Grupo Cotrina
+                {systemName}
               </span>
             </NavLink>
           </div>
@@ -104,6 +105,7 @@ export const Default = ({
 };
 
 Default.propTypes = {
+  systemName: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       path: PropTypes.string.isRequired,

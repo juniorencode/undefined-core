@@ -16,6 +16,7 @@ import { Thumbnail } from '../../Thumbnail';
 
 export const SortableRow = props => {
   const {
+    minHeight,
     row,
     index,
     size,
@@ -239,6 +240,7 @@ export const SortableRow = props => {
                 className={cn('px-4 py-1.5 text-nowrap', {
                   'border-l-4 dark:border-secondary-400': column.line
                 })}
+                style={{ height: minHeight + 'px' }}
               >
                 {getHighlightedText(row[column.attr], highlighted)}
               </td>
@@ -440,8 +442,9 @@ export const SortableRow = props => {
 };
 
 SortableRow.propTypes = {
-  index: PropTypes.number,
+  minHeight: PropTypes.number,
   row: PropTypes.object,
+  index: PropTypes.number,
   className: PropTypes.string,
   structure: PropTypes.array,
   data: PropTypes.array,

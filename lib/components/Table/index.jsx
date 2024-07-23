@@ -27,6 +27,7 @@ import { SortableRow } from './SortableRow';
 export const Table = props => {
   const {
     className,
+    minHeight,
     structure = [],
     data = [],
     loading,
@@ -195,10 +196,7 @@ export const Table = props => {
 
   return (
     <div
-      className={cn(
-        'relative border-t border-b overflow-auto dark:border-secondary-500',
-        className
-      )}
+      className={cn('relative overflow-auto', className)}
       ref={tableContainerRef}
     >
       <DndContext
@@ -211,10 +209,10 @@ export const Table = props => {
             <thead className="text-xs uppercase text-secondary-500 dark:text-secondary-400">
               <tr className="sticky top-0 left-0 z-10 bg-secondary-100 dark:bg-secondary-700">
                 {dndFunc && (
-                  <th className="px-4 py-3 w-1 tracking-wider font-medium border-r bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-secondary-200 dark:border-secondary-600"></th>
+                  <th className="px-4 py-3 w-1 tracking-wider font-medium border-l first:border-l-0 bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-secondary-200 dark:border-secondary-600"></th>
                 )}
                 {!noSeqNum && (
-                  <th className="px-4 py-3 w-1 tracking-wider font-medium bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0">
+                  <th className="px-4 py-3 w-1 tracking-wider font-medium border-l first:border-l-0 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600 sticky top-0 left-0">
                     #
                   </th>
                 )}
@@ -224,7 +222,7 @@ export const Table = props => {
                     <th
                       key={column.attr}
                       className={cn(
-                        'px-4 py-3 tracking-wider font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-l border-secondary-200 dark:border-secondary-600',
+                        'px-4 py-3 tracking-wider font-medium text-nowrap bg-secondary-100 dark:bg-secondary-700 sticky top-0 left-0 border-l first:border-l-0 border-secondary-200 dark:border-secondary-600',
                         {
                           'border-l-4 dark:border-secondary-400': column.line
                         }
@@ -289,38 +287,41 @@ export const Table = props => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                {dndFunc && (
-                  <td className="border-r h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600"></td>
-                )}
-                {!noSeqNum && (
-                  <td className="h-2 bg-secondary-100 dark:bg-secondary-700"></td>
-                )}
-                {columns
-                  .filter(col => col.type !== 'line' && !col.hidden)
-                  .map((col, index) => (
+              {structure.filter(item => item.type === 'filesIcon').length >
+                0 && (
+                <tr>
+                  {dndFunc && (
+                    <td className="border-l first:border-l-0 h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600"></td>
+                  )}
+                  {!noSeqNum && (
+                    <td className="h-2 border-l first:border-l-0 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600"></td>
+                  )}
+                  {columns
+                    .filter(col => col.type !== 'line' && !col.hidden)
+                    .map((col, index) => (
+                      <td
+                        key={`fill-${index}`}
+                        className={cn(
+                          'border-l first:border-l-0 h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600',
+                          {
+                            'border-l-4 dark:border-secondary-400': col.line
+                          }
+                        )}
+                      ></td>
+                    ))}
+                  {(handleUpdate || handleDelete) && (
                     <td
-                      key={`fill-${index}`}
                       className={cn(
-                        'border-l h-2 bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600',
+                        'h-2 sticky top-0 right-0 border-l bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600',
                         {
-                          'border-l-4 dark:border-secondary-400': col.line
+                          'border-special border-opacity-20 dark:border-opacity-100':
+                            isScrolling
                         }
                       )}
                     ></td>
-                  ))}
-                {(handleUpdate || handleDelete) && (
-                  <td
-                    className={cn(
-                      'h-2 sticky top-0 right-0 border-l bg-secondary-100 dark:bg-secondary-700 border-secondary-200 dark:border-secondary-600',
-                      {
-                        'border-special border-opacity-20 dark:border-opacity-100':
-                          isScrolling
-                      }
-                    )}
-                  ></td>
-                )}
-              </tr>
+                  )}
+                </tr>
+              )}
               {loading && (
                 <Skeleton
                   isScrolling={isScrolling}
@@ -336,6 +337,7 @@ export const Table = props => {
                 items.map((row, index) => (
                   <SortableRow
                     key={row.id || index}
+                    minHeight={minHeight}
                     row={row}
                     index={index}
                     size={size}
@@ -374,6 +376,7 @@ export const Table = props => {
 
 Table.propTypes = {
   className: PropTypes.string,
+  minHeight: PropTypes.number,
   structure: PropTypes.array,
   data: PropTypes.array,
   loading: PropTypes.bool,

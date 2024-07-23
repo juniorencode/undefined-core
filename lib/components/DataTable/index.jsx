@@ -24,18 +24,16 @@ export const DataTable = props => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 m-3 h-10">
-        <div className="flex items-center justify-between gap-4">
-          <Search search={filter.search} setSearch={setSearch} />
-          <Filter
-            startDate={filter.start}
-            endDate={filter.end}
-            setDate={setDate}
-          />
-        </div>
+      <div className="flex items-center justify-between gap-4 m-3 h-10">
+        <Search search={filter.search} setSearch={setSearch} />
+        <Filter
+          startDate={filter.start}
+          endDate={filter.end}
+          setDate={setDate}
+        />
       </div>
       <Table
-        className="h-[calc(100vh_-_19.1rem)] sm:h-[calc(100vh_-_15.1rem)]"
+        className="h-[calc(100vh_-_19.1rem)] sm:h-[calc(100vh_-_15.1rem)] border-t border-b border-secondary-200 dark:border-secondary-500"
         structure={structure}
         data={data}
         loading={loading}

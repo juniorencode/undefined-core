@@ -5,7 +5,7 @@ import { PiSignOutBold } from 'react-icons/pi';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { cn } from '../../../utilities/styles.utilities';
 
-export const Responsive = ({ options, handleLogout }) => {
+export const Responsive = ({ systemName, options, handleLogout }) => {
   const [isCollapse, setIsCollapse] = useState(true);
 
   const handleShowHiden = e =>
@@ -32,7 +32,7 @@ export const Responsive = ({ options, handleLogout }) => {
         </button>
         <NavLink to="/">
           <span className="p-2 text-xl text-nowrap font-semibold text-secondary-700 dark:text-white">
-            Grupo Cotrina
+            {systemName}
           </span>
         </NavLink>
       </div>
@@ -98,6 +98,7 @@ export const Responsive = ({ options, handleLogout }) => {
 };
 
 Responsive.propTypes = {
+  systemName: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       path: PropTypes.string.isRequired,
