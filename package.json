@@ -4,9 +4,9 @@
   "private": false,
   "version": "0.28.3",
   "type": "module",
-  "main": "dist/main.js",
+  "main": "lib/main.js",
   "files": [
-    "dist"
+    "lib"
   ],
   "publishConfig": {
     "access": "public"
@@ -15,11 +15,11 @@
     "**/*.css"
   ],
   "exports": {
-    ".": "./dist/main.js",
-    "./utilities": "./dist/utilities/index.js",
-    "./layouts": "./dist/layouts/index.js",
-    "./hooks": "./dist/hooks/index.js",
-    "./plugins": "./dist/plugins/index.js"
+    ".": "./lib/main.js",
+    "./utilities": "./lib/utilities/index.js",
+    "./layouts": "./lib/layouts/index.js",
+    "./hooks": "./lib/hooks/index.js",
+    "./plugins": "./lib/plugins/index.js"
   },
   "scripts": {
     "dev": "vite --host",

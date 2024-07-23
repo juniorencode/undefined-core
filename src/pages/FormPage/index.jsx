@@ -74,16 +74,20 @@ export const FormPage = () => {
     console.log(form);
   });
 
-  const postFile = (form, setProgress) =>
+  const postFile = (form, setProgress, width = '', height = '') =>
     axios
-      .post('https://api.juniorencode.com/api/storage/file', form, {
-        onUploadProgress: ({ progress, loaded, total }) => {
-          if (setProgress) {
-            total !== loaded &&
-              setProgress(prev => ({ ...prev, progress, loaded, total }));
+      .post(
+        `https://api.juniorencode.com/api/storage/image?w=${width}&h=${height}`,
+        form,
+        {
+          onUploadProgress: ({ progress, loaded, total }) => {
+            if (setProgress) {
+              total !== loaded &&
+                setProgress(prev => ({ ...prev, progress, loaded, total }));
+            }
           }
         }
-      })
+      )
       .then(res => res.data)
       .catch(err => err);
 
@@ -110,16 +114,16 @@ export const FormPage = () => {
         />
         <InputMedia
           label="Media"
-          name="media"
+          name="media3"
           accept={['jpeg', 'jpg', 'png', 'webp', 'mp4']}
           register={Form.register}
           postFile={postFile}
-          multiple
-          removeFile={removeFile}
+          width={236}
+          height={236}
         />
         <InputMedia
           label="Media"
-          name="media1"
+          name="media"
           accept={['jpeg', 'jpg', 'png', 'webp', 'mp4']}
           register={Form.register}
           postFile={postFile}
