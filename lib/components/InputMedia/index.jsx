@@ -15,6 +15,8 @@ const InputMedia = ({
   register,
   postFile,
   required,
+  width,
+  height,
   disabled
   // ...params
 }) => {
@@ -29,7 +31,12 @@ const InputMedia = ({
     const formData = new FormData();
     formData.append('name', file.name);
     formData.append('file', file);
-    const response = await postFile(formData, setProgress);
+    const response = await postFile(
+      formData,
+      setProgress,
+      width && width,
+      height && height
+    );
     if (inputFile.value)
       inputFile.handleChange([...inputFile.value, response.data._id]);
     else
@@ -53,10 +60,12 @@ const InputMedia = ({
     handleSelect(files);
     setIsOver(false);
   };
+
   const handleUpload = selectedFiles => {
     if (!selectedFiles) return;
     setWaiting(prev => [...prev, ...selectedFiles]);
   };
+
   useEffect(() => {
     if (waiting.length === 0 || progress) return;
     const file = waiting[waiting.length - 1];
@@ -97,6 +106,7 @@ const InputMedia = ({
     }
     //eslint-disable-next-line
   }, [urlFile.value]);
+
   useEffect(() => {
     urlFile &&
       urlFile.value &&
@@ -125,7 +135,9 @@ const InputMedia = ({
   };
 
   const handleRemove = index => {
-    inputFile.handleChange(inputFile?.value?.filter((_, i) => i !== index));
+    !multiple
+      ? inputFile.handleChange(null)
+      : inputFile.handleChange(inputFile?.value?.filter((_, i) => i !== index));
     urlFile.handleChange(urlFile?.value?.filter((_, i) => i !== index));
     setFileThumbnail(prev => prev.filter((_, i) => i !== index));
     setUrlThumbnail(prev => prev.filter((_, i) => i !== index));
@@ -186,14 +198,20 @@ const InputMedia = ({
         {urlThumbnail?.map((_, index) => (
           <div
             key={index}
-            className={`${
+            className={
               multiple
-                ? 'flex w-[90px] h-[80px] rounded-lg border-2 overflow-hidden border-neutral-700'
-                : ' flex flex-col h-[200px] '
-            } relative `}
+                ? 'flex relative w-[90px] h-[80px] rounded-lg border-2 overflow-hidden border-neutral-700'
+                : `flex relative flex-col h-[200px] w-[${
+                    (200 * height) / width
+                  }px]`
+            }
           >
             <Thumbnail
-              className={`${multiple ? 'w-[90px] h-[80px] ' : ' h-full '}  `}
+              className={
+                multiple
+                  ? 'w-[90px] h-[80px] '
+                  : `w-[${(200 * height) / width}px] h-full `
+              }
               file={fileThumbnail[index]}
               url={urlThumbnail[index]}
               handleRemove={() => handleRemove(index)}
@@ -244,6 +262,8 @@ InputMedia.propTypes = {
   register: PropTypes.func.isRequired,
   postFile: PropTypes.func.isRequired,
   required: PropTypes.bool,
+  width: PropTypes.number,
+  height: PropTypes.number,
   disabled: PropTypes.bool
 };
 
