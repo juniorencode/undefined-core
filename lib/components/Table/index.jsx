@@ -164,6 +164,9 @@ export const Table = props => {
           order: index + 1
         }));
       });
+      const oldChange = items.find(item => item.id === active.id && item);
+      const newChange = items.find(item => item.id === over.id && item);
+      dndFunc(oldChange.id, { ...oldChange, order: newChange.order });
     }
   };
 
