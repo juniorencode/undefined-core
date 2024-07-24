@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 export const NotFoundLayout = () => {
   return (
-    <div className="absolute top-1/2 -translate-y-1/2 p-4 sm:p-8">
-      <div>
+    <div className="flex items-center w-full h-full bg-secondary-100 dark:bg-secondary-900">
+      <div className="p-4 sm:p-8">
         <p className="text-9xl font-black text-primary-500 dark:text-primary-400">
           404
         </p>

@@ -15,7 +15,7 @@ export default defineConfig({
     react(),
     libInjectCss(),
     visualizer({
-      filename: './dist/stats.html',
+      filename: './stats.html',
       open: true
     })
   ],
@@ -26,7 +26,7 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['react', 'react/jsx-runtime', 'react-router-dom'],
+      external: ['react', 'react/jsx-runtime', 'react-dom', 'react-router-dom'],
       input: Object.fromEntries(
         glob
           .sync('lib/**/*.{js,jsx}')
