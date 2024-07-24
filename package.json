@@ -2,11 +2,11 @@
   "name": "undefined-core",
   "author": "Carlos Junior Ramos Vásquez",
   "private": false,
-  "version": "0.28.6",
+  "version": "0.28.7",
   "type": "module",
-  "main": "lib/main.js",
+  "main": "dist/main.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -15,11 +15,11 @@
     "**/*.css"
   ],
   "exports": {
-    ".": "./lib/main.js",
-    "./utilities": "./lib/utilities/index.js",
-    "./layouts": "./lib/layouts/index.js",
-    "./hooks": "./lib/hooks/index.js",
-    "./plugins": "./lib/plugins/index.js"
+    ".": "./dist/main.js",
+    "./utilities": "./dist/utilities/index.js",
+    "./layouts": "./dist/layouts/index.js",
+    "./hooks": "./dist/hooks/index.js",
+    "./plugins": "./dist/plugins/index.js"
   },
   "scripts": {
     "dev": "vite --host",
