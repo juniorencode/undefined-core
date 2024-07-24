@@ -161,7 +161,7 @@ export const FormPage = () => {
           register={Form.register}
           // firstValue
           // required
-          disabled
+          // disabled
         />
         <InputSearch
           name="search"
@@ -179,7 +179,7 @@ export const FormPage = () => {
           ]}
           register={Form.register}
           // required
-          disabled
+          // disabled
         />
         <InputText
           name="text"
@@ -200,7 +200,7 @@ export const FormPage = () => {
           funcDelete={id => console.log('delete: ' + id)}
           // required
           minLength={2}
-          disabled
+          // disabled
         />
         <InputRichText
           name="richtext"

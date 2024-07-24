@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import { usePopper } from 'react-popper';
+import { useRef } from 'react';
 import { MdClose } from 'react-icons/md';
 import { cn } from '../../utilities/styles.utilities';
+import { usePopper } from '../../utilities/popper.utilities';
 
 export const SelectDropdown = props => {
   const {
@@ -17,27 +17,23 @@ export const SelectDropdown = props => {
     funcDelete
   } = props;
 
-  const [popperRef, setPopperRef] = useState(null);
+  const popperRef = useRef(null);
 
-  const { styles, attributes } = usePopper(domRef.current, popperRef, {
-    placement: isOpen ? 'bottom-start' : 'top-start'
-  });
+  const { styles, placement } = usePopper(domRef, popperRef);
 
   return (
     <>
       {options.length > 0 && isOpen && (
         <div
           className={cn(
-            'listbox absolute top-full z-20 my-2 w-full border rounded-lg shadow-top dark:shadow-neutral-900 bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
+            'listbox absolute top-full z-20 my-2 w-full h-max border rounded-lg shadow-top dark:shadow-neutral-900 bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
             {
-              'shadow-bottom':
-                !attributes.popper?.['data-popper-placement'].startsWith('top')
+              'shadow-bottom': placement === 'bottom'
             }
           )}
-          ref={setPopperRef}
+          ref={popperRef}
           role="listbox"
-          style={styles.popper}
-          {...attributes.popper}
+          style={styles}
         >
           <ul className="my-2 max-h-[200px] text-sm overflow-y-auto text-neutral-700 dark:text-neutral-200">
             {options?.map(item => (

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { usePopper } from 'react-popper';
 import { IoIosArrowDown } from 'react-icons/io';
 import { cn } from '../../../utilities/styles.utilities';
 import { useClickOutside } from '../../../hooks/useClickOutside.hook';
@@ -9,13 +8,8 @@ export const InputSelect = props => {
   const { className, options = [], handleChange } = props;
 
   const domRef = useClickOutside(() => setIsOpen(false));
-  const [popperRef, setPopperRef] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState(options[0].value);
-
-  const { styles, attributes } = usePopper(domRef.current, popperRef, {
-    placement: isOpen ? 'bottom-start' : 'top-start'
-  });
 
   const onSelect = value => {
     setValue(value);
@@ -51,15 +45,8 @@ export const InputSelect = props => {
       {options.length > 0 && isOpen && (
         <div
           className={cn(
-            'absolute top-full z-20 my-2 w-full border rounded-lg shadow-top dark:shadow-neutral-900 bg-secondary-200 dark:bg-secondary-800 border-neutral-300 dark:border-neutral-800',
-            {
-              'shadow-bottom':
-                !attributes.popper?.['data-popper-placement'].startsWith('top')
-            }
+            'absolute top-full z-20 my-2 w-full border rounded-lg shadow-bottom dark:shadow-neutral-900 bg-secondary-200 dark:bg-secondary-800 border-neutral-300 dark:border-neutral-800'
           )}
-          ref={setPopperRef}
-          style={styles.popper}
-          {...attributes.popper}
         >
           <div>
             <ul className="my-2 max-h-32 text-sm overflow-y-auto text-secondary-700 dark:text-secondary-200">

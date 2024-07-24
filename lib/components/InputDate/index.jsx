@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState, useCallback } from 'react';
-import { usePopper } from 'react-popper';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { FaCalendar } from 'react-icons/fa';
 import { cn } from '../../utilities/styles.utilities';
+import { usePopper } from '../../utilities/popper.utilities';
 import { nameOfMonths } from '../../utilities/time.utilities';
 import { useClickOutside } from '../../hooks/useClickOutside.hook';
 import { InputContainer } from '../InputContainer';
@@ -13,15 +13,13 @@ export const InputDate = props => {
     props;
 
   const domRef = useClickOutside(() => setIsOpen(false));
-  const [popperRef, setPopperRef] = useState(null);
+  const popperRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
   const [daySelected, setDaySelected] = useState(null);
   const { errors, value, handleChange } = register(name, { required });
 
-  const { styles, attributes } = usePopper(domRef.current, popperRef, {
-    placement: isOpen ? 'bottom-start' : 'top-start'
-  });
+  const { styles, placement } = usePopper(domRef, popperRef);
 
   useEffect(() => {
     setDaySelected(formatDate(value));
@@ -76,15 +74,11 @@ export const InputDate = props => {
             className={cn(
               'absolute top-full left-0 z-50 inline-block my-2 p-4 h-96 border rounded-lg shadow-top dark:shadow-neutral-900 bg-secondary-100 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600',
               {
-                'shadow-bottom':
-                  !attributes.popper?.['data-popper-placement'].startsWith(
-                    'top'
-                  )
+                'shadow-bottom': placement === 'bottom'
               }
             )}
-            ref={setPopperRef}
-            style={styles.popper}
-            {...attributes.popper}
+            ref={popperRef}
+            style={styles}
           >
             <Calendar
               selectedDate={selectedDate}
