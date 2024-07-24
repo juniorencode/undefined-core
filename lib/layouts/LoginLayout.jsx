@@ -6,12 +6,12 @@ import { InputCheck } from '../components/InputCheck';
 
 export const LoginLayout = ({ form }) => {
   return (
-    <div className="flex items-center justify-center w-full h-full bg-secondary-100 dark:bg-secondary-900">
-      <div className="flex flex-col items-center">
+    <div className="flex items-center justify-center w-full h-screen bg-secondary-100 dark:bg-secondary-900">
+      <div className="flex flex-col items-center mx-4 w-full">
         <p className="flex items-center mb-6 text-2xl font-semibold text-secondary-900 dark:text-white">
           Cotrina Exports E.I.R.L.
         </p>
-        <div className="min-w-[320px] bg-white rounded-lg shadow-3xl dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-secondary-800 dark:border-secondary-700">
+        <div className="min-w-[320px] max-w-[420px] w-full bg-white rounded-lg shadow-3xl dark:border md:mt-0 xl:p-0 dark:bg-secondary-800 dark:border-secondary-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-secondary-900 md:text-2xl dark:text-white">
               Iniciar sesión en su cuenta

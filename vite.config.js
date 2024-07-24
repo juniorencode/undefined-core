@@ -15,8 +15,7 @@ export default defineConfig({
     react(),
     libInjectCss(),
     visualizer({
-      filename: './stats.html',
-      open: true
+      filename: './stats.html'
     })
   ],
   build: {

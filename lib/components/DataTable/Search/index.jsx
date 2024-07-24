@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useState } from 'react';
-import { debounce } from 'lodash';
 import { IoIosSearch } from 'react-icons/io';
+import { debounce } from '../../../utilities/utils.utilities';
 
 export const Search = props => {
   const { search, setSearch } = props;
