@@ -55,7 +55,7 @@ export const Table = props => {
     for (let i = 0; i < _newColumns.length; i++) {
       if (_newColumns[i].type === 'line') {
         for (let j = i + 1; j < _newColumns.length; j++) {
-          if (_newColumns[j].attr !== 'line' && !_newColumns[j].hidden) {
+          if (_newColumns[j].type !== 'line' && !_newColumns[j].hidden) {
             _newColumns[j].line = true;
             break;
           }
@@ -267,20 +267,17 @@ export const Table = props => {
                           <div className="min-w-[200px] max-h-[300px] overflow-y-auto">
                             {columns
                               .filter(col => col.type !== 'line')
-                              .map(
-                                (row, index) =>
-                                  row.attr !== 'line' && (
-                                    <InputCheck
-                                      key={`ske-row-${index}`}
-                                      name={row.attr}
-                                      label={row.label}
-                                      value={!row.hidden}
-                                      handleChange={val =>
-                                        handleColumns(row.attr, val)
-                                      }
-                                    />
-                                  )
-                              )}
+                              .map((row, index) => (
+                                <InputCheck
+                                  key={`ske-row-${index}`}
+                                  name={row.attr}
+                                  label={row.label}
+                                  value={!row.hidden}
+                                  handleChange={val =>
+                                    handleColumns(row.attr, val)
+                                  }
+                                />
+                              ))}
                           </div>
                         </div>
                       </div>
@@ -353,7 +350,7 @@ export const Table = props => {
                     shortFileName={shortFileName}
                     handleDeleteEvent={handleDeleteEvent}
                     structure={columns.filter(
-                      col => col.attr !== 'line' && !col.hidden
+                      col => col.type !== 'line' && !col.hidden
                     )}
                     dndFunc={dndFunc}
                     isScrolling={isScrolling}
