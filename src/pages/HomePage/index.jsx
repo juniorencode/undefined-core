@@ -1,12 +1,6 @@
 import { FaUsers } from 'react-icons/fa6';
 import { BaseLayout } from '../../../lib/layouts';
-import {
-  CountBadge,
-  LineStatBadge,
-  BarStatBadge,
-  TableBadge,
-  Chart
-} from '../../../lib/main.js';
+import { CountBadge, TableBadge, Chart } from '../../../lib/main.js';
 
 export const HomePage = () => {
   const values = [72, 56, 20, 36, 80, 40, 30, 20, 25, 30, 12, 60];
@@ -24,12 +18,6 @@ export const HomePage = () => {
     'Noviembre',
     'Diciembre'
   ];
-
-  const options = {
-    plugins: {
-      legend: { display: false }
-    }
-  };
 
   const data = {
     labels: months,
@@ -70,105 +58,68 @@ export const HomePage = () => {
         />
       </div>
       <div className="grid grid-cols-4 gap-4">
-        <div className="flex flex-col col-span-3 gap-4">
-          {/* <BarStatBadge
-            className="col-span-3"
-            title="Transacciones del 2024"
-            data={data}
-            options={options}
-            height={4}
-          /> */}
-          <Chart
-            className="col-span-3"
-            title="Transacciones del 2024"
-            data={data}
-            options={{
-              type: 'bar',
-              // title: 'Bar Chart',
-              data: {
-                labels: months,
-                datasets: [
-                  {
-                    // label: '# of votes',
-                    data: values,
-                    // borderColor: 'rgba(255 99 132 / 1)',
-                    // backgroundColor: 'rgba(255 99 132 / 0.2)',
-                    borderWidth: 2
-                  }
-                ]
-              }
-            }}
-            height={4}
-          />
-          <LineStatBadge
-            className="col-span-3"
-            title="Transacciones del 2024"
-            data={data}
-            options={options}
-            height={4}
-          />
-        </div>
-        <div className="col-span-1">
-          <TableBadge
-            title="Top de categorías mas usadas"
-            structure={[
-              {
-                label: 'Top Canales',
-                attr: 'name',
-                type: 'text'
-              },
-              {
-                label: 'Usuarios',
-                attr: 'number',
-                type: 'text'
-              }
-            ]}
-            data={[
-              {
-                id: 1,
-                name: 'Búsqueda Orgánica',
-                number: 5649
-              },
-              {
-                id: 2,
-                name: 'Referencia',
-                number: 4025
-              },
-              {
-                id: 3,
-                name: 'Directo',
-                number: 3105
-              },
-              {
-                id: 4,
-                name: 'Sociales',
-                number: 1251
-              },
-              {
-                id: 5,
-                name: 'Otros',
-                number: 734
-              }
-            ]}
-            dataPie={{
-              labels: [
-                'Búsqueda Orgánica',
-                'Referencia',
-                'Directo',
-                'Sociales',
-                'Otros'
-              ],
+        <Chart
+          className="col-span-3"
+          title="Transacciones del 2024"
+          data={data}
+          options={{
+            type: 'bar',
+            data: {
+              labels: months,
               datasets: [
                 {
-                  label: 'Examples',
-                  data: [5649, 4025, 3105, 1251, 734]
+                  data: values,
+                  borderWidth: 2
                 }
               ]
-            }}
-            options={options}
-            height={8}
-          />
-        </div>
+            }
+          }}
+          height={4}
+        />
+        <TableBadge
+          className="col-span-1"
+          title="Top de categorías mas usadas"
+          structure={[
+            {
+              label: 'Top Canales',
+              attr: 'name',
+              type: 'text'
+            },
+            {
+              label: 'Usuarios',
+              attr: 'number',
+              type: 'text'
+            }
+          ]}
+          data={[
+            {
+              id: 1,
+              name: 'Búsqueda Orgánica',
+              number: 5649
+            },
+            {
+              id: 2,
+              name: 'Referencia',
+              number: 4025
+            },
+            {
+              id: 3,
+              name: 'Directo',
+              number: 3105
+            },
+            {
+              id: 4,
+              name: 'Sociales',
+              number: 1251
+            },
+            {
+              id: 5,
+              name: 'Otros',
+              number: 734
+            }
+          ]}
+          height={4}
+        />
       </div>
     </BaseLayout>
   );

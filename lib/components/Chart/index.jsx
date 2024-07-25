@@ -10,6 +10,7 @@ import { tile } from '../../utilities/config.utilities';
 export const Chart = ({ className, title, options, height = 1 }) => {
   const accentColor = primaryColors[localStorage.getItem('accent') || 'blue'];
   const baseColor = secondaryColors[localStorage.getItem('base') || 'neutral'];
+  const domRef = useRef(null);
   const canvasRef = useRef(null);
   const state = {
     tooltipVisible: false,
@@ -585,9 +586,16 @@ export const Chart = ({ className, title, options, height = 1 }) => {
     // eslint-disable-next-line
   }, [canvasRef.current]);
 
+  useEffect(() => {
+    if (!ctx) return;
+    resize();
+    // eslint-disable-next-line
+  }, [className, height]);
+
   return (
     <div
       className={cn('p-4 rounded-lg bg-secondary-800', className)}
+      ref={domRef}
       style={{ height: tile * height + 16 * (height - 1) + 'px' }}
     >
       {title && (
