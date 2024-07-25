@@ -4,7 +4,8 @@ import {
   CountBadge,
   LineStatBadge,
   BarStatBadge,
-  TableBadge
+  TableBadge,
+  Chart
 } from '../../../lib/main.js';
 
 export const HomePage = () => {
@@ -70,11 +71,33 @@ export const HomePage = () => {
       </div>
       <div className="grid grid-cols-4 gap-4">
         <div className="flex flex-col col-span-3 gap-4">
-          <BarStatBadge
+          {/* <BarStatBadge
             className="col-span-3"
             title="Transacciones del 2024"
             data={data}
             options={options}
+            height={4}
+          /> */}
+          <Chart
+            className="col-span-3"
+            title="Transacciones del 2024"
+            data={data}
+            options={{
+              type: 'bar',
+              // title: 'Bar Chart',
+              data: {
+                labels: months,
+                datasets: [
+                  {
+                    // label: '# of votes',
+                    data: values,
+                    // borderColor: 'rgba(255 99 132 / 1)',
+                    // backgroundColor: 'rgba(255 99 132 / 0.2)',
+                    borderWidth: 2
+                  }
+                ]
+              }
+            }}
             height={4}
           />
           <LineStatBadge

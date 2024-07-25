@@ -20,7 +20,7 @@ import { useForm } from '../../../lib/hooks';
 
 export const FormPage = () => {
   const Form = useForm({
-    text: '@juniorencode',
+    // text: '@juniorencode',
     search: '3',
     // password: 'qwe',
     // number: 123.12,
