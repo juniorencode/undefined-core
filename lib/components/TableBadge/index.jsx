@@ -1,48 +1,16 @@
 import PropTypes from 'prop-types';
-import { Pie } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-} from 'chart.js';
-import { Table } from '../Table';
 import { cn } from '../../utilities/styles.utilities';
 import { tile } from '../../utilities/config.utilities';
-import { primaryColors } from '../../utilities/color.utilities';
-import { mergeObjectDeep } from '../../utilities/utils.utilities';
-
-ChartJS.register(ArcElement, Title, Tooltip, Legend, Filler);
+import { Table } from '../Table';
 
 export const TableBadge = ({
   className,
   title,
   structure,
   data,
-  dataPie,
-  options,
   noSeqNum,
   height = 1
 }) => {
-  const accentColor = primaryColors[localStorage.getItem('accent') || 'blue'];
-  const defaultData = {
-    datasets: [
-      {
-        borderWidth: 2,
-        borderColor: `rgba(${accentColor['500']} / 1)`,
-        backgroundColor: `rgba(${accentColor['500']} / 0.3)`,
-        hoverBackgroundColor: `rgba(${accentColor['500']} / 0.5)`
-      }
-    ]
-  };
-  const defaultOptions = {
-    maintainAspectRatio: true,
-    responsive: true,
-    animation: true
-  };
-
   return (
     <div
       className={cn('p-4 rounded-lg bg-secondary-800', className)}
@@ -54,14 +22,6 @@ export const TableBadge = ({
         </p>
       )}
       <div className="flex flex-col gap-4">
-        {dataPie && (
-          <div className="px-8 py-4">
-            <Pie
-              data={mergeObjectDeep(defaultData, dataPie)}
-              options={mergeObjectDeep(defaultOptions, options)}
-            />
-          </div>
-        )}
         <Table
           className="h-[calc(100%-40px)]"
           minHeight={50}

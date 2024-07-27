@@ -23,7 +23,7 @@ export const BaseLayout = ({ children, className }) => {
       />
       <div
         className={cn(
-          'mt-[62px] sm:mt-0 sm:ml-64 p-4 h-screen overflow-y-auto transition-all duration-300',
+          'mt-[62px] sm:mt-0 sm:ml-64 p-4 h-[calc(100vh-62px)] sm:h-screen overflow-y-auto transition-all duration-300',
           {
             'sm:ml-[53px]': isCollapse
           },
