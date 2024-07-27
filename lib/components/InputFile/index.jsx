@@ -12,13 +12,14 @@ const InputFile = ({
   accept,
   multiple,
   postFile,
+  maxElem,
   putFile,
   register,
   required,
   disabled
   // ...params
 }) => {
-  const inputFile = register(name, { required });
+  const inputFile = register(name, { required, maxElem });
   const urlFile = register('_' + name);
   const domId = useId();
   const [waiting, setWaiting] = useState([]);
@@ -203,6 +204,7 @@ InputFile.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   accept: PropTypes.array,
+  maxElem: PropTypes.number,
   multiple: PropTypes.bool,
   register: PropTypes.func.isRequired,
   postFile: PropTypes.func.isRequired,

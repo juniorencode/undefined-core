@@ -231,7 +231,7 @@ export const Table = props => {
                         }
                       )}
                     >
-                      {column.attr === 'featured' ? (
+                      {column.type === 'featured' ? (
                         <FaRegStar size={18} />
                       ) : (
                         column.label

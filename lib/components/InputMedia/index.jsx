@@ -17,10 +17,11 @@ const InputMedia = ({
   required,
   width,
   height,
+  maxElem,
   disabled
   // ...params
 }) => {
-  const inputFile = register(name, { required });
+  const inputFile = register(name, { required, maxElem });
   const urlFile = register('_' + name);
   const domId = useId();
   const [waiting, setWaiting] = useState([]);
@@ -264,6 +265,7 @@ InputMedia.propTypes = {
   required: PropTypes.bool,
   width: PropTypes.number,
   height: PropTypes.number,
+  maxElem: PropTypes.number,
   disabled: PropTypes.bool
 };
 

@@ -22,6 +22,7 @@ export const InputText = props => {
     required,
     minLength,
     maxLength,
+    maxElem,
     isEmail,
     focused,
     autoComplete,
@@ -39,6 +40,7 @@ export const InputText = props => {
     required,
     minLength,
     maxLength,
+    maxElem,
     isEmail
   });
   const separators = [',', ';', '|'];
@@ -292,6 +294,7 @@ InputText.propTypes = {
   required: PropTypes.bool,
   minLength: PropTypes.number,
   maxLength: PropTypes.number,
+  maxElem: PropTypes.number,
   isEmail: PropTypes.bool,
   focused: PropTypes.bool,
   autoComplete: PropTypes.bool,

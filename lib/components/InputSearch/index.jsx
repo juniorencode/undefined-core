@@ -25,6 +25,7 @@ export const InputSearch = props => {
     focused,
     autoComplete,
     multiple,
+    maxElem,
     disabled,
     ...params
   } = props;
@@ -40,6 +41,7 @@ export const InputSearch = props => {
     required,
     minLength,
     maxLength,
+    maxElem,
     isEmail
   });
 
@@ -261,6 +263,7 @@ InputSearch.propTypes = {
   required: PropTypes.bool,
   minLength: PropTypes.number,
   maxLength: PropTypes.number,
+  maxElem: PropTypes.number,
   isEmail: PropTypes.bool,
   focused: PropTypes.bool,
   autoComplete: PropTypes.bool,

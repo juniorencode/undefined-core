@@ -206,6 +206,7 @@ InputSelect.propTypes = {
   callback: PropTypes.func,
   funcDelete: PropTypes.func,
   toNumber: PropTypes.bool,
+  maxElem: PropTypes.number,
   toBoolean: PropTypes.bool,
   register: PropTypes.func.isRequired,
   required: PropTypes.bool,
