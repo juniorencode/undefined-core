@@ -1,28 +1,50 @@
 import PropTypes from 'prop-types';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FaCircleNotch } from 'react-icons/fa';
-import ReactPlayer from 'react-player';
 
 export const Thumbnail = props => {
   const { className, file, url, input } = props;
-
-  const playerRef = useRef(null);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
   const [thumbnail, setThumbnail] = useState(null);
 
-  const captureThumbnail = () => {
-    const player = playerRef.current.getInternalPlayer();
-    const canvas = document.createElement('canvas');
-    canvas.width = player.videoWidth;
-    canvas.height = player.videoHeight;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(player, 0, 0, canvas.width, canvas.height);
-    setThumbnail(canvas.toDataURL('image/jpeg'));
-  };
+  useEffect(() => {
+    const captureThumbnail = () => {
+      const video = videoRef.current;
+      const canvas = canvasRef.current;
+
+      if (video && canvas) {
+        const context = canvas.getContext('2d');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        setThumbnail(canvas.toDataURL('image/jpeg'));
+      }
+    };
+    const handleLoadedData = () => {
+      const video = videoRef.current;
+      if (video) {
+        video.currentTime = 2; // Captura el fotograma a los 2 segundos
+      }
+    };
+
+    const video = videoRef.current;
+    if (video) {
+      video.addEventListener('loadeddata', handleLoadedData);
+      video.addEventListener('seeked', captureThumbnail);
+    }
+
+    return () => {
+      if (video) {
+        video.removeEventListener('loadeddata', handleLoadedData);
+        video.removeEventListener('seeked', captureThumbnail);
+      }
+    };
+  }, []);
 
   const format = () => {
     if (file && file.type) {
       const mimeType = file.type;
-
       if (mimeType.startsWith('image/')) {
         return 'image';
       } else if (mimeType.startsWith('video/')) {
@@ -34,13 +56,13 @@ export const Thumbnail = props => {
   };
 
   return (
-    <div className={`${className} flex items-center  flex-col `}>
+    <div className={`${className} flex items-center flex-col`}>
       {format() === 'image' && (
         <a
           href={file.url || url}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${className} flex items-center overflow-hidden flex-col `}
+          className={`${className} flex items-center overflow-hidden flex-col`}
         >
           <img
             src={file.url || url}
@@ -53,23 +75,13 @@ export const Thumbnail = props => {
       )}
       {format() === 'video' && (
         <>
-          <ReactPlayer
-            ref={playerRef}
-            url={file.url || url}
-            width="0"
-            height="0"
-            onReady={captureThumbnail}
-            playing={false}
-            config={{
-              file: {
-                attributes: {
-                  crossOrigin: 'true'
-                }
-              }
-            }}
-            controls={false}
+          <video
+            ref={videoRef}
+            src={file.url || url}
             style={{ display: 'none' }}
+            crossOrigin="anonymous"
           />
+          <canvas ref={canvasRef} style={{ display: 'none' }} />
           {thumbnail ? (
             <a
               href={file.url || url}
@@ -80,7 +92,7 @@ export const Thumbnail = props => {
               } relative w-fit h-full flex items-center flex-col overflow-hidden`}
             >
               <img
-                src={thumbnail || url}
+                src={thumbnail}
                 alt="Miniatura del video"
                 className={`${!input && 'rounded'} ${className} object-cover ${
                   !file.url && url ? 'blur' : ''
